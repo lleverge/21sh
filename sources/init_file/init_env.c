@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:08:42 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 13:32:01 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/18 13:44:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,37 @@
 
 t_env				*var_cpy(t_env *start, t_env *cpy)
 {
-    t_env   *tmp;
-    t_env   *voyager;
+	t_env	*tmp;
+	t_env	*voyager;
 
-    tmp = (t_env *)malloc(sizeof(t_env));
-    voyager = cpy;
-    tmp->name = ft_strdup(start->name);
-    tmp->content = ft_strdup(start->content);
-    tmp->next = NULL;
-    if (voyager == NULL)
-        return (tmp);
-    while (voyager->next)
-        voyager = voyager->next;
-    voyager->next = tmp;
-    return (cpy);
+	tmp = (t_env *)malloc(sizeof(t_env));
+	voyager = cpy;
+	tmp->name = ft_strdup(start->name);
+	tmp->content = ft_strdup(start->content);
+	tmp->next = NULL;
+	if (voyager == NULL)
+		return (tmp);
+	while (voyager->next)
+		voyager = voyager->next;
+	voyager->next = tmp;
+	return (cpy);
 }
 
 t_env				*env_in_list(char *envar, t_env *start)
 {
-	t_env   *tmp;
-    t_env   *voyager;
+	t_env	*tmp;
+	t_env	*voyager;
 
-    tmp = (t_env *)malloc(sizeof(t_env));
-    voyager = start;
-    tmp->name = getvarname(envar);
-    tmp->content = getvarcontent(envar);
-    if (start == NULL)
-        return (tmp);
-    while (voyager->next)
-        voyager = voyager->next;
-    voyager->next = tmp;
-    return (start);
+	tmp = (t_env *)malloc(sizeof(t_env));
+	voyager = start;
+	tmp->name = getvarname(envar);
+	tmp->content = getvarcontent(envar);
+	if (start == NULL)
+		return (tmp);
+	while (voyager->next)
+		voyager = voyager->next;
+	voyager->next = tmp;
+	return (start);
 }
 
 t_env				*fill_env(char **environ)
