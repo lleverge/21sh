@@ -6,14 +6,14 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:54:34 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 12:20:30 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/18 12:32:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 
-static t_lexer			*lexer_pushb(t_lexer **list, t_lexer *new)
+static void				lexer_pushb(t_lexer **list, t_lexer *new)
 {
 	t_lexer		*tmp;
 
@@ -44,7 +44,7 @@ static t_lexer			*create_lexer_node(char *str, int token_id)
 	return (new);
 }
 
-int				token_id(char *str)
+int						get_token_id(char *str)
 {
 	if (!ft_strcmp(str, ">>"))
 		return (DGREAT);
@@ -69,12 +69,12 @@ int				token_id(char *str)
 	return (0);
 }
 
-t_lexer			*lexer_list(t_lexer *list, char *str)
+t_lexer					*lexer_list(t_lexer *list, char *str)
 {
 	t_lexer		*new;
 	int			token_id;
 
-	token_id = token_id(str);
+	token_id = get_token_id(str);
 	new = create_lexer_node(str, token_id);
 	if (new)
 		lexer_pushb(&list, new);
