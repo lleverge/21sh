@@ -1,18 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.h                                            :+:      :+:    :+:   */
+/*   init_tree.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 09:49:51 by lleverge         ###   ########.fr       */
+/*   Created: 2017/01/18 09:55:27 by lleverge          #+#    #+#             */
+/*   Updated: 2017/01/18 09:55:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SHELL_H
-# define SHELL_H
+#include "lexer.h"
 
+t_node			*init_node(void)
+{
+	t_node		*new;
 
-
-#endif
+	if (!(new = (t_node *)malloc(sizeof(t_node))))
+		return (NULL);
+	new->token_id = 0;
+	new->content = NULL;
+	new->cmd = NULL;
+	new->left = NULL;
+	new->right = NULL;
+	return (new);
+}

@@ -6,8 +6,16 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2016/11/28 18:41:14 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/18 10:00:18 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "21sh.h"
+
+int			main(int ac, char **av, char **environ)
+{
+	char	*line;
+
+	line = NULL;
+	return (0);
+}
