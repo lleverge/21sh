@@ -6,33 +6,47 @@
 #    By: lleverge <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2016/11/28 18:41:00 by lleverge         ###   ########.fr        #
+#    Updated: 2017/01/18 11:18:54 by lleverge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = 21sh
-SRC = main.c
-OBJ = $(SRC:.c=.o)
-LIB = -L./libft -lft -ltermcap
-FLAGS = -Wall -Wextra -Werror
+NAME	= 42sh
 
-$(NAME): $(OBJ)
-	make -C ./libft
-	gcc $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
+C_DIR	= sources
+C_DIRS	= $(shell find $(C_DIR) -type d -follow -print)
+C_FILES	= $(shell find $(C_DIRS) -type f -follow -print | grep -w "[.c]$$")
+
+O_DIR	= .tmp/obj
+O_DIRS	= $(C_DIRS:$(C_DIR)%=$(O_DIR)%)
+O_FILES	= $(C_FILES:$(C_DIR)%.c=$(O_DIR)%.o)
+
+FLAGS	= -Wall -Werror -Wextra
+INCS	= -Iincludes -Ilibft
+LIB		= -L./libft -lft -ltermcap
 
 all: $(NAME)
 
-%.o: %.c
-	gcc $(FLAGS) -o $@ -c $<
+$(NAME): $(O_FILES)
+	@echo "Creating $(NAME)"
+	@make -C ./libft
+	@gcc $(FLAGS) $^ $(LIB) -o $@
+
+$(O_DIR)%.o: $(C_DIR)%.c
+	@echo "Creating object : $@"
+	@mkdir -p $(O_DIRS) $(O_DIR)
+	@gcc $(FLAGS) $(INCS) -o $@ -c $<
 
 clean:
-	rm -f $(OBJ)
-	make -C libft/ clean
+	@echo "Deleting objects"
+	@rm -rf $(O_FILES)
+	@make clean -C libft
 
 fclean: clean
-	rm -f $(NAME)
-	make fclean -C libft
+	@echo "Deleting $(NAME)"
+	@make fclean -C libft
+	@rm $(NAME) || true
+	@rm -rf .tmp/
 
-re: fclean $(NAME)
+re: fclean all
 
 .PHONY : all clean fclean re

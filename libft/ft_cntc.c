@@ -1,21 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_cntc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 11:21:02 by lleverge         ###   ########.fr       */
+/*   Created: 2017/01/18 11:58:32 by lleverge          #+#    #+#             */
+/*   Updated: 2017/01/18 11:59:02 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "libft.h"
 
-int			main(int ac, char **av, char **environ)
+int			ft_cntc(char *str, char c)
 {
-	char	*line;
+	int		i;
+	int		cnt;
 
-	line = NULL;
+	if (str && c)
+	{
+		i = 0;
+		cnt = 0;
+		while (str[i])
+		{
+			if (str[i] == c)
+				cnt++;
+			i++;
+		}
+		return (cnt);
+	}
 	return (0);
 }

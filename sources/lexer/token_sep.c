@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 10:54:13 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 11:02:13 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/18 11:20:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ int			is_sep(char c)
 
 int			is_and(char *str, int i)
 {
-	str[i + 1] != '&' ? 0 : 1;
+	return (str[i + 1] != '&') ? 0 : 1;
 }
 
 int			is_pipe(char *str, int i)
 {
-	str[i + 1] != '|' ? 0 : 1;
+	return (str[i + 1] != '|') ? 0 : 1;
 }
 
 int			is_quote(char *str, int i)

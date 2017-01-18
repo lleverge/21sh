@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 11:14:04 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/18 11:24:01 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ typedef struct stat		t_stat;
 typedef struct winsize	t_winsize;
 typedef struct termios	t_termios;
 
-typedef struct		s_cursor
+typedef struct		s_pos
 {
 	int				x;
 	int				y;
-}					t_cursor;
+}					t_pos;
 
 typedef struct		s_term
 {

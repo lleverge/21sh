@@ -6,14 +6,13 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 09:54:17 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/18 12:23:33 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-# include "libft.h"
-# include "shell.h"
+# include <shell.h>
 
 typedef enum	e_token_id
 {
@@ -33,13 +32,21 @@ typedef enum	e_token_id
 	ERROR
 }				t_token_id;
 
-typedef struct		s_node
+typedef struct		s_lexer
 {
 	int				token_id;
 	char			*content;
 	char			**cmd;
-	struct s_node	*left;
-	struct s_node	*right;
-}					t_node;
+	struct s_node	*prev;
+	struct s_node	*next;
+}					t_lexer;
+
+int					is_sep(char c);
+int					is_and(char *str, int i);
+int					is_pipe(char *str, int i);
+int					is_quote(char *str, int i);
+int					is_dquote(char *str, int i);
+int					token_id(char *str);
+t_lexer				*lexer_list(t_lexer *list, char *str);
 
 #endif

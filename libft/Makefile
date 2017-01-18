@@ -59,7 +59,8 @@ SRC = ft_isspace.c\
 	ft_lstiter.c\
 	ft_lstmap.c\
 	ft_lstnew.c\
-	get_next_line.c
+	get_next_line.c\
+	ft_cntc.c
 OBJ = ft_isspace.o\
 	ft_memset.o\
 	ft_bzero.o\
@@ -119,7 +120,8 @@ OBJ = ft_isspace.o\
 	ft_lstiter.o\
 	ft_lstmap.o\
 	ft_lstnew.o\
-	get_next_line.o
+	get_next_line.o\
+	ft_cntc.o
 RM = rm -f
 FLAGS = -Wall -Werror -Wextra
 HEADER = libft.h
