@@ -1,33 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   prompt_tools.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 15:27:24 by lleverge         ###   ########.fr       */
+/*   Created: 2017/01/25 15:23:22 by lleverge          #+#    #+#             */
+/*   Updated: 2017/01/25 15:29:39 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-int			init_all(char **environ)
+void		prompt2(char *new, char *tmp, char *home)
 {
-	t_ult	*ult;
-
-	ult = NULL;
-	ult = init_ult(ult, environ);
-	prompt(ult->env);
-	return (0);
+	color(GREEN, "");
+	ft_putstr("~");
+	new = ft_strsub(tmp, ft_strlen(home), ft_strlen(tmp));
+	ft_putstr_sp(new);
+	color(RESET, "");
+	ft_strdel(&new);
 }
 
-int			main(int ac, char **av, char **environ)
+char		*get_data(t_env *env, char *ref_name)
 {
-	av = NULL;
-	(void)av;
-	if (ac != 1)
-		ft_putendl_fd("error: 21sh requires no arguments", 2);
-	init_all(environ);
-	return (0);
+	while (env)
+	{
+		if (ft_strcmp(env->name, ref_name) == 0)
+			return (env->content);
+		env = env->next;
+	}
+	return (NULL);
 }

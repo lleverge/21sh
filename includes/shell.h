@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 13:53:15 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/25 15:30:38 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,14 @@
 # include <dirent.h>
 # include <stdio.h>
 # include <fcntl.h>
-# include <term.h>
+
+# define RED "[31m"
+# define BLUE "[34m"
+# define CYAN "[36m"
+# define RESET "[39m"
+# define GREEN "[32m"
+# define YELLOW "[33m"
+# define MAGENTA "[35m"
 
 typedef struct stat		t_stat;
 typedef struct winsize	t_winsize;
@@ -67,6 +74,7 @@ t_ult				*init_ult(t_ult *ult, char **environ);
 t_env				*env_cpy(t_env *envtmp, t_env *env);
 t_env				*var_cpy(t_env *start, t_env *cpy);
 t_env				*env_in_list(char *envar, t_env *start);
+t_env				*fill_env(char **environ);
 
 /*
 **env_tools.c
@@ -77,4 +85,21 @@ char				*getvarcontent(char *envar);
 char				*getvarname(char *envar);
 t_env				*env_cpy(t_env *envtmp, t_env *env);
 
+/*
+**prompt_tools.c
+*/
+void				prompt2(char *new, char *tmp, char *home);
+char				*get_data(t_env *env, char *ref_name);
+
+/*
+**display_tools.c
+*/
+void				print_list(t_env *env);
+
+/*
+** prompt.c**
+*/
+void				ft_putstr_sp(char *str);
+void				color(char *color, char *target);
+void				prompt(t_env *env);
 #endif

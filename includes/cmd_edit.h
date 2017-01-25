@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cmd_edit.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 15:27:24 by lleverge         ###   ########.fr       */
+/*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
+/*   Updated: 2017/01/25 15:25:29 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#ifndef CMD_EDIT_H
+# define CMD_EDIT_H
+# include <shell.h>
 
-int			init_all(char **environ)
+typedef struct		s_cursor
 {
-	t_ult	*ult;
+	int				x;
+	int				y;
+}					t_cursor;
 
-	ult = NULL;
-	ult = init_ult(ult, environ);
-	prompt(ult->env);
-	return (0);
-}
+/*
+** prompt.c**
+*/
+void				ft_putstr_sp(char *str);
+void				color(char *color, char *target);
 
-int			main(int ac, char **av, char **environ)
-{
-	av = NULL;
-	(void)av;
-	if (ac != 1)
-		ft_putendl_fd("error: 21sh requires no arguments", 2);
-	init_all(environ);
-	return (0);
-}
+#endif

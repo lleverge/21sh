@@ -6,11 +6,11 @@
 #    By: lleverge <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2017/01/18 11:18:54 by lleverge         ###   ########.fr        #
+#    Updated: 2017/01/25 15:07:28 by lleverge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	= 42sh
+NAME	= 21sh
 
 C_DIR	= sources
 C_DIRS	= $(shell find $(C_DIR) -type d -follow -print)
