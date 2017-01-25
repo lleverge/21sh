@@ -6,13 +6,15 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 15:25:29 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/25 17:01:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_EDIT_H
 # define CMD_EDIT_H
 # include <shell.h>
+# include <term.h>
+# include <curses.h>
 
 typedef struct		s_cursor
 {

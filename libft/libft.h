@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/23 16:11:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/18 11:59:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/25 17:10:05 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+char				**ft_strsplit_ws(char const *s);
 int					ft_cntc(char *str, char c);
 int					get_next_line(int const fd, char **line);
 int					ft_isspace(char c);

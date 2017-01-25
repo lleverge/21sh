@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 15:30:38 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/01/25 17:16:51 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ t_env				*env_in_list(char *envar, t_env *start);
 t_env				*fill_env(char **environ);
 
 /*
+**init_term.c
+*/
+void				init_term2(t_term *termi);
+t_term				*init_term();
+
+/*
 **env_tools.c
 */
 int					count_tablen(char **tab);
@@ -97,9 +103,16 @@ char				*get_data(t_env *env, char *ref_name);
 void				print_list(t_env *env);
 
 /*
-** prompt.c**
+**prompt.c
 */
 void				ft_putstr_sp(char *str);
 void				color(char *color, char *target);
 void				prompt(t_env *env);
+
+/*
+**free_tools.c
+*/
+void				free_env(t_env **head);
+void				free_tab(char **tab);
+
 #endif

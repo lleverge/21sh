@@ -1,25 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_ult.c                                         :+:      :+:    :+:   */
+/*   free_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 17:28:55 by lleverge         ###   ########.fr       */
+/*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
+/*   Updated: 2017/01/25 17:15:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-t_ult			*init_ult(t_ult *ult, char **environ)
+void		free_env(t_env **head)
 {
-	if (!(ult = (t_ult *)malloc(sizeof(t_ult))))
+	t_env	*current;
+	t_env	*next;
+
+	current = *head;
+	while (current)
 	{
-		ft_putendl_fd("error: ult struct malloc failed", 2);
-		return (NULL);
+		next = current->next;
+		if (current->name)
+			ft_strdel(&(current->name));
+		if (current->content)
+			ft_strdel(&(current->content));
+		free(current);
+		current = next;
 	}
-	ult->env = fill_env(environ);
-	ult->term = init_term();
-	return (ult);
+	*head = NULL;
+}
+
+void		free_tab(char **tab)
+{
+	int		i;
+
+	i = 0;
+	while (tab[i] != 0)
+	{
+		ft_strdel(&tab[i]);
+		i++;
+	}
+	free(tab);
+	tab = NULL;
 }
