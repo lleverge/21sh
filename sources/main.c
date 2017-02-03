@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/03 16:50:05 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/03 17:38:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int			init_all(char **environ)
 		prompt(ult->env);
 		ft_strdel(&line);
 		get_next_line(0, &line);
+		ft_putchar('\n');
 	}
 	ft_strdel(&line);
 	return (0);

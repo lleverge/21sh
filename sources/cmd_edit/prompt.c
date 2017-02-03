@@ -6,75 +6,81 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 14:15:33 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 18:17:26 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/03 17:39:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 
-void			ft_putstr_sp(char *str)
+static void		color(char *str, char *col)
 {
+	ft_putstr("\e");
+	ft_putstr(col);
 	ft_putstr(str);
-	ft_putchar(' ');
+	ft_putstr("\033[0m");
 }
 
-void			color(char *color, char *target)
+static void		put_home(char *home, char *cwd)
 {
-	ft_putchar_fd('\033', 2);
-	ft_putstr_fd(color, 2);
-	ft_putstr_fd(target, 2);
+	color("~", CYAN);
+	color((ft_strstr(cwd, home) + ft_strlen(home)), CYAN);
 }
 
-static void		prompt_user(t_env *env)
+static int		prompt_handle(char *user, int i)
 {
-	char *user;
-
-	user = get_data(env, "USER");
-	ft_putstr("\n# ");
 	if (user)
 	{
-		color(YELLOW, user);
-		color(RESET, "");
-		ft_putstr(" in ");
+		i = ft_strlen(user) + 1;
+		color(user, YELLOW);
+		ft_putchar(' ');
 	}
 	else
 	{
-		color(RED, "unknown");
-		color(RESET, "");
-		ft_putstr(" in ");
+		color("incognito ", RED);
+		i = 10;
 	}
+	return (i);
 }
 
-static void		prompt_path(t_env *env)
+static int		put_prompt(char *user, char *home, char *pwd)
 {
-	char	*tmp;
-	char	*home;
-	char	*new;
+	int i;
 
-	new = NULL;
-	tmp = get_data(env, "PWD");
-	if (!(home = get_data(env, "HOME")))
-		home = "";
-	if (!tmp)
+	i = 5;
+	i = prompt_handle(user, i);
+	if (pwd && home && ft_strstr(pwd, home))
 	{
-		color(RED, "");
-		ft_putstr("somewhere ");
-		color(RESET, "");
+		i += ft_strlen(ft_strstr(pwd, home) + ft_strlen(home)) + 1;
+		put_home(home, pwd);
+		ft_strdel(&pwd);
 	}
-	else if (tmp && ft_strncmp(tmp, home, ft_strlen(home)) == 0)
-		prompt2(new, tmp, home);
+	else if (pwd && pwd[0])
+	{
+		i += ft_strlen(pwd);
+		color(pwd, CYAN);
+		ft_strdel(&pwd);
+	}
 	else
 	{
-		color(BLUE, "");
-		ft_putstr_sp(tmp);
-		color(RESET, "");
+		i += 7;
+		color("nowhere", RED);
 	}
+	ft_putstr(" $> ");
+	ft_strdel(&user);
+	ft_strdel(&home);
+	return (i);
 }
 
-void			prompt(t_env *env)
+int				prompt(t_env *env)
 {
-	prompt_user(env);
-	prompt_path(env);
-	color(BLUE, " \n$> ");
-	color(RESET, "");
+	char			*user;
+	char			*home;
+	char			*pwd;
+	int				i;
+
+	user = get_node_content(env, "USER");
+	home = get_node_content(env, "HOME");
+	pwd = get_node_content(env, "PWD");
+	i = put_prompt(user, home, pwd);
+	return (i);
 }

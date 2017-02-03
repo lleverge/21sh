@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 19:31:41 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/03 17:02:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <term.h>
 # include <curses.h>
 
-#define BUFFER *(unsigned int *)buffer
+# define BUFFER *(unsigned int *)buffer
 
 typedef enum		e_enum
 {
@@ -46,11 +46,11 @@ typedef struct		s_cursor
 /*
 **edit_tools.c
 */
-void			use_ncap(char *cap, int n);
-void			use_cap(char *cap);
+void				use_ncap(char *cap, int n);
+void				use_cap(char *cap);
 
 /*
 **ft_keyhook.c
 */
-int				ft_keyspot(void);
+int					ft_keyspot(void);
 #endif

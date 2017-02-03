@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/03 16:27:29 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/03 17:34:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,9 +106,7 @@ void				print_list(t_env *env);
 /*
 **prompt.c
 */
-void				ft_putstr_sp(char *str);
-void				color(char *color, char *target);
-void				prompt(t_env *env);
+int					prompt(t_env *env);
 
 /*
 **free_tools.c
