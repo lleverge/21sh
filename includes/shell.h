@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 17:16:51 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/03 16:27:29 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct		s_ult
 {
 	t_term			*term;
 	t_env			*env;
+	char			**path;
 }					t_ult;
 
 /*
@@ -115,4 +116,8 @@ void				prompt(t_env *env);
 void				free_env(t_env **head);
 void				free_tab(char **tab);
 
+/*
+**init_tools.c
+*/
+char				*get_node_content(t_env *env, char *str);
 #endif
