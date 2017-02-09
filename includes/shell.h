@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/03 17:34:30 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/03 17:46:09 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct		s_term
 {
 	int				fd;
 	t_termios		termios;
+	t_winsize		ws;
 }					t_term;
 
 typedef struct		s_env

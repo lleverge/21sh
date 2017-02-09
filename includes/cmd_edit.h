@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/03 17:02:36 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/09 14:46:35 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 # include <shell.h>
 # include <term.h>
 # include <curses.h>
+# include <signal.h>
+# include <termios.h>
+# include <termcap.h>
+# include <sys/ioctl.h>
 
 # define BUFFER *(unsigned int *)buffer
 
