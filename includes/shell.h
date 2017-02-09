@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/03 17:46:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/09 15:48:42 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,17 @@ typedef struct stat		t_stat;
 typedef struct winsize	t_winsize;
 typedef struct termios	t_termios;
 
+typedef struct		s_prompt
+{
+	int				len;
+}					t_prompt;
+
+typedef struct		s_cursor
+{
+	int				x;
+	int				y;
+}					t_cursor;
+
 typedef struct		s_pos
 {
 	int				x;
@@ -62,6 +73,8 @@ typedef struct		s_ult
 {
 	t_term			*term;
 	t_env			*env;
+	t_prompt		*prom;
+	t_cursor		*curs;
 	char			**path;
 }					t_ult;
 
@@ -83,6 +96,16 @@ t_env				*fill_env(char **environ);
 */
 void				init_term2(t_term *termi);
 t_term				*init_term();
+
+/*
+**init_prompt.c
+*/
+t_prompt			*init_prompt(void);
+
+/*
+**init_cursor.c
+*/
+t_cursor			*init_cursor(void);
 
 /*
 **env_tools.c
@@ -107,7 +130,7 @@ void				print_list(t_env *env);
 /*
 **prompt.c
 */
-int					prompt(t_env *env);
+int					prompt(t_env *env, t_ult *ult);
 
 /*
 **free_tools.c

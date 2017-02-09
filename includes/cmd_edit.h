@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 14:46:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/09 15:35:56 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,6 @@ typedef enum		e_enum
 	CRTL_A_KEY = 1,
 }					t_enum;
 
-typedef struct		s_cursor
-{
-	int				x;
-	int				y;
-}					t_cursor;
-
 /*
 **edit_tools.c
 */
@@ -56,5 +50,5 @@ void				use_cap(char *cap);
 /*
 **ft_keyhook.c
 */
-int					ft_keyspot(void);
+int					ft_keyspot(t_ult *ult);
 #endif

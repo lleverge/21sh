@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 14:15:33 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/03 17:39:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/09 15:44:21 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ static int		put_prompt(char *user, char *home, char *pwd)
 	return (i);
 }
 
-int				prompt(t_env *env)
+int				prompt(t_env *env, t_ult *ult)
 {
 	char			*user;
 	char			*home;
@@ -82,5 +82,7 @@ int				prompt(t_env *env)
 	home = get_node_content(env, "HOME");
 	pwd = get_node_content(env, "PWD");
 	i = put_prompt(user, home, pwd);
+	ult->prom->len = i + 3;
+	ult->curs->x = i + 4;
 	return (i);
 }
