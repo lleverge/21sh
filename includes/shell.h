@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 15:48:42 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/09 18:02:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct termios	t_termios;
 typedef struct		s_prompt
 {
 	int				len;
+	char			*cmd_line;
+	int				cmd_len;
 }					t_prompt;
 
 typedef struct		s_cursor
