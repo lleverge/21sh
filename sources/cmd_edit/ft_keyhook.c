@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 19:18:48 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 15:45:36 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/09 19:00:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 
 static void		move_right(t_ult *ult)
 {
-	ult->curs->x += 1;
-	use_cap("nd");
+	if (ult->curs->x < ult->term->ws.ws_col)
+	{
+		ult->curs->x += 1;
+		use_cap("nd");
+	}
 }
 
 static void		move_left(t_ult *ult)

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 18:02:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/09 18:57:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,11 @@ void				print_list(t_env *env);
 **prompt.c
 */
 int					prompt(t_env *env, t_ult *ult);
+
+/*
+**ft_size.c
+*/
+void				get_ws(t_ult *ult);
 
 /*
 **free_tools.c
