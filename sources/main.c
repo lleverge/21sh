@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 16:45:22 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 18:42:58 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ int			init_all(char **environ)
 	char		*line;
 
 	ult = NULL;
+	ed = NULL;
 	line = ft_strdup("");
 	ult = init_ult(ult, environ);
-	ed = init_edit(environ);
+	ed = init_edit(ed, environ);
 	while (42)
 	{
 		prompt(ed);

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 16:55:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 18:39:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ typedef struct		s_edit
 {
 	t_input			*input;
 	t_env			*env;
-	t_termios		termi;
-	t_winsize		ws;
+	t_term			*termi;
 	int				ret;
 	int				pid;
 	int				fd;
@@ -75,7 +74,7 @@ t_input				*init_input(void);
 /*
 **init_edit.c
 */
-t_edit				*init_edit(char **environ);
+t_edit				*init_edit(t_edit *ed, char **environ);
 
 /*
 **init_cursor.c

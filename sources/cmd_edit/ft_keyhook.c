@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 19:18:48 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 15:48:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 18:48:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void		move_right(t_edit *ed)
 {
-	if (ed->input->curs->x < ed->ws.ws_col)
+	if (ed->input->curs->x < ed->termi->ws.ws_col)
 	{
 		ed->input->curs->x += 1;
 		use_cap("nd");

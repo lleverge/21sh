@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 16:42:43 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 18:45:03 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void				print_list(t_env *env);
 /*
 **ft_size.c
 */
-void				get_ws(int fd, t_winsize ws);
+void				get_ws(t_term *termi);
 
 /*
 **free_tools.c

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 16:38:20 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 18:47:10 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ t_ult			*init_ult(t_ult *ult, char **environ)
 	ult->term = init_term();
 	ult->prom = init_prompt();
 	ult->path = get_paths(ult->env);
-	get_ws(ult->term->fd, ult->term->ws);
+	get_ws(ult->term);
 	return (ult);
 }
