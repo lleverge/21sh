@@ -6,11 +6,12 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/14 14:15:33 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 15:44:21 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 15:56:22 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
+#include "cmd_edit.h"
 
 static void		color(char *str, char *col)
 {
@@ -71,18 +72,18 @@ static int		put_prompt(char *user, char *home, char *pwd)
 	return (i);
 }
 
-int				prompt(t_env *env, t_ult *ult)
+int				prompt(t_edit *ed)
 {
 	char			*user;
 	char			*home;
 	char			*pwd;
 	int				i;
 
-	user = get_node_content(env, "USER");
-	home = get_node_content(env, "HOME");
-	pwd = get_node_content(env, "PWD");
+	user = get_node_content(ed->env, "USER");
+	home = get_node_content(ed->env, "HOME");
+	pwd = get_node_content(ed->env, "PWD");
 	i = put_prompt(user, home, pwd);
-	ult->prom->len = i + 3;
-	ult->curs->x = i + 4;
+	ed->input->lprom = i + 3;
+	ed->input->curs->x = i + 4;
 	return (i);
 }

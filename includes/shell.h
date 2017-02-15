@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 18:57:37 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 16:42:43 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,6 @@ typedef struct		s_prompt
 	int				cmd_len;
 }					t_prompt;
 
-typedef struct		s_cursor
-{
-	int				x;
-	int				y;
-}					t_cursor;
-
 typedef struct		s_pos
 {
 	int				x;
@@ -76,7 +70,7 @@ typedef struct		s_ult
 	t_term			*term;
 	t_env			*env;
 	t_prompt		*prom;
-	t_cursor		*curs;
+	t_pos			*pos;
 	char			**path;
 }					t_ult;
 
@@ -105,11 +99,6 @@ t_term				*init_term();
 t_prompt			*init_prompt(void);
 
 /*
-**init_cursor.c
-*/
-t_cursor			*init_cursor(void);
-
-/*
 **env_tools.c
 */
 int					count_tablen(char **tab);
@@ -130,14 +119,9 @@ char				*get_data(t_env *env, char *ref_name);
 void				print_list(t_env *env);
 
 /*
-**prompt.c
-*/
-int					prompt(t_env *env, t_ult *ult);
-
-/*
 **ft_size.c
 */
-void				get_ws(t_ult *ult);
+void				get_ws(int fd, t_winsize ws);
 
 /*
 **free_tools.c

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 15:35:56 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 16:55:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,52 @@ typedef enum		e_enum
 	CRTL_A_KEY = 1,
 }					t_enum;
 
+typedef struct		s_cursor
+{
+	int				x;
+	int				y;
+}					t_cursor;
+
+typedef struct		s_input
+{
+	t_cursor		*curs;
+	char			*cmd_line;
+	char			*cp;
+	int				lprom;
+}					t_input;
+
+typedef struct		s_edit
+{
+	t_input			*input;
+	t_env			*env;
+	t_termios		termi;
+	t_winsize		ws;
+	int				ret;
+	int				pid;
+	int				fd;
+	char			*absol_path;
+}					t_edit;
+
+/*
+**init_input.c
+*/
+t_input				*init_input(void);
+
+/*
+**init_edit.c
+*/
+t_edit				*init_edit(char **environ);
+
+/*
+**init_cursor.c
+*/
+t_cursor			*init_cursor(void);
+
+/*
+**prompt.c
+*/
+int					prompt(t_edit *ed);
+
 /*
 **edit_tools.c
 */
@@ -50,5 +96,5 @@ void				use_cap(char *cap);
 /*
 **ft_keyhook.c
 */
-int					ft_keyspot(t_ult *ult);
+int					ft_keyspot(t_edit *ed);
 #endif

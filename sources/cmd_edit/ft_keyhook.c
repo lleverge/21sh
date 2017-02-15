@@ -6,40 +6,40 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 19:18:48 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 19:00:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/15 15:48:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-static void		move_right(t_ult *ult)
+static void		move_right(t_edit *ed)
 {
-	if (ult->curs->x < ult->term->ws.ws_col)
+	if (ed->input->curs->x < ed->ws.ws_col)
 	{
-		ult->curs->x += 1;
+		ed->input->curs->x += 1;
 		use_cap("nd");
 	}
 }
 
-static void		move_left(t_ult *ult)
+static void		move_left(t_edit *ed)
 {
-	if (ult->curs->x > ult->prom->len)
+	if (ed->input->curs->x > ed->input->lprom)
 	{
-		ult->curs->x -= 1;
+		ed->input->curs->x -= 1;
 		use_cap("le");
 	}
 }
 
-static void		manage_key(t_ult *ult, char *buffer[5])
+static void		manage_key(t_edit *ed, char *buffer[5])
 {
 	if (BUFFER == RIGHT_KEY)
-		move_right(ult);
+		move_right(ed);
 	if (BUFFER == LEFT_KEY)
-		move_left(ult);
+		move_left(ed);
 }
 
-int				ft_keyspot(t_ult *ult)
+int				ft_keyspot(t_edit *ed)
 {
 	char	*buffer[5];
 
@@ -47,7 +47,7 @@ int				ft_keyspot(t_ult *ult)
 	while (BUFFER != RET_KEY)
 	{
 		read(0, buffer, 4);
-		manage_key(ult, buffer);
+		manage_key(ed, buffer);
 	}
 	return (0);
 }

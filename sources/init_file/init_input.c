@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_size.c                                          :+:      :+:    :+:   */
+/*   init_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 18:51:24 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 16:50:37 by lleverge         ###   ########.fr       */
+/*   Created: 2017/02/15 16:14:21 by lleverge          #+#    #+#             */
+/*   Updated: 2017/02/15 16:54:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
 #include <shell.h>
+#include <cmd_edit.h>
 
-void			get_ws(int fd, t_winsize ws)
+t_input				*init_input(void)
 {
-	if (ioctl(fd, TIOCGWINSZ, &ws) == -1)
+	t_input		*input;
+
+	if (!(input = (t_input *)malloc(sizeof(t_input))))
 	{
-		ft_putendl_fd("Ioctl error", 2);
+		ft_putendl_fd("error: struct input malloc failed", 2);
 		exit(-1);
 	}
-	ws.ws_col--;
-	ws.ws_row--;
+	input->curs = init_cursor();
+	input->cmd_line = NULL;
+	input->cp = NULL;
+	input->lprom = 0;
+	return (input);
 }
