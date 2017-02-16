@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 19:18:48 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 17:04:52 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/16 18:04:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,9 @@ void			move_right(t_edit *ed)
 	{
 		ed->input->curs->x += 1;
 		use_cap("nd");
-		}
+	}
 }
+
 /*
 void			move_left(t_edit *ed)
 {

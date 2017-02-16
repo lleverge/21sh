@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 15:08:36 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 17:03:06 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/16 18:21:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		init_func1(t_func1 *func)
 {
 //	func[UP] = &move_up(ed);
 //	func[DOWN] = &move_down(ed);
-//	func[LEFT] = &move_left;
+	func[LEFT] = &move_left;
 	func[RIGHT] = &move_right;
 //	func[DEL] = &del_at(ed);
 //	func[HOME] = &home(ed);

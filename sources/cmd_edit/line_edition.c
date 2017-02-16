@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 16:23:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 17:20:14 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/16 18:19:55 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,15 @@ static void			func1_key(t_key *key, t_edit *ed)
 	int		i;
 
 	i = 0;
-	while (i != FUNC1)
+	if (i == RIGHT)
+		(*(key->func1)[RIGHT])(ed);
+	if (i == LEFT)
+		(*(key->func1)[LEFT])(ed);
+/*	while (i != FUNC1)
 	{
 		(*(key->func1)[i])(ed);
 		i++;
-	}
+		}*/
 }
 
 static char			*line_edit1(char *buffer)
