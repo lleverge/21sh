@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 15:08:36 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 15:45:47 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/16 17:03:06 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 
 void		init_func1(t_func1 *func)
 {
-	func[UP] = &move_up;
-	func[DOWN] = &move_down;
-	func[LEFT] = &move_left;
+//	func[UP] = &move_up(ed);
+//	func[DOWN] = &move_down(ed);
+//	func[LEFT] = &move_left;
 	func[RIGHT] = &move_right;
-	func[DEL] = &del_at;
-	func[HOME] = &home;
-	func[END] = &end;
-	func[FWORD] = &fword;
-	func[BWORD] = &bword;
-	func[CP] = &select_c;
-	func[SUP] = &del;
-	func[PAST] = &past;
+//	func[DEL] = &del_at(ed);
+//	func[HOME] = &home(ed);
+//	func[END] = &end(ed);
+//	func[FWORD] = &fword(ed);
+//	func[BWORD] = &bword(ed);
+//	func[CP] = &select_c(ed);
+//	func[SUP] = &del(ed);
+//	func[PAST] = &past(ed);
 }
 
-void		init_func2(t_fun2 *func)
+void		init_func2(/*t_func2 *fun2)*/void)
 {
-	func[CLEFT] = &smove_left;
-	func[CRIGHT] = &smove_right;
+//	func[CLEFT] = &smove_left(ed);
+//	func[CRIGHT] = &smove_right(ed);
 }

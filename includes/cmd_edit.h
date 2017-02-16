@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 15:56:40 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/16 17:20:56 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,6 @@ typedef enum		e_enum
 	CRTL_A_KEY = 1,
 	}					t_enum;*/
 
-typedef struct		s_key
-{
-	void			(*func1[FUNC1])(struct s_key *key);
-	void			(*func2[FUNC2])(struct s_key *key);
-	void			*buffer;
-	int				move;
-	int				cmove;
-}					t_key;
-
 typedef struct		s_cursor
 {
 	int				x;
@@ -114,8 +105,17 @@ typedef struct		s_edit
 	char			*absol_path;
 }					t_edit;
 
-typedef void		(*t_func1)(t_key *key);
-typedef void		(*t_func2)(t_key *key);
+typedef struct      s_key
+{
+    void            (*func1[FUNC1])(struct s_edit *ed);
+    void            (*func2[FUNC2])(struct s_edit *ed);
+    void            *buffer;
+    int             *move;
+    int             *cmove;
+}                   t_key;
+
+typedef void		(*t_func1)(t_edit *ed);
+typedef void		(*t_func2)(t_edit *ed);
 
 /*
 **init_input.c
@@ -126,6 +126,9 @@ t_input				*init_input(void);
 **init_edit.c
 */
 t_edit				*init_edit(t_edit *ed, char **environ);
+int					*init_move(void);
+int					*init_cmove(void);
+void				init_tkey(t_edit *ed, t_key **key);
 
 /*
 **init_cursor.c
@@ -136,7 +139,12 @@ t_cursor			*init_cursor(void);
 **funct.c
 */
 void				init_func1(t_func1 *func);
-void				init_func2(t_func2 *func);
+void				init_func2(void /*t_func2 *func*/);
+
+/*
+**line_edition.c
+*/
+void				line_edition(t_key *key, t_edit *ed);
 
 /*
 **prompt.c
@@ -152,5 +160,7 @@ void				use_cap(char *cap);
 /*
 **ft_keyhook.c
 */
-int					ft_keyspot(t_edit *ed);
+void				move_right(t_edit *ed);
+void				move_left(t_edit *ed);
+//int					ft_keyspot(t_edit *ed);
 #endif
