@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 18:39:04 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/16 15:56:40 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,46 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 
-# define BUFFER *(unsigned int *)buffer
+# define FUNC1 14
+# define UP 0
+# define DOWN 1
+# define LEFT 2
+# define RIGHT 3
+# define DEL 4
+# define HOME 5
+# define END 6
+# define FWORD 7
+# define BWORD 8
+# define CP 9
+# define SUP 10
+# define PAST 11
+# define HISTORY_UP 12
+# define HISTORY_DOWN 13
+
+# define T_UP 0x415B1B1B
+# define T_DOWN 0x425B1B1B
+# define T_LEFT 0x444F1B
+# define T_RIGHT 0x434F1B
+# define T_DEL 0x7F
+# define T_HOME 0x01
+# define T_END 0x05
+# define T_FWORD 0x92C6
+# define T_BWORD 0xAB88E2
+# define T_VISUAL 0x9FC3
+# define T_CUT 0x8889E2
+# define T_CP 0xA7C3
+# define T_SUP 0x4
+# define T_PAST 0x9A88E2
+# define T_ENTER 0xA
+# define T_HUP 0x414F1B
+# define T_HDOWN 0x424F1B
+# define T_QUIT 0x4
+# define T_CLEAR 0x2
+# define FUNC2 2
+# define CLEFT 0
+# define CRIGHT 1
+
+/*# define BUFFER *(unsigned int *)buffer
 
 typedef enum		e_enum
 {
@@ -39,7 +78,16 @@ typedef enum		e_enum
 	PAGE_DOWN_KEY = 2117491483,
 	TAB_KEY = 9,
 	CRTL_A_KEY = 1,
-}					t_enum;
+	}					t_enum;*/
+
+typedef struct		s_key
+{
+	void			(*func1[FUNC1])(struct s_key *key);
+	void			(*func2[FUNC2])(struct s_key *key);
+	void			*buffer;
+	int				move;
+	int				cmove;
+}					t_key;
 
 typedef struct		s_cursor
 {
@@ -66,6 +114,9 @@ typedef struct		s_edit
 	char			*absol_path;
 }					t_edit;
 
+typedef void		(*t_func1)(t_key *key);
+typedef void		(*t_func2)(t_key *key);
+
 /*
 **init_input.c
 */
@@ -80,6 +131,12 @@ t_edit				*init_edit(t_edit *ed, char **environ);
 **init_cursor.c
 */
 t_cursor			*init_cursor(void);
+
+/*
+**funct.c
+*/
+void				init_func1(t_func1 *func);
+void				init_func2(t_func2 *func);
 
 /*
 **prompt.c

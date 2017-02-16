@@ -6,14 +6,14 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 18:42:58 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/16 15:05:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-int			init_all(char **environ)
+int				init_all(char **environ)
 {
 	t_ult		*ult;
 	t_edit		*ed;
@@ -35,7 +35,7 @@ int			init_all(char **environ)
 	return (0);
 }
 
-int			main(int ac, char **av, char **environ)
+int				main(int ac, char **av, char **environ)
 {
 	av = NULL;
 	(void)av;
