@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 17:20:56 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/16 18:24:35 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,14 +105,14 @@ typedef struct		s_edit
 	char			*absol_path;
 }					t_edit;
 
-typedef struct      s_key
+typedef struct		s_key
 {
-    void            (*func1[FUNC1])(struct s_edit *ed);
-    void            (*func2[FUNC2])(struct s_edit *ed);
-    void            *buffer;
-    int             *move;
-    int             *cmove;
-}                   t_key;
+	void			(*func1[FUNC1])(struct s_edit *ed);
+	void			(*func2[FUNC2])(struct s_edit *ed);
+	void			*buffer;
+	int				*move;
+	int				*cmove;
+}					t_key;
 
 typedef void		(*t_func1)(t_edit *ed);
 typedef void		(*t_func2)(t_edit *ed);
@@ -139,7 +139,7 @@ t_cursor			*init_cursor(void);
 **funct.c
 */
 void				init_func1(t_func1 *func);
-void				init_func2(void /*t_func2 *func*/);
+void				init_func2(void/*t_func2 *func*/);
 
 /*
 **line_edition.c
