@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 19:18:48 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 18:04:30 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/23 13:51:00 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			move_right(t_edit *ed)
 	}
 }
 
-/*
+
 void			move_left(t_edit *ed)
 {
 	if (ed->input->curs->x > ed->input->lprom)
@@ -30,7 +30,7 @@ void			move_left(t_edit *ed)
 		ed->input->curs->x -= 1;
 		use_cap("le");
 	}
-	}*/
+}
 /*
 static void		manage_key(t_edit *ed, char *buffer[5])
 {

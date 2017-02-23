@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 18:24:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/23 15:08:18 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,4 +163,19 @@ void				use_cap(char *cap);
 void				move_right(t_edit *ed);
 void				move_left(t_edit *ed);
 //int					ft_keyspot(t_edit *ed);
+
+/*
+**insert_char.c
+*/
+char				*ft_strinsert_at(char *str, char c, size_t pos);
+void				putchar_move_cursor(t_edit *ed);
+void				insert_rec(t_edit *ed, int y, char *nuffer, int rec);
+char				*insert_at(t_edit *ed, char *buffer, char c);
+
+/*
+**ft_size.c
+*/
+int					cursor_to_sbuffer(t_edit *ed, int x, int y);
+void				buffer_to_cursor(t_edit *ed, int pos, t_cursor *cursor);
+int					line_full(t_edit *ed, int len, int y, int prompt_size);
 #endif

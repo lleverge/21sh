@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 15:57:33 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 18:14:53 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/23 14:21:34 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,11 +74,16 @@ void				init_tkey(t_edit *ed, t_key **key)
 
 t_edit				*init_edit(t_edit *ed, char **environ)
 {
+	char	*tmp;
+
 	if (!(ed = (t_edit *)malloc(sizeof(t_edit))))
 	{
 		ft_putendl_fd("error: edit struct malloc failed", 2);
 		exit(-1);
 	}
+	tmp = getcwd(NULL, 200);
+	ed->absol_path = ft_strjoin(tmp, "/");
+	ft_strdel(&tmp);
 	ed->env = fill_env(environ);
 	ed->input = init_input();
 	ed->termi = init_term();
