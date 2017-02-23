@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/23 14:38:28 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/23 15:10:38 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/23 17:51:17 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ char		*ft_strinsert_at(char *str, char c, size_t pos)
 		ft_putendl_fd("error: strinsert malloc failed", 2);
 		exit(-1);
 	}
-	ft_strncpy(ret, str, pos);
+	ft_strncpy(ret, str, 0/*pos*/);
 	ret[pos] = c;
-	ft_strcpy(&ret[pos + 1], &str[pos]);
+	ft_strcpy(ret, str /*&ret[pos + 1], &str[pos]*/);
 	return (ret);
 }
 

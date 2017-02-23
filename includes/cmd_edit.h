@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/23 15:08:18 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/23 17:56:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,8 @@ void				use_cap(char *cap);
 */
 void				move_right(t_edit *ed);
 void				move_left(t_edit *ed);
+void				move_up(t_edit *ed);
+void				move_down(t_edit *ed);
 //int					ft_keyspot(t_edit *ed);
 
 /*

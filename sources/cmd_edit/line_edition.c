@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 16:23:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/23 15:12:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/02/23 18:12:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,11 @@ static void			func1_key(t_key *key, t_edit *ed)
 	int		i;
 
 	i = 0;
-	if (i == RIGHT)
-		(*(key->func1)[RIGHT])(ed);
-	if (i == LEFT)
-		(*(key->func1)[LEFT])(ed);
-/*	while (i != FUNC1)
+	while (i != FUNC1)
 	{
 		(*(key->func1)[i])(ed);
 		i++;
-		}*/
+	}
 }
 
 static void			handle_char(t_edit *ed, char c)
@@ -47,7 +43,6 @@ static char			*line_edit1(char *buffer)
 
 static void			line_edit2(char *buffer, t_edit *ed)
 {
-	
 	if (ft_isprint(buffer[0]) && ft_strlen(buffer) == 1 &&
 		ft_strlen(ed->input->cmd_line) < 600 &&
 		ft_cntc(ed->input->cmd_line, '\n') == 0)
