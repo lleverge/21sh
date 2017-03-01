@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/23 17:56:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/01 12:03:44 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <termcap.h>
 # include <sys/ioctl.h>
 
-# define FUNC1 14
+# define FUNC1 9
 # define UP 0
 # define DOWN 1
 # define LEFT 2
@@ -30,11 +30,6 @@
 # define END 6
 # define FWORD 7
 # define BWORD 8
-# define CP 9
-# define SUP 10
-# define PAST 11
-# define HISTORY_UP 12
-# define HISTORY_DOWN 13
 
 # define T_UP 0x415B1B1B
 # define T_DOWN 0x425B1B1B
@@ -58,27 +53,6 @@
 # define FUNC2 2
 # define CLEFT 0
 # define CRIGHT 1
-
-/*# define BUFFER *(unsigned int *)buffer
-
-typedef enum		e_enum
-{
-	LEFT_KEY = 4479771,
-	RIGHT_KEY = 4414235,
-	UP_KEY = 4283163,
-	DOWN_KEY = 4348699,
-	ESC_KEY = 27,
-	SPACE_KEY = 32,
-	DEL_KEY = 127,
-	RET_KEY = 10,
-	SUP_KEY = 2117294875,
-	HOME_KEY = 4741915,
-	END_KEY = 4610843,
-	PAGE_UP_KEY = 2117425947,
-	PAGE_DOWN_KEY = 2117491483,
-	TAB_KEY = 9,
-	CRTL_A_KEY = 1,
-	}					t_enum;*/
 
 typedef struct		s_cursor
 {
@@ -156,6 +130,14 @@ int					prompt(t_edit *ed);
 */
 void				use_ncap(char *cap, int n);
 void				use_cap(char *cap);
+char				*ft_strsupress_at(char *str, size_t pos);
+int					check_max(t_edit *ed, t_cursor *curs, char *cmd_line, int index);
+void				supress_end(t_edit *ed);
+
+/*
+**edit_tools2.c
+*/
+char				*ft_strrpbrk(const char *s1, const char *s2);
 
 /*
 **ft_keyhook.c
@@ -173,6 +155,26 @@ char				*ft_strinsert_at(char *str, char c, size_t pos);
 void				putchar_move_cursor(t_edit *ed);
 void				insert_rec(t_edit *ed, int y, char *nuffer, int rec);
 char				*insert_at(t_edit *ed, char *buffer, char c);
+
+/*
+**del.c
+*/
+void				del_at(t_edit *ed);
+void				del(t_edit *ed);
+
+/*
+**homend.c
+*/
+void				home(t_edit *ed);
+void				end(t_edit *ed);
+
+/*
+**bfword.c
+*/
+void				fword(t_edit *ed);
+void				bword(t_edit *ed);
+char				*ft_strpbrk(const char *s1, const char *s2);
+
 
 /*
 **ft_size.c

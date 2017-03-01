@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/16 15:08:36 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/23 17:57:48 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/01 09:14:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,11 @@ void		init_func1(t_func1 *func)
 	func[DOWN] = &move_down;
 	func[LEFT] = &move_left;
 	func[RIGHT] = &move_right;
-//	func[DEL] = &del_at(ed);
-//	func[HOME] = &home(ed);
-//	func[END] = &end(ed);
-//	func[FWORD] = &fword(ed);
-//	func[BWORD] = &bword(ed);
-//	func[CP] = &select_c(ed);
-//	func[SUP] = &del(ed);
-//	func[PAST] = &past(ed);
+	func[DEL] = &del_at;
+	func[HOME] = &home;
+	func[END] = &end;
+	func[FWORD] = &fword;
+	func[BWORD] = &bword;
 }
 
 void		init_func2(/*t_func2 *fun2)*/void)

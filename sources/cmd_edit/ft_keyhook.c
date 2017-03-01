@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 19:18:48 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/23 17:58:31 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/01 12:40:29 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void			move_down(t_edit *ed)
 	size_t	len;
 
 	len = ft_strlen(ed->input->cmd_line) + ed->input->lprom;
-	if (cursor_to_sbuffer(ed, ed->input->curs->x,				\
-						  ed->input->curs->y + 1) < (int)len)
+	if (cursor_to_sbuffer(ed, ed->input->curs->x,
+						ed->input->curs->y + 1) < (int)len)
 	{
 		ed->input->curs->y++;
 		use_cap("do");
@@ -45,7 +45,8 @@ void			move_down(t_edit *ed)
 	}
 	else
 	{
-		if (ed->input->curs->y + 1 == (int)(len - 1) / (ed->termi->ws.ws_col + 1))
+		if (ed->input->curs->y + 1 == (int)(len - 1)
+			/ (ed->termi->ws.ws_col + 1))
 		{
 			use_cap("do");
 			use_cap("cr");
@@ -58,7 +59,6 @@ void			move_down(t_edit *ed)
 
 void			move_up(t_edit *ed)
 {
-
 	if (ed->input->curs->y - 1 >= 0)
 	{
 		use_cap("up");
@@ -72,26 +72,3 @@ void			move_up(t_edit *ed)
 		ed->input->curs->x = ed->input->lprom;
 	}
 }
-
-/*
-static void		manage_key(t_edit *ed, char *buffer[5])
-{
-	if (BUFFER == RIGHT_KEY)
-		move_right(ed);
-	if (BUFFER == LEFT_KEY)
-		move_left(ed);
-}
-
-int				ft_keyspot(t_edit *ed)
-{
-	char	*buffer[5];
-
-	ft_bzero(buffer, 5);
-	while (BUFFER != RET_KEY)
-	{
-		read(0, buffer, 4);
-		manage_key(ed, buffer);
-	}
-	return (0);
-	}
-*/

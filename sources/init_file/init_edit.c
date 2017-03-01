@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/15 15:57:33 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/23 14:21:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/01 09:42:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,6 @@ int					*init_move(void)
 	ret[6] = T_END;
 	ret[7] = T_FWORD;
 	ret[8] = T_BWORD;
-	ret[9] = T_VISUAL;
-	ret[10] = T_SUP;
-	ret[11] = T_PAST;
-	ret[12] = T_HUP;
-	ret[13] = T_HDOWN;
 	return (ret);
 }
 

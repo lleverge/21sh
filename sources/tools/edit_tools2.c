@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcmp.c                                        :+:      :+:    :+:   */
+/*   edit_tools2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2015/11/25 17:11:43 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/01 10:10:27 by lleverge         ###   ########.fr       */
+/*   Created: 2017/03/01 09:23:51 by lleverge          #+#    #+#             */
+/*   Updated: 2017/03/01 09:24:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <shell.h>
+#include <cmd_edit.h>
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+char		*ft_strrpbrk(const char *s1, const char *s2)
 {
-	unsigned char	*str1;
-	unsigned char	*str2;
-	size_t			count;
+	int		i;
+	char	*ret;
+	char	*tmp;
 
-	str1 = (unsigned char*)s1;
-	str2 = (unsigned char*)s2;
-	count = 0;
-	if (n == 0)
-		return (0);
-	while (count < n)
+	i = 0;
+	ret = (char*)s1 + ft_strlen(s1) - 1;
+	while (s2[i])
 	{
-		if (str1[count] != str2[count])
-			return ((int)(str1[count] - str2[count]));
-		count++;
+		tmp = ft_strrchr(s1, (int)s2[i]);
+		if (tmp != NULL)
+		{
+			if (tmp < ret)
+				ret = tmp;
+		}
+		i++;
 	}
-	return (0);
+	if (tmp == NULL)
+		return ((char*)s1);
+	return (ret + 1);
 }
