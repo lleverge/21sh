@@ -6,11 +6,45 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:47:19 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 18:56:10 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/03 18:36:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
+
+void		exit_eof(t_term *termi, t_prompt *prompt)
+{
+	prompt_print(prompt, 0);
+	reset_term(termi);
+	exit(0);
+}
+
+int			reset_term(t_term *termi)
+{
+	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
+	if (tcgetattr(0, &(termi->termios)) == -1)
+		return (-1);
+	termi->termios.c_lflag |= (ICANON | ECHO);
+	if (tcsetattr(0, 0, &(termi->termios)) == -1)
+		return (-1);
+	return (0);
+}
+
+void		exit_term(t_term *termi)
+{
+	if (tcgetattr(termi->fd, &(termi->termios)) == -1)
+	{
+		ft_putendl("error: tcgetattr");
+		exit(-1);
+	}
+	termi->termios.c_lflag |= (ICANON | ECHO);
+	if (tcsetattr(termi->fd, TCSANOW, &(termi->termios)) == -1)
+	{
+		ft_putendl("error: tcsetattr");
+		exit(-1);
+	}
+	close(termi->fd);
+}
 
 void		init_term2(t_term *termi)
 {

@@ -6,11 +6,27 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
-/*   Updated: 2017/01/25 17:15:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/03 12:18:32 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include <cmd_edit.h>
+
+void		free_prompt(t_prompt **prompt)
+{
+	t_prompt *tmp;
+
+	tmp = *prompt;
+	tmp->i = 0;
+	tmp->copy_mode = 0;
+	tmp->cursor_start = 0;
+	tmp->cursor_end = 0;
+	if (tmp->copy_str)
+		free(tmp->copy_str);
+	tmp->win_size = 0;
+	free(tmp);
+	tmp = NULL;
+}
 
 void		free_env(t_env **head)
 {
@@ -31,16 +47,16 @@ void		free_env(t_env **head)
 	*head = NULL;
 }
 
-void		free_tab(char **tab)
+void		free_tab(char **tabl)
 {
 	int		i;
 
 	i = 0;
-	while (tab[i] != 0)
+	while (tabl[i] != 0)
 	{
-		ft_strdel(&tab[i]);
+		ft_strdel(&tabl[i]);
 		i++;
 	}
-	free(tab);
+	free(tabl);
 	tab = NULL;
 }

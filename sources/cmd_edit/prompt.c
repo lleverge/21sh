@@ -5,85 +5,109 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/04/14 14:15:33 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 15:56:22 by lleverge         ###   ########.fr       */
+/*   Created: 2017/03/03 10:45:54 by lleverge          #+#    #+#             */
+/*   Updated: 2017/03/03 11:53:40 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "cmd_edit.h"
+#include <cmd_edit.h>
 
-static void		color(char *str, char *col)
+void			color(char *color, char *str)
 {
-	ft_putstr("\e");
-	ft_putstr(col);
-	ft_putstr(str);
-	ft_putstr("\033[0m");
+	ft_putchar_fd('\033', 2);
+	ft_putstr_fd(color, 2);
+	ft_putstr_fd(str, 2);
 }
 
-static void		put_home(char *home, char *cwd)
+static void		prompt_path(int i, char *buff)
 {
-	color("~", CYAN);
-	color((ft_strstr(cwd, home) + ft_strlen(home)), CYAN);
+	char	*str;
+
+	if (i >= 1)
+	{
+		color(PURPLE, "");
+		ft_putchar('~');
+		color(RESET, "");
+	}
+	if (i > 1)
+	{
+		str = ft_strdup(&buff[i]);
+		color(PURPLE, str);
+		color(RESET, "");
+		free(str);
+	}
+	else if (i == 0)
+	{
+		str = ft_strdup(ft_strchr(buff, '/'));
+		color(PURPLE, str);
+		color(RESET, "");
+		free(str);
+	}
+	ft_putchar('\n');
 }
 
-static int		prompt_handle(char *user, int i)
+static void		prompt_name(t_env *env)
 {
-	if (user)
+	t_env	*tmp;
+
+	tmp = env;
+	while (env)
 	{
-		i = ft_strlen(user) + 1;
-		color(user, YELLOW);
-		ft_putchar(' ');
+		if (ft_strcmp(env->name, "USER") == 0)
+		{
+			color(CYAN, env->content);
+			color(RESET, "");
+		}
+		env = env->next;
 	}
-	else
-	{
-		color("incognito ", RED);
-		i = 10;
-	}
-	return (i);
+	env = tmp;
+	ft_putstr(" in ");
 }
 
-static int		put_prompt(char *user, char *home, char *pwd)
+static int		pwd_home(t_env *env, char *buff)
 {
-	int i;
+	t_env	*tmp;
+	int		i;
 
-	i = 5;
-	i = prompt_handle(user, i);
-	if (pwd && home && ft_strstr(pwd, home))
+	tmp = env;
+	i = 0;
+	while (env)
 	{
-		i += ft_strlen(ft_strstr(pwd, home) + ft_strlen(home)) + 1;
-		put_home(home, pwd);
-		ft_strdel(&pwd);
+		if (ft_strcmp(env->name, "HOME") == 0)
+		{
+			if (ft_strcmp(ft_strchr(env->content, '/'), buff) == 0)
+				return (1);
+			else if (ft_strncmp(ft_strchr(env->content, '/'), buff,
+								ft_strlen(ft_strchr(env->content, '/'))) == 0)
+			{
+				i = ft_strlen(ft_strchr(env->content, '/'));
+				return (i);
+			}
+		}
+		env = env->next;
 	}
-	else if (pwd && pwd[0])
-	{
-		i += ft_strlen(pwd);
-		color(pwd, CYAN);
-		ft_strdel(&pwd);
-	}
-	else
-	{
-		i += 7;
-		color("nowhere", RED);
-	}
-	ft_putstr(" $> ");
-	ft_strdel(&user);
-	ft_strdel(&home);
-	return (i);
+	env = tmp;
+	return (0);
 }
 
-int				prompt(t_edit *ed)
+void			get_prompt(t_env *env)
 {
-	char			*user;
-	char			*home;
-	char			*pwd;
-	int				i;
+	char	buff[100];
+	int		i;
 
-	user = get_node_content(ed->env, "USER");
-	home = get_node_content(ed->env, "HOME");
-	pwd = get_node_content(ed->env, "PWD");
-	i = put_prompt(user, home, pwd);
-	ed->input->lprom = i + 3;
-	ed->input->curs->x = i + 4;
-	return (i);
+	color(BLUE, "# ");
+	color(RESET, "");
+	prompt_name(env);
+	ft_bzero(buff, 100);
+	if (get_intel(env, "PWD") == 1)
+	{
+		getcwd(buff, 100);
+		if (buff[0] != 0)
+		{
+			i = pwd_home(env, buff);
+			prompt_path(i, buff);
+		}
+		else
+			ft_putendl_fd("\033[31mDirectory does not exist\033[39m", 2);
+	}
 }

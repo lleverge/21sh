@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_cursor.c                                      :+:      :+:    :+:   */
+/*   edit_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/09 15:28:04 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 16:23:39 by lleverge         ###   ########.fr       */
+/*   Created: 2017/03/03 10:59:45 by lleverge          #+#    #+#             */
+/*   Updated: 2017/03/03 11:02:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 
-t_cursor		*init_cursor(void)
+int			ft_putchar_int(int c)
 {
-	t_cursor		*curs;
+	ft_putchar((char)c);
+	return (0);
+}
 
-	if (!(curs = (t_cursor *)malloc(sizeof(t_cursor))))
+int			get_intel(t_env *env, char *str)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (env)
 	{
-		ft_putendl_fd("error: struct curs malloc failed", 2);
-		exit(-1);
+		if (ft_strcmp(env->name, str) == 0)
+		{
+			env = tmp;
+			return (1);
+		}
+		env = env->next;
 	}
-	curs->x = 0;
-	curs->y = 0;
-	return (curs);
+	env = tmp;
+	return (0);
 }

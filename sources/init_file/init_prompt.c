@@ -6,18 +6,36 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:20:35 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/09 15:41:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/03 10:29:55 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 
+t_prompt		*stock_prompt(t_prompt *prompt, int i)
+{
+	static t_prompt *tmp;
+
+	tmp = NULL;
+	if (i == 0)
+		tmp = prompt;
+	return (tmp);
+}
+
 t_prompt		*init_prompt(void)
 {
-	t_prompt	*prom;
+	t_prompt		*prompt;
+	struct winsize	win;
 
-	if (!(prom = (t_prompt *)malloc(sizeof(t_prompt))))
+	if (!(prompt = (t_prompt *)malloc(sizeof(t_prompt))))
 		return (NULL);
-	prom->len = 0;
-	return (prom);
+	ft_bzero(prompt->cmd, 2000);
+	prompt->i = 0;
+	prompt->copy_mode = 0;
+	prompt->cursor_start = 0;
+	prompt->cursor_end = 0;
+	prompt->copy_str = NULL;
+	ioctl(0, TIOCGWINSZ, &win);
+	prompt->win_size = win.ws_col;
+	return (prompt);
 }

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:43:41 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/15 18:45:03 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/03 12:05:02 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,15 @@
 # include <fcntl.h>
 
 # define RED "[31m"
-# define BLUE "[34m"
-# define CYAN "[36m"
-# define RESET "[39m"
+# define PURPLE "[1;35m"
 # define GREEN "[32m"
-# define YELLOW "[33m"
-# define MAGENTA "[35m"
+# define CYAN "[0;36m"
+# define BLUE "[1;34m"
+# define RESET "[39m"
 
 typedef struct stat		t_stat;
 typedef struct winsize	t_winsize;
 typedef struct termios	t_termios;
-
-typedef struct		s_prompt
-{
-	int				len;
-	char			*cmd_line;
-	int				cmd_len;
-}					t_prompt;
 
 typedef struct		s_pos
 {
@@ -69,7 +61,6 @@ typedef struct		s_ult
 {
 	t_term			*term;
 	t_env			*env;
-	t_prompt		*prom;
 	t_pos			*pos;
 	char			**path;
 }					t_ult;
@@ -91,12 +82,7 @@ t_env				*fill_env(char **environ);
 **init_term.c
 */
 void				init_term2(t_term *termi);
-t_term				*init_term();
-
-/*
-**init_prompt.c
-*/
-t_prompt			*init_prompt(void);
+t_term				*init_term(void);
 
 /*
 **env_tools.c

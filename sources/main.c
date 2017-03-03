@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/16 17:52:42 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/03 13:40:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,13 @@
 int				init_all(char **environ)
 {
 	t_ult		*ult;
-	t_edit		*ed;
-	t_key		*key;
 
 	ult = NULL;
-	ed = NULL;
-	key = NULL;
-	ult = init_ult(ult, environ);
-	ed = init_edit(ed, environ);
-	init_tkey(ed, &key);
+	ult = init_ult(ult, environ);	
 	while (42)
 	{
-		prompt(ed);
-		line_edition(key, ed);
+		get_prompt(ult->env);
+		termcap(ult);
 		ft_putchar('\n');
 	}
 	return (0);

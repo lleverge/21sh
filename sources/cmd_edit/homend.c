@@ -5,32 +5,57 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/01 09:11:07 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/01 12:41:02 by lleverge         ###   ########.fr       */
+/*   Created: 2017/03/03 11:11:37 by lleverge          #+#    #+#             */
+/*   Updated: 2017/03/03 18:36:32 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
 #include <cmd_edit.h>
 
-void	home(t_edit *ed)
+void		next_word(t_prompt *prompt, char *buffer)
 {
-	use_ncap("up", ed->input->curs->y - 1);
-	use_cap("cr");
-	use_ncap("nd", ed->input->lprom - 1);
-	ed->input->curs->x = ed->input->lprom;
-	ed->input->curs->y = 0;
+	if (NEXT_WORD)
+	{
+		while (prompt->cmd[prompt->i] &&
+			   ft_isspace(prompt->cmd[prompt->i]) == 0)
+			prompt->i++;
+		while (prompt->cmd[prompt->i] &&
+			   ft_isspace(prompt->cmd[prompt->i]) == 1)
+			prompt->i++;
+		prompt_print(prompt, 1);
+	}
 }
 
-void	end(t_edit *ed)
+void		previous_word(t_prompt *prompt, char *buffer)
 {
-	t_cursor	new_cur;
+	if (PREV_WORD)
+	{
+		while (prompt->i > 0 &&
+			   ft_isspace(prompt->cmd[prompt->i]) == 0)
+			prompt->i--;
+		while (prompt->i > 0 &&
+			   ft_isspace(prompt->cmd[prompt->i]) == 1)
+			prompt->i--;
+		prompt_print(prompt, 1);
+	}
+}
 
-	buffer_to_cursor(ed, ft_strlen(ed->input->cmd_line)
-					+ ed->input->lprom, &new_cur);
-	use_cap("cr");
-	use_ncap("do", new_cur.y - 1 - ed->input->curs->y);
-	use_ncap("nd", new_cur.x - 1);
-	ed->input->curs->x = new_cur.x;
-	ed->input->curs->y = new_cur.y;
+void		home(t_prompt *prompt, char *buffer)
+{
+	if (T_HOME)
+	{
+		while (prompt->i > 0)
+			prompt->i--;
+		prompt_print(prompt, 1);
+	}
+}
+
+void		end(t_prompt *prompt, char *buffer)
+{
+	if (T_END)
+	{
+		while (prompt->cmd[prompt->i])
+			prompt->i++;
+		prompt_print(prompt, 1);
+	}
 }
