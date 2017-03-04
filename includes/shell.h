@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 16:09:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 18:18:08 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,20 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
+typedef struct		s_hist
+{
+	int				index;
+	char			*cmd;
+	struct s_hist	*next;
+}					t_hist;
+
 typedef struct		s_ult
 {
 	t_term			*term;
 	t_env			*env;
 	t_pos			*pos;
 	char			**path;
+	t_hist			*hist;
 }					t_ult;
 
 /*
@@ -83,6 +91,18 @@ t_env				*fill_env(char **environ);
 */
 void				init_term2(t_term *termi);
 t_term				*init_term(void);
+
+/*
+**init_hist.c
+*/
+t_hist				*init_hist(t_hist *hist);
+
+/*
+**hist.c
+*/
+t_hist				*fill_hist(t_hist *hist, char *cmd);
+void				hist_full(t_hist **hist);
+t_hist				*add_hist(t_hist *hist, char *cmd);
 
 /*
 **env_tools.c

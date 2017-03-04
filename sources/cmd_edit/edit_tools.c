@@ -6,13 +6,23 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 16:08:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 18:22:22 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 
-void		reset_prompt2(t_prompt *prompt, t_ult *ult)
+static void		lesslines(t_prompt *prompt, t_ult *ult, size_t i)
+{
+	if (i == prompt->win_size - 3 || i == prompt->win_size - 4)
+	{
+		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+		get_prompt(ult->env);
+	}
+}
+
+void			reset_prompt2(t_prompt *prompt, t_ult *ult)
 {
 	size_t		i;
 	size_t		j;
@@ -32,21 +42,19 @@ void		reset_prompt2(t_prompt *prompt, t_ult *ult)
 		j++;
 		i++;
 	}
+	lesslines(prompt, ult, i);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
-	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
-	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
-	get_prompt(ult->env);
 	color(RED, "$> ");
 	color(RESET, "");
 }
 
-int			ft_putchar_int(int c)
+int				ft_putchar_int(int c)
 {
 	ft_putchar((char)c);
 	return (0);
 }
 
-int			get_intel(t_env *env, char *str)
+int				get_intel(t_env *env, char *str)
 {
 	t_env	*tmp;
 
