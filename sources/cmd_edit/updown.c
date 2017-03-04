@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 11:17:56 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 18:38:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 16:01:54 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ void		down_line(t_prompt *prompt, char *buffer)
 
 void		up_line(t_prompt *prompt, char *buffer)
 {
-	if (UP_CMD && ft_strlen(prompt->cmd) > prompt->win_size && (size_t)prompt->i > prompt->win_size)
+	if (UP_CMD && ft_strlen(prompt->cmd) >
+		prompt->win_size && (size_t)prompt->i > prompt->win_size)
 	{
 		prompt->i = prompt->i - prompt->win_size;
 		prompt_print(prompt, 1);
 	}
-	else if (T_UP)
+	else if (UP_CMD && prompt->i < (int)prompt->win_size)
 	{
 		prompt->i = 0;
 		prompt_print(prompt, 1);

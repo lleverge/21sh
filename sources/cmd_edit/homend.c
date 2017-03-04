@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 11:11:37 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 18:36:32 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 16:01:14 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ void		next_word(t_prompt *prompt, char *buffer)
 	if (NEXT_WORD)
 	{
 		while (prompt->cmd[prompt->i] &&
-			   ft_isspace(prompt->cmd[prompt->i]) == 0)
+			ft_isspace(prompt->cmd[prompt->i]) == 0)
 			prompt->i++;
 		while (prompt->cmd[prompt->i] &&
-			   ft_isspace(prompt->cmd[prompt->i]) == 1)
+			ft_isspace(prompt->cmd[prompt->i]) == 1)
 			prompt->i++;
 		prompt_print(prompt, 1);
 	}
@@ -31,10 +31,10 @@ void		previous_word(t_prompt *prompt, char *buffer)
 	if (PREV_WORD)
 	{
 		while (prompt->i > 0 &&
-			   ft_isspace(prompt->cmd[prompt->i]) == 0)
+			ft_isspace(prompt->cmd[prompt->i]) == 0)
 			prompt->i--;
 		while (prompt->i > 0 &&
-			   ft_isspace(prompt->cmd[prompt->i]) == 1)
+			ft_isspace(prompt->cmd[prompt->i]) == 1)
 			prompt->i--;
 		prompt_print(prompt, 1);
 	}

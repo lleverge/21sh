@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 18:37:59 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 16:04:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,15 @@ void				color(char *color, char *str);
 */
 char				*termcap(t_ult *ult);
 void				prompt_print(t_prompt *prompt, int show_cursor);
-void				prompt_shell(t_prompt *prompt, char *buff);
+void				prompt_shell(t_prompt *prompt, char *buff, t_ult *ult);
+void				reset_prompt(t_prompt *prompt);
+void				print_cursor(t_prompt *prompt, int show_cursor, int i);
 
 /*
 **insert.c
 */
 void				delete(t_prompt *prompt, char *buffer);
-void				backspace(t_prompt *prompt, char *buffer);
+void				backspace(t_prompt *prompt, char *buffer, t_ult *ult);
 void				space(t_prompt *prompt, char *buffer);
 void				charac(t_prompt *prompt, char *buffer);
 
@@ -100,13 +102,14 @@ void				right(t_prompt *prompt, char *buffer);
 */
 int					get_intel(t_env *env, char *str);
 int					ft_putchar_int(int c);
+void				reset_prompt2(t_prompt *prompt, t_ult *ult);
 
 /*
 **homend.c
 */
 void				next_word(t_prompt *prompt, char *buffer);
 void				previous_word(t_prompt *prompt, char *buffer);
-void				home(t_prompt* prompt, char *buffer);
+void				home(t_prompt *prompt, char *buffer);
 void				end(t_prompt *prompt, char *buffer);
 
 /*

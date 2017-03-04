@@ -6,14 +6,14 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 18:56:29 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 16:07:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-static void		reset_prompt(t_prompt *prompt)
+void			reset_prompt(t_prompt *prompt)
 {
 	size_t		i;
 	size_t		j;
@@ -38,7 +38,7 @@ static void		reset_prompt(t_prompt *prompt)
 	color(RESET, "");
 }
 
-static void		print_cursor(t_prompt *prompt, int show_cursor, int i)
+void			print_cursor(t_prompt *prompt, int show_cursor, int i)
 {
 	if (i == prompt->i && show_cursor == 1)
 	{
@@ -77,7 +77,7 @@ void			prompt_print(t_prompt *prompt, int show_cursor)
 	print_cursor(prompt, show_cursor, i);
 }
 
-void			prompt_shell(t_prompt *prompt, char *buffer)
+void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 {
 	if (prompt->i < 2500)
 	{
@@ -86,7 +86,7 @@ void			prompt_shell(t_prompt *prompt, char *buffer)
 	}
 	down_line(prompt, buffer);
 	up_line(prompt, buffer);
-	backspace(prompt, buffer);
+	backspace(prompt, buffer, ult);
 	delete(prompt, buffer);
 	left(prompt, buffer);
 	right(prompt, buffer);
@@ -111,12 +111,12 @@ char			*termcap(t_ult *ult)
 	str = NULL;
 	while ((ret = read(0, buffer, 4)) != -1)
 	{
-		prompt_shell(prompt, buffer);
+		prompt_shell(prompt, buffer, ult);
 		if (buffer[0] == 4 && !prompt->cmd[0])
 			exit_eof(ult->term, prompt);
 		if (buffer[0] == 10)
 		{
-			prompt_print(prompt, 0);//str = input_return(sh, prompt);
+			prompt_print(prompt, 0);
 			break ;
 		}
 		ft_bzero(buffer, 4);

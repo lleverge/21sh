@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:54 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 11:53:40 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 15:23:15 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void			color(char *color, char *str)
 {
-	ft_putchar_fd('\033', 2);
-	ft_putstr_fd(color, 2);
-	ft_putstr_fd(str, 2);
+	ft_putchar_fd('\033', 1);
+	ft_putstr_fd(color, 1);
+	ft_putstr_fd(str, 1);
 }
 
 static void		prompt_path(int i, char *buff)

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/28 13:53:17 by lleverge          #+#    #+#             */
-/*   Updated: 2015/12/01 14:05:41 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 14:54:32 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,5 @@
 
 void	ft_putstr_fd(char const *s, int fd)
 {
-	while (*s)
-	{
-		ft_putchar_fd(*s, fd);
-		s++;
-	}
+	write(fd, s, ft_strlen(s));
 }

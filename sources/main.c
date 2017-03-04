@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 13:40:23 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 16:06:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				init_all(char **environ)
 	t_ult		*ult;
 
 	ult = NULL;
-	ult = init_ult(ult, environ);	
+	ult = init_ult(ult, environ);
 	while (42)
 	{
 		get_prompt(ult->env);

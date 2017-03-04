@@ -6,11 +6,39 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 11:02:37 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/04 16:08:35 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
+
+void		reset_prompt2(t_prompt *prompt, t_ult *ult)
+{
+	size_t		i;
+	size_t		j;
+
+	j = 3;
+	i = 0;
+	tputs(tgetstr("vi", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+	while (i < ft_strlen(prompt->cmd))
+	{
+		if (j >= prompt->win_size)
+		{
+			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+			j = 0;
+		}
+		j++;
+		i++;
+	}
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+	get_prompt(ult->env);
+	color(RED, "$> ");
+	color(RESET, "");
+}
 
 int			ft_putchar_int(int c)
 {
