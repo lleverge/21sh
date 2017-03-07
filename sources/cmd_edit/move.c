@@ -6,27 +6,39 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:38:54 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 16:02:48 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/07 10:41:28 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-void		down(t_prompt *prompt, char *buffer)
+void		down(t_prompt *prompt, char *buffer, t_ult *ult)
 {
 	if (T_DOWN)
 	{
-		prompt->i = ft_strlen(prompt->cmd);
+		if (ult->hist->prev)
+		{
+			ult->hist = ult->hist->prev;
+			ft_bzero(prompt->cmd, ft_strlen(prompt->cmd));
+			ft_memcpy(prompt->cmd, ult->hist->cmd, ft_strlen(ult->hist->cmd));
+			prompt->i = ft_strlen(prompt->cmd);
+		}
 		prompt_print(prompt, 1);
 	}
 }
 
-void		up(t_prompt *prompt, char *buffer)
+void		up(t_prompt *prompt, char *buffer, t_ult *ult)
 {
 	if (T_UP)
 	{
-		prompt->i = ft_strlen(prompt->cmd);
+		if (ult->hist->next)
+		{
+			ult->hist = ult->hist->next;
+			ft_bzero(prompt->cmd, ft_strlen(prompt->cmd));
+			ft_memcpy(prompt->cmd, ult->hist->cmd, ft_strlen(ult->hist->cmd));
+			prompt->i = ft_strlen(prompt->cmd);
+		}
 		prompt_print(prompt, 1);
 	}
 }

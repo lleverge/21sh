@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 18:16:14 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/07 11:35:33 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,22 +90,25 @@ void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 	delete(prompt, buffer);
 	left(prompt, buffer);
 	right(prompt, buffer);
-	up(prompt, buffer);
-	down(prompt, buffer);
+	up(prompt, buffer, ult);
+	down(prompt, buffer, ult);
 	home(prompt, buffer);
 	previous_word(prompt, buffer);
 	next_word(prompt, buffer);
 	end(prompt, buffer);
 }
 
+/*
 static void		print_list2(t_hist *hist)
 {
-	while (hist->next)
+	while (hist)
 	{
+		ft_putstr(" cmd = ");
 		ft_putendl(hist->cmd);
 		hist = hist->next;
 	}
-}
+	}
+*/
 
 char			*termcap(t_ult *ult)
 {
@@ -125,10 +128,8 @@ char			*termcap(t_ult *ult)
 			exit_eof(ult->term, prompt);
 		if (buffer[0] == 10)
 		{
-			ult->hist = add_hist(ult->hist, prompt->cmd);
 			prompt_print(prompt, 0);
-			ft_putchar('\n');
-			print_list2(ult->hist);
+			fill_hist(&(ult->hist), prompt->cmd);
 			break ;
 		}
 		ft_bzero(buffer, 4);

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 18:18:08 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/07 11:34:13 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ typedef struct		s_env
 
 typedef struct		s_hist
 {
-	int				index;
 	char			*cmd;
+	struct s_hist	*prev;
 	struct s_hist	*next;
 }					t_hist;
 
@@ -100,9 +100,9 @@ t_hist				*init_hist(t_hist *hist);
 /*
 **hist.c
 */
-t_hist				*fill_hist(t_hist *hist, char *cmd);
+void				fill_hist(t_hist **hist, char *cmd);
 void				hist_full(t_hist **hist);
-t_hist				*add_hist(t_hist *hist, char *cmd);
+void				add_hist(t_hist **start, char *cmd);
 
 /*
 **env_tools.c

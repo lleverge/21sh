@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 17:06:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/07 09:07:26 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,9 @@ static char		**get_paths(t_env *env)
 
 t_ult			*init_ult(t_ult *ult, char **environ)
 {
-	static t_hist		*hist;
+	t_hist		*hist;
 
+	hist = NULL;
 	if (!(ult = (t_ult *)malloc(sizeof(t_ult))))
 	{
 		ft_putendl_fd("error: ult struct malloc failed", 2);

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 16:04:07 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/07 10:05:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void				charac(t_prompt *prompt, char *buffer);
 /*
 **move.c
 */
-void				down(t_prompt *prompt, char *buffer);
-void				up(t_prompt *prompt, char *buffer);
+void				down(t_prompt *prompt, char *buffer, t_ult *ult);
+void				up(t_prompt *prompt, char *buffer, t_ult *ult);
 void				left(t_prompt *prompt, char *buffer);
 void				right(t_prompt *prompt, char *buffer);
 
