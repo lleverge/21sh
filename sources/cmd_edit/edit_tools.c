@@ -6,18 +6,40 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 18:22:22 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 13:04:21 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 
-static void		lesslines(t_prompt *prompt, t_ult *ult, size_t i)
+void			reset(t_prompt *prompt)
 {
-	if (i == prompt->win_size - 3 || i == prompt->win_size - 4)
+	int		i;
+
+	i = prompt->y;
+	while (i > 0 && i != 0)
 	{
 		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
-		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+		i--;
+	}
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
+	color(RED, "$> ");
+	color(RESET, "");
+}
+
+static void		lesslines(t_prompt *prompt, t_ult *ult, size_t i)
+{
+	int		y;
+
+	y = prompt->y;
+	if (i == prompt->win_size - 3 || i == prompt->win_size - 4)
+	{
+		while (y + 1)
+		{
+			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+			y--;
+		}
 		get_prompt(ult->env);
 	}
 }
@@ -31,17 +53,6 @@ void			reset_prompt2(t_prompt *prompt, t_ult *ult)
 	i = 0;
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
-	while (i < ft_strlen(prompt->cmd))
-	{
-		if (j >= prompt->win_size)
-		{
-			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
-			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
-			j = 0;
-		}
-		j++;
-		i++;
-	}
 	lesslines(prompt, ult, i);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
 	color(RED, "$> ");

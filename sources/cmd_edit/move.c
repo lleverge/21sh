@@ -6,44 +6,73 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:38:54 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/07 10:41:28 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 13:05:05 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-void		down(t_prompt *prompt, char *buffer, t_ult *ult)
+static void		display_hist(t_prompt *prompt)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (prompt->cmd[i])
+	{
+		if (j == (int)prompt->win_size)
+		{
+			prompt->y++;
+			j = 0;
+		}
+		ft_putchar(prompt->cmd[i]);
+		i++;
+		j++;
+	}
+}
+
+void			down(t_prompt *prompt, char *buffer, t_ult *ult)
 {
 	if (T_DOWN)
 	{
 		if (ult->hist->prev)
 		{
+			reset(prompt);
+			prompt->y = 0;
 			ult->hist = ult->hist->prev;
-			ft_bzero(prompt->cmd, ft_strlen(prompt->cmd));
-			ft_memcpy(prompt->cmd, ult->hist->cmd, ft_strlen(ult->hist->cmd));
+			ft_strcpy(prompt->cmd, ult->hist->cmd);
+			display_hist(prompt);
 			prompt->i = ft_strlen(prompt->cmd);
+			print_cursor(prompt, 1, prompt->i);
 		}
-		prompt_print(prompt, 1);
 	}
 }
 
-void		up(t_prompt *prompt, char *buffer, t_ult *ult)
+void			up(t_prompt *prompt, char *buffer, t_ult *ult)
 {
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
 	if (T_UP)
 	{
 		if (ult->hist->next)
 		{
+			reset(prompt);
+			prompt->y = 0;
 			ult->hist = ult->hist->next;
-			ft_bzero(prompt->cmd, ft_strlen(prompt->cmd));
-			ft_memcpy(prompt->cmd, ult->hist->cmd, ft_strlen(ult->hist->cmd));
+			ft_strcpy(prompt->cmd, ult->hist->cmd);
+			display_hist(prompt);
 			prompt->i = ft_strlen(prompt->cmd);
+			print_cursor(prompt, 1, prompt->i);
 		}
-		prompt_print(prompt, 1);
 	}
 }
 
-void		left(t_prompt *prompt, char *buffer)
+void			left(t_prompt *prompt, char *buffer)
 {
 	if (T_LEFT && prompt->i > 0)
 	{
@@ -57,7 +86,7 @@ void		left(t_prompt *prompt, char *buffer)
 	}
 }
 
-void		right(t_prompt *prompt, char *buffer)
+void			right(t_prompt *prompt, char *buffer)
 {
 	if (T_RIGHT && prompt->cmd[prompt->i])
 	{

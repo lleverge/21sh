@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/07 11:35:33 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 13:13:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void			reset_prompt(t_prompt *prompt)
 
 	j = 3;
 	i = 0;
+	prompt->y = 0;
 	tputs(tgetstr("vi", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	while (i < ft_strlen(prompt->cmd))
@@ -61,9 +62,6 @@ void			prompt_print(t_prompt *prompt, int show_cursor)
 		tputs(tgetstr("me", NULL), 1, ft_putchar_int);
 		if (i == prompt->i && show_cursor == 1)
 			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
-		if (prompt->copy_mode == 1 && i >= prompt->cursor_start &&
-			i <= prompt->cursor_end)
-			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
 		ft_putchar(prompt->cmd[i]);
 		j++;
 		if (j >= prompt->win_size)
@@ -71,6 +69,7 @@ void			prompt_print(t_prompt *prompt, int show_cursor)
 			ft_putendl("");
 			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 			j = 0;
+			prompt->y++;
 		}
 		i++;
 	}
@@ -86,7 +85,7 @@ void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 	}
 	down_line(prompt, buffer);
 	up_line(prompt, buffer);
-	backspace(prompt, buffer, ult);
+	backspace(prompt, buffer);
 	delete(prompt, buffer);
 	left(prompt, buffer);
 	right(prompt, buffer);
@@ -97,18 +96,6 @@ void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 	next_word(prompt, buffer);
 	end(prompt, buffer);
 }
-
-/*
-static void		print_list2(t_hist *hist)
-{
-	while (hist)
-	{
-		ft_putstr(" cmd = ");
-		ft_putendl(hist->cmd);
-		hist = hist->next;
-	}
-	}
-*/
 
 char			*termcap(t_ult *ult)
 {

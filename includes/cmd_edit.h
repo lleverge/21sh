@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/07 10:05:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 12:22:03 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct		s_prompt
 {
 	char			cmd[2000];
 	int				i;
+	int				y;
 	int				copy_mode;
 	int				cursor_start;
 	int				cursor_end;
@@ -85,7 +86,7 @@ void				print_cursor(t_prompt *prompt, int show_cursor, int i);
 **insert.c
 */
 void				delete(t_prompt *prompt, char *buffer);
-void				backspace(t_prompt *prompt, char *buffer, t_ult *ult);
+void				backspace(t_prompt *prompt, char *buffer);
 void				space(t_prompt *prompt, char *buffer);
 void				charac(t_prompt *prompt, char *buffer);
 
@@ -103,6 +104,8 @@ void				right(t_prompt *prompt, char *buffer);
 int					get_intel(t_env *env, char *str);
 int					ft_putchar_int(int c);
 void				reset_prompt2(t_prompt *prompt, t_ult *ult);
+void				print_backsp(t_prompt *prompt, int show_cursor);
+void				reset(t_prompt *prompt);
 
 /*
 **homend.c

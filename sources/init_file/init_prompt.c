@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:20:35 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 10:29:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 09:50:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ t_prompt		*init_prompt(void)
 		return (NULL);
 	ft_bzero(prompt->cmd, 2000);
 	prompt->i = 0;
+	prompt->y = 0;
 	prompt->copy_mode = 0;
 	prompt->cursor_start = 0;
 	prompt->cursor_end = 0;
