@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:10:54 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 16:12:00 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:21:52 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static char		*cpy_at(char *src1, char *src2, int i)
 		ft_strdel(&tmp);
 		tmp = ft_strsub(src1, i, ft_strlen(src1));
 		res = ft_strjoin(tmp2, tmp);
+		ft_strdel(&tmp);
+		ft_strdel(&tmp2);
 		return (res);
 	}
 	else

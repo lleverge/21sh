@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:47:19 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 14:17:36 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:20:31 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		exit_eof(t_term *termi, t_prompt *prompt)
 {
 	prompt_print(prompt, 0);
 	reset_term(termi);
+	free_prompt(&prompt);
 	exit(0);
 }
 

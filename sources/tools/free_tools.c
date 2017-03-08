@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/03 12:18:32 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 16:16:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		free_prompt(t_prompt **prompt)
 	tmp->cursor_start = 0;
 	tmp->cursor_end = 0;
 	if (tmp->copy_str)
-		free(tmp->copy_str);
+		ft_strdel(&(tmp->copy_str));
 	tmp->win_size = 0;
 	free(tmp);
 	tmp = NULL;
