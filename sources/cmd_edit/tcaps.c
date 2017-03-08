@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 13:13:36 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 15:52:42 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 	previous_word(prompt, buffer);
 	next_word(prompt, buffer);
 	end(prompt, buffer);
+	cut(prompt, buffer, prompt->i);
+	paste(prompt, buffer, prompt->i);
+	copy(prompt, buffer, prompt->i);
 }
 
 char			*termcap(t_ult *ult)
@@ -113,7 +116,7 @@ char			*termcap(t_ult *ult)
 		prompt_shell(prompt, buffer, ult);
 		if (buffer[0] == 4 && !prompt->cmd[0])
 			exit_eof(ult->term, prompt);
-		if (buffer[0] == 10)
+		if (buffer[0] == 10 && buffer[1] == 0)
 		{
 			prompt_print(prompt, 0);
 			fill_hist(&(ult->hist), prompt->cmd);

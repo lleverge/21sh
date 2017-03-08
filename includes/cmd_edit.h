@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 12:22:03 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/08 15:54:31 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@
 # define T_DEL ((buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 51))
 # define T_HOME ((buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 72))
 # define T_END ((buffer[0] == 27 && buffer[1] == 91 && buffer[2] == 70))
+# define T_CUT (buffer[0] == 11 && buffer[1] == 00)
+# define T_PAS (buffer[0] == 16 && buffer[1] == 00)
+# define T_CPY (buffer[0] == 9 && buffer[1] == 00)
 # define PREV_WORD1 ((buffer[0] == 27 && buffer[1] == 27))
 # define PREV_WORD2 ((buffer[2] == 91 && buffer[3] == 68))
 # define NEXT_WORD2 ((buffer[2] == 91 && buffer[3] == 67))
@@ -99,6 +102,13 @@ void				left(t_prompt *prompt, char *buffer);
 void				right(t_prompt *prompt, char *buffer);
 
 /*
+**cut.c
+*/
+void				cut(t_prompt *prompt, char *buffer, int i);
+void				paste(t_prompt *prompt, char *buffer, int i);
+void				copy(t_prompt *prompt, char *buffer, int i);
+
+/*
 **edit_tools.c
 */
 int					get_intel(t_env *env, char *str);
@@ -124,6 +134,5 @@ void				up_line(t_prompt *prompt, char *buffer);
 /*
 **free_tools.c
 */
-
 void				free_prompt(t_prompt **prompt);
 #endif
