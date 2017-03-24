@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 14:09:30 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:10:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
+typedef struct		s_exec
+{
+	pid_t			pid;
+	int				fd[2];
+	int				fd_write;
+	int				fd_read;
+	int				stdin_cp;
+	int				stdout_cp;
+}					t_exec;
+
 typedef struct		s_hist
 {
 	char			*cmd;
@@ -66,12 +76,14 @@ typedef struct		s_hist
 
 typedef struct		s_ult
 {
+	t_exec			*exec;
 	t_term			*term;
 	t_env			*env;
 	t_pos			*pos;
 	char			**path;
 	t_hist			*hist;
 	char			*cmd;
+	int				ret;
 }					t_ult;
 
 /*

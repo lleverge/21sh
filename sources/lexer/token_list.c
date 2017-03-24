@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:54:34 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 15:05:19 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 17:55:58 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,6 @@ int						get_token_id(char *str)
 		return (DLESS);
 	else if (!ft_strcmp(str, "|"))
 		return (PIPE);
-	else if (!ft_strcmp(str, "||"))
-		return (OR);
-	else if (!ft_strcmp(str, "&&"))
-		return (AND);
 	else
 		return (CMD);
 	return (0);

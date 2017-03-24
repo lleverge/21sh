@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:23:22 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 14:09:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:17:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char		*copy_cmd(char *cmd)
 {
 	char	*tmp;
-	
+
 	tmp = ft_strdup(cmd);
 	return (tmp);
 }

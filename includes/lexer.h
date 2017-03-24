@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 15:25:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 19:16:34 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,9 @@ typedef enum	e_token_id
 	GREAT,
 	DGREAT,
 	DLESS,
-	OR,
-	AND,
 	QUOTE,
 	DQUOTE,
 	CMD,
-	BQUOTE,
-	DOLLAR,
 	END_LIST,
 	ERROR
 }				t_token_id;
@@ -41,10 +37,21 @@ typedef struct		s_lexer
 	struct s_lexer	*next;
 }					t_lexer;
 
+typedef struct		s_parser
+{
+	int				stdin;
+	int				stdout;
+	int				shutout_out;
+	int				shutout_in;
+	int				token;
+	char			**content;
+	struct s_parser	*next;
+}					t_parser;
+
 /*
 **lexer.c
 */
-void				lexer(char *cmd);
+t_lexer				*lexer(char *cmd);
 
 /*
 **ft_strsplit_ws.c
@@ -70,4 +77,32 @@ t_lexer				*lexer_list(t_lexer *list, char *str);
 **free_tools.c
 */
 void				free_lexer(t_lexer **lexer);
+
+/*
+**lexer_error.c
+*/
+int					lexer_error(t_lexer *list);
+
+/*
+**parser_list.c
+*/
+void				free_parser(t_parser **parser);
+t_parser			*fill_parser(t_parser *list, t_lexer *list_lex, int token);
+
+/*
+**parser.c
+*/
+t_parser			*do_parsing(t_ult *ult, t_lexer *list, t_parser *process);
+
+/*
+**manage_io.c
+*/
+int					manage_io_files(t_ult *ult, t_lexer *list,
+									t_parser *process, int token);
+
+/*
+**io_redir.c
+*/
+void				open_redir(t_ult *ult, t_lexer *lex);
+int					fd_len(char *str, int i);
 #endif
