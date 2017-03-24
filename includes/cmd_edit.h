@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 16:19:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:14:35 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void				color(char *color, char *str);
 /*
 **tcaps.c
 */
-char				*termcap(t_ult *ult);
+void				termcap(t_ult *ult);
 void				prompt_print(t_prompt *prompt, int show_cursor);
 void				prompt_shell(t_prompt *prompt, char *buff, t_ult *ult);
 void				reset_prompt(t_prompt *prompt);

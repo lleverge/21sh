@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 13:12:58 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:25:09 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,16 @@ typedef struct		s_lexer
 }					t_lexer;
 
 /*
+**lexer.c
+*/
+void				lexer(char *cmd);
+
+/*
+**ft_strsplit_ws.c
+*/
+char				**ft_strsplit_ws(char const *s);
+
+/*
 **token_sep.c
 */
 int					is_sep(char c);
@@ -56,4 +66,8 @@ int					is_dquote(char *str, int i);
 int					get_token_id(char *str);
 t_lexer				*lexer_list(t_lexer *list, char *str);
 
+/*
+**free_tools.c
+*/
+void				free_lexer(t_lexer **lexer);
 #endif

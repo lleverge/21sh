@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/07 11:34:13 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 14:09:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct		s_ult
 	t_pos			*pos;
 	char			**path;
 	t_hist			*hist;
+	char			*cmd;
 }					t_ult;
 
 /*
@@ -118,6 +119,7 @@ t_env				*env_cpy(t_env *envtmp, t_env *env);
 */
 void				prompt2(char *new, char *tmp, char *home);
 char				*get_data(t_env *env, char *ref_name);
+char				*copy_cmd(char *cmd);
 
 /*
 **display_tools.c

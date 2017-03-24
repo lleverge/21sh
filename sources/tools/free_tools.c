@@ -6,11 +6,34 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 16:16:37 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:26:35 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
+#include <lexer.h>
+
+void		free_lexer(t_lexer **lexer)
+{
+	t_lexer *current;
+	t_lexer *next;
+
+	current = *lexer;
+	while (current)
+	{
+		next = current->next;
+		if (current->content)
+			ft_strdel(&(current->content));
+		if (current->cmd)
+			free_tab(current->cmd);
+		current->token_id = 0;
+		current->prev = NULL;
+		current->next = NULL;
+		free(current);
+		current = next;
+	}
+	*lexer = NULL;
+}
 
 void		free_prompt(t_prompt **prompt)
 {

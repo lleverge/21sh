@@ -6,24 +6,35 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 16:06:27 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/24 15:30:13 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+#include <lexer.h>
 #include <cmd_edit.h>
 
 int				init_all(char **environ)
 {
 	t_ult		*ult;
+	char		**cmd;
+	int			i;
 
 	ult = NULL;
 	ult = init_ult(ult, environ);
 	while (42)
 	{
+		i = 0;
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
+		cmd = ft_strsplit(ult->cmd, ';');
+		while (cmd[i])
+		{
+			lexer(cmd[i]);
+			i++;
+		}
+		free_tab(cmd);
 	}
 	return (0);
 }

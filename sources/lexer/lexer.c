@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt_tools.c                                     :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/01/25 15:23:22 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 14:09:12 by lleverge         ###   ########.fr       */
+/*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
+/*   Updated: 2017/03/24 15:32:28 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include <lexer.h>
 
-char		*copy_cmd(char *cmd)
+void		lexer(char *cmd)
 {
-	char	*tmp;
-	
-	tmp = ft_strdup(cmd);
-	return (tmp);
-}
+	char		**cmd2;
+	t_lexer		*list;
+	int			i;
 
-char		*get_data(t_env *env, char *ref_name)
-{
-	while (env)
+	i = 0;
+	list = NULL;
+	cmd2 = ft_strsplit_ws(cmd);
+	while (cmd2[i])
 	{
-		if (ft_strcmp(env->name, ref_name) == 0)
-			return (env->content);
-		env = env->next;
+		list = lexer_list(list, cmd2[i]);
+		i++;
 	}
-	return (NULL);
+	free_lexer(&list);
+	free_tab(cmd2);
 }
