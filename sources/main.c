@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 19:07:06 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/03/25 14:33:01 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int				init_all(char **environ)
 	t_ult		*ult;
 	char		**cmd;
 	t_lexer		*list;
-	t_parser	*process;
 	int			i;
 
 	ult = NULL;
@@ -33,10 +32,9 @@ int				init_all(char **environ)
 		cmd = ft_strsplit(ult->cmd, ';');
 		while (cmd[i])
 		{
-			list = lexer(cmd[i]);
+			list = lexer(cmd[i], ult);
 			i++;
 		}
-		process = do_parsing(ult, list, NULL);
 		free_tab(cmd);
 	}
 	return (0);

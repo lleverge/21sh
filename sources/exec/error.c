@@ -1,44 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/03/25 15:00:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/25 15:41:50 by lleverge         ###   ########.fr       */
+/*   Created: 2017/03/25 14:25:18 by lleverge          #+#    #+#             */
+/*   Updated: 2017/03/25 14:28:17 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 
-char		**parser(t_lexer *list)
+void			ft_env_error(char *file)
 {
-	char	**cmd;
-	t_lexer	*tmp;
-	int		i;
-	int		j;
+	ft_putstr_fd("env: ", 2);
+	ft_putstr_fd(file, 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
+}
 
-	i = 0;
-	j = 0;
-	tmp = list;
-	while (tmp->token_id == CMD && tmp)
+int                 env_manage_error(char *cmd)
+{
+	t_stat  st;
+
+	if (stat(cmd, &st) == -1)
 	{
-		tmp = tmp->next;
-		i++;
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd(": No such file or directory.\n", 2);
+		return (-1);
 	}
-	if (!(cmd = (char **)malloc(sizeof(char *) * i + 1)))
+	else if (access(cmd, X_OK) == -1)
 	{
-		ft_putendl_fd("error: parser malloc failed", 2);
-		exit(-1);
+		ft_putstr_fd(cmd, 2);
+		ft_putstr_fd(": Permission denied.\n", 2);
+		return (-1);
 	}
-	while (j < i)
-	{
-		cmd[j] = ft_strdup(list->content);
-		list = list->next;
-		j++;
-	}
-	cmd[j] = NULL;
-	return (cmd);
+	return (0);
 }

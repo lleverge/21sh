@@ -6,13 +6,13 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 19:16:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/04/05 15:02:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
-# include <shell.h>
+# include "shell.h"
 
 typedef enum	e_token_id
 {
@@ -51,7 +51,7 @@ typedef struct		s_parser
 /*
 **lexer.c
 */
-t_lexer				*lexer(char *cmd);
+t_lexer				*lexer(char *cmd, t_ult *ult);
 
 /*
 **ft_strsplit_ws.c
@@ -71,7 +71,7 @@ int					is_dquote(char *str, int i);
 **token_list.c
 */
 int					get_token_id(char *str);
-t_lexer				*lexer_list(t_lexer *list, char *str);
+t_lexer				*lexer_list(t_lexer *list, char *str, char **cmd);
 
 /*
 **free_tools.c
@@ -92,13 +92,22 @@ t_parser			*fill_parser(t_parser *list, t_lexer *list_lex, int token);
 /*
 **parser.c
 */
-t_parser			*do_parsing(t_ult *ult, t_lexer *list, t_parser *process);
+char				**parser(t_lexer *list);
 
 /*
 **manage_io.c
 */
 int					manage_io_files(t_ult *ult, t_lexer *list,
 									t_parser *process, int token);
+/*
+**fork.c
+*/
+char				*search_path(char **path_tab, char **cmd);
+
+/*
+**do_pipe.c
+*/
+int					do_pipe(t_ult *ult, t_lexer *list);
 
 /*
 **io_redir.c

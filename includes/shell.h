@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 17:10:20 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/04/05 14:49:41 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,4 +153,37 @@ void				free_tab(char **tab);
 **init_tools.c
 */
 char				*get_node_content(t_env *env, char *str);
+
+/*
+**fork.c
+*/
+char				**path_in_tab(t_env *env, char **cmd);
+int					exe_fork2(char **cmd, char **path_tab);
+int					exe_fork(t_env *env, char **cmd, char **path_tab);
+
+/*
+**fork2.c
+*/
+void				fork_error(char **cmd, char **path_tab);
+char				*search_path2(char *tmp2, char *tmp, char **path_tab, int i);
+
+/*
+**tools2.c
+*/
+int					list_size(t_env *env);
+
+/*
+**tools3.c
+*/
+char				*ft_getbin_path(char *cmd);
+char				*ft_getbin_name(char *cmd);
+char				**ft_tabdup_path(char **tab, char *content);
+char				**part_tabcpy(char **tab);
+char				**list_in_tab(t_env *env);
+
+/*
+**error.c
+*/
+void				ft_env_error(char *file);
+int					env_manage_error(char *cmd);
 #endif
