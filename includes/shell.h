@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/04/05 14:49:41 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:29:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@
 typedef struct stat		t_stat;
 typedef struct winsize	t_winsize;
 typedef struct termios	t_termios;
-
-typedef struct		s_pos
-{
-	int				x;
-	int				y;
-}					t_pos;
 
 typedef struct		s_term
 {
@@ -79,7 +73,6 @@ typedef struct		s_ult
 	t_exec			*exec;
 	t_term			*term;
 	t_env			*env;
-	t_pos			*pos;
 	char			**path;
 	t_hist			*hist;
 	char			*cmd;
@@ -104,6 +97,12 @@ t_env				*fill_env(char **environ);
 */
 void				init_term2(t_term *termi);
 t_term				*init_term(void);
+
+/*
+**init_exec.c
+*/
+t_exec				*create_exec(void);
+void				free_exec(t_exec *exec);
 
 /*
 **init_hist.c

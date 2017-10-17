@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/04/05 15:02:30 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/04/06 19:31:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,15 @@
 
 typedef enum	e_token_id
 {
-	PIPE,
-	LESS,
-	GREAT,
-	DGREAT,
-	DLESS,
-	QUOTE,
-	DQUOTE,
-	CMD,
-	END_LIST,
-	ERROR
+	PIPE = 1,
+	LESS = 2,
+	GREAT = 3,
+	DGREAT = 4,
+	DLESS = 5,
+	QUOTE = 6,
+	DQUOTE = 7,
+	EOL = 8,
+	ERROR = 9
 }				t_token_id;
 
 typedef struct		s_lexer
@@ -41,8 +40,8 @@ typedef struct		s_parser
 {
 	int				stdin;
 	int				stdout;
-	int				shutout_out;
-	int				shutout_in;
+	int				shutout;
+	int				shutin;
 	int				token;
 	char			**content;
 	struct s_parser	*next;
@@ -59,6 +58,11 @@ t_lexer				*lexer(char *cmd, t_ult *ult);
 char				**ft_strsplit_ws(char const *s);
 
 /*
+**ft_strsplit_tok.c
+*/
+char				**ft_strsplit_tok(char const *s);
+
+/*
 **token_sep.c
 */
 int					is_sep(char c);
@@ -70,7 +74,6 @@ int					is_dquote(char *str, int i);
 /*
 **token_list.c
 */
-int					get_token_id(char *str);
 t_lexer				*lexer_list(t_lexer *list, char *str, char **cmd);
 
 /*
@@ -87,12 +90,12 @@ int					lexer_error(t_lexer *list);
 **parser_list.c
 */
 void				free_parser(t_parser **parser);
-t_parser			*fill_parser(t_parser *list, t_lexer *list_lex, int token);
+t_parser			*fill_parser(t_parser *list, int token);
 
 /*
 **parser.c
 */
-char				**parser(t_lexer *list);
+int					parser(t_lexer *list, t_ult *ult);
 
 /*
 **manage_io.c
@@ -107,7 +110,7 @@ char				*search_path(char **path_tab, char **cmd);
 /*
 **do_pipe.c
 */
-int					do_pipe(t_ult *ult, t_lexer *list);
+int					fork_pipe(t_ult *ult, t_exec *exec, char **cmd1);
 
 /*
 **io_redir.c

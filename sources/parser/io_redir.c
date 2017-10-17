@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/24 17:03:31 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 17:10:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/04/06 09:09:33 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			open_redir(t_ult *ult, t_lexer *lex)
 	{
 		if ((ult->exec->fd_write = open(lex->next->cmd[0], flag, 0644)) == -1)
 		{
-			ft_putendl_fd("42sh: permission denied", 2);
+			ft_putendl_fd("21sh: permission denied", 2);
 			ult->ret = 1;
 		}
 		else

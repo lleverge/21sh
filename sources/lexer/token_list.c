@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:54:34 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/25 12:40:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/04/06 15:43:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void				lexer_pushb(t_lexer **list, t_lexer *new)
 	}
 }
 
-static t_lexer			*create_lexer_node(char *str, int token_id, char **cmd)
+static t_lexer			*create_lexer_node(char *str, char **cmd)
 {
 	t_lexer		*new;
 	int			i;
@@ -37,7 +37,7 @@ static t_lexer			*create_lexer_node(char *str, int token_id, char **cmd)
 	i = 0;
 	if (!(new = (t_lexer *)malloc(sizeof(t_lexer))))
 		return (NULL);
-	new->token_id = token_id;
+	new->token_id = 0;
 	new->content = str;
 	new->cmd = ft_tabdup(cmd);
 	new->prev = NULL;
@@ -45,34 +45,11 @@ static t_lexer			*create_lexer_node(char *str, int token_id, char **cmd)
 	return (new);
 }
 
-int						get_token_id(char *str)
-{
-	if (!ft_strcmp(str, ">>"))
-		return (DGREAT);
-	else if (!ft_strcmp(str, "<<"))
-		return (DLESS);
-	else if (ft_cntc(str, '>') == 1)
-		return (GREAT);
-	else if (ft_cntc(str, '<') == 1)
-		return (LESS);
-	else if (ft_cntc(str, '>') == 2)
-		return (DGREAT);
-	else if (ft_cntc(str, '<') == 2)
-		return (DLESS);
-	else if (!ft_strcmp(str, "|"))
-		return (PIPE);
-	else
-		return (CMD);
-	return (0);
-}
-
 t_lexer					*lexer_list(t_lexer *list, char *str, char **cmd)
 {
 	t_lexer		*new;
-	int			token_id;
 
-	token_id = get_token_id(str);
-	new = create_lexer_node(str, token_id, cmd);
+	new = create_lexer_node(str, cmd);
 	if (new)
 		lexer_pushb(&list, new);
 	return (list);
