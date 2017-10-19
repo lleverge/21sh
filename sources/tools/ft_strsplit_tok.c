@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
@@ -6,16 +7,22 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 14:15:09 by lleverge          #+#    #+#             */
-/*   Updated: 2017/04/06 15:57:03 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/19 19:22:54 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
-static int		ft_istoken(char c)
+int		ft_istoken(char c)
 {
-	if (c == '<' || c == '>' || c == '|')
+	if (c == '<')
 		return (1);
+	else if (c == '>')
+		return (2);
+	else if ( c == '|')
+		return (3);
+	else if (c == '&')
+		return (4);
 	else
 		return (0);
 }

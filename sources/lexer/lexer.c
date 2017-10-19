@@ -6,68 +6,32 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/18 19:35:40 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/19 19:19:52 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-static int					test_token_id(char *str)
-{
-	if (!ft_strcmp(str, ">>"))
-		return (DGREAT);
-	else if (!ft_strcmp(str, "<<"))
-		return (DLESS);
-	else if (ft_cntc(str, '>') == 1)
-		return (GREAT);
-	else if (ft_cntc(str, '<') == 1)
-		return (LESS);
-	else if (ft_cntc(str, '>') == 2)
-		return (DGREAT);
-	else if (ft_cntc(str, '<') == 2)
-		return (DLESS);
-	else if (!ft_strcmp(str, "|"))
-		return (PIPE);
-	return (0);
-}
-
-static void					get_token_id(char *cmd, t_lexer *list)
+int					new_lexer(char *str)
 {
 	int		i;
-	int		id;
-	char	**tmp;
 
 	i = 0;
-	tmp = ft_strsplit_ws(cmd);
-	while (tmp[i])
+	ft_putendl(str);
+	while (str[i])
 	{
-		if ((id = test_token_id(tmp[i])) > 0)
+		if (ft_istoken(str[i]))
 		{
-			list->token_id = id;
-			list = list->next;
+			if (ft_istoken(str[i]) == 1)
+				check_less(str, i);
+			if (ft_istoken(str[i]) == 2)
+				check_great(str, i);
+			if (ft_istoken(str[i]) == 3)
+				check_pipe(str, i);
+			if (ft_istoken(str[i]) == 4)
+				check_and(str, i);
 		}
 		i++;
-	}
-	list->token_id = SEPARATOR;
-}
-
-t_lexer		*lexer(char *cmd, t_ult *ult)
-{
-	char		**cmd2;
-	t_lexer		*list;
-	int			i;
-
-	i = 0;
-	list = NULL;
-	cmd2 = ft_strsplit_tok(cmd);
-	ft_strlen(ult->path[0]);
-	while (cmd2[i])
-	{
-		list = lexer_list(list, cmd2[i]);
-		i++;
-	}
-	get_token_id(cmd, list);
-	//exe_fork(ult->env, cmd2, path_in_tab(ult->env, cmd2));
-	free_tab(cmd2);
-	return (list);
+	}		 
+	return (0);
 }

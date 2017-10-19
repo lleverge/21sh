@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:18:14 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/19 13:52:22 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/19 14:49:42 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static t_process		*create_proc_node(t_process *proc, char *cmd)
 	proc->cmd = ft_strdup(cmd);
 	proc->fd[0] = -1;
 	proc->fd[1] = -1;
-	proc->fd[2] = -1;
 	proc->pid = -1;
 	proc->done = -1;
 	proc->next = NULL;

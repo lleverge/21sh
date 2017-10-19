@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/19 12:48:31 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/19 18:04:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef enum	e_token_id
 	DQUOTE = 7,
 	AND = 8,
 	OR = 9,
-	SEPARATOR = 10,
+	AGGREG = 11,
+	SEPARATOR = 12,
 }				t_token_id;
 
 typedef struct		s_lexer
@@ -39,7 +40,15 @@ typedef struct		s_lexer
 /*
 **lexer.c
 */
-t_lexer				*lexer(char *cmd, t_ult *ult);
+int					new_lexer(char *cmd);
+
+/*
+**check_token.c
+*/
+int					check_pipe(char *str, int i);
+int					check_and(char *str, int i);
+int					check_less(char *str, int i);
+int					check_great(char *str, int i);
 
 /*
 **ft_strsplit_ws.c
@@ -49,6 +58,7 @@ char				**ft_strsplit_ws(char const *s);
 /*
 **ft_strsplit_tok.c
 */
+int					ft_istoken(char c);
 char				**ft_strsplit_tok(char const *s);
 
 /*

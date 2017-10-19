@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/19 13:51:57 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/19 14:49:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct		s_env
 typedef struct		s_process
 {
 	char				*cmd;
-	int					fd[3];
+	int					fd[2];
 	pid_t				pid;
 	int					done;
 	struct s_process	*next;
@@ -81,8 +81,9 @@ typedef struct		s_ult
 	t_env			*env;
 	char			**path;
 	t_hist			*hist;
-	char			*cmd;
+	int				fd[3];
 	int				ret;
+	char			*cmd;
 }					t_ult;
 
 /*
