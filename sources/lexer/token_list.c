@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:54:34 by lleverge          #+#    #+#             */
-/*   Updated: 2017/04/06 15:43:37 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/18 19:30:09 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void				lexer_pushb(t_lexer **list, t_lexer *new)
 	}
 }
 
-static t_lexer			*create_lexer_node(char *str, char **cmd)
+static t_lexer			*create_lexer_node(char *str)
 {
 	t_lexer		*new;
 	int			i;
@@ -38,18 +38,17 @@ static t_lexer			*create_lexer_node(char *str, char **cmd)
 	if (!(new = (t_lexer *)malloc(sizeof(t_lexer))))
 		return (NULL);
 	new->token_id = 0;
-	new->content = str;
-	new->cmd = ft_tabdup(cmd);
+	new->content = ft_strdup(str);
 	new->prev = NULL;
 	new->next = NULL;
 	return (new);
 }
 
-t_lexer					*lexer_list(t_lexer *list, char *str, char **cmd)
+t_lexer					*lexer_list(t_lexer *list, char *str)
 {
 	t_lexer		*new;
 
-	new = create_lexer_node(str, cmd);
+	new = create_lexer_node(str);
 	if (new)
 		lexer_pushb(&list, new);
 	return (list);

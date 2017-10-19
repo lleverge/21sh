@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 15:26:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/18 19:31:34 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@ void		free_lexer(t_lexer **lexer)
 		next = current->next;
 		if (current->content)
 			ft_strdel(&(current->content));
-		if (current->cmd)
-			free_tab(current->cmd);
 		current->token_id = 0;
 		current->prev = NULL;
 		current->next = NULL;

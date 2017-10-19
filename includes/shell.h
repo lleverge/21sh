@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/04/06 19:29:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/19 13:51:57 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,22 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef struct		s_exec
+typedef struct		s_process
 {
-	pid_t			pid;
-	int				fd[2];
-	int				fd_write;
-	int				fd_read;
-	int				stdin_cp;
-	int				stdout_cp;
-}					t_exec;
+	char				*cmd;
+	int					fd[3];
+	pid_t				pid;
+	int					done;
+	struct s_process	*next;
+}						t_process;
+
+typedef struct		s_job
+{
+	int				linker;
+	pid_t			pgid;
+	t_process		*proc;
+	struct s_job	*next;
+}					t_job;
 
 typedef struct		s_hist
 {
@@ -70,7 +77,6 @@ typedef struct		s_hist
 
 typedef struct		s_ult
 {
-	t_exec			*exec;
 	t_term			*term;
 	t_env			*env;
 	char			**path;
@@ -99,10 +105,14 @@ void				init_term2(t_term *termi);
 t_term				*init_term(void);
 
 /*
-**init_exec.c
+**init_job.c
 */
-t_exec				*create_exec(void);
-void				free_exec(t_exec *exec);
+t_job				*job_list(t_job *job, t_process *proc);
+
+/*
+**init_process.c
+*/
+t_process			*process_list(t_process *proc, char *cmd);
 
 /*
 **init_hist.c

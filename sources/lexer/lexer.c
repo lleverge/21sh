@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/17 17:42:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/18 19:35:40 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,26 +48,7 @@ static void					get_token_id(char *cmd, t_lexer *list)
 		}
 		i++;
 	}
-	list->token_id = EOL;
-}
-
-static void				no_ws(char **cmd_tab)
-{
-	int		i;
-	char	*tmp;
-
-	i = 0;
-	while (cmd_tab[i])
-	{
-		if (ft_isspace(cmd_tab[i][0]))
-		{
-			tmp = ft_strsub(cmd_tab[i], 1, ft_strlen(cmd_tab[i]));
-			ft_strdel(&cmd_tab[i]);
-			cmd_tab[i] = ft_strdup(tmp);
-			ft_strdel(&tmp);
-		}
-		i++;
-	}
+	list->token_id = SEPARATOR;
 }
 
 t_lexer		*lexer(char *cmd, t_ult *ult)
@@ -79,16 +60,14 @@ t_lexer		*lexer(char *cmd, t_ult *ult)
 	i = 0;
 	list = NULL;
 	cmd2 = ft_strsplit_tok(cmd);
-	no_ws(cmd2);
 	ft_strlen(ult->path[0]);
 	while (cmd2[i])
 	{
-		list = lexer_list(list, cmd2[i], cmd2);
+		list = lexer_list(list, cmd2[i]);
 		i++;
 	}
 	get_token_id(cmd, list);
-	parser(list, ult);
-	exe_fork(ult->env, cmd2, path_in_tab(ult->env, cmd2));
+	//exe_fork(ult->env, cmd2, path_in_tab(ult->env, cmd2));
 	free_tab(cmd2);
 	return (list);
 }

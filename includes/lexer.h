@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/04/06 19:31:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/19 12:48:31 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,18 @@ typedef enum	e_token_id
 	DLESS = 5,
 	QUOTE = 6,
 	DQUOTE = 7,
-	EOL = 8,
-	ERROR = 9
+	AND = 8,
+	OR = 9,
+	SEPARATOR = 10,
 }				t_token_id;
 
 typedef struct		s_lexer
 {
 	int				token_id;
 	char			*content;
-	char			**cmd;
 	struct s_lexer	*prev;
 	struct s_lexer	*next;
 }					t_lexer;
-
-typedef struct		s_parser
-{
-	int				stdin;
-	int				stdout;
-	int				shutout;
-	int				shutin;
-	int				token;
-	char			**content;
-	struct s_parser	*next;
-}					t_parser;
 
 /*
 **lexer.c
@@ -74,7 +63,7 @@ int					is_dquote(char *str, int i);
 /*
 **token_list.c
 */
-t_lexer				*lexer_list(t_lexer *list, char *str, char **cmd);
+t_lexer				*lexer_list(t_lexer *list, char *str);
 
 /*
 **free_tools.c
@@ -87,12 +76,6 @@ void				free_lexer(t_lexer **lexer);
 int					lexer_error(t_lexer *list);
 
 /*
-**parser_list.c
-*/
-void				free_parser(t_parser **parser);
-t_parser			*fill_parser(t_parser *list, int token);
-
-/*
 **parser.c
 */
 int					parser(t_lexer *list, t_ult *ult);
@@ -100,8 +83,7 @@ int					parser(t_lexer *list, t_ult *ult);
 /*
 **manage_io.c
 */
-int					manage_io_files(t_ult *ult, t_lexer *list,
-									t_parser *process, int token);
+
 /*
 **fork.c
 */
@@ -110,7 +92,7 @@ char				*search_path(char **path_tab, char **cmd);
 /*
 **do_pipe.c
 */
-int					fork_pipe(t_ult *ult, t_exec *exec, char **cmd1);
+int					fork_pipe(t_ult *ult, char **cmd1);
 
 /*
 **io_redir.c
