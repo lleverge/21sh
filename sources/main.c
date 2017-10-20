@@ -6,13 +6,40 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/19 18:00:02 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/20 11:19:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 #include <cmd_edit.h>
+
+static int		parse_error(char *cmd)
+{
+	int		i;
+
+	i = 0;
+	if (cmd[ft_strlen(cmd) - 1] == '&' && cmd[ft_strlen(cmd) - 2] != '&')
+	{
+		ft_putendl("21sh: & not accepted");
+		return (-1);
+	}
+	while (cmd[i])
+	{
+		while (ft_isspace(cmd[i]))
+			i++;
+		if (ft_istoken(cmd[i]))
+		{
+			ft_putstr_fd("21sh: parse error near ", 2);
+			ft_putchar_fd(cmd[i], 2);
+			ft_putchar_fd('\n', 2);
+			return (-1);
+		}
+		else
+			return (0);
+	}
+	return (0);
+}
 
 int				init_all(char **environ)
 {
@@ -31,10 +58,13 @@ int				init_all(char **environ)
 		termcap(ult);
 		ft_putchar('\n');
 		cmd = ft_strsplit(ult->cmd, ';');
-		while (cmd[i])
+		if (cmd[i] && parse_error(cmd[i]) == 0)
 		{
-			new_lexer(cmd[i]);
-			i++;
+			while (cmd[i])
+			{
+				new_lexer(cmd[i]);
+				i++;
+			}
 		}
 	}
 	return (0);
