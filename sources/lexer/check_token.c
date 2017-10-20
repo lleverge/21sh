@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 16:45:30 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/20 12:26:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/20 14:45:48 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,7 @@ int			check_and(char *str, int i)
 		else if (str[i + 1] == '&')
 			return (AND);
 		else if (str[i + 1] == '>')
-		{
-			check_aggreg(str, i);
 			return (AGGREG);
-		}
 		else if (str[i + 1] == '<')
 			return (AGGREG);
 	}

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/20 11:19:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/20 14:37:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,22 @@
 static int		parse_error(char *cmd)
 {
 	int		i;
+	int		j;
 
 	i = 0;
-	if (cmd[ft_strlen(cmd) - 1] == '&' && cmd[ft_strlen(cmd) - 2] != '&')
-	{
-		ft_putendl("21sh: & not accepted");
-		return (-1);
-	}
+	j = 0;
 	while (cmd[i])
 	{
 		while (ft_isspace(cmd[i]))
 			i++;
-		if (ft_istoken(cmd[i]))
+		if (ft_istoken(cmd[i]) > 0)
 		{
 			ft_putstr_fd("21sh: parse error near ", 2);
 			ft_putchar_fd(cmd[i], 2);
 			ft_putchar_fd('\n', 2);
 			return (-1);
 		}
-		else
-			return (0);
+		i++;
 	}
 	return (0);
 }
@@ -47,10 +43,12 @@ int				init_all(char **environ)
 	t_process	*proc;
 	char		**cmd;
 	int			i;
+	int			j;
 
 	ult = NULL;
 	proc = NULL;
 	ult = init_ult(ult, environ);
+	j = 0;
 	while (42)
 	{
 		i = 0;
@@ -58,6 +56,11 @@ int				init_all(char **environ)
 		termcap(ult);
 		ft_putchar('\n');
 		cmd = ft_strsplit(ult->cmd, ';');
+		while (cmd[j])
+		{
+			parse_error(cmd[j]);
+			j++;
+		}
 		if (cmd[i] && parse_error(cmd[i]) == 0)
 		{
 			while (cmd[i])
