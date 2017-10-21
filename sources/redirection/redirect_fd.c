@@ -6,18 +6,18 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/20 20:19:05 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/10/21 16:49:23 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 
-static char	*get_word(char *sub_cmd)
+static char			*get_word(char *sub_cmd)
 {
-	size_t	w_length;
-	size_t	w_start;
-	char	*tmp;
+	size_t			w_length;
+	size_t			w_start;
+	char			*tmp;
 
 	w_length = 0;
 	w_start = 0;
@@ -30,7 +30,7 @@ static char	*get_word(char *sub_cmd)
 	return (ft_strsub(sub_cmd, w_start, w_length));
 }
 
-static int	check_error(char *sub_cmd)
+static int			check_error(char *sub_cmd)
 {
 	if (!sub_cmd || !*sub_cmd)
 	{
@@ -47,24 +47,61 @@ static int	check_error(char *sub_cmd)
 	return (0);
 }
 
-t_process	*simple_redirect(t_process *proc)
+static t_process	*standard_fd(t_process *proc)
 {
-	char	*sub_str;
-	char	*file_name;
-	int		fd;
+	if (proc->fd[0] == -1)
+		proc->fd[0] = 0;
+	if (proc->fd[1] == -1)
+		proc->fd[1] = 1;
+	if (proc->fd[2] == -1)
+		proc->fd[2] = 2;
+	return (proc);
+}
+
+static int			which_fd(char *cmd)
+{
+	char			*sub_cmd;
+	int				i;
+	int				j;
+	int				fd;
+
+	sub_cmd = cmd;
+	sub_cmd = ft_strsub(sub_cmd, 0, (ft_strchr(sub_cmd, '>') - sub_cmd));
+	i = ft_strlen(sub_cmd) - 1;
+	if (ft_isdigit(sub_cmd[i]))
+	{
+		j = i;
+		while (i > 0 && ft_isdigit(sub_cmd[i]))
+			i--;
+	}
+	fd = ft_atoi(&sub_cmd[i]);
+	ft_strdel(&sub_cmd);
+	return (fd == 2 ? 2 : 1);
+}
+
+t_process			*simple_redirect(t_process *proc)
+{
+	char			*sub_str;
+	char			*file_name;
+	int				fd;
 
 	sub_str = ft_strchr(proc->cmd, '>') + 1;
 	if (check_error(sub_str) == -1)
+	{
+		free_process_one(proc);
 		return (NULL);
+	}
 	file_name = get_word(sub_str);
 	if ((fd = open(file_name, O_TRUNC | O_CREAT | O_RDWR,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
 		ft_putendl_fd("open error", STDERR_FILENO);
 		ft_strdel(&file_name);
+		free_process_one(proc);
 		return (NULL);
 	}
-	proc->fd[1] = fd;
+	proc->fd[which_fd(proc->cmd)] = fd;
+	proc = standard_fd(proc);
 	ft_strdel(&file_name);
 	return (proc);
 }
