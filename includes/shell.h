@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 16:54:20 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 17:05:57 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ void				get_ws(t_term *termi);
 */
 void				free_env(t_env **head);
 void				free_tab(char **tab);
+void				free_process_one(t_process *proc);
 
 /*
 **init_tools.c

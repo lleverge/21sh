@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/18 19:31:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 17:06:20 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,11 @@ void		free_tab(char **tabl)
 	}
 	free(tabl);
 	tab = NULL;
+}
+
+void		free_process_one(t_process *proc)
+{
+	ft_strdel(&proc->cmd);
+	free(proc);
+	proc = NULL;
 }
