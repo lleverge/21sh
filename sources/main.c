@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 17:20:06 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 18:44:09 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static int		full_parse_error(char **cmd)
 int				init_all(char **environ)
 {
 	t_ult		*ult;
-	t_process	*proc;
 	char		**cmd;
 	char		*nosp;
 	int			i;
