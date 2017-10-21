@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/21 16:49:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/10/21 17:54:04 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 
-static char			*get_word(char *sub_cmd)
+char				*get_word(char *sub_cmd)
 {
 	size_t			w_length;
 	size_t			w_start;
@@ -30,7 +30,7 @@ static char			*get_word(char *sub_cmd)
 	return (ft_strsub(sub_cmd, w_start, w_length));
 }
 
-static int			check_error(char *sub_cmd)
+int					check_error_redir(char *sub_cmd)
 {
 	if (!sub_cmd || !*sub_cmd)
 	{
@@ -47,7 +47,7 @@ static int			check_error(char *sub_cmd)
 	return (0);
 }
 
-static t_process	*standard_fd(t_process *proc)
+t_process			*standard_fd(t_process *proc)
 {
 	if (proc->fd[0] == -1)
 		proc->fd[0] = 0;
@@ -58,7 +58,7 @@ static t_process	*standard_fd(t_process *proc)
 	return (proc);
 }
 
-static int			which_fd(char *cmd)
+int					which_fd(char *cmd)
 {
 	char			*sub_cmd;
 	int				i;
@@ -86,7 +86,7 @@ t_process			*simple_redirect(t_process *proc)
 	int				fd;
 
 	sub_str = ft_strchr(proc->cmd, '>') + 1;
-	if (check_error(sub_str) == -1)
+	if (check_error_redir(sub_str) == -1)
 	{
 		free_process_one(proc);
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 17:33:52 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 17:59:17 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,17 @@ void					free_process_one(t_process *proc);
 **init_tools.c
 */
 char					*get_node_content(t_env *env, char *str);
+
+/*
+**redirections
+*/
+
+t_process			*simple_redirect(t_process *proc);
+t_process			*append_redirect(t_process *proc);
+t_process			*standard_fd(t_process *proc);
+int					check_error_redir(char *sub_cmd);
+char				*get_word(char *sub_cmd);
+int					which_fd(char *cmd);
 
 /*
 **fork.c
