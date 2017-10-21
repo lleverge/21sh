@@ -6,14 +6,14 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 16:44:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 17:27:47 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 
-int				check_aggreg(char *str, int i)
+int						check_aggreg(char *str, int i)
 {
 	int		j;
 	int		fdi1;
@@ -69,25 +69,29 @@ char					*ft_strnosp(char *str)
 	return (nosp);
 }
 
-int					new_lexer(char *str)
+int						new_lexer(char *str)
 {
 	int		i;
+	int		ret;
 
 	i = 0;
+	ret = 0;
 	while (str[i])
 	{
 		if (ft_istoken(str[i]))
 		{
 			if (ft_istoken(str[i]) == 1)
-				check_less(str, i);
-			if (ft_istoken(str[i]) == 2)
-				check_great(str, i);
-			if (ft_istoken(str[i]) == 3)
-				check_pipe(str, i);
-			if (ft_istoken(str[i]) == 4)
-				check_and(str, i);
+				ret = check_less(str, i);
+			else if (ft_istoken(str[i]) == 2)
+				ret = check_great(str, i);
+			else if (ft_istoken(str[i]) == 3)
+				ret = check_pipe(str, i);
+			else if (ft_istoken(str[i]) == 4)
+				ret = check_and(str, i);
 		}
+		if (ret == -1)
+			return (-1);
 		i++;
-	}		 
+	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 16:47:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 17:20:06 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,18 @@ static int		parse_error(char *cmd)
 	return (0);
 }
 
-static int      full_parse_error(char **cmd)
+static int		full_parse_error(char **cmd)
 {
-    int     i;
+	int		i;
 
-    i = 0;
-    while (cmd[i])
-    {
-        if (parse_error(cmd[i]) == -1)
-            return (-1);
-        i++;
-    }
-    return (0);
+	i = 0;
+	while (cmd[i])
+	{
+		if (parse_error(cmd[i]) == -1)
+			return (-1);
+		i++;
+	}
+	return (0);
 }
 
 int				init_all(char **environ)
