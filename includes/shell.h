@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 16:51:30 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 16:54:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct		s_env
 	struct s_env	*next;
 }					t_env;
 
-typedef struct		s_process
+typedef struct			s_process
 {
 	int					token_id;
 	char				*cmd;
@@ -176,7 +176,8 @@ int					exe_fork(t_env *env, char **cmd, char **path_tab);
 **fork2.c
 */
 void				fork_error(char **cmd, char **path_tab);
-char				*search_path2(char *tmp2, char *tmp, char **path_tab, int i);
+char				*search_path2(char *tmp2, char *tmp, char **path_tab,
+					int i);
 
 /*
 **tools2.c
