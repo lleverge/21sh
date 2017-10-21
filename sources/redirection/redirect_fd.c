@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/21 17:54:04 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/10/21 18:47:27 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,22 @@ char				*get_word(char *sub_cmd)
 	return (ft_strsub(sub_cmd, w_start, w_length));
 }
 
-int					check_error_redir(char *sub_cmd)
+int					check_error_redir(char *sub_cmd, char *error_char)
 {
 	if (!sub_cmd || !*sub_cmd)
 	{
-		ft_putendl_fd("parse error near '>'", STDERR_FILENO);
+		ft_putstr_fd("parse error near '", STDERR_FILENO);
+		ft_putstr_fd(error_char, STDERR_FILENO);
+		ft_putendl_fd("'", STDERR_FILENO);
 		return (-1);
 	}
 	while (*sub_cmd && (*sub_cmd < 33 || *sub_cmd > 126))
 		sub_cmd++;
 	if (!*sub_cmd)
 	{
-		ft_putendl_fd("parse error near '>'", STDERR_FILENO);
+		ft_putstr_fd("parse error near '", STDERR_FILENO);
+		ft_putstr_fd(error_char, STDERR_FILENO);
+		ft_putendl_fd("'", STDERR_FILENO);
 		return (-1);
 	}
 	return (0);
@@ -86,7 +90,7 @@ t_process			*simple_redirect(t_process *proc)
 	int				fd;
 
 	sub_str = ft_strchr(proc->cmd, '>') + 1;
-	if (check_error_redir(sub_str) == -1)
+	if (check_error_redir(sub_str, ">") == -1)
 	{
 		free_process_one(proc);
 		return (NULL);

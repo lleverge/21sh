@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 17:09:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/21 17:53:04 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/10/21 18:57:45 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_process			*append_redirect(t_process *proc)
 	char			*file_name;
 	int				fd;
 
-	sub_str = ft_strchr(proc->cmd, '>') + 1;
-	if (check_error_redir(sub_str) == -1)
+	sub_str = ft_strchr(proc->cmd, '>') + 2;
+	if (check_error_redir(sub_str, ">>") == -1)
 	{
 		free_process_one(proc);
 		return (NULL);
@@ -35,6 +35,33 @@ t_process			*append_redirect(t_process *proc)
 		return (NULL);
 	}
 	proc->fd[which_fd(proc->cmd)] = fd;
+	proc = standard_fd(proc);
+	ft_strdel(&file_name);
+	return (proc);
+}
+
+t_process			*redirect_input(t_process *proc)
+{
+	char			*sub_str;
+	char			*file_name;
+	int				fd;
+
+	sub_str = ft_strchr(proc->cmd, '<') + 1;
+	if (check_error_redir_2(sub_str) == -1)
+	{
+		free_process_one(proc);
+		return (NULL);
+	}
+	file_name = get_word(sub_str);
+	if ((fd = open(file_name, O_RONLY)) == -1)
+	{
+		ft_putendl_fd("open error :", STDERR_FILENO);
+		get_open_err(file_name);
+		ft_strdel(&file_name);
+		free_process_one(proc);
+		return (NULL);
+	}
+	proc->fd[0] = fd;
 	proc = standard_fd(proc);
 	ft_strdel(&file_name);
 	return (proc);
