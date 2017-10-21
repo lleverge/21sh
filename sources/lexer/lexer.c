@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/20 12:20:57 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 16:44:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,41 @@ int				check_aggreg(char *str, int i)
 	fd2 = ft_strsub(str, i + 2, j - i);
 	fdi2 = ft_atoi(fd2);
 	return (0);
+}
+
+char					*ft_strnosp(char *str)
+{
+	int		count;
+	int		strlen;
+	int		i;
+	int		j;
+	char	*nosp;
+
+	count = 0;
+	strlen = ft_strlen(str);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (ft_isspace(str[i]))
+			count++;
+		i++;
+	}
+	if (!(nosp = (char *)malloc(sizeof(char) * (strlen - count))))
+	{
+		ft_putendl_fd("21sh: ft_strnosp malloc failed", 2);
+		exit(-1);
+	}
+	while (*str)
+	{
+		if (!ft_isspace(*str))
+		{
+			nosp[j] = *str;
+			j++;
+		}
+		str++;
+	}
+	return (nosp);
 }
 
 int					new_lexer(char *str)

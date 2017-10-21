@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 16:45:30 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/20 14:45:48 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 15:18:18 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,21 +35,18 @@ int			check_pipe(char *str, int i)
 
 int			check_and(char *str, int i)
 {
-	if (str[i + 1])
-	{
-		if (str[i - 1] != '&' && !ft_istoken(str[i + 1]) && str[i + 1] != '-')
-			ft_error("error: & not accepted");
-		else if (ft_istoken(str[i + 1]) == 3)
-			ft_error("error: &| unknown");
-		else if (ft_istoken(str[i + 1]) && str[i + 2] && ft_istoken(str[i + 2]))
-			ft_error("error: operator unknown");
-		else if (str[i + 1] == '&')
-			return (AND);
-		else if (str[i + 1] == '>')
-			return (AGGREG);
-		else if (str[i + 1] == '<')
-			return (AGGREG);
-	}
+	if (str[i - 1] != '&' && !ft_istoken(str[i + 1]) && str[i + 1] != '-')
+		ft_error("error: & not accepted");
+	else if (ft_istoken(str[i + 1]) == 3)
+		ft_error("error: &| unknown");
+	else if (ft_istoken(str[i + 1]) && str[i + 2] && ft_istoken(str[i + 2]))
+		ft_error("error: operator unknown");
+	else if (str[i + 1] == '&')
+		return (AND);
+	else if (str[i + 1] == '>')
+		return (AGGREG);
+	else if (str[i + 1] == '<')
+		return (AGGREG);
 	return (0);
 }
 

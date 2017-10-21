@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/20 12:24:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 16:42:58 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct		s_lexer
 */
 int					new_lexer(char *cmd);
 int					check_aggreg(char *str, int i);
+char				*ft_strnosp(char *str);
 /*
 **check_token.c
 */

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/20 12:25:29 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 16:51:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct		s_process
 {
 	int					token_id;
 	char				*cmd;
-	int					fd[2];
+	int					fd[3];
 	pid_t				pid;
 	int					done;
 	struct s_process	*next;

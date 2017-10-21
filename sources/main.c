@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/20 14:37:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/21 16:47:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,32 @@
 static int		parse_error(char *cmd)
 {
 	int		i;
-	int		j;
 
 	i = 0;
-	j = 0;
-	while (cmd[i])
-	{
-		while (ft_isspace(cmd[i]))
-			i++;
-		if (ft_istoken(cmd[i]) > 0)
-		{
-			ft_putstr_fd("21sh: parse error near ", 2);
-			ft_putchar_fd(cmd[i], 2);
-			ft_putchar_fd('\n', 2);
-			return (-1);
-		}
+	while (ft_isspace(cmd[i]))
 		i++;
+	if (ft_istoken(cmd[i]) > 0)
+	{
+		ft_putstr_fd("21sh: parse error near ", 2);
+		ft_putchar_fd(cmd[i], 2);
+		ft_putchar_fd('\n', 2);
+		return (-1);
 	}
 	return (0);
+}
+
+static int      full_parse_error(char **cmd)
+{
+    int     i;
+
+    i = 0;
+    while (cmd[i])
+    {
+        if (parse_error(cmd[i]) == -1)
+            return (-1);
+        i++;
+    }
+    return (0);
 }
 
 int				init_all(char **environ)
@@ -42,13 +50,12 @@ int				init_all(char **environ)
 	t_ult		*ult;
 	t_process	*proc;
 	char		**cmd;
+	char		*nosp;
 	int			i;
-	int			j;
 
 	ult = NULL;
 	proc = NULL;
 	ult = init_ult(ult, environ);
-	j = 0;
 	while (42)
 	{
 		i = 0;
@@ -56,17 +63,17 @@ int				init_all(char **environ)
 		termcap(ult);
 		ft_putchar('\n');
 		cmd = ft_strsplit(ult->cmd, ';');
-		while (cmd[j])
+		if (cmd[i])
 		{
-			parse_error(cmd[j]);
-			j++;
-		}
-		if (cmd[i] && parse_error(cmd[i]) == 0)
-		{
-			while (cmd[i])
+			if (full_parse_error(cmd) == 0)
 			{
-				new_lexer(cmd[i]);
-				i++;
+				while (cmd[i])
+				{
+					nosp = ft_strnosp(cmd[i]);
+					new_lexer(nosp);
+					ft_strdel(&nosp);
+					i++;
+				}
 			}
 		}
 	}
