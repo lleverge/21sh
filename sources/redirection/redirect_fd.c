@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/21 18:47:27 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/10/22 15:04:18 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ t_process			*simple_redirect(t_process *proc)
 	if ((fd = open(file_name, O_TRUNC | O_CREAT | O_RDWR,
 		S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH)) == -1)
 	{
-		ft_putendl_fd("open error", STDERR_FILENO);
+		get_open_err(file_name, W_OK);
 		ft_strdel(&file_name);
 		free_process_one(proc);
 		return (NULL);

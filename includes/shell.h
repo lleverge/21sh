@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 17:59:17 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/22 14:47:45 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,8 @@ char					*get_node_content(t_env *env, char *str);
 t_process			*simple_redirect(t_process *proc);
 t_process			*append_redirect(t_process *proc);
 t_process			*standard_fd(t_process *proc);
-int					check_error_redir(char *sub_cmd);
+int					check_error_redir(char *sub_cmd, char *error_char);
+void				get_open_err(char *file_name, int access_mode);
 char				*get_word(char *sub_cmd);
 int					which_fd(char *cmd);
 
