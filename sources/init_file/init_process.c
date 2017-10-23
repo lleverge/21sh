@@ -6,13 +6,13 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:18:14 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 18:53:14 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/23 14:12:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static void				proc_pushb(t_process **head, t_process *new)
+void					proc_pushb(t_process **head, t_process *new)
 {
 	t_process		*tmp;
 
@@ -27,7 +27,7 @@ static void				proc_pushb(t_process **head, t_process *new)
 	}
 }
 
-static t_process		*create_proc_node(t_process *proc, char *cmd)
+t_process			*create_proc_node(t_process *proc, char *cmd)
 {
 	if (!(proc = (t_process *)malloc(sizeof(t_process))))
 	{

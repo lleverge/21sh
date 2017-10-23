@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 18:50:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/23 14:44:10 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,34 +69,42 @@ char					*ft_strnosp(char *str)
 	return (nosp);
 }
 
-t_process						**new_lexer(char *str)
+t_process						*new_lexer(char *str, t_process *proc_list)
 {
 	int				i;
-	t_process		**proc_list;
 	t_process		*new;
 
 	i = 0;
 	new = NULL;
-	proc_list = NULL;
 	while (str[i])
 	{
 		if (ft_istoken(str[i]))
 		{
 			new = create_proc_node(new, str);
 			if (ft_istoken(str[i]) == 1)
-				new = check_less(str, i);
+				new = check_less(str, i, new);
 			else if (ft_istoken(str[i]) == 2)
-				new = check_great(str, i);
+				new = check_great(str, i, new);
 			else if (ft_istoken(str[i]) == 3)
-				new = check_pipe(str, i);
+				new = check_pipe(str, i, new);
 			else if (ft_istoken(str[i]) == 4)
-				new = check_and(str, i);
+				new = check_and(str, i, new);
 			if (new == NULL)
 				return (NULL);
 			else
-				proc_pushb(proc_list, new);
+				proc_pushb(&proc_list, new);
 		}
 		i++;
 	}
 	return (proc_list);
+}
+
+int								start_prog(char *cmd, t_job **job_li)
+{
+	char				*cmdnosp;
+
+	cmdnosp = ft_strnosp(cmd);
+	*job_li = job_list(*job_li, cmd, cmdnosp);
+	(*job_li)->proc = new_lexer(cmdnosp, (*job_li)->proc);
+	return (0);
 }

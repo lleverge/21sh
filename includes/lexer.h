@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 16:42:58 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/23 14:11:33 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,18 @@ typedef struct		s_lexer
 /*
 **lexer.c
 */
-int					new_lexer(char *cmd);
+t_process			*new_lexer(char *str, t_process *proc_list);
 int					check_aggreg(char *str, int i);
 char				*ft_strnosp(char *str);
+int					start_prog(char *cmd, t_job **job_li);
+
 /*
 **check_token.c
 */
-int					check_pipe(char *str, int i);
-int					check_and(char *str, int i);
-int					check_less(char *str, int i);
-int					check_great(char *str, int i);
+t_process			*check_pipe(char *str, int i, t_process *new);
+t_process			*check_and(char *str, int i, t_process *new);
+t_process			*check_less(char *str, int i, t_process *new);
+t_process			*check_great(char *str, int i, t_process *new);
 
 /*
 **ft_strsplit_ws.c

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 18:44:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/23 14:19:54 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ int				init_all(char **environ)
 {
 	t_ult		*ult;
 	char		**cmd;
-	char		*nosp;
+	t_job		*job_li;
 	int			i;
 
 	ult = NULL;
-	proc = NULL;
+	job_li = NULL;
 	ult = init_ult(ult, environ);
 	while (42)
 	{
@@ -68,9 +68,7 @@ int				init_all(char **environ)
 			{
 				while (cmd[i])
 				{
-					nosp = ft_strnosp(cmd[i]);
-					new_lexer(nosp);
-					ft_strdel(&nosp);
+					start_prog(cmd[i], &job_li);
 					i++;
 				}
 			}

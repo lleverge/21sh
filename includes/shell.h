@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/22 14:47:45 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/10/23 14:12:35 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ typedef struct			s_process
 
 typedef struct			s_job
 {
+	char				*cmd;
+	char				*cmdnosp;
 	int					linker;
 	pid_t				pgid;
 	t_process			*proc;
@@ -109,12 +111,14 @@ t_term					*init_term(void);
 /*
 **init_job.c
 */
-t_job					*job_list(t_job *job, t_process *proc);
+t_job					*job_list(t_job *job, char *cmd, char *cmdnosp);
 
 /*
 **init_process.c
 */
 t_process				*process_list(t_process *proc, char *cmd);
+void					proc_pushb(t_process **head, t_process *new);
+t_process				*create_proc_node(t_process *proc, char *cmd);
 
 /*
 **init_hist.c

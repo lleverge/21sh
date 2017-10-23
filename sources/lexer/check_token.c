@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 16:45:30 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 18:50:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/23 14:29:16 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void				ft_error(char *error)
 
 t_process				*check_pipe(char *str, int i, t_process *new)
 {
+	ft_strlen(new->cmd);
 	if (str[i + 1])
 	{
 		if (ft_istoken(str[i + 1]) && str[i + 1] != '|')
@@ -32,15 +33,16 @@ t_process				*check_pipe(char *str, int i, t_process *new)
 			return (NULL);
 		}
 		else if (str[i + 1] == '|')
-			return (OR);
+			return (NULL); //OR
 		else if (str[i + 1] != '|')
-			return (PIPE);
+			return (NULL); //PIPE
 	}
-	return (0);
+	return (NULL);
 }
 
 t_process				*check_and(char *str, int i, t_process *new)
 {
+	ft_strlen(new->cmd);
 	if (str[i - 1] != '&' && !ft_istoken(str[i + 1]) && str[i + 1] != '-')
 	{
 		ft_error("error: & not accepted");
@@ -57,20 +59,21 @@ t_process				*check_and(char *str, int i, t_process *new)
 		return (NULL);
 	}
 	else if (str[i + 1] == '&')
-		return (AND);
+		return (NULL); //AND
 	else if (str[i + 1] == '>')
-		return (AGGREG);
+		return (NULL); // AGGREG
 	else if (str[i + 1] == '<')
-		return (AGGREG);
+		return (NULL); //AGGREG
 	return (NULL);
 }
 
 t_process				*check_less(char *str, int i, t_process *new)
 {
+	ft_strlen(new->cmd);
 	if (str[i + 1])
 	{
 		if (!ft_istoken(str[i + 1]))
-			return (LESS);
+			return (NULL); //LESS
 		else if (ft_istoken(str[i + 1]) && str[i + 2] && ft_istoken(str[i + 2]))
 		{
 			ft_error("error: operator unknown");
@@ -83,19 +86,21 @@ t_process				*check_less(char *str, int i, t_process *new)
 			return (NULL);
 		}
 		else if (str[i + 1] == '<')
-			return (DLESS);
+			return (NULL); //DLESS
 		else if (str[i + 1] == '&')
-			return (AGGREG);
+			return (NULL); //AGGREG
 	}
 	return (NULL);
 }
 
 t_process				*check_great(char *str, int i, t_process *new)
 {
-	if (str[i + 1])
+	if (!str[i + 1])
+		ft_putendl_fd("21sh: parse error near '>'", 2);
+	else if (str[i + 1])
 	{
 		if (!ft_istoken(str[i + 1]))
-			return (GREAT);
+			return (simple_redirect(new)); //GREAT
 		else if (ft_istoken(str[i + 1]) && str[i + 2] && ft_istoken(str[i + 2]))
 		{
 			ft_error("error: operator unknown");
@@ -108,9 +113,9 @@ t_process				*check_great(char *str, int i, t_process *new)
 			return (NULL);
 		}
 		else if (str[i + 1] == '>')
-			return (DLESS);
+			return (NULL); //DGREAT
 		else if (str[i + 1] == '&')
-			return (AGGREG);
+			return (NULL); // AGGREG
 	}
 	return (NULL);
 }
