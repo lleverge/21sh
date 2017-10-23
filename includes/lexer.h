@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 14:11:33 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/23 17:19:34 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ t_process			*new_lexer(char *str, t_process *proc_list);
 int					check_aggreg(char *str, int i);
 char				*ft_strnosp(char *str);
 int					start_prog(char *cmd, t_job **job_li);
+int					check_linker(t_job **job_li, char *cmd, int i);
 
 /*
 **check_token.c

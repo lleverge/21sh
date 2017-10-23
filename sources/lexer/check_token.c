@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 16:45:30 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 14:29:16 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/23 19:01:08 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,10 @@ t_process				*check_great(char *str, int i, t_process *new)
 	else if (str[i + 1])
 	{
 		if (!ft_istoken(str[i + 1]))
-			return (simple_redirect(new)); //GREAT
+		{
+			new->token_id = GREAT;
+			return (simple_redirect(new));
+		}
 		else if (ft_istoken(str[i + 1]) && str[i + 2] && ft_istoken(str[i + 2]))
 		{
 			ft_error("error: operator unknown");

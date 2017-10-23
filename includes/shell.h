@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 14:12:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/23 16:31:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,8 @@ t_term					*init_term(void);
 **init_job.c
 */
 t_job					*job_list(t_job *job, char *cmd, char *cmdnosp);
+void					job_pushb(t_job **head, t_job *new);
+t_job					*create_job_node(char *cmd, char *cmdnosp);
 
 /*
 **init_process.c
