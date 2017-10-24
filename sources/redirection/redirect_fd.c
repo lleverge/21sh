@@ -6,81 +6,68 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/22 15:04:18 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/10/24 15:51:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 
-char				*get_word(char *sub_cmd)
+int					get_start_pos(char *cmd)
 {
-	size_t			w_length;
-	size_t			w_start;
+	int		start;
+
+	start = 0;
+	while (cmd[start] != '>')
+		start++;
+	if (start >= 1 && ft_isdigit(cmd[start - 1]))
+	{
+		while (start >= 1 && ft_isdigit(cmd[start - 1]))
+			start--;
+	}
+	if (start >= 1 && ft_isalpha(cmd[start - 1]))
+		start = ft_strchr(cmd, '>') - cmd;
+	return (start);
+}
+
+int					get_epur_size(char *cmd)
+{
+	int				to_epur;
 	char			*tmp;
+	int				start;
 
-	w_length = 0;
-	w_start = 0;
-	tmp = sub_cmd;
-	while (tmp[w_start] && (tmp[w_start] < 33 || tmp[w_start] > 126))
-		w_start++;
-	tmp = &tmp[w_start];
-	while (tmp[w_length] && (tmp[w_length] >= 33 && tmp[w_length] <= 126))
-		w_length++;
-	return (ft_strsub(sub_cmd, w_start, w_length));
+	to_epur = 0;
+	start = get_start_pos(cmd);
+	tmp = &cmd[start];
+	while (tmp[to_epur] && tmp[to_epur] != '>')
+		to_epur++;
+	if (tmp[to_epur + 1])
+		to_epur++;
+	while (tmp[to_epur] && (tmp[to_epur] < 33 || tmp[to_epur] > 126))
+		to_epur++;
+	while (tmp[to_epur] && (tmp[to_epur] >= 33 && tmp[to_epur] <= 126))
+		to_epur++;
+	return (to_epur);
 }
 
-int					check_error_redir(char *sub_cmd, char *error_char)
+t_process			*cmd_epur(t_process *proc)
 {
-	if (!sub_cmd || !*sub_cmd)
-	{
-		ft_putstr_fd("parse error near '", STDERR_FILENO);
-		ft_putstr_fd(error_char, STDERR_FILENO);
-		ft_putendl_fd("'", STDERR_FILENO);
-		return (-1);
-	}
-	while (*sub_cmd && (*sub_cmd < 33 || *sub_cmd > 126))
-		sub_cmd++;
-	if (!*sub_cmd)
-	{
-		ft_putstr_fd("parse error near '", STDERR_FILENO);
-		ft_putstr_fd(error_char, STDERR_FILENO);
-		ft_putendl_fd("'", STDERR_FILENO);
-		return (-1);
-	}
-	return (0);
-}
+	char			*sub_str;
+	int				start_pos;
+	int				w_length;
+	char			*new_cmd;
 
-t_process			*standard_fd(t_process *proc)
-{
-	if (proc->fd[0] == -1)
-		proc->fd[0] = 0;
-	if (proc->fd[1] == -1)
-		proc->fd[1] = 1;
-	if (proc->fd[2] == -1)
-		proc->fd[2] = 2;
+	start_pos = ft_strchr(proc->cmd, '>') - proc->cmd;
+	if (start_pos > 1)
+		if (ft_isdigit(proc->cmd[start_pos - 1]))
+			start_pos = get_start_pos(proc->cmd);
+	w_length = get_epur_size(proc->cmd);
+	sub_str = ft_strsub(proc->cmd, start_pos, w_length);
+	new_cmd = ft_extracter(proc->cmd, sub_str);
+	ft_strdel(&proc->cmd);
+	proc->cmd = new_cmd;
+	ft_strdel(&sub_str);
 	return (proc);
-}
-
-int					which_fd(char *cmd)
-{
-	char			*sub_cmd;
-	int				i;
-	int				j;
-	int				fd;
-
-	sub_cmd = cmd;
-	sub_cmd = ft_strsub(sub_cmd, 0, (ft_strchr(sub_cmd, '>') - sub_cmd));
-	i = ft_strlen(sub_cmd) - 1;
-	if (ft_isdigit(sub_cmd[i]))
-	{
-		j = i;
-		while (i > 0 && ft_isdigit(sub_cmd[i]))
-			i--;
-	}
-	fd = ft_atoi(&sub_cmd[i]);
-	ft_strdel(&sub_cmd);
-	return (fd == 2 ? 2 : 1);
 }
 
 t_process			*simple_redirect(t_process *proc)
@@ -107,5 +94,6 @@ t_process			*simple_redirect(t_process *proc)
 	proc->fd[which_fd(proc->cmd)] = fd;
 	proc = standard_fd(proc);
 	ft_strdel(&file_name);
+	proc = cmd_epur(proc);
 	return (proc);
 }

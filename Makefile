@@ -6,7 +6,7 @@
 #    By: lleverge <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2017/01/25 15:07:28 by lleverge         ###   ########.fr        #
+#    Updated: 2017/10/24 14:30:50 by vfrolich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ all: $(NAME)
 
 $(NAME): $(O_FILES)
 	@echo "Creating $(NAME)"
-	@make -C ./libft
+	@make -C ./libft -j8
 	@gcc $(FLAGS) $^ $(LIB) -o $@
 
 $(O_DIR)%.o: $(C_DIR)%.c
