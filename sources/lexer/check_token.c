@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/19 16:45:30 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 19:01:08 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/24 13:10:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_process				*check_pipe(char *str, int i, t_process *new)
 		else if (str[i + 1] == '|')
 			return (NULL); //OR
 		else if (str[i + 1] != '|')
-			return (NULL); //PIPE
+			return (prep_pipe(new, str, i)); //PIPE
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 16:31:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/24 13:08:53 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,4 +217,9 @@ char					**list_in_tab(t_env *env);
 */
 void					ft_env_error(char *file);
 int						env_manage_error(char *cmd);
+
+/*
+**pipe.c
+*/
+t_process				*prep_pipe(t_process *new, char *str, int i);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 19:00:08 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/24 14:17:51 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,9 @@ int								start_prog(char *cmd, t_job **job_li)
 		{
 			ft_putendl("Maillon proc:");
 			ft_putendl((*job_li)->proc->cmd);
+			ft_putstr("token_id = ");
+			ft_putnbr((*job_li)->proc->token_id);
+			ft_putchar('\n');
 			(*job_li)->proc = (*job_li)->proc->next;
 		}
 		*job_li = (*job_li)->next;
