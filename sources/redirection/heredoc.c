@@ -6,108 +6,110 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 15:52:23 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/23 16:09:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/13 16:15:27 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../../includes/shell.h"
-// #include "../../includes/lexer.h"
-
 #include <shell.h>
 #include <lexer.h>
+#include <cmd_edit.h>
 
-// static t_process		*create_proc_node_one(t_process *proc, char *cmd)
-// {
-// 	if (!(proc = (t_process *)malloc(sizeof(t_process))))
-// 	{
-// 		ft_putendl_fd("error: process struct malloc failed", 2);
-// 		exit(-1);
-// 	}
-// 	proc->cmd = ft_strdup(cmd);
-// 	proc->token_id = -1;
-// 	proc->fd[0] = -1;
-// 	proc->fd[1] = -1;
-// 	proc->fd[2] = -1;
-// 	proc->pid = -1;
-// 	proc->done = -1;
-// 	proc->next = NULL;
-// 	return (proc);
-// }
+char			*read_heredoc(t_prompt *prompt, t_ult *ult)
+{
+	static char	buffer[4];
 
-// int						check_err_heredoc(t_process *proc)
-// {
-// 	char			*sub_cmd;
+	ft_bzero(buffer, 4);
+	while (read(0, buffer, 4) != -1)
+	{
+		prompt_shell(prompt, buffer, ult);
+		if (buffer[0] == 4 && !prompt->cmd[0])
+		{
+			reset_prompt_heredoc(prompt);
+			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
+			tputs(tgetstr("ce", NULL), 1, ft_putchar_int);
+			return (NULL);
+		}
+		if (buffer[0] == 10 && buffer[1] == 0)
+		{
+			prompt_print(prompt, 0);
+			ft_putchar('\n');
+			break ;
+		}
+		ft_bzero(buffer, 4);
+	}
+	return (strdup(prompt->cmd));
+}
 
-// 	sub_cmd = ft_strchr(proc->cmd, '<');
-// 	if (!(sub_cmd + 2))
-// 	{	
-// 		ft_putendl_fd("Missing heredoc delimiter, try [command] << [delimiter]"
-// 		, STDERR_FILENO);
-// 		return (-1);
-// 	}
-// 	return (0);	
-// }
+static char		*add_nl(char **line)
+{
+	char		*tmp;
 
-// t_process				*heredoc(t_process *proc)
-// {
-// 	char			*sub_str;
-// 	char			*file_name;
-// 	int				fd;
+	if (!(tmp = (char *)malloc(sizeof(ft_strlen(*line) + 2))))
+	{
+		ft_putendl_fd("21sh : malloc error", 2);
+		exit(1);
+	}
+	ft_strcpy(tmp, *line);
+	tmp[ft_strlen(*line)] = '\n';
+	tmp[ft_strlen(*line) + 1] = '\0';
+	ft_strdel(line);
+	return (tmp);
+}
 
-	
-// 	proc = standard_fd(proc);
-// 	if (check_err_heredoc(proc) == -1)
-// 	{
-// 		free_process_one(proc);
-// 		return (NULL);
-// 	}
+char			*termcaps_heredoc(t_ult *ult)
+{
+	t_prompt	*prompt;
+	char		*dest;
 
-// 	return (proc);
-// }
+	prompt = init_prompt();
+	prompt->heredoc = 1;
+	dest = NULL;
+	stock_prompt(prompt, 0);
+	prompt_print(prompt, 1);
+	dest = read_heredoc(prompt, ult);
+	dest ? dest = add_nl(&dest) : 0;
+	free_prompt(&prompt);
+	return (dest);
+}
 
-// static t_process *which_redir(t_process *proc)
-// {
-// 	char	*sub_cmd;
+static char		*get_delim(char *cmd)
+{
+	char		*tmp;
 
-// 	sub_cmd = ft_strchr(proc->cmd, '>');
-// 	if (sub_cmd)
-// 	{
-// 		if(*(sub_cmd+ 1) == '>')
-// 			return (append_redirect(proc));
-// 		return (simple_redirect(proc));
-// 	}
-// 	sub_cmd = ft_strchr(proc->cmd, '<');
-// 	if (sub_cmd)
-// 	{
-// 		if(*(sub_cmd+ 1) == '<')
-// 		{
-// 			ft_putendl("too soon for heredoc");
-// 			return (NULL);
-// 		}
-// 		return (redirect_input(proc));
-// 	}
-// 	return (NULL);
-// }
+	tmp = ft_strchr(cmd, '<') + 2;
+	if (!*tmp)
+	{
+		ft_putendl_fd("21sh : missing heredoc delimiter", STDERR_FILENO);
+		return (NULL);
+	}
+	tmp = get_word(tmp);
+	tmp = add_nl(&tmp);
+	return (tmp);
+}
 
-// int			main(int argc, char **argv)
-// {
-// 	t_process *proc;
-// 	char	buffer[1024];
+t_process		*heredoc(t_process *proc, t_ult *ult)
+{
+	int			fd[2];
+	char		*delim;
 
-// 	if (argc != 2)
-// 		return (1);
-// 	proc = create_proc_node_one(proc, argv[1]);
-// 	proc = which_redir(proc);
-// 	if (!proc)
-// 		return (-1);
-// 	ft_putstr("INPUT FD is -> ");
-// 	ft_putnbr(proc->fd[0]);
-// 	ft_putchar('\n');
-// 	ft_putstr("OUTPUT FD is -> ");
-// 	ft_putnbr(proc->fd[1]);
-// 	ft_putchar('\n');
-// 	ft_putstr("ERR FD is -> ");
-// 	ft_putnbr(proc->fd[2]);
-// 	ft_putchar('\n');
-// 	return (0);
-// }
+	if (pipe(fd) == -1)
+	{
+		ft_putendl_fd("21sh : pipe error", 2);
+		return (NULL);
+	}
+	if (!(delim = get_delim(proc->cmd)))
+		return (NULL);
+	proc = standard_fd(proc);
+	ft_putendl(proc->cmd);
+	heredoc_write(fd[1], delim, ult);
+	if (close(fd[1]) == -1)
+	{
+		ft_putendl_fd("close error", 2);
+		return (NULL);
+	}
+	proc->fd[0] = fd[0];
+	ft_strdel(&delim);
+	proc = cmd_epur_heredoc(proc);
+	ft_putendl(proc->cmd);
+	return (proc);
+}

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/24 15:52:20 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/13 16:11:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,24 @@ static int		full_parse_error(char **cmd)
 		i++;
 	}
 	return (0);
+}
+
+static t_process		*create_proc_node_one(t_process *proc, char *cmd)
+{
+	if (!(proc = (t_process *)malloc(sizeof(t_process))))
+	{
+		ft_putendl_fd("error: process struct malloc failed", 2);
+		exit(-1);
+	}
+	proc->cmd = ft_strdup(cmd);
+	proc->token_id = -1;
+	proc->fd[0] = -1;
+	proc->fd[1] = -1;
+	proc->fd[2] = -1;
+	proc->pid = -1;
+	proc->done = -1;
+	proc->next = NULL;
+	return (proc);
 }
 
 int				init_all(char **environ)

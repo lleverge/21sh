@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tcaps.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 15:14:08 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/13 13:11:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void			prompt_print(t_prompt *prompt, int show_cursor)
 	size_t	j;
 
 	i = 0;
-	reset_prompt(prompt);
+	!prompt->heredoc ? reset_prompt(prompt) : reset_prompt_heredoc(prompt);
 	j = 3;
 	while (prompt->cmd[i])
 	{

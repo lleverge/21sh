@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_prompt.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:20:35 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 09:50:36 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/10 14:37:39 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ t_prompt		*init_prompt(void)
 	prompt->copy_str = NULL;
 	ioctl(0, TIOCGWINSZ, &win);
 	prompt->win_size = win.ws_col;
+	prompt->heredoc = 0;
 	return (prompt);
 }

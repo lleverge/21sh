@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_edit.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 15:14:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/12 17:16:00 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct		s_prompt
 	int				cursor_end;
 	char			*copy_str;
 	size_t			win_size;
+	int				heredoc;
 }					t_prompt;
 
 /*
@@ -83,6 +84,7 @@ void				termcap(t_ult *ult);
 void				prompt_print(t_prompt *prompt, int show_cursor);
 void				prompt_shell(t_prompt *prompt, char *buff, t_ult *ult);
 void				reset_prompt(t_prompt *prompt);
+void				reset_prompt_heredoc(t_prompt *prompt);
 void				print_cursor(t_prompt *prompt, int show_cursor, int i);
 
 /*

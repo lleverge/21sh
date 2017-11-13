@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:18:14 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 14:12:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/13 16:13:33 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-void					proc_pushb(t_process **head, t_process *new)
+void				proc_pushb(t_process **head, t_process *new)
 {
 	t_process		*tmp;
 
@@ -45,7 +45,7 @@ t_process			*create_proc_node(t_process *proc, char *cmd)
 	return (proc);
 }
 
-t_process				*process_list(t_process *proc, char *cmd)
+t_process			*process_list(t_process *proc, char *cmd)
 {
 	t_process		*new;
 
