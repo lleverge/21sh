@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:21:48 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/13 16:16:16 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:08:29 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void		heredoc_write(int fd, char *delim, t_ult *ult)
 		line = termcaps_heredoc(ult);
 		if (!line || !ft_strcmp(line, delim))
 			break ;
-		write(fd, line, ft_strlen(line));
+		if (write(fd, line, ft_strlen(line)) == -1)
+			ft_putendl_fd("21sh: write error", 2);
 	}
 	line ? ft_strdel(&line) : 0;
 }
@@ -46,6 +47,17 @@ static int	get_epur_size_heredoc(char *cmd)
 	while (tmp[to_epur] && (tmp[to_epur] >= 33 && tmp[to_epur] <= 126))
 		to_epur++;
 	return (to_epur);
+}
+
+t_process	*clean_exit_heredoc(int fd[2], char **delim)
+{
+	if (close(fd[0]) == -1 || close(fd[1]) == -1)
+	{
+		ft_putendl_fd("21sh: close error", 2);
+		return (NULL);
+	}
+	ft_strdel(delim);
+	return (NULL);
 }
 
 t_process	*cmd_epur_heredoc(t_process *proc)

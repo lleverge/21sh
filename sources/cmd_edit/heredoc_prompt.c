@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 14:40:55 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/10 14:49:39 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:00:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 
-void			reset_prompt_heredoc(t_prompt *prompt)
+void			reset_prompt_heredoc(t_prompt *prompt, int show_cursor)
 {
 	size_t		i;
 	size_t		j;
@@ -20,7 +20,8 @@ void			reset_prompt_heredoc(t_prompt *prompt)
 	j = 3;
 	i = 0;
 	prompt->y = 0;
-	tputs(tgetstr("vi", NULL), 1, ft_putchar_int);
+	if (show_cursor)
+		tputs(tgetstr("vi", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	while (i < ft_strlen(prompt->cmd))
 	{

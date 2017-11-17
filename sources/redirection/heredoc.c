@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 15:52:23 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/13 16:15:27 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:20:38 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,18 @@
 #include <lexer.h>
 #include <cmd_edit.h>
 
-char			*read_heredoc(t_prompt *prompt, t_ult *ult)
+static char		*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag)
 {
 	static char	buffer[4];
 
 	ft_bzero(buffer, 4);
-	while (read(0, buffer, 4) != -1)
+	signal(SIGINT, &sig_handler_heredoc);
+	while (read(0, buffer, 4) != -1 && *sig_flag == 42)
 	{
 		prompt_shell(prompt, buffer, ult);
 		if (buffer[0] == 4 && !prompt->cmd[0])
 		{
-			reset_prompt_heredoc(prompt);
+			reset_prompt_heredoc(prompt, 1);
 			tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 			tputs(tgetstr("ce", NULL), 1, ft_putchar_int);
 			return (NULL);
@@ -37,7 +38,7 @@ char			*read_heredoc(t_prompt *prompt, t_ult *ult)
 		}
 		ft_bzero(buffer, 4);
 	}
-	return (strdup(prompt->cmd));
+	return (*sig_flag == 42 ? strdup(prompt->cmd) : NULL);
 }
 
 static char		*add_nl(char **line)
@@ -60,13 +61,15 @@ char			*termcaps_heredoc(t_ult *ult)
 {
 	t_prompt	*prompt;
 	char		*dest;
+	int			*flag;
 
 	prompt = init_prompt();
 	prompt->heredoc = 1;
 	dest = NULL;
 	stock_prompt(prompt, 0);
 	prompt_print(prompt, 1);
-	dest = read_heredoc(prompt, ult);
+	flag = singleton_signal();
+	dest = read_heredoc(prompt, ult, flag);
 	dest ? dest = add_nl(&dest) : 0;
 	free_prompt(&prompt);
 	return (dest);
@@ -99,9 +102,11 @@ t_process		*heredoc(t_process *proc, t_ult *ult)
 	}
 	if (!(delim = get_delim(proc->cmd)))
 		return (NULL);
+	stock_ult(ult, 0);
 	proc = standard_fd(proc);
-	ft_putendl(proc->cmd);
 	heredoc_write(fd[1], delim, ult);
+	if (!proc)
+		return (clean_exit_heredoc(fd, &delim));
 	if (close(fd[1]) == -1)
 	{
 		ft_putendl_fd("close error", 2);
@@ -110,6 +115,5 @@ t_process		*heredoc(t_process *proc, t_ult *ult)
 	proc->fd[0] = fd[0];
 	ft_strdel(&delim);
 	proc = cmd_epur_heredoc(proc);
-	ft_putendl(proc->cmd);
 	return (proc);
 }

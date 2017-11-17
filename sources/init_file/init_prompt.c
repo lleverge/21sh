@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:20:35 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/10 14:37:39 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/15 20:31:41 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 t_prompt		*stock_prompt(t_prompt *prompt, int i)
 {
-	static t_prompt *tmp;
+	static t_prompt *tmp = NULL;
 
-	tmp = NULL;
 	if (i == 0)
 		tmp = prompt;
 	return (tmp);

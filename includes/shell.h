@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/13 16:12:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:19:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct			s_ult
 **init_ult.c
 */
 t_ult					*init_ult(t_ult *ult, char **environ);
+t_ult					*stock_ult(t_ult *ult, int i);
 
 /*
 **init_env.c
@@ -121,6 +122,7 @@ t_job					*create_job_node(char *cmd, char *cmdnosp);
 t_process				*process_list(t_process *proc, char *cmd);
 void					proc_pushb(t_process **head, t_process *new);
 t_process				*create_proc_node(t_process *proc, char *cmd);
+t_process				*stock_proc(t_process *proc, int i);
 
 /*
 **init_hist.c
@@ -181,6 +183,7 @@ t_process				*append_redirect(t_process *proc);
 t_process				*redirect_input(t_process *proc);
 t_process				*standard_fd(t_process *proc);
 t_process				*heredoc(t_process *proc, t_ult *ult);
+t_process				*clean_exit_heredoc(int fd[2], char **delim);
 char					*termcaps_heredoc(t_ult *ult);
 void					heredoc_write(int fd, char *delim, t_ult *ult);
 t_process				*cmd_epur_heredoc(t_process *proc);
@@ -227,7 +230,14 @@ void					ft_env_error(char *file);
 int						env_manage_error(char *cmd);
 
 /*
+**heredoc_signal.c
+*/
+void					sig_handler_heredoc(int sig);
+int						*singleton_signal();
+
+/*
 **pipe.c
 */
 t_process				*prep_pipe(t_process *new, char *str, int i);
+
 #endif

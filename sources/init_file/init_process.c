@@ -6,11 +6,20 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:18:14 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/13 16:13:33 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/15 20:32:12 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+t_process			*stock_proc(t_process *proc, int i)
+{
+	static t_process *tmp = NULL;
+
+	if (i == 0)
+		tmp = proc;
+	return (tmp);
+}
 
 void				proc_pushb(t_process **head, t_process *new)
 {

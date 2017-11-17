@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/13 13:11:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/17 13:01:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void			prompt_print(t_prompt *prompt, int show_cursor)
 	size_t	j;
 
 	i = 0;
-	!prompt->heredoc ? reset_prompt(prompt) : reset_prompt_heredoc(prompt);
+	!prompt->heredoc ? reset_prompt(prompt) : reset_prompt_heredoc(prompt, 1);
 	j = 3;
 	while (prompt->cmd[i])
 	{
