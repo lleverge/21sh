@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/17 17:19:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/18 16:55:53 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,11 @@ char					**list_in_tab(t_env *env);
 */
 void					ft_env_error(char *file);
 int						env_manage_error(char *cmd);
+
+/*
+**signal.c
+*/
+void					main_signal_handler(void);
 
 /*
 **heredoc_signal.c

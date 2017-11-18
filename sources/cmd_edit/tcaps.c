@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/17 13:01:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/18 17:20:46 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ void			termcap(t_ult *ult)
 
 	prompt = init_prompt();
 	stock_prompt(prompt, 0);
+	stock_ult(ult, 0);
+	main_signal_handler();
 	prompt_print(prompt, 1);
 	while ((ret = read(0, buffer, 4)) != -1)
 	{

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:30:11 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/17 17:27:39 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/18 17:00:46 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,17 @@ int				*singleton_signal(void)
 void			sig_handler_heredoc(int sig)
 {
 	int			*magic_int;
-	t_ult		ult;
 	t_prompt	*prompt;
 
 	magic_int = 0;
-	ult = NULL;
 	prompt = NULL;
-	ult = stock_ult(ult, 1);
 	prompt = stock_prompt(prompt, 1);
 	if (sig == SIGINT)
 	{
-		magic_int = Singleton_signal();
+		magic_int = singleton_signal();
 		*magic_int -= 1;
 		reset_prompt_heredoc(prompt, 0);
-		ft_putchar('\n');
-		prompt_print(prompt, 0);
+		prompt_print(prompt, 1);
 		tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 		tputs(tgetstr("ce", NULL), 1, ft_putchar_int);
 	}
