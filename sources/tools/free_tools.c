@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 17:06:20 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/23 18:47:51 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,18 @@ void		free_env(t_env **head)
 void		free_tab(char **tabl)
 {
 	int		i;
+	char	**tmp;
 
 	i = 0;
-	while (tabl[i] != 0)
+	tmp = tabl;
+	while (*tabl)
 	{
-		ft_strdel(&tabl[i]);
-		i++;
+		ft_strdel(tabl);
+		tabl++;
 	}
+	tabl = tmp;
 	free(tabl);
-	tab = NULL;
+	tabl = NULL;
 }
 
 void		free_process_one(t_process *proc)
