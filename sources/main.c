@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/23 20:21:45 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/24 17:14:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,6 @@ int				init_all(char **environ)
 	ult = NULL;
 	job_li = NULL;
 	ult = init_ult(ult, environ);
-	hash_init();
-	exit (0);
 	while (42)
 	{
 		i = 0;

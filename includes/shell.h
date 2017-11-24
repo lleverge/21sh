@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/23 19:42:35 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/24 17:21:25 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct			s_ult
 	char				*cmd;
 }						t_ult;
 
-typedef struct 			s_hashelem
+typedef struct			s_hashelem
 {
 	char				*bin_name;
 	char				*full_bin_name;
@@ -205,9 +205,12 @@ int						get_epur_size(char *cmd);
 /*
 **hash_table
 */
-t_list					*hash_init(void);
+t_hashelem				*hash_init(void);
 t_hashelem				*get_all_binwords(char *path_string);
-
+void					hash_push(t_hashelem *newelem, t_hashelem **elemlist);
+char					*hash_search(char *cmd, t_hashelem **table);
+int						hash_it(char *cmd);
+t_hashelem				**table_init(void);
 
 /*
 **fork.c

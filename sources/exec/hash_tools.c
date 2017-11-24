@@ -6,20 +6,20 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 19:16:55 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/23 22:08:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/24 17:28:02 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static t_hashelem	*init_hash_one(char	*binary, char *full_binary)
+static t_hashelem	*init_hash_one(char *binary, char *full_binary)
 {
-	t_hashelem	*dest;
+	t_hashelem		*dest;
 
 	if (!(dest = (t_hashelem *)malloc(sizeof(t_hashelem))))
 	{
 		ft_putendl_fd("21sh : malloc error : abort.", 2);
-		exit (1);
+		exit(1);
 	}
 	dest->bin_name = ft_strdup(binary);
 	dest->full_bin_name = ft_strdup(full_binary);
@@ -27,9 +27,9 @@ static t_hashelem	*init_hash_one(char	*binary, char *full_binary)
 	return (dest);
 }
 
-static void		hash_push(t_hashelem *newelem, t_hashelem **elemlist)
+void				hash_push(t_hashelem *newelem, t_hashelem **elemlist)
 {
-	t_hashelem	*tmp;
+	t_hashelem		*tmp;
 
 	if (!(*elemlist))
 	{
@@ -44,16 +44,16 @@ static void		hash_push(t_hashelem *newelem, t_hashelem **elemlist)
 
 static DIR			*safe_opendir(char *path_string)
 {
-	DIR		*pathdir;
+	DIR				*pathdir;
 
-	if (access(path_string, F_OK) == - 1)
+	if (access(path_string, F_OK) == -1)
 	{
 		ft_putstr_fd("21sh : bin directory ", 2);
 		ft_putstr_fd(path_string, 2);
 		ft_putendl_fd(" doesnt exists", 2);
 		return (NULL);
 	}
-	if (access(path_string, X_OK) == - 1)
+	if (access(path_string, X_OK) == -1)
 	{
 		ft_putstr_fd("21sh : bin directory ", 2);
 		ft_putstr_fd(path_string, 2);
@@ -64,7 +64,7 @@ static DIR			*safe_opendir(char *path_string)
 	if (!(pathdir = opendir(path_string)))
 	{
 		ft_putendl_fd("21sh : malloc error on opendir call, abort.", 2);
-		exit (1);
+		exit(1);
 	}
 	return (pathdir);
 }
@@ -91,12 +91,12 @@ static void			get_bin_words(char *path_string, t_hashelem **hash_list)
 	closedir(pathdir);
 }
 
-t_hashelem 			*get_all_binwords(char *path_string)
+t_hashelem			*get_all_binwords(char *path_string)
 {
-	char		**path_strings;
-	t_hashelem	*bin_words;
-	t_hashelem	*new;
-	char		**tmp;
+	char			**path_strings;
+	t_hashelem		*bin_words;
+	t_hashelem		*new;
+	char			**tmp;
 
 	path_strings = ft_strsplit(path_string, ':');
 	tmp = path_strings;
