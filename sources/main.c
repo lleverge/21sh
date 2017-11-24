@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/24 17:14:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/24 17:39:46 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ int				init_all(char **environ)
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
+		ft_strdel(&ult->cmd);
 		// if (cmd[i])
 		// {
 		// 	if (full_parse_error(cmd) == 0)
