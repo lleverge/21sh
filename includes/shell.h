@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/24 17:21:25 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/28 16:07:25 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct			s_process
 	int					fd[3];
 	pid_t				pid;
 	int					done;
+	t_list				*fd_to_close;
 	struct s_process	*next;
 }						t_process;
 
@@ -191,6 +192,8 @@ t_process				*redirect_input(t_process *proc);
 t_process				*standard_fd(t_process *proc);
 t_process				*heredoc(t_process *proc, t_ult *ult);
 t_process				*clean_exit_heredoc(int fd[2], char **delim);
+t_process				*agreg_output(t_process *proc);
+t_process				*cmd_epur_agreg(t_process *proc);
 char					*termcaps_heredoc(t_ult *ult);
 void					heredoc_write(int fd, char *delim, t_ult *ult);
 t_process				*cmd_epur_heredoc(t_process *proc);
