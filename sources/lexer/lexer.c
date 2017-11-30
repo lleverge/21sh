@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/24 14:17:51 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/26 18:59:15 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,15 @@ t_process						*new_lexer(char *str, t_process *proc_list)
 
 	i = 0;
 	new = NULL;
-	while (str[i])
+	prep_proc(&proc_list, str);
+	while (proc_list)
 	{
+		ft_putstr("maillon cmd: ");
+		ft_putendl(proc_list->cmd);
+		ft_putnbr(proc_list->token_id);
+		proc_list = proc_list->next;
+	}
+/*		
 		if (ft_istoken(str[i]))
 		{
 			new = create_proc_node(new, str);
@@ -129,14 +136,12 @@ t_process						*new_lexer(char *str, t_process *proc_list)
 				return (NULL);
 			else
 				proc_pushb(&proc_list, new);
-		}
-		i++;
-	}
-	if (new == NULL)
-	{
-		new = create_proc_node(new, str);
-		proc_pushb(&proc_list, new);
-	}
+
+
+	new = create_proc_node(new, str);
+	new->token_id = SEPARATOR;
+	new->cmd = last_proc(str);
+	proc_pushb(&proc_list, new);*/
 	return (proc_list);
 }
 

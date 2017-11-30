@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/24 15:56:26 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/10/26 18:54:19 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,4 +226,6 @@ int						env_manage_error(char *cmd);
 **pipe.c
 */
 t_process				*prep_pipe(t_process *new, char *str, int i);
+char					*last_proc(char *cmd);
+void					prep_proc(t_process **proc_li, char *str);
 #endif
