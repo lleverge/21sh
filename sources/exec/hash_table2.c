@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 12:42:28 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/24 17:21:39 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:42:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,5 @@ void			hash_destroy(t_hashelem **table)
 		}
 		index++;
 	}
+	free(table);
 }

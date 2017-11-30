@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:39:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/27 16:47:49 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/30 16:00:13 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,8 @@ void				hash_insert(t_hashelem *elem, t_hashelem **table)
 	int				index;
 
 	index = hash_it(elem->bin_name);
-	elem->next = NULL;
-	hash_push(elem, &table[index]);
+	hash_push(init_hash_one(elem->bin_name, elem->full_bin_name),
+	&table[index]);
 }
 
 t_hashelem			**table_init(void)
@@ -89,10 +89,17 @@ t_hashelem			**table_init(void)
 	}
 	path_list = NULL;
 	path_list = hash_init();
+	tmp = path_list;
+	while (path_list)
+	{
+		hash_insert(path_list, table);
+		path_list = path_list->next;
+	}
+	path_list = tmp;
 	while (path_list)
 	{
 		tmp = path_list->next;
-		hash_insert(path_list, table);
+		hash_destroy_one(path_list);
 		path_list = tmp;
 	}
 	return (table);

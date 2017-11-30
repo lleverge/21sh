@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/28 16:07:25 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:54:04 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,11 +209,13 @@ int						get_epur_size(char *cmd);
 **hash_table
 */
 t_hashelem				*hash_init(void);
+t_hashelem				*init_hash_one(char *binary, char *full_binary);
 t_hashelem				*get_all_binwords(char *path_string);
 void					hash_push(t_hashelem *newelem, t_hashelem **elemlist);
 char					*hash_search(char *cmd, t_hashelem **table);
 int						hash_it(char *cmd);
 t_hashelem				**table_init(void);
+void					hash_destroy_one(t_hashelem *elem);
 
 /*
 **fork.c
