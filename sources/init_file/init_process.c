@@ -3,16 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   init_process.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:18:14 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 14:12:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/28 16:07:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-void					proc_pushb(t_process **head, t_process *new)
+t_process			*stock_proc(t_process *proc, int i)
+{
+	static t_process *tmp = NULL;
+
+	if (i == 0)
+		tmp = proc;
+	return (tmp);
+}
+
+void				proc_pushb(t_process **head, t_process *new)
 {
 	t_process		*tmp;
 
@@ -41,11 +50,12 @@ t_process			*create_proc_node(t_process *proc, char *cmd)
 	proc->fd[2] = -1;
 	proc->pid = -1;
 	proc->done = -1;
+	proc->fd_to_close = NULL;
 	proc->next = NULL;
 	return (proc);
 }
 
-t_process				*process_list(t_process *proc, char *cmd)
+t_process			*process_list(t_process *proc, char *cmd)
 {
 	t_process		*new;
 

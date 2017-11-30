@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:08:42 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/18 19:25:40 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/24 17:35:55 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ t_env				*fill_env(char **environ)
 	env = NULL;
 	while (envi[++i] != 0)
 		env = env_in_list(envi[i], env);
+	free_tab(envi);
 	return (env);
 }

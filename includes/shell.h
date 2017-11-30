@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/26 18:54:19 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:01:15 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct			s_process
 	int					fd[3];
 	pid_t				pid;
 	int					done;
+	t_list				*fd_to_close;
 	struct s_process	*next;
 }						t_process;
 
@@ -89,10 +90,18 @@ typedef struct			s_ult
 	char				*cmd;
 }						t_ult;
 
+typedef struct			s_hashelem
+{
+	char				*bin_name;
+	char				*full_bin_name;
+	struct s_hashelem	*next;
+}						t_hashelem;
+
 /*
 **init_ult.c
 */
 t_ult					*init_ult(t_ult *ult, char **environ);
+t_ult					*stock_ult(t_ult *ult, int i);
 
 /*
 **init_env.c
@@ -121,6 +130,7 @@ t_job					*create_job_node(char *cmd, char *cmdnosp);
 t_process				*process_list(t_process *proc, char *cmd);
 void					proc_pushb(t_process **head, t_process *new);
 t_process				*create_proc_node(t_process *proc, char *cmd);
+t_process				*stock_proc(t_process *proc, int i);
 
 /*
 **init_hist.c
@@ -176,17 +186,34 @@ char					*get_node_content(t_env *env, char *str);
 **redirections
 */
 
-t_process			*simple_redirect(t_process *proc);
-t_process			*append_redirect(t_process *proc);
-t_process			*redirect_input(t_process *proc);
-t_process			*standard_fd(t_process *proc);
-int					check_error_redir(char *sub_cmd, char *error_char);
-void				get_open_err(char *file_name, int access_mode);
-char				*get_word(char *sub_cmd);
-int					which_fd(char *cmd);
-char				*ft_extracter(char *s, char *to_del);
-int					get_start_pos(char *cmd);
-int					get_epur_size(char *cmd);
+t_process				*simple_redirect(t_process *proc);
+t_process				*append_redirect(t_process *proc);
+t_process				*redirect_input(t_process *proc);
+t_process				*standard_fd(t_process *proc);
+t_process				*heredoc(t_process *proc, t_ult *ult);
+t_process				*clean_exit_heredoc(int fd[2], char **delim);
+t_process				*agreg_output(t_process *proc);
+t_process				*cmd_epur_agreg(t_process *proc);
+char					*termcaps_heredoc(t_ult *ult);
+void					heredoc_write(int fd, char *delim, t_ult *ult);
+t_process				*cmd_epur_heredoc(t_process *proc);
+int						check_error_redir(char *sub_cmd, char *error_char);
+void					get_open_err(char *file_name, int access_mode);
+char					*get_word(char *sub_cmd);
+int						which_fd(char *cmd);
+char					*ft_extracter(char *s, char *to_del);
+int						get_start_pos(char *cmd);
+int						get_epur_size(char *cmd);
+
+/*
+**hash_table
+*/
+t_hashelem				*hash_init(void);
+t_hashelem				*get_all_binwords(char *path_string);
+void					hash_push(t_hashelem *newelem, t_hashelem **elemlist);
+char					*hash_search(char *cmd, t_hashelem **table);
+int						hash_it(char *cmd);
+t_hashelem				**table_init(void);
 
 /*
 **fork.c
@@ -223,9 +250,21 @@ void					ft_env_error(char *file);
 int						env_manage_error(char *cmd);
 
 /*
+**signal.c
+*/
+void					main_signal_handler(void);
+
+/*
+**heredoc_signal.c
+*/
+void					sig_handler_heredoc(int sig);
+int						*singleton_signal();
+
+/*
 **pipe.c
 */
 t_process				*prep_pipe(t_process *new, char *str, int i);
 char					*last_proc(char *cmd);
 void					prep_proc(t_process **proc_li, char *str);
+
 #endif

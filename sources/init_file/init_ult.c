@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   init_ult.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/19 14:48:11 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/17 17:20:18 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static char		**get_paths(t_env *env)
+static char			**get_paths(t_env *env)
 {
-	char	**path_tab;
-	char	*path;
+	char			**path_tab;
+	char			*path;
 
 	path_tab = NULL;
 	path = NULL;
@@ -30,9 +30,18 @@ static char		**get_paths(t_env *env)
 	return (NULL);
 }
 
-t_ult			*init_ult(t_ult *ult, char **environ)
+t_ult				*stock_ult(t_ult *ult, int i)
 {
-	t_hist		*hist;
+	static t_ult	*tmp = NULL;
+
+	if (i == 0)
+		tmp = ult;
+	return (tmp);
+}
+
+t_ult				*init_ult(t_ult *ult, char **environ)
+{
+	t_hist			*hist;
 
 	hist = NULL;
 	if (!(ult = (t_ult *)malloc(sizeof(t_ult))))

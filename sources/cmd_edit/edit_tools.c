@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edit_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:59:45 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 13:04:21 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/13 16:13:02 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,13 @@ void			reset(t_prompt *prompt)
 	}
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
-	color(RED, "$> ");
-	color(RESET, "");
+	if (!prompt->heredoc)
+	{
+		color(RED, "$> ");
+		color(RESET, "");
+	}
+	else
+		ft_putstr("> ");
 }
 
 static void		lesslines(t_prompt *prompt, t_ult *ult, size_t i)
@@ -55,8 +60,13 @@ void			reset_prompt2(t_prompt *prompt, t_ult *ult)
 	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	lesslines(prompt, ult, i);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
-	color(RED, "$> ");
-	color(RESET, "");
+	if (prompt->heredoc)
+	{
+		color(RED, "$> ");
+		color(RESET, "");
+	}
+	else
+		ft_putstr("> ");
 }
 
 int				ft_putchar_int(int c)
