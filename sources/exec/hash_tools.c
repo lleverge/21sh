@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 19:16:55 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/24 17:28:02 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/11/30 15:35:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static t_hashelem	*init_hash_one(char *binary, char *full_binary)
+t_hashelem			*init_hash_one(char *binary, char *full_binary)
 {
 	t_hashelem		*dest;
 
