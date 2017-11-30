@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:35:51 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 16:12:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/11/30 18:33:43 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,47 @@
 void			print_backsp(t_prompt *prompt, int show_cursor)
 {
 	int		i;
+	int		cursor_flag;
 	size_t	j;
 
 	i = 0;
 	j = 0;
+	cursor_flag = 0;
 	reset(prompt);
 	prompt->y = 0;
 	while (prompt->cmd[i])
 	{
-		if (j == prompt->win_size - 4 && prompt->y == 0)
+		if ((j == prompt->win_size - 4 && prompt->y == 0) ||
+			(j == prompt->win_size && prompt->y != 0))
 		{
 			prompt->y++;
 			j = 0;
 		}
-		else if (j == prompt->win_size && prompt->y != 0)
+		if (i == prompt->i && show_cursor == 1)
 		{
-			prompt->y++;
-			j = 0;
+			cursor_flag = 1;
+			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
+			ft_putchar(prompt->cmd[i]);
+			tputs(tgetstr("me", NULL), 1, ft_putchar_int);
 		}
-		ft_putchar(prompt->cmd[i]);
+		else
+			ft_putchar(prompt->cmd[i]);
 		i++;
 		j++;
 	}
-	prompt->i = ft_strlen(prompt->cmd);
-	print_cursor(prompt, show_cursor, i);
+	if (cursor_flag == 0)
+		print_cursor(prompt, show_cursor, i);
 }
 
 void			delete(t_prompt *prompt, char *buffer)
 {
 	if (T_DEL && prompt->cmd[prompt->i])
 	{
+		if ((size_t)prompt->i == ft_strlen(prompt->cmd))
+			prompt->i--;
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
 				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
-		prompt_print(prompt, 1);
+		print_backsp(prompt, 1);
 	}
 }
 
@@ -56,7 +64,7 @@ void			backspace(t_prompt *prompt, char *buffer)
 {
 	if (BACK_SPACE && prompt->i > 0)
 	{
-		prompt->i--;
+			prompt->i--;
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
 				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
 		print_backsp(prompt, 1);
