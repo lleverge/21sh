@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/30 19:46:01 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/10 17:15:35 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,5 +268,11 @@ int						*singleton_signal();
 t_process				*prep_pipe(t_process *new, char *str, int i);
 char					*last_proc(char *cmd);
 void					prep_proc(t_process **proc_li, char *str);
+
+/*
+**builtins
+*/
+t_env					*split_to_unset(char *cmd, t_env *envlist);
+t_env					*split_to_set(char *cmd, t_env *envlist);
 
 #endif
