@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/28 20:14:40 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/11 22:45:18 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,10 @@ int				init_all(char **environ)
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
+		ult->ret = search_for_builtins(ult);
+		if (ult->ret == 2)
+			ft_putendl_fd("21sh: builtin not found", 2);
+		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
 		// if (cmd[i])
 		// {
 		// 	if (full_parse_error(cmd) == 0)

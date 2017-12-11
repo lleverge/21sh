@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:48:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/10 14:50:53 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/11 18:33:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		env_push(t_env **envlist, t_env *envnode)
 	tmp->next = envnode;
 }
 
-static t_env	*set_env(t_env *env, char *name, char *value)
+t_env			*set_env(t_env *env, char *name, char *value)
 {
 	t_env		*tmp;
 
@@ -56,25 +56,25 @@ static t_env	*set_env(t_env *env, char *name, char *value)
 	return (env);
 }
 
-t_env			*split_to_set(char *cmd, t_env *envlist)
+t_env			*split_to_set(t_ult *ult)
 {
 	char		**splited_cmd;
 	char		**tmp;
 	char		*tmp_string;
 
 	splited_cmd = NULL;
-	splited_cmd = ft_whitespace(cmd);
+	splited_cmd = ft_whitespace(ult->cmd);
 	tmp = splited_cmd;
 	while (*tmp)
 	{
 		if (ft_strchr(*tmp, '='))
 		{
 			tmp_string = ft_strsub(*tmp, 0, ft_strchr(*tmp, '=') - *tmp);
-			envlist = set_env(envlist, tmp_string, ft_strchr(*tmp, '=') + 1);
+			ult->env = set_env(ult->env, tmp_string, ft_strchr(*tmp, '=') + 1);
 			tmp_string ? ft_strdel(&tmp_string) : NULL;
 		}
 		tmp++;
 	}
 	free_tab(splited_cmd);
-	return (envlist);
+	return (ult->env);
 }

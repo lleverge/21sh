@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:18:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/10 16:27:33 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/11 22:57:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	free_env_one(t_env *env)
 	free(env);
 }
 
-static int	unset_env(char *name, t_env *envlist)
+int			unset_env(char *name, t_env *envlist)
 {
 	t_env	*tmp;
 	t_env	*start;
@@ -43,13 +43,13 @@ static int	unset_env(char *name, t_env *envlist)
 	return (1);
 }
 
-t_env		*split_to_unset(char *cmd, t_env *envlist)
+t_env		*split_to_unset(t_ult *ult)
 {
 	char	**splited_cmd;
 	char	**tmp;
 
 	splited_cmd = NULL;
-	splited_cmd = ft_whitespace(cmd);
+	splited_cmd = ft_whitespace(ult->cmd);
 	tmp = splited_cmd;
 	while (*tmp)
 	{
@@ -60,9 +60,9 @@ t_env		*split_to_unset(char *cmd, t_env *envlist)
 			ft_putendl("': not a valid identifier");
 		}
 		else
-			unset_env(*tmp, envlist);
+			ult->ret = unset_env(*tmp, ult->env);
 		tmp++;
 	}
 	free_tab(splited_cmd);
-	return (envlist);
+	return (ult->env);
 }

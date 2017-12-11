@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/10 17:15:35 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/11 18:35:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -270,9 +270,13 @@ char					*last_proc(char *cmd);
 void					prep_proc(t_process **proc_li, char *str);
 
 /*
-**builtins
+**safe_position_tools.c
 */
-t_env					*split_to_unset(char *cmd, t_env *envlist);
-t_env					*split_to_set(char *cmd, t_env *envlist);
+char					*get_cdir(t_env *env);
+
+/*
+**builtins_selector.c
+*/
+int						search_for_builtins(t_ult *ult);
 
 #endif

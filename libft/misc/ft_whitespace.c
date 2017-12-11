@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 12:06:16 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/06/22 19:14:41 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/11 20:37:06 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int				ft_count_words(char const *s)
 	nb_w = 0;
 	while (s[i] != '\0')
 	{
-		if (s[i] != 32 && s[i] != '\n' && s[i] != '\t')
+		if (s[i] != 32 && s[i] != '\n' && s[i] != '\t' && s[i])
 		{
 			nb_w++;
 			while (s[i] != 32 && s[i] != '\n' && s[i] != '\t' && s[i] != '\0')
@@ -30,7 +30,7 @@ static int				ft_count_words(char const *s)
 		else
 			i++;
 	}
-	return (nb_w + 1);
+	return (nb_w == 0 ? 0 : nb_w + 1);
 }
 
 static int				ft_count_char(char const *s, int i)
@@ -83,8 +83,9 @@ static char				**ft_malloc_tab(char const *s)
 
 	i = 0;
 	j = 0;
-	dest = (char **)malloc(sizeof(char *) * ft_count_words(s));
-	if (dest == NULL)
+	if (!ft_count_words(s))
+		return (NULL);
+	if (!(dest = (char **)malloc(sizeof(char *) * ft_count_words(s))))
 		return (NULL);
 	while (s[i] != '\0')
 	{
