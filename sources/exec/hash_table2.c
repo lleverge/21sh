@@ -64,3 +64,15 @@ void			hash_destroy(t_hashelem **table)
 	}
 	free(table);
 }
+
+void			destroy_path_list(t_hashelem *path_list)
+{
+	t_hashelem	*tmp;
+
+	while (path_list)
+	{
+		tmp = path_list->next;
+		hash_destroy_one(path_list);
+		path_list = tmp;
+	}
+}

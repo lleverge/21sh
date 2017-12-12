@@ -43,6 +43,13 @@ int			unset_env(char *name, t_env *envlist)
 	return (1);
 }
 
+static void	unset_error(char *cmd)
+{
+	ft_putstr_fd("21sh: unset: '", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd("': not a valid identifier", 2);
+}
+
 t_env		*split_to_unset(t_ult *ult)
 {
 	char	**splited_cmd;
@@ -54,13 +61,16 @@ t_env		*split_to_unset(t_ult *ult)
 	while (*tmp)
 	{
 		if (ft_strchr(*tmp, '='))
-		{
-			ft_putstr("21sh: unset: '");
-			ft_putstr(*tmp);
-			ft_putendl("': not a valid identifier");
-		}
+			unset_error(*tmp);
 		else
+		{
 			ult->ret = unset_env(*tmp, ult->env);
+			if (!ft_strncmp("PATH", *tmp, 4))
+			{
+				hash_destroy(ult->hash_table);
+				ult->hash_table = table_init(ult->env);
+			}
+		}
 		tmp++;
 	}
 	free_tab(splited_cmd);

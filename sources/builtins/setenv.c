@@ -72,6 +72,14 @@ t_env			*split_to_set(t_ult *ult)
 			tmp_string = ft_strsub(*tmp, 0, ft_strchr(*tmp, '=') - *tmp);
 			ult->env = set_env(ult->env, tmp_string, ft_strchr(*tmp, '=') + 1);
 			tmp_string ? ft_strdel(&tmp_string) : NULL;
+			if (!ft_strncmp("PATH", *tmp, 4))
+			{
+				ft_putendl("on detruit mongars");
+				while (1)
+					;
+				hash_destroy(ult->hash_table);
+				ult->hash_table = table_init(ult->env);	
+			}
 		}
 		tmp++;
 	}

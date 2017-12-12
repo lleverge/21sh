@@ -46,10 +46,34 @@
 // 	return (0);
 // }
 
+static	void	print_hash(t_hashelem **path_tab)
+{
+	t_hashelem	*tmp_list;
+	int			i = 0;
+
+	ft_putendl("bp");
+	if (!path_tab)
+		return ;
+	while (i < 1021)
+	{
+		tmp_list = path_tab[i];
+		while (tmp_list)
+		{
+			ft_putstr("full bin name is ->");
+			ft_putendl(tmp_list->bin_name);
+			ft_putstr("bin path is ->");
+			ft_putendl(tmp_list->full_bin_name);
+			tmp_list = tmp_list->next;
+		}
+		i++;
+	}
+	ft_putendl("bp 2");
+}
+
 int				init_all(char **environ)
 {
 	t_ult		*ult;
-	// char		**cmd;
+	// char		**cmd = NULL;
 	t_job		*job_li;
 	int			i;
 
@@ -63,9 +87,8 @@ int				init_all(char **environ)
 		termcap(ult);
 		ft_putchar('\n');
 		ult->ret = search_for_builtins(ult);
-		if (ult->ret == 2)
-			ft_putendl_fd("21sh: builtin not found", 2);
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
+		print_hash(ult->hash_table);
 		// if (cmd[i])
 		// {
 		// 	if (full_parse_error(cmd) == 0)

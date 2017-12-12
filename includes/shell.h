@@ -79,23 +79,24 @@ typedef struct			s_hist
 	struct s_hist		*next;
 }						t_hist;
 
-typedef struct			s_ult
-{
-	t_term				*term;
-	t_env				*env;
-	char				**path;
-	t_hist				*hist;
-	int					fd[3];
-	int					ret;
-	char				*cmd;
-}						t_ult;
-
 typedef struct			s_hashelem
 {
 	char				*bin_name;
 	char				*full_bin_name;
 	struct s_hashelem	*next;
 }						t_hashelem;
+
+typedef struct			s_ult
+{
+	t_term				*term;
+	t_env				*env;
+	char				**path;
+	t_hashelem			**hash_table;
+	t_hist				*hist;
+	int					fd[3];
+	int					ret;
+	char				*cmd;
+}						t_ult;
 
 /*
 **init_ult.c
@@ -208,14 +209,16 @@ int						get_epur_size(char *cmd);
 /*
 **hash_table
 */
-t_hashelem				*hash_init(void);
+t_hashelem				*hash_init(t_env *envlist);
 t_hashelem				*init_hash_one(char *binary, char *full_binary);
+void					destroy_path_list(t_hashelem *path_list);
 t_hashelem				*get_all_binwords(char *path_string);
 void					hash_push(t_hashelem *newelem, t_hashelem **elemlist);
 char					*hash_search(char *cmd, t_hashelem **table);
 int						hash_it(char *cmd);
-t_hashelem				**table_init(void);
+t_hashelem				**table_init(t_env *envlist);
 void					hash_destroy_one(t_hashelem *elem);
+void					hash_destroy(t_hashelem **table);
 
 /*
 **fork.c

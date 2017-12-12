@@ -30,40 +30,16 @@ int					hash_it(char *cmd)
 	return (hash % 1021);
 }
 
-static char			*alt_path_string(void)
-{
-	int				fd;
-	char			*line;
-	char			*dest;
-
-	if ((fd = open("/etc/paths", O_RDONLY)) == -1)
-		return (NULL);
-	dest = strgen(1);
-	line = NULL;
-	while (get_next_line(fd, &line) != 0)
-	{
-		line = ft_strjoin_free_one(&line, ":");
-		dest = ft_strjoin_free(&dest, &line);
-	}
-	close(fd);
-	return (dest);
-}
-
-t_hashelem			*hash_init(void)
+t_hashelem			*hash_init(t_env *envlist)
 {
 	char			*path_string;
 	t_hashelem		*dest;
 
 	path_string = NULL;
-	path_string = getenv("PATH");
-	if (!path_string)
-		path_string = alt_path_string();
-	if (!path_string)
-	{
-		ft_putendl_fd("21sh : open /etc/paths error , abort", 2);
-		exit(1);
-	}
+	if (!(path_string = get_node_content(envlist, "PATH")))
+		return (NULL);
 	dest = get_all_binwords(path_string);
+	ft_strdel(&path_string);
 	return (dest);
 }
 
@@ -76,7 +52,7 @@ void				hash_insert(t_hashelem *elem, t_hashelem **table)
 	&table[index]);
 }
 
-t_hashelem			**table_init(void)
+t_hashelem			**table_init(t_env *envlist)
 {
 	t_hashelem **table;
 	t_hashelem *tmp;
@@ -88,7 +64,11 @@ t_hashelem			**table_init(void)
 		exit(1);
 	}
 	path_list = NULL;
-	path_list = hash_init();
+	if (!(path_list = hash_init(envlist)))
+	{
+		free(table);
+		return (NULL);
+	}
 	tmp = path_list;
 	while (path_list)
 	{
@@ -96,11 +76,6 @@ t_hashelem			**table_init(void)
 		path_list = path_list->next;
 	}
 	path_list = tmp;
-	while (path_list)
-	{
-		tmp = path_list->next;
-		hash_destroy_one(path_list);
-		path_list = tmp;
-	}
+	destroy_path_list(path_list);
 	return (table);
 }

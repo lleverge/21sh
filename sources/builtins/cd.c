@@ -18,7 +18,7 @@ static int		go_home(t_env *env)
 	char		*home;
 	char		*old;
 
-	if (!(home = get_data(env, "HOME")))
+	if (!(home = get_node_content(env, "HOME")))
 	{
 		ft_putendl_fd("cd: HOME isnt defined", 2);
 		return (1);
@@ -37,6 +37,7 @@ static int		go_home(t_env *env)
 	unset_env("PWD", env);
 	set_env(env, "PWD", home);
 	ft_strdel(&old);
+	ft_strdel(&home);
 	return (0);
 }
 
@@ -94,7 +95,7 @@ static int		prev_dir(t_env *env)
 	char		*tmp;
 
 	tmp = get_cdir(env);
-	if (!(old = get_data(env, "OLDPWD")))
+	if (!(old = get_node_content(env, "OLDPWD")))
 	{
 		ft_putendl_fd("cd: OLDPWD not set", 2);
 		tmp ? ft_strdel(&tmp) : NULL;
@@ -113,6 +114,7 @@ static int		prev_dir(t_env *env)
 		unset_env("PWD", env);
 		set_env(env, "PWD", old);
 	}
+	ft_strdel(&old);
 	return (0);
 }
 

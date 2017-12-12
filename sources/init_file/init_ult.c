@@ -53,6 +53,7 @@ t_ult				*init_ult(t_ult *ult, char **environ)
 	ult->term = init_term();
 	ult->path = get_paths(ult->env);
 	ult->hist = init_hist(hist);
+	ult->hash_table = table_init(ult->env);
 	ult->fd[0] = 0;
 	ult->fd[1] = 1;
 	ult->fd[2] = 2;
