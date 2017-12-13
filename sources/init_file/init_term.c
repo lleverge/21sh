@@ -51,7 +51,7 @@ void		init_term2(t_term *termi)
 {
 	termi->termios.c_lflag &= ~(ICANON);
 	termi->termios.c_lflag &= ~(ECHO);
-	termi->termios.c_cc[VMIN] = 0;
+	termi->termios.c_cc[VMIN] = 1;
 	termi->termios.c_cc[VTIME] = 1;
 	if (tcsetattr(termi->fd, TCSANOW, &(termi->termios)) == -1)
 		ft_putendl_fd("error: tcsetattr", 2);
