@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/08 13:13:02 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/14 17:44:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,8 @@ void			prompt_print(t_prompt *prompt, int show_cursor)
 
 void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 {
-	if (prompt->i < 2500)
-	{
-		charac(prompt, buffer);
-		space(prompt, buffer);
-	}
+	charac(prompt, buffer);
+	space(prompt, buffer);
 	down_line(prompt, buffer);
 	up_line(prompt, buffer);
 	backspace(prompt, buffer);
@@ -96,7 +93,7 @@ void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 	next_word(prompt, buffer);
 	end(prompt, buffer);
 	cut(prompt, buffer, prompt->i);
-	paste(prompt, buffer, prompt->i);
+	paste(prompt, buffer);
 	copy(prompt, buffer, prompt->i);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:10:54 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 17:54:59 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/14 19:17:25 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,12 @@ static char		*cpy_at(char *src1, char *src2, int i)
 	char	*tmp2;
 	char	*res;
 
-	if (src1 && src2)
+	if (ft_strcmp(src1, "") == 0)
+	{
+		tmp = ft_strdup(src2);
+		return (tmp);
+	}
+	else if (src1 && src2)
 	{
 		tmp = ft_strsub(src1, 0, i);
 		tmp2 = ft_strjoin(tmp, src2);
@@ -30,7 +35,9 @@ static char		*cpy_at(char *src1, char *src2, int i)
 		return (res);
 	}
 	else
+	{
 		return (NULL);
+	}
 }
 
 void			copy(t_prompt *prompt, char *buffer, int i)
@@ -66,15 +73,27 @@ void			cut(t_prompt *prompt, char *buffer, int i)
 	}
 }
 
-void			paste(t_prompt *prompt, char *buffer, int i)
+void			paste(t_prompt *prompt, char *buffer)
 {
 	char	*tmp;
+	int		itmp;
+	size_t		j;
+	size_t		k;
 
+	j = 3;
+	k = 0;
 	if (T_PAS && prompt->copy_str)
 	{
-		tmp = cpy_at(prompt->cmd, prompt->copy_str, i);
-		ft_bzero(prompt->cmd, 2000);
-		ft_memcpy(prompt->cmd, tmp, ft_strlen(tmp));
+		itmp = prompt->i;
+		tmp = cpy_at(prompt->cmd, prompt->copy_str, prompt->i);
+		prompt->i += ft_strlen(prompt->copy_str);
+		if (prompt->i <= 2000)
+		{
+			ft_bzero(prompt->cmd, 2000);
+			ft_memcpy(prompt->cmd, tmp, ft_strlen(tmp));
+		}
+		else
+			prompt->i = itmp;
 		ft_strdel(&tmp);
 		print_backsp(prompt, 1);
 	}

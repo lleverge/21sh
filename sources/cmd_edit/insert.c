@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:35:51 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/30 18:33:43 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/14 14:56:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void			backspace(t_prompt *prompt, char *buffer)
 
 void			space(t_prompt *prompt, char *buffer)
 {
-	if (WHITE_SP)
+	if (WHITE_SP && prompt->i < 1999)
 	{
 		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
 				ft_strlen(prompt->cmd + prompt->i) + 1);
@@ -85,7 +85,7 @@ void			space(t_prompt *prompt, char *buffer)
 
 void			charac(t_prompt *prompt, char *buffer)
 {
-	if (CHAR)
+	if (CHAR && prompt->i < 1999)
 	{
 		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
 				ft_strlen(prompt->cmd + prompt->i) + 1);

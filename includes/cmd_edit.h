@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/17 17:17:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/14 17:41:22 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void				right(t_prompt *prompt, char *buffer);
 **cut.c
 */
 void				cut(t_prompt *prompt, char *buffer, int i);
-void				paste(t_prompt *prompt, char *buffer, int i);
+void				paste(t_prompt *prompt, char *buffer);
 void				copy(t_prompt *prompt, char *buffer, int i);
 
 /*
