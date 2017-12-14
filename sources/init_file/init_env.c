@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:08:42 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/24 17:35:55 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/15 00:09:00 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ t_env				*env_in_list(char *envar, t_env *start)
 	t_env	*voyager;
 
 	tmp = (t_env *)malloc(sizeof(t_env));
+	tmp->next = NULL;
 	voyager = start;
 	tmp->name = getvarname(envar);
 	tmp->content = getvarcontent(envar);
