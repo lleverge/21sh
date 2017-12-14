@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/26 18:59:15 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:22:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,104 +69,24 @@ char					*ft_strnosp(char *str)
 	return (nosp);
 }
 
-int								check_linker(t_job **job_li, char *cmd, int i)
-{
-	int		j;
-	t_job	*new;
-	char	*subcmd;
-
-	j = i;
-	new = NULL;
-	while (cmd[j])
-	{
-		if (cmd[j] == '&' && cmd[j + 1] && cmd[j + 1] == '&')
-		{
-			subcmd = ft_strsub(cmd, i, j - i);
-			new = create_job_node(subcmd, ft_strnosp(subcmd));
-			new->linker = AND;
-			job_pushb(job_li, new);
-			return (j + 2);
-		}
-		else if (cmd[j] == '|' && cmd[j + 1] && cmd[j + 1] == '|')
-		{
-			subcmd = ft_strsub(cmd, i, j - i);
-			new = create_job_node(subcmd, ft_strnosp(subcmd));
-			new->linker = OR;
-			job_pushb(job_li, new);
-			return (j + 2);
-		}
-		else
-			j++;
-	}
-	subcmd = ft_strsub(cmd, i, j - i);
-	new = create_job_node(subcmd, ft_strnosp(subcmd));
-	new->linker = SEPARATOR;
-	job_pushb(job_li, new);
-	return (j);
-}
-
-t_process						*new_lexer(char *str, t_process *proc_list)
-{
-	int				i;
-	t_process		*new;
-
-	i = 0;
-	new = NULL;
-	prep_proc(&proc_list, str);
-	while (proc_list)
-	{
-		ft_putstr("maillon cmd: ");
-		ft_putendl(proc_list->cmd);
-		ft_putnbr(proc_list->token_id);
-		proc_list = proc_list->next;
-	}
-/*		
-		if (ft_istoken(str[i]))
-		{
-			new = create_proc_node(new, str);
-			if (ft_istoken(str[i]) == 1)
-				new = check_less(str, i, new);
-			else if (ft_istoken(str[i]) == 2)
-				new = check_great(str, i, new);
-			else if (ft_istoken(str[i]) == 3)
-				new = check_pipe(str, i, new);
-			else if (ft_istoken(str[i]) == 4)
-				new = check_and(str, i, new);
-			if (new == NULL)
-				return (NULL);
-			else
-				proc_pushb(&proc_list, new);
-
-
-	new = create_proc_node(new, str);
-	new->token_id = SEPARATOR;
-	new->cmd = last_proc(str);
-	proc_pushb(&proc_list, new);*/
-	return (proc_list);
-}
-
-int								start_prog(char *cmd, t_job **job_li)
+int								start_prog(t_ult *ult, char **cmd)
 {
 	int		i;
+	t_job	*job_li;
+	t_job	*new;
+	char	*str;
 
 	i = 0;
+	job_li = NULL;
+	str = "/bin/";
 	while (cmd[i])
-		i = check_linker(job_li, cmd, i);
-	while (*job_li)
 	{
-		ft_putendl("Maillon job:");
-		ft_putendl((*job_li)->cmd);
-		(*job_li)->proc = new_lexer((*job_li)->cmd, (*job_li)->proc);
-		while ((*job_li)->proc)
-		{
-			ft_putendl("Maillon proc:");
-			ft_putendl((*job_li)->proc->cmd);
-			ft_putstr("token_id = ");
-			ft_putnbr((*job_li)->proc->token_id);
-			ft_putchar('\n');
-			(*job_li)->proc = (*job_li)->proc->next;
-		}
-		*job_li = (*job_li)->next;
+		new = create_job_node(cmd[i]);
+		job_pushb(&job_li, new);
+		append_redirect(job_li->proc);
+		exe_fork(ult->env, ft_strsplit_ws(job_li->proc->cmd), &str);
+		i++;
 	}
+	destroy_job_list(job_li);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 14:15:09 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/21 17:28:57 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/13 16:15:16 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 int				ft_istoken(char c)
 {
-	if (c == '<')
-		return (1);
-	else if (c == '>')
-		return (2);
-	else if (c == '|')
+	if (c == '|')
 		return (3);
 	else if (c == '&')
 		return (4);

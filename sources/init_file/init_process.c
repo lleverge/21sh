@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:18:14 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/28 16:07:52 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/13 20:15:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void				proc_pushb(t_process **head, t_process *new)
 	}
 }
 
-t_process			*create_proc_node(t_process *proc, char *cmd)
+t_process			*create_proc_node(char *cmd)
 {
+	t_process	*proc;
+
 	if (!(proc = (t_process *)malloc(sizeof(t_process))))
 	{
 		ft_putendl_fd("error: process struct malloc failed", 2);
@@ -52,16 +54,5 @@ t_process			*create_proc_node(t_process *proc, char *cmd)
 	proc->done = -1;
 	proc->fd_to_close = NULL;
 	proc->next = NULL;
-	return (proc);
-}
-
-t_process			*process_list(t_process *proc, char *cmd)
-{
-	t_process		*new;
-
-	new = NULL;
-	new = create_proc_node(new, cmd);
-	if (new)
-		proc_pushb(&proc, new);
 	return (proc);
 }

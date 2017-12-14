@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/11 18:35:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/13 22:27:28 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ typedef struct			s_process
 typedef struct			s_job
 {
 	char				*cmd;
-	char				*cmdnosp;
 	int					linker;
 	pid_t				pgid;
 	t_process			*proc;
@@ -121,16 +120,16 @@ t_term					*init_term(void);
 /*
 **init_job.c
 */
-t_job					*job_list(t_job *job, char *cmd, char *cmdnosp);
+t_job					*job_list(t_job *job, char *cmd);
 void					job_pushb(t_job **head, t_job *new);
-t_job					*create_job_node(char *cmd, char *cmdnosp);
+t_job					*create_job_node(char *cmd);
 
 /*
 **init_process.c
 */
 t_process				*process_list(t_process *proc, char *cmd);
 void					proc_pushb(t_process **head, t_process *new);
-t_process				*create_proc_node(t_process *proc, char *cmd);
+t_process				*create_proc_node(char *cmd);
 t_process				*stock_proc(t_process *proc, int i);
 
 /*
@@ -268,9 +267,6 @@ int						*singleton_signal();
 /*
 **pipe.c
 */
-t_process				*prep_pipe(t_process *new, char *str, int i);
-char					*last_proc(char *cmd);
-void					prep_proc(t_process **proc_li, char *str);
 
 /*
 **safe_position_tools.c
@@ -281,5 +277,13 @@ char					*get_cdir(t_env *env);
 **builtins_selector.c
 */
 int						search_for_builtins(t_ult *ult);
+
+/*
+**free_procjob.c
+*/
+void					destroy_proc_one(t_process *proc);
+void					destroy_proc_list(t_process *proc_list);
+void					destroy_job_one(t_job *job);
+void					destroy_job_list(t_job *job_list);
 
 #endif

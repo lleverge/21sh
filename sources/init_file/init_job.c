@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:46:25 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/23 16:30:11 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/13 21:53:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void				job_pushb(t_job **head, t_job *new)
 {
 	t_job		*tmp;
 
-	if (!*head)
+	if (!(*head))
 		*head = new;
 	else
 	{
@@ -27,7 +27,7 @@ void				job_pushb(t_job **head, t_job *new)
 	}
 }
 
-t_job				*create_job_node(char *cmd, char *cmdnosp)
+t_job				*create_job_node(char *cmd)
 {
 	t_job		*job;
 
@@ -37,20 +37,9 @@ t_job				*create_job_node(char *cmd, char *cmdnosp)
 		exit(-1);
 	}
 	job->cmd = ft_strdup(cmd);
-	job->cmdnosp = ft_strdup(cmdnosp);
 	job->linker = 0;
 	job->pgid = 0;
-	job->proc = NULL;
+	job->proc = create_proc_node(cmd);
 	job->next = NULL;
-	return (job);
-}
-
-t_job				*job_list(t_job *job, char *cmd, char *cmdnosp)
-{
-	t_job		*new;
-
-	new = create_job_node(cmd, cmdnosp);
-	if (new)
-		job_pushb(&job, new);
 	return (job);
 }

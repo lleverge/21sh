@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/11 22:45:18 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/14 13:18:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,42 @@
 #include <cmd_edit.h>
 
 
-// static int		parse_error(char *cmd)
-// {
-// 	int		i;
+ static int		parse_error(char *cmd)
+ {
+ 	int		i;
 
-// 	i = 0;
-// 	while (ft_isspace(cmd[i]))
-// 		i++;
-// 	if (ft_istoken(cmd[i]) > 0)
-// 	{
-// 		ft_putstr_fd("21sh: parse error near ", 2);
-// 		ft_putchar_fd(cmd[i], 2);
-// 		ft_putchar_fd('\n', 2);
-// 		return (-1);
-// 	}
-// 	return (0);
-// }
+ 	i = 0;
+ 	while (ft_isspace(cmd[i]))
+ 		i++;
+ 	if (ft_istoken(cmd[i]) > 0)
+ 	{
+ 		ft_putstr_fd("21sh: parse error near ", 2);
+ 		ft_putchar_fd(cmd[i], 2);
+ 		ft_putchar_fd('\n', 2);
+ 		return (-1);
+ 	}
+ 	return (0);
+ }
 
-// static int		full_parse_error(char **cmd)
-// {
-// 	int		i;
+ static int		full_parse_error(char **cmd)
+ {
+ 	int		i;
 
-// 	i = 0;
-// 	while (cmd[i])
-// 	{
-// 		if (parse_error(cmd[i]) == -1)
-// 			return (-1);
-// 		i++;
-// 	}
-// 	return (0);
-// }
+ 	i = 0;
+ 	while (cmd[i])
+ 	{
+ 		if (parse_error(cmd[i]) == -1)
+ 			return (-1);
+ 		i++;
+ 	}
+ 	return (0);
+ }
 
-static	void	print_hash(t_hashelem **path_tab)
+/*static	void	print_hash(t_hashelem **path_tab)
 {
 	t_hashelem	*tmp_list;
 	int			i = 0;
 
-	ft_putendl("bp");
 	if (!path_tab)
 		return ;
 	while (i < 1021)
@@ -63,22 +62,20 @@ static	void	print_hash(t_hashelem **path_tab)
 			ft_putendl(tmp_list->bin_name);
 			ft_putstr("bin path is ->");
 			ft_putendl(tmp_list->full_bin_name);
-			tmp_list = tmp_list->next;
+	tmp_list = tmp_list->next;
 		}
 		i++;
 	}
 	ft_putendl("bp 2");
-}
+	}*/
 
 int				init_all(char **environ)
 {
 	t_ult		*ult;
-	// char		**cmd = NULL;
-	t_job		*job_li;
+	char		**cmd;
 	int			i;
 
 	ult = NULL;
-	job_li = NULL;
 	ult = init_ult(ult, environ);
 	while (42)
 	{
@@ -86,20 +83,15 @@ int				init_all(char **environ)
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
-		ult->ret = search_for_builtins(ult);
+		cmd = ft_strsplit_tok(ult->cmd);
+		/*ult->ret = search_for_builtins(ult);
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
-		print_hash(ult->hash_table);
-		// if (cmd[i])
-		// {
-		// 	if (full_parse_error(cmd) == 0)
-		// 	{
-		// 		while (cmd[i])
-		// 		{
-		// 			start_prog(cmd[i], &job_li);
-		// 			i++;
-		// 		}
-		// 	}
-		// }
+		print_hash(ult->hash_table);*/
+		 if (cmd[i])
+		 {
+		 	if (full_parse_error(cmd) == 0)
+				start_prog(ult, cmd);
+		 }
 	}
 	return (0);
 }
