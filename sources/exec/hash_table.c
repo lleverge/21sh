@@ -48,8 +48,7 @@ void				hash_insert(t_hashelem *elem, t_hashelem **table)
 	int				index;
 
 	index = hash_it(elem->bin_name);
-	hash_push(init_hash_one(elem->bin_name, elem->full_bin_name),
-	&table[index]);
+	hash_push(init_hash_one(elem->bin_name, elem->full_bin_name), &table[index]);
 }
 
 t_hashelem			**table_init(t_env *envlist)

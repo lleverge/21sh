@@ -67,8 +67,8 @@ t_env		*split_to_unset(t_ult *ult)
 			ult->ret = unset_env(*tmp, ult->env);
 			if (!ft_strncmp("PATH", *tmp, 4))
 			{
-				hash_destroy(ult->hash_table);
-				ult->hash_table = table_init(ult->env);
+				ult->hash_table ? hash_destroy(ult->hash_table) : NULL;
+				ult->hash_table = NULL;
 			}
 		}
 		tmp++;

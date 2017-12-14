@@ -48,16 +48,16 @@ static DIR			*safe_opendir(char *path_string)
 
 	if (access(path_string, F_OK) == -1)
 	{
-		ft_putstr_fd("21sh : bin directory ", 2);
+		ft_putstr_fd("21sh : warning: bin directory ", 2);
 		ft_putstr_fd(path_string, 2);
-		ft_putendl_fd(" doesnt exists", 2);
+		ft_putendl_fd(" doesnt exists and will not be added to hash_table", 2);
 		return (NULL);
 	}
 	if (access(path_string, X_OK) == -1)
 	{
 		ft_putstr_fd("21sh : bin directory ", 2);
 		ft_putstr_fd(path_string, 2);
-		ft_putendl_fd("21sh : bin directory ", 2);
+		ft_putendl_fd("Permission denied, will not be added to hash_table", 2);
 		return (NULL);
 	}
 	pathdir = NULL;

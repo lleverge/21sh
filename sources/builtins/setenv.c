@@ -39,7 +39,7 @@ t_env			*set_env(t_env *env, char *name, char *value)
 		if (!ft_strcmp(name, tmp->name))
 		{
 			tmp->content ? ft_strdel(&tmp->content) : NULL;
-			tmp->content = value;
+			tmp->content = ft_strdup(value);
 			return (env);
 		}
 		tmp = tmp->next;
@@ -74,11 +74,8 @@ t_env			*split_to_set(t_ult *ult)
 			tmp_string ? ft_strdel(&tmp_string) : NULL;
 			if (!ft_strncmp("PATH", *tmp, 4))
 			{
-				ft_putendl("on detruit mongars");
-				while (1)
-					;
 				hash_destroy(ult->hash_table);
-				ult->hash_table = table_init(ult->env);	
+				ult->hash_table = table_init(ult->env);
 			}
 		}
 		tmp++;

@@ -50,19 +50,22 @@ void			hash_destroy(t_hashelem **table)
 
 	tmp = table;
 	index = 0;
-	while (index < 1020)
+	if (!table)
+		return ;
+	while (index < 1021)
 	{
 		if (table[index])
 		{
-			while ((tmp2 = table[index]->next))
+			while (table[index])
 			{
+				tmp2 = table[index]->next;
 				hash_destroy_one(table[index]);
 				table[index] = tmp2;
 			}
 		}
 		index++;
 	}
-	free(table);
+	table ? free(table) : NULL;
 }
 
 void			destroy_path_list(t_hashelem *path_list)

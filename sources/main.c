@@ -15,64 +15,61 @@
 #include <cmd_edit.h>
 
 
- static int		parse_error(char *cmd)
- {
- 	int		i;
+ // static int		parse_error(char *cmd)
+ // {
+ // 	int		i;
 
- 	i = 0;
- 	while (ft_isspace(cmd[i]))
- 		i++;
- 	if (ft_istoken(cmd[i]) > 0)
- 	{
- 		ft_putstr_fd("21sh: parse error near ", 2);
- 		ft_putchar_fd(cmd[i], 2);
- 		ft_putchar_fd('\n', 2);
- 		return (-1);
- 	}
- 	return (0);
- }
+ // 	i = 0;
+ // 	while (ft_isspace(cmd[i]))
+ // 		i++;
+ // 	if (ft_istoken(cmd[i]) > 0)
+ // 	{
+ // 		ft_putstr_fd("21sh: parse error near ", 2);
+ // 		ft_putchar_fd(cmd[i], 2);
+ // 		ft_putchar_fd('\n', 2);
+ // 		return (-1);
+ // 	}
+ // 	return (0);
+ // }
 
- static int		full_parse_error(char **cmd)
- {
- 	int		i;
+ // static int		full_parse_error(char **cmd)
+ // {
+ // 	int		i;
 
- 	i = 0;
- 	while (cmd[i])
- 	{
- 		if (parse_error(cmd[i]) == -1)
- 			return (-1);
- 		i++;
- 	}
- 	return (0);
- }
+ // 	i = 0;
+ // 	while (cmd[i])
+ // 	{
+ // 		if (parse_error(cmd[i]) == -1)
+ // 			return (-1);
+ // 		i++;
+ // 	}
+ // 	return (0);
+ // }
 
-/*static	void	print_hash(t_hashelem **path_tab)
+static	void	print_hash(t_hashelem **path_tab)
 {
 	t_hashelem	*tmp_list;
 	int			i = 0;
 
 	if (!path_tab)
 		return ;
+	ft_putendl("bP");
 	while (i < 1021)
 	{
 		tmp_list = path_tab[i];
 		while (tmp_list)
 		{
-			ft_putstr("full bin name is ->");
 			ft_putendl(tmp_list->bin_name);
-			ft_putstr("bin path is ->");
-			ft_putendl(tmp_list->full_bin_name);
-	tmp_list = tmp_list->next;
+			tmp_list = tmp_list->next;
 		}
 		i++;
 	}
-	ft_putendl("bp 2");
-	}*/
+}
 
 int				init_all(char **environ)
 {
 	t_ult		*ult;
-	char		**cmd;
+	// char		**cmd;
 	int			i;
 
 	ult = NULL;
@@ -83,15 +80,22 @@ int				init_all(char **environ)
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
-		cmd = ft_strsplit_tok(ult->cmd);
-		/*ult->ret = search_for_builtins(ult);
+		// cmd = ft_strsplit_tok(ult->cmd);
+		if (ult->cmd)
+		{
+			ult->ret = search_for_builtins(ult);
+			if (!ft_strcmp(ult->cmd, "hash"))
+			{
+				ft_putendl("hash_print");
+				print_hash(ult->hash_table);
+			}
+		}
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
-		print_hash(ult->hash_table);*/
-		 if (cmd[i])
-		 {
-		 	if (full_parse_error(cmd) == 0)
-				start_prog(ult, cmd);
-		 }
+		 // if (cmd[i])
+		 // {
+		 // 	if (full_parse_error(cmd) == 0)
+			// 	start_prog(ult, cmd);
+		 // }
 	}
 	return (0);
 }
