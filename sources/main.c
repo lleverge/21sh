@@ -49,10 +49,12 @@
 static	void	print_hash(t_hashelem **path_tab)
 {
 	t_hashelem	*tmp_list;
-	int			i = 0;
+	int			i;
 
+	i = 0;
 	if (!path_tab)
 		return ;
+	tmp_list = NULL;
 	while (i < 1021)
 	{
 		tmp_list = path_tab[i];
@@ -83,11 +85,8 @@ int				init_all(char **environ)
 		if (ult->cmd)
 		{
 			ult->ret = search_for_builtins(ult);
-			if (!ft_strcmp(ult->cmd, "hash"))
-			{
-				ft_putendl("hash_print");
+			if (!ft_strcmp(ult->cmd, "hash") && ult->hash_table)
 				print_hash(ult->hash_table);
-			}
 		}
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
 		// ft_putendl("BP2");

@@ -62,6 +62,7 @@ t_hashelem			**table_init(t_env *envlist)
 		ft_putendl_fd("21sh : malloc erroc on hash table init, abort.", 2);
 		exit(1);
 	}
+	ft_bzero(table, sizeof(t_hashelem *) * 1021);
 	path_list = NULL;
 	if (!(path_list = hash_init(envlist)))
 	{
