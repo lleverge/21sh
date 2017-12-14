@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/14 13:18:04 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/14 21:01:44 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,9 @@
 static	void	print_hash(t_hashelem **path_tab)
 {
 	t_hashelem	*tmp_list;
-	int			i = 0;
+	int			i;
 
+	i = 0;
 	if (!path_tab)
 		return ;
 	while (i < 1021)
