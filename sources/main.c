@@ -53,7 +53,6 @@ static	void	print_hash(t_hashelem **path_tab)
 
 	if (!path_tab)
 		return ;
-	ft_putendl("bP");
 	while (i < 1021)
 	{
 		tmp_list = path_tab[i];
@@ -91,6 +90,8 @@ int				init_all(char **environ)
 			}
 		}
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
+		// ft_putendl("BP2");
+		// if (ult->cmd)	
 		 // if (cmd[i])
 		 // {
 		 // 	if (full_parse_error(cmd) == 0)
