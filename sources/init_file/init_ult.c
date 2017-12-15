@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include <shell.h>
+#include <builtins.h>
 
 static char			**get_paths(t_env *env)
 {
@@ -39,6 +40,29 @@ t_ult				*stock_ult(t_ult *ult, int i)
 	return (tmp);
 }
 
+static t_env				*incr_shlvl(t_env *envlist)
+{
+	char	*tmp;
+	int		shlvl;
+
+	tmp = NULL;
+	shlvl = 1;
+	if (!(tmp = get_node_content(envlist, "SHLVL")))
+	{
+		tmp = ft_itoa(shlvl);
+		envlist = set_env(envlist, "SHLVL", tmp);
+		ft_strdel(&tmp);
+		return (envlist);
+	}
+	shlvl = ft_atoi(tmp);
+	shlvl++;
+	ft_strdel(&tmp);
+	tmp = ft_itoa(shlvl);
+	envlist = set_env(envlist, "SHLVL", tmp);
+	ft_strdel(&tmp);
+	return (envlist);
+}
+
 t_ult				*init_ult(t_ult *ult, char **environ)
 {
 	t_hist			*hist;
@@ -52,6 +76,7 @@ t_ult				*init_ult(t_ult *ult, char **environ)
 	ult->env = fill_env(environ);
 	ult->term = init_term();
 	ult->path = get_paths(ult->env);
+	ult->env = incr_shlvl(ult->env);
 	ult->hist = init_hist(hist);
 	ult->hash_table = table_init(ult->env);
 	ult->cmd = NULL; 

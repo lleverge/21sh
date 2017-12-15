@@ -70,8 +70,11 @@ t_term		*init_term(void)
 	if ((termi->fd = open(ttyname(0), O_RDWR)) == -1)
 		ft_putendl_fd("error: tyyname", 2);
 	ft_strdel(&name);
-	if (tgetent(NULL, getenv("TERMI")) < 1)
-		ft_putendl_fd("error: tgetent", 2);
+	if (tgetent(NULL, getenv("TERM")) < 1)
+	{
+		ft_putendl_fd("error: tgetent, termios struct not set, abort.", 2);
+		exit(1);
+	}
 	if (tcgetattr(termi->fd, &(termi->termios)) == -1)
 		ft_putendl_fd("error: tcgetattr", 2);
 	init_term2(termi);
