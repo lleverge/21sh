@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/15 15:12:43 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/21 20:25:54 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,5 +285,10 @@ void					destroy_proc_one(t_process *proc);
 void					destroy_proc_list(t_process *proc_list);
 void					destroy_job_one(t_job *job);
 void					destroy_job_list(t_job *job_list);
+
+/*
+**main_redirection.c
+*/
+t_process 				*main_redirection_checker(t_process *proc, t_ult *ult);
 
 #endif

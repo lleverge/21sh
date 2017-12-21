@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:47:19 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/17 12:50:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/21 19:44:34 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ t_term		*init_term(void)
 	if (tcgetattr(termi->fd, &(termi->termios)) == -1)
 		ft_putendl_fd("error: tcgetattr", 2);
 	init_term2(termi);
+	close(termi->fd);
 	return (termi);
 }
