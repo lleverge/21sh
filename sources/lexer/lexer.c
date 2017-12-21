@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/14 13:22:04 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/15 16:53:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,15 @@ int								start_prog(t_ult *ult, char **cmd)
 	int		i;
 	t_job	*job_li;
 	t_job	*new;
-	char	*str;
 
 	i = 0;
 	job_li = NULL;
-	str = "/bin/";
 	while (cmd[i])
 	{
 		new = create_job_node(cmd[i]);
 		job_pushb(&job_li, new);
-		append_redirect(job_li->proc);
-		exe_fork(ult->env, ft_strsplit_ws(job_li->proc->cmd), &str);
+//		append_redirect(job_li->proc);
+		exe_fork(ult->env, job_li->proc, ult->hash_table);
 		i++;
 	}
 	destroy_job_list(job_li);

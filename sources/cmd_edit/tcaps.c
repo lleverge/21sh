@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/14 17:44:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/15 16:55:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,11 +106,11 @@ void			termcap(t_ult *ult)
 	prompt = init_prompt();
 	stock_prompt(prompt, 0);
 	stock_ult(ult, 0);
-	main_signal_handler();
 	prompt_print(prompt, 1);
 	while ((ret = read(0, buffer, 4)) != -1)
 	{
 		prompt_shell(prompt, buffer, ult);
+		main_signal_handler();
 		if (buffer[0] == 4 && !prompt->cmd[0])
 			exit_eof(ult->term, prompt);
 		if (buffer[0] == 10 && buffer[1] == 0)

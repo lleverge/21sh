@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/14 13:23:06 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/15 17:01:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,31 +84,26 @@ int				exe_fork2(char **cmd, char **path_tab)
 	return (0);
 }
 
-int				exe_fork(t_env *env, char **cmd, char **path_tab)
+int				exe_fork(t_env *env, t_process *proc, t_hashelem **table)
 {
 	pid_t	pid;
 	char	*cmd_path;
 	char	**env_cpy;
+	char	**cmd_tab;
 
-	if ((cmd_path = search_path(path_tab, cmd)) == NULL)
-	{
-		fork_error(cmd, path_tab);
-		return (-1);
-	}
+	cmd_tab = ft_strsplit_ws(proc->cmd);
+	cmd_path = hash_search(cmd_tab[0], table);
 	env_cpy = list_in_tab(env);
-	pid = fork();
-	if (pid > 0)
-		wait(0);
-	else if (pid == 0)
+	if ((pid = fork()) == 0)
 	{
-		signal(SIGINT, SIG_DFL);
-		if (cmd[0][ft_strlen(cmd[0])] != '/')
-			cmd_path = ft_strjoin(cmd_path, "/");
-		cmd_path = ft_strjoin(cmd_path, ft_getbin_name(cmd[0]));
-		execve(cmd_path, cmd, env_cpy);
+		if (execve(cmd_path, cmd_tab, env_cpy) < 0)
+		{
+			ft_putstr_fd("42sh: command not found: ", 2);
+			ft_putendl_fd(cmd_tab[0], 2);
+			exit(127);
+		}
 	}
+	wait(0);
 	free_tab(env_cpy);
-	ft_strdel(&cmd_path);
-	free_tab(path_tab);
 	return (0);
 }

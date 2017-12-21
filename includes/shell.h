@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/13 22:27:28 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/15 15:12:43 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,7 +224,7 @@ void					hash_destroy(t_hashelem **table);
 */
 char					**path_in_tab(t_env *env, char **cmd);
 int						exe_fork2(char **cmd, char **path_tab);
-int						exe_fork(t_env *env, char **cmd, char **path_tab);
+int						exe_fork(t_env *env, t_process *proc, t_hashelem **table);
 
 /*
 **fork2.c
