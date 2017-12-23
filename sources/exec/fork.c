@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/23 18:17:51 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/23 21:05:13 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int				exe_fork(t_env *env, t_process *proc, t_hashelem **table)
 	char	**cmd_tab;
 
 	cmd_tab = ft_strsplit_ws(proc->cmd);
-	cmd_path = hash_search(cmd_tab[0], table);
+	if (!(cmd_path = hash_search(cmd_tab[0], table)))
 	env_cpy = list_in_tab(env);
 	if ((pid = fork()) == 0)
 	{

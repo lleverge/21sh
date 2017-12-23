@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/23 16:55:16 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/23 22:15:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,7 @@ void					hash_destroy(t_hashelem **table);
 char					**path_in_tab(t_env *env, char **cmd);
 int						exe_fork2(char **cmd, char **path_tab);
 int						exe_fork(t_env *env, t_process *proc, t_hashelem **table);
+int						is_path(char *cmd);
 
 /*
 **fork2.c
@@ -243,6 +244,7 @@ void					close_fd_exec(t_process *proc);
 **tools2.c
 */
 int						list_size(t_env *env);
+int						is_path(char *cmd);
 
 /*
 **tools3.c
@@ -283,6 +285,7 @@ char					*get_cdir(t_env *env);
 **builtins_selector.c
 */
 int						search_for_builtins(t_ult *ult);
+int						check_for_builtin(char *cmd);
 
 /*
 **free_procjob.c

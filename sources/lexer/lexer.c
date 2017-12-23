@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/23 16:51:33 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/23 22:22:11 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,17 +74,29 @@ int								start_prog(t_ult *ult, char **cmd)
 	int		i;
 	t_job	*job_li;
 	t_job	*new;
+	char	**cmd_tab;
 
 	i = 0;
 	job_li = NULL;
+	cmd_tab = ft_strsplit_ws(cmd[0]);
 	while (cmd[i])
 	{
 		new = create_job_node(cmd[i]);
 		job_pushb(&job_li, new);
 		job_li->proc = main_redirection_checker(job_li->proc, ult);
-		exe_fork(ult->env, job_li->proc, ult->hash_table);
 		i++;
 	}
+	if (!check_for_builtin(cmd_tab[0]))
+	{
+		if (hash_search(cmd[0], ult->hash_table))
+			exe_fork(ult->env, job_li->proc, ult->hash_table);
+/*
+  insert path parser here
+		else
+			is_path(cmd_tab[0]);
+*/
+	}
+	free_tab(cmd_tab);
 	destroy_job_list(job_li);
 	return (0);
 }
