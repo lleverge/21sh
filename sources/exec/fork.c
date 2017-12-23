@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/23 15:13:40 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/23 16:55:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int				exe_fork(t_env *env, t_process *proc, t_hashelem **table)
 		}
 	}
 	wait(0);
+	close_fd_exec(proc);
 	free_tab(env_cpy);
 	free_tab(cmd_tab);
 	return (0);
