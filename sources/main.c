@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/28 18:41:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/14 21:01:44 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/23 16:42:48 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,31 @@ static	void	print_hash(t_hashelem **path_tab)
 	}
 }
 
+void		print_proc(t_process *proc)
+{
+	if (!proc)
+		return ;
+	ft_putstr("proc cmd is : ");
+	ft_putendl(proc->cmd);
+	ft_putstr("proc fd 0 is : ");
+	ft_putnbrendl(proc->fd[0]);	
+	ft_putstr("proc fd 1 is : ");
+	ft_putnbrendl(proc->fd[1]);	
+	ft_putstr("proc fd 2 is : ");
+	ft_putnbrendl(proc->fd[2]);
+	while (proc->fd_to_close)
+	{
+		ft_putstr("we will close fd -> ");
+		ft_putnbrendl(*((int *)(proc->fd_to_close->content)));
+		proc->fd_to_close = proc->fd_to_close->next;
+	}
+}
+
 int				init_all(char **environ)
 {
 	t_ult		*ult;
 	// char		**cmd;
+	t_process	*proc;
 	int			i;
 
 	ult = NULL;
@@ -88,6 +109,11 @@ int				init_all(char **environ)
 			if (!ft_strcmp(ult->cmd, "hash") && ult->hash_table)
 				print_hash(ult->hash_table);
 		}
+		ult->cmd ? proc = create_proc_node(ult->cmd) : NULL;
+		proc ? proc = main_redirection_checker(proc, ult) : NULL;
+		// proc ? print_proc(proc) : NULL;
+		exe_fork(ult->env, proc, ult->hash_table);
+		proc ? free_process_one(proc) : NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
 		// ft_putendl("BP2");
 		// if (ult->cmd)	
