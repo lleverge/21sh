@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/15 16:55:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/23 18:13:52 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void			prompt_print(t_prompt *prompt, int show_cursor)
 
 void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 {
+	main_auto(buffer, prompt);
 	charac(prompt, buffer);
 	space(prompt, buffer);
 	down_line(prompt, buffer);

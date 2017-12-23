@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/15 16:53:20 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/23 16:51:33 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int								start_prog(t_ult *ult, char **cmd)
 	{
 		new = create_job_node(cmd[i]);
 		job_pushb(&job_li, new);
-//		append_redirect(job_li->proc);
+		job_li->proc = main_redirection_checker(job_li->proc, ult);
 		exe_fork(ult->env, job_li->proc, ult->hash_table);
 		i++;
 	}

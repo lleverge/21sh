@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/14 17:41:22 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/23 18:13:34 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,11 @@ void				end(t_prompt *prompt, char *buffer);
 */
 void				down_line(t_prompt *prompt, char *buffer);
 void				up_line(t_prompt *prompt, char *buffer);
+
+/*
+**main_auto.c
+*/
+void				main_auto(char *buffer, t_prompt *prompt);
 
 /*
 **free_tools.c
