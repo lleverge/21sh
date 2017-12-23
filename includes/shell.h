@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/21 20:25:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/23 15:12:53 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,11 @@ int						exe_fork(t_env *env, t_process *proc, t_hashelem **table);
 void					fork_error(char **cmd, char **path_tab);
 char					*search_path2(char *tmp2, char *tmp, char **path_tab,
 							int i);
+
+/*
+**manage_fd.c
+*/
+int						set_fd_exec(t_process *proc);
 
 /*
 **tools2.c

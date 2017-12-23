@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/21 19:40:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/23 13:07:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ t_process 	*main_redirection_checker(t_process *proc, t_ult *ult)
 	if (!proc)
 		return (NULL);
 	if (redir_detector_int(proc))
-		proc = main_redirection_checker(proc, ult);		
+		proc = main_redirection_checker(proc, ult);
+	proc = standard_fd(proc);
 	return (proc);
 }

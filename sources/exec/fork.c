@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fork.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/15 17:01:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/23 15:13:40 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int				exe_fork(t_env *env, t_process *proc, t_hashelem **table)
 	env_cpy = list_in_tab(env);
 	if ((pid = fork()) == 0)
 	{
+		if (set_fd_exec(proc) == -1)
+			exit(-1);
 		if (execve(cmd_path, cmd_tab, env_cpy) < 0)
 		{
 			ft_putstr_fd("42sh: command not found: ", 2);
@@ -105,5 +107,6 @@ int				exe_fork(t_env *env, t_process *proc, t_hashelem **table)
 	}
 	wait(0);
 	free_tab(env_cpy);
+	free_tab(cmd_tab);
 	return (0);
 }
