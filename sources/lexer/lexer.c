@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/23 22:22:11 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/24 12:27:47 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,11 +90,11 @@ int								start_prog(t_ult *ult, char **cmd)
 	{
 		if (hash_search(cmd[0], ult->hash_table))
 			exe_fork(ult->env, job_li->proc, ult->hash_table);
-/*
-  insert path parser here
-		else
-			is_path(cmd_tab[0]);
-*/
+		else if (ft_strchr(cmd[0], '/'))
+		{
+			if (!path_access_checker(cmd[0]))
+				exe_fork(ult->env, job_li->proc, ult->hash_table);
+		}
 	}
 	free_tab(cmd_tab);
 	destroy_job_list(job_li);

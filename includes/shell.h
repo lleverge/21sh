@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/23 22:15:04 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/24 12:30:01 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ void					close_fd_exec(t_process *proc);
 **tools2.c
 */
 int						list_size(t_env *env);
-int						is_path(char *cmd);
+int						path_access_checker(char *cmd_path);
 
 /*
 **tools3.c
@@ -299,5 +299,6 @@ void					destroy_job_list(t_job *job_list);
 **main_redirection.c
 */
 t_process 				*main_redirection_checker(t_process *proc, t_ult *ult);
+
 
 #endif
