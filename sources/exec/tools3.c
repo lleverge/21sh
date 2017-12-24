@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 12:01:29 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/25 14:29:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/24 13:31:44 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ char	**list_in_tab(t_env *env)
 	while (env)
 	{
 		tmp = ft_strjoin(env->name, "=");
-		str = ft_strjoin(tmp, env->content);
+		str = ft_strjoin_free_one(&tmp, env->content);
 		ft_strdel(&tmp);
 		envir[i] = str;
 		i++;

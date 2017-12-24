@@ -6,37 +6,64 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/23 21:05:13 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/24 14:52:00 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "shell.h"
 #include "lexer.h"
 
-int				exe_fork(t_env *env, t_process *proc, t_hashelem **table)
+int				exe_fork2(t_env *env, t_process *proc, char *cmd_path)
 {
 	pid_t	pid;
-	char	*cmd_path;
 	char	**env_cpy;
 	char	**cmd_tab;
+	int		status;
 
 	cmd_tab = ft_strsplit_ws(proc->cmd);
-	if (!(cmd_path = hash_search(cmd_tab[0], table)))
 	env_cpy = list_in_tab(env);
+	status = 0;
 	if ((pid = fork()) == 0)
 	{
 		if (set_fd_exec(proc) == -1)
 			exit(-1);
-		if (execve(cmd_path, cmd_tab, env_cpy) < 0)
+		if (execve(cmd_path ,cmd_tab, env_cpy) < 0)
 		{
-			ft_putstr_fd("42sh: command not found: ", 2);
-			ft_putendl_fd(cmd_tab[0], 2);
+			ft_putstr_fd("21sh: execve error", 2);
 			exit(127);
 		}
 	}
-	wait(0);
+	wait(&status);
 	close_fd_exec(proc);
 	free_tab(env_cpy);
 	free_tab(cmd_tab);
-	return (0);
+	return (status);
+}
+
+int				exe_fork(t_env *env, t_process *proc, t_ult *ult)
+{
+	pid_t	pid;
+	char	**env_cpy;
+	char	**cmd_tab;
+	int		status;
+
+	cmd_tab = ft_strsplit_ws(proc->cmd);
+	env_cpy = list_in_tab(env);
+	status = 0;
+	if ((pid = fork()) == 0)
+	{
+		if (set_fd_exec(proc) == -1)
+			exit(-1);
+		if (execve(hash_search(*cmd_tab, ult->hash_table),
+			cmd_tab, env_cpy) < 0)
+		{
+			ft_putstr_fd("21sh: execve error", 2);
+			exit(127);
+		}
+	}
+	wait(&status);
+	close_fd_exec(proc);
+	free_tab(env_cpy);
+	free_tab(cmd_tab);
+	return (status);
 }

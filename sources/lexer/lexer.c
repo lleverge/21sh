@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/24 12:27:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/24 15:01:46 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,27 @@ char					*ft_strnosp(char *str)
 	return (nosp);
 }
 
-int								start_prog(t_ult *ult, char **cmd)
+int					seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
+{
+
+	char	**cmd_tab2;
+
+	cmd_tab2 = cmd_tab;
+	if (check_for_builtin(*cmd_tab))
+		return (search_for_builtins(ult));
+	if (hash_search(*cmd_tab, ult->hash_table))
+		return (exe_fork(ult->env, job->proc, ult));
+	if (ft_strchr(*cmd_tab, '/') && !path_access_checker(*cmd_tab))
+		return (exe_fork2(ult->env, job->proc, *cmd_tab));
+	if (!ft_strchr(*cmd_tab, '/'))
+	{
+		ft_putstr_fd("21sh : command not found: ", 2);
+		ft_putendl_fd(*cmd_tab, 2);
+	}
+	return (127);
+}
+
+int					start_prog(t_ult *ult, char **cmd)
 {
 	int		i;
 	t_job	*job_li;
@@ -86,16 +106,7 @@ int								start_prog(t_ult *ult, char **cmd)
 		job_li->proc = main_redirection_checker(job_li->proc, ult);
 		i++;
 	}
-	if (!check_for_builtin(cmd_tab[0]))
-	{
-		if (hash_search(cmd[0], ult->hash_table))
-			exe_fork(ult->env, job_li->proc, ult->hash_table);
-		else if (ft_strchr(cmd[0], '/'))
-		{
-			if (!path_access_checker(cmd[0]))
-				exe_fork(ult->env, job_li->proc, ult->hash_table);
-		}
-	}
+	ult->ret = seek_and_exec(ult, job_li, cmd_tab);
 	free_tab(cmd_tab);
 	destroy_job_list(job_li);
 	return (0);
