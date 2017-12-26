@@ -66,8 +66,10 @@ int				init_all(char **environ)
 		// 		print_hash(ult->hash_table);
 		// }
 		if (ult->cmd)
+		{
 			if (cmd[i])
 				start_prog(ult, cmd);
+		}
 		ft_strdel(&ult->cmd);
 		free_tab(cmd);
 	}

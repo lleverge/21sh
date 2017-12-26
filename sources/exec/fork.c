@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/24 14:52:00 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/26 16:18:51 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "shell.h"
-#include "lexer.h"
+#include <shell.h>
+#include <lexer.h>
 
 int				exe_fork2(t_env *env, t_process *proc, char *cmd_path)
 {
@@ -52,6 +52,7 @@ int				exe_fork(t_env *env, t_process *proc, t_ult *ult)
 	status = 0;
 	if ((pid = fork()) == 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		if (set_fd_exec(proc) == -1)
 			exit(-1);
 		if (execve(hash_search(*cmd_tab, ult->hash_table),

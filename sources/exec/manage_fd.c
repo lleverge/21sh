@@ -6,11 +6,27 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 14:12:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/23 18:09:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/26 10:00:03 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+void	restore_fd(int fd[3])
+{
+	if (dup2(fd[0], 0) == -1)
+		ft_putendl_fd("21sh: error while restoring standard input", 2);
+	if (dup2(fd[1], 1) == -1)
+		ft_putendl_fd("21sh: error while restoring standard output", 2);
+	if (dup2(fd[2], 2) == -1)
+		ft_putendl_fd("21sh: error while restoring standard error output", 2);
+	if (close(fd[0]) == -1)
+		ft_putendl_fd("21sh: error while closing saved standard intput", 2);
+	if (close(fd[1]) == -1)
+		ft_putendl_fd("21sh: error while closing saved standard output", 2);
+	if (close(fd[2]) == -1)
+		ft_putendl_fd("21sh: error while closing saved err output", 2);
+}
 
 void	check_close(t_process *proc, int i)
 {

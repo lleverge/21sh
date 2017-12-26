@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/24 15:01:46 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/26 14:20:48 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,22 @@ char					*ft_strnosp(char *str)
 	return (nosp);
 }
 
+static int			builtin_launch(t_ult *ult, t_process *proc)
+{
+	int fd[3];
+	int ret;
+
+	fd[0] = dup(ult->fd[0]);
+	fd[1] = dup(ult->fd[1]);
+	fd[2] = dup(ult->fd[2]);
+	if (set_fd_exec(proc) == -1)
+		return (1);
+	ret = search_for_builtins(ult, proc);
+	close_fd_exec(proc);
+	restore_fd(fd);
+	return (ret);
+}
+
 int					seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 {
 
@@ -76,7 +92,7 @@ int					seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 
 	cmd_tab2 = cmd_tab;
 	if (check_for_builtin(*cmd_tab))
-		return (search_for_builtins(ult));
+		return (builtin_launch(ult, job->proc));
 	if (hash_search(*cmd_tab, ult->hash_table))
 		return (exe_fork(ult->env, job->proc, ult));
 	if (ft_strchr(*cmd_tab, '/') && !path_access_checker(*cmd_tab))
