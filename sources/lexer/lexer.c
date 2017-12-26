@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/24 15:01:46 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/26 14:05:55 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ char					*ft_strnosp(char *str)
 
 int					seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 {
-
 	char	**cmd_tab2;
 
 	cmd_tab2 = cmd_tab;

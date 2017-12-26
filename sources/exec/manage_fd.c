@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 14:12:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/23 18:09:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/26 14:08:10 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	check_close(t_process *proc, int i)
 {
-	int fd;
-	t_list *tmp;
-	int fd_closed;
+	int		fd;
+	t_list	*tmp;
+	int		fd_closed;
 
 	tmp = proc->fd_to_close;
 	fd = proc->fd[i];
