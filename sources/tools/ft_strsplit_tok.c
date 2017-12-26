@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit_tok.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 14:15:09 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/13 16:15:16 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/26 14:13:00 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ int				ft_istoken(char c)
 {
 	if (c == '|')
 		return (3);
-	else if (c == '&')
-		return (4);
+	// else if (c == '&')
+	// 	return (4);
 	else
 		return (0);
 }

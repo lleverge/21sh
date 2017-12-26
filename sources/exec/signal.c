@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/18 19:27:28 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/26 16:18:37 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	intsig_handler(int signal)
 		prompt->win_size = win.ws_col;
 	}
 	prompt_print(prompt, 0);
-	ft_strclr(prompt->cmd);
+	reset_prompt(prompt);
+	ft_strdel(&ult->cmd);
 	prompt->i = 0;
 }
 

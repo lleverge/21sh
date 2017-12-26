@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/24 14:51:52 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/26 15:51:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ t_env					*fill_env(char **environ);
 */
 void					init_term2(t_term *termi);
 t_term					*init_term(void);
+int						reset_term(t_term *termi);
+
 
 /*
 **init_job.c
@@ -239,6 +241,8 @@ char					*search_path2(char *tmp2, char *tmp, char **path_tab,
 */
 int						set_fd_exec(t_process *proc);
 void					close_fd_exec(t_process *proc);
+int						*save_fd_exec(t_ult *ult);
+void					restore_fd(int fd[3]);
 
 /*
 **tools2.c
@@ -284,7 +288,7 @@ char					*get_cdir(t_env *env);
 /*
 **builtins_selector.c
 */
-int						search_for_builtins(t_ult *ult);
+int						search_for_builtins(t_ult *ult, t_process *proc);
 int						check_for_builtin(char *cmd);
 
 /*
