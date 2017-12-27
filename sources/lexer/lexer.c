@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/26 16:22:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2017/12/27 10:15:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int					seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 	if (hash_search(*cmd_tab, ult->hash_table))
 		return (exe_fork(ult->env, job->proc, ult));
 	if (ft_strchr(*cmd_tab, '/') && !path_access_checker(*cmd_tab))
-		return (exe_fork2(ult->env, job->proc, *cmd_tab));
+		return (exe_fork2(ult->env, job->proc, *cmd_tab, ult));
 	if (!ft_strchr(*cmd_tab, '/'))
 	{
 		ft_putstr_fd("21sh : command not found: ", 2);

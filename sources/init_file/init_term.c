@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:47:19 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/21 19:44:34 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/27 12:45:54 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void		exit_eof(t_term *termi, t_prompt *prompt)
 	prompt_print(prompt, 0);
 	reset_term(termi);
 	free_prompt(&prompt);
+	ft_putchar('\n');
 	exit(0);
 }
 
@@ -24,10 +25,16 @@ int			reset_term(t_term *termi)
 {
 	tputs(tgetstr("ve", NULL), 1, ft_putchar_int);
 	if (tcgetattr(0, &(termi->termios)) == -1)
+	{
+		ft_putendl_fd("tcgetattr in reset term failed", 2);
 		return (-1);
+	}
 	termi->termios.c_lflag |= (ICANON | ECHO);
 	if (tcsetattr(0, 0, &(termi->termios)) == -1)
+	{
+		ft_putendl_fd("tcsetattr in reset term failed", 2);
 		return (-1);
+	}
 	return (0);
 }
 

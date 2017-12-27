@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/26 16:18:37 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/27 14:14:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,10 @@
 #include <lexer.h>
 #include <cmd_edit.h>
 
-void	intsig_handler(int signal)
+void	intsig_handler(t_ult *ult, t_prompt *prompt)
 {
-	t_ult			*ult;
-	t_prompt		*prompt;
 	struct winsize	win;
 
-	(void)signal;
-	ult = NULL;
-	prompt = NULL;
-	ult = stock_ult(ult, 1);
-	prompt = stock_prompt(prompt, 1);
 	if (prompt->win_size == 0)
 	{
 		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
@@ -37,12 +30,27 @@ void	intsig_handler(int signal)
 	prompt->i = 0;
 }
 
+void	signal_dispatch(int signal)
+{
+	t_ult			*ult;
+	t_prompt		*prompt;
+
+	ult = NULL;
+	prompt = NULL;
+	ult = stock_ult(ult, 1);
+	prompt = stock_prompt(prompt, 1);
+	if (signal == SIGINT)
+		intsig_handler(ult, prompt);
+	// else if (signal == SIGCHLD)
+	// 	sigchild_handler();
+}
+
 void	main_signal_handler(void)
 {
 	struct sigaction	action;
 
 	ft_bzero(&action, sizeof(action));
-	action.sa_handler = &intsig_handler;
+	action.sa_handler = &signal_dispatch;
 	if (sigaction(SIGINT, &action, NULL) == -1)
 		ft_putendl_fd("21sh : sigaction error", 2);
 }
