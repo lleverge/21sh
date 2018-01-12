@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/27 10:15:51 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/12 19:00:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,12 @@ typedef struct			s_hist
 	struct s_hist		*prev;
 	struct s_hist		*next;
 }						t_hist;
+
+typedef struct			s_quote
+{
+	int					quotes[2];
+	struct s_quote		*next;
+}						t_quote;
 
 typedef struct			s_hashelem
 {
@@ -206,6 +212,16 @@ int						which_fd(char *cmd);
 char					*ft_extracter(char *s, char *to_del);
 int						get_start_pos(char *cmd);
 int						get_epur_size(char *cmd);
+int						is_simple_redir(char *cmd);
+int						is_quoted(char *cmd, int index);
+t_quote 				*quoted_list_init_one(char *sub_cmd, char *cmd);
+t_quote 				*quote_list_init(char *cmd);
+
+
+/*
+**quote_list_initc.c
+*/
+
 
 /*
 **hash_table

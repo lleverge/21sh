@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/27 14:14:52 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/12 19:02:10 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void	signal_dispatch(int signal)
 	prompt = stock_prompt(prompt, 1);
 	if (signal == SIGINT)
 		intsig_handler(ult, prompt);
-	// else if (signal == SIGCHLD)
-	// 	sigchild_handler();
 }
 
 void	main_signal_handler(void)

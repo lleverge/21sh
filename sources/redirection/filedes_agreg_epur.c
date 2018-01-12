@@ -6,18 +6,30 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:03:12 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/27 18:24:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2017/12/27 16:17:59 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+// static int			get_real_start_pos(char *cmd)
+// {
+// 	int i;
+
+// 	i = 0;
+// 	while (cmd[i + 1])
+// 	{
+// 		if ()
+// 	}
+// }
 
 int					get_start_pos_agreg(char *cmd)
 {
 	int		start;
 
 	start = 0;
-	while (cmd[start] != '>')
+	while (cmd[start] && cmd[start + 1 ] && cmd[start] != '>' && cmd[start + 1]
+	!= '&')
 		start++;
 	if (start >= 1 && ft_isdigit(cmd[start - 1]))
 	{
@@ -38,7 +50,8 @@ int					get_epur_size_agreg(char *cmd)
 	to_epur = 0;
 	start = get_start_pos_agreg(cmd);
 	tmp = &cmd[start];
-	while (tmp[to_epur] && tmp[to_epur] != '>')
+	while (tmp[to_epur] && tmp[to_epur +1] && tmp[to_epur] != '>'
+		&& tmp[to_epur + 1] != '&')
 		to_epur++;
 	if (tmp[to_epur + 1])
 		to_epur++;

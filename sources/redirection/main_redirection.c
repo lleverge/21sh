@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/26 14:16:39 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/12 18:59:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ static int is_only_number(char *sub_cmd)
 	}
 	if (*sub_cmd && ft_isbadtoken(*sub_cmd))
 	{
-		ft_putendl("nope");
 		return (-1);
 	}
 	return (0);
@@ -76,7 +75,7 @@ static int redir_detector_int(t_process *proc)
 		return (3);
 	if (ft_strstr(proc->cmd, "<") && check_deeper(proc->cmd, "<") != - 1)
 		return (4);
-	if (ft_strstr(proc->cmd, ">") && check_deeper(proc->cmd, ">") != - 1)
+	if (is_simple_redir(proc->cmd))
 		return (5);
 	return (0);
 }
@@ -97,6 +96,14 @@ t_process 	*main_redirection_checker(t_process *proc, t_ult *ult)
 	}
 	if (!proc)
 		return (NULL);
+	// ft_putstr("proc cmd is -> ");
+	// ft_putendl(proc->cmd);
+	// ft_putstr("proc fd 0 is: ");
+	// ft_putnbrendl(proc->fd[0]);
+	// ft_putstr("proc fd 1 is: ");
+	// ft_putnbrendl(proc->fd[1]);
+	// ft_putstr("proc fd 2 is: ");
+	// ft_putnbrendl(proc->fd[2]);
 	if (redir_detector_int(proc))
 		proc = main_redirection_checker(proc, ult);
 	proc = standard_fd(proc);
