@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/12 19:00:09 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/12 21:25:13 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,9 +213,13 @@ char					*ft_extracter(char *s, char *to_del);
 int						get_start_pos(char *cmd);
 int						get_epur_size(char *cmd);
 int						is_simple_redir(char *cmd);
-int						is_quoted(char *cmd, int index);
+int						is_redir_append(char *cmd);
+int						is_fildes_agreg(char *cmd);
+int						is_input_redir(char *cmd);
+int						is_heredoc(char *cmd);
 t_quote 				*quoted_list_init_one(char *sub_cmd, char *cmd);
 t_quote 				*quote_list_init(char *cmd);
+int						is_quoted(char *cmd, int index);
 
 
 /*

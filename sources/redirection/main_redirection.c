@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/12 18:59:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/12 21:23:54 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,30 +52,30 @@ static int	check_deeper(char *cmd, char *to_check)
 
 static t_process	*redir_detector(t_process *proc, t_ult *ult)
 {
-	if (ft_strstr(proc->cmd, ">>") && check_deeper(proc->cmd, ">>") != - 1)
+	if (is_redir_append(proc->cmd) && check_deeper(proc->cmd, ">>") != - 1)
 		return (append_redirect(proc));
-	if (ft_strstr(proc->cmd, "<<") && check_deeper(proc->cmd, "<<") != - 1)
+	if (is_heredoc(proc->cmd) && check_deeper(proc->cmd, "<<") != - 1)
 		return (heredoc(proc, ult));
-	if (ft_strstr(proc->cmd, ">&") && check_deeper(proc->cmd, ">&") != - 1)
+	if (is_fildes_agreg(proc->cmd) && check_deeper(proc->cmd, ">&") != - 1)
 		return (agreg_output(proc));
-	if (ft_strstr(proc->cmd, "<") && check_deeper(proc->cmd, "<") != - 1)
+	if (is_input_redir(proc->cmd) && check_deeper(proc->cmd, "<") != - 1)
 		return (redirect_input(proc));
-	if (ft_strstr(proc->cmd, ">") && check_deeper(proc->cmd, ">") != - 1)
+	if (is_simple_redir(proc->cmd) && check_deeper(proc->cmd, ">") != - 1)	
 		return (simple_redirect(proc));
 	return (proc);
 }
 
 static int redir_detector_int(t_process *proc)
 {
-	if (ft_strstr(proc->cmd, ">>") && check_deeper(proc->cmd, ">>") != - 1)
+	if (is_redir_append(proc->cmd) && check_deeper(proc->cmd, ">>") != - 1)
 		return (1);
-	if (ft_strstr(proc->cmd, "<<") && check_deeper(proc->cmd, "<<") != - 1)
+	if (is_heredoc(proc->cmd) && check_deeper(proc->cmd, "<<") != - 1)
 		return (2);
-	if (ft_strstr(proc->cmd, ">&") && check_deeper(proc->cmd, ">&") != - 1)
+	if (is_input_redir(proc->cmd) && check_deeper(proc->cmd, "<") != - 1)
 		return (3);
-	if (ft_strstr(proc->cmd, "<") && check_deeper(proc->cmd, "<") != - 1)
+	if (is_fildes_agreg(proc->cmd) && check_deeper(proc->cmd, ">&") != - 1)
 		return (4);
-	if (is_simple_redir(proc->cmd))
+	if (is_simple_redir(proc->cmd) && check_deeper(proc->cmd, ">") != - 1)
 		return (5);
 	return (0);
 }
