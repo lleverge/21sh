@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/12 19:02:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/13 20:24:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,28 @@
 #include <lexer.h>
 #include <cmd_edit.h>
 
-void	intsig_handler(t_ult *ult, t_prompt *prompt)
+static void full_lines(t_prompt *prompt)
+{
+	int		count;
+
+	count = prompt->i;
+	if ((size_t)prompt->i == (prompt->win_size - 3))
+		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+	else if ((size_t)prompt->i > (prompt->win_size - 3))
+	{
+		count -= (prompt->win_size - 3);
+		if ((size_t)count == prompt->win_size)
+			tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+		while ((size_t)count >= prompt->win_size)
+		{
+			count -= prompt->win_size;
+			if ((size_t)count == prompt->win_size)
+				tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+		}
+	}
+}
+
+void	intsig_handler(t_prompt *prompt, t_ult *ult)
 {
 	struct winsize	win;
 
@@ -24,10 +45,14 @@ void	intsig_handler(t_ult *ult, t_prompt *prompt)
 		ioctl(0, TIOCGWINSZ, &win);
 		prompt->win_size = win.ws_col;
 	}
+	full_lines(prompt);
 	prompt_print(prompt, 0);
-	reset_prompt(prompt);
+	ft_putchar('\n');
+	get_prompt(ult->env);
+	ft_strclr(prompt->cmd);
 	ft_strdel(&ult->cmd);
 	prompt->i = 0;
+	prompt_print(prompt, 1);
 }
 
 void	signal_dispatch(int signal)
@@ -40,15 +65,10 @@ void	signal_dispatch(int signal)
 	ult = stock_ult(ult, 1);
 	prompt = stock_prompt(prompt, 1);
 	if (signal == SIGINT)
-		intsig_handler(ult, prompt);
+		intsig_handler(prompt, ult);
 }
 
 void	main_signal_handler(void)
 {
-	struct sigaction	action;
-
-	ft_bzero(&action, sizeof(action));
-	action.sa_handler = &signal_dispatch;
-	if (sigaction(SIGINT, &action, NULL) == -1)
-		ft_putendl_fd("21sh : sigaction error", 2);
+	signal(SIGINT, &signal_dispatch);
 }
