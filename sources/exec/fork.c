@@ -6,16 +6,18 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/27 14:13:45 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/14 17:55:05 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
+#include <stdio.h>
 
 static void	clean(t_process *proc, t_ult *ult, char **env_cpy, char **cmd_tab)
 {
 	close_fd_exec(proc);
+	free(ult->term);
 	ult->term = init_term();
 	free_tab(env_cpy);
 	free_tab(cmd_tab);

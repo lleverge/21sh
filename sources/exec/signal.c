@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/13 20:24:52 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/14 16:41:16 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ static void full_lines(t_prompt *prompt)
 				tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 		}
 	}
+}
+
+void	sigwinch_handler(t_prompt *prompt)
+{
+	
+	reset(prompt);
+	// reset_prompt2(prompt, ult);
+
+	prompt_print(prompt, 1);
 }
 
 void	intsig_handler(t_prompt *prompt, t_ult *ult)
@@ -66,9 +75,12 @@ void	signal_dispatch(int signal)
 	prompt = stock_prompt(prompt, 1);
 	if (signal == SIGINT)
 		intsig_handler(prompt, ult);
+	if (signal == SIGWINCH)
+		sigwinch_handler(prompt);
 }
 
 void	main_signal_handler(void)
 {
 	signal(SIGINT, &signal_dispatch);
+	signal(SIGWINCH, &signal_dispatch);
 }

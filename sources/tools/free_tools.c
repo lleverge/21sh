@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/26 14:45:14 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/14 17:40:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,7 @@ void		free_tab(char **tabl)
 		tabl++;
 	}
 	tabl = tmp;
-	free(tabl);
-	tabl = NULL;
+	tabl ? free(tabl) : NULL;
 }
 
 void		free_process_one(t_process *proc)

@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_tools.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:23:22 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 19:17:04 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/14 17:33:45 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+int			is_cmd_empty(char *cmd)
+{
+	char 	*tmp;
+
+	tmp = cmd;
+	while (*tmp)
+	{
+		if (!ft_isspace(*tmp))
+			return (0);
+		tmp++;
+	}
+	return (1);
+}
 
 char		*copy_cmd(char *cmd)
 {

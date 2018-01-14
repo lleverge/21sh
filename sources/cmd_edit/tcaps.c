@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/26 14:35:25 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/14 17:31:43 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ void			termcap(t_ult *ult)
 		{
 			prompt_print(prompt, 0);
 			fill_hist(&(ult->hist), prompt->cmd);
-			ult->cmd = copy_cmd(prompt->cmd);
+			!is_cmd_empty(prompt->cmd) ? ult->cmd = copy_cmd(prompt->cmd)
+			: NULL;
 			break ;
 		}
 		ft_bzero(buffer, 4);

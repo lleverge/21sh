@@ -52,26 +52,29 @@ int				init_all(char **environ)
 
 	ult = NULL;
 	ult = init_ult(ult, environ);
+	cmd = NULL;
 	while (42)
 	{
 		i = 0;
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
-		cmd = ft_strsplit_tok(ult->cmd);
+		if (ult->cmd && *ult->cmd)
+			cmd = ft_strsplit_tok(ult->cmd);
 		// if (ult->cmd)
 		// {
 		// 	ult->ret = search_for_builtins(ult);
 		// 	if (!ft_strcmp(ult->cmd, "hash") && ult->hash_table)
 		// 		print_hash(ult->hash_table);
 		// }
-		if (ult->cmd)
+		if (ult->cmd && *ult->cmd)
 		{
 			if (cmd[i])
 				start_prog(ult, cmd);
 		}
-		ft_strdel(&ult->cmd);
+		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
 		free_tab(cmd);
+		cmd = NULL;
 	}
 	return (0);
 }

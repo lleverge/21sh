@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/12 21:25:13 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/14 17:26:07 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,9 +164,10 @@ t_env					*env_cpy(t_env *envtmp, t_env *env);
 /*
 **prompt_tools.c
 */
-void					prompt2(char *new, char *tmp, char *home);
+int						is_cmd_empty(char *cmd);
 char					*get_data(t_env *env, char *ref_name);
 char					*copy_cmd(char *cmd);
+
 
 /*
 **display_tools.c
