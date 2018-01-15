@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/14 17:26:07 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/15 17:34:50 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <dirent.h>
-# include <stdio.h>
 # include <fcntl.h>
 
 # define RED "[31m"

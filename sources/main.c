@@ -1,80 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
+/*   Updated: 2018/01/15 19:40:18 by vfrolich         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 #include <cmd_edit.h>
 
-// static	void	print_hash(t_hashelem **path_tab)
-// {
-// 	t_hashelem	*tmp_list;
-// 	int			i;
 
-// 	i = 0;
-// 	if (!path_tab)
-// 		return ;
-// 	tmp_list = NULL;
-// 	while (i < 1021)
-// 	{
-// 		tmp_list = path_tab[i];
-// 		while (tmp_list)
-// 		{
-// 			ft_putendl(tmp_list->bin_name);
-// 			tmp_list = tmp_list->next;
-// 		}
-// 		i++;
-// 	}
-// }
+static void setting_all(t_ult *ult)
+{
+	char **cmd;
+	char **splited_cmd;
+	char **tmp;
 
-// void		print_proc(t_process *proc)
-// {
-// 	if (!proc)
-// 		return ;
-// 	ft_putstr("proc cmd is : ");
-// 	ft_putendl(proc->cmd);
-// 	ft_putstr("proc fd 0 is : ");
-// 	ft_putnbrendl(proc->fd[0]);	
-// 	ft_putstr("proc fd 1 is : ");
-// 	ft_putnbrendl(proc->fd[1]);	
-// 	ft_putstr("proc fd 2 is : ");
-// 	ft_putnbrendl(proc->fd[2]);
-// 	while (proc->fd_to_close)
-// 	{
-// 		ft_putstr("we will close fd -> ");
-// 		ft_putnbrendl(*((int *)(proc->fd_to_close->content)));
-// 		proc->fd_to_close = proc->fd_to_close->next;
-// 	}
-// }
+	cmd = NULL;
+	splited_cmd = NULL;
+	splited_cmd = ft_strsplit(ult->cmd, ';');
+	tmp = splited_cmd;
+	while (*tmp)
+	{
+		cmd = ft_strsplit_tok(*tmp);
+		start_prog(ult, cmd);
+		free_tab(cmd);
+		tmp++;
+	}
+	free_tab(splited_cmd);
+}
 
 int				init_all(char **environ)
 {
 	t_ult		*ult;
-	char		**cmd;
-	int			i;
 
 	ult = NULL;
 	ult = init_ult(ult, environ);
-	cmd = NULL;
 	while (42)
 	{
-		i = 0;
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
 		if (ult->cmd && *ult->cmd)
-			cmd = ft_strsplit_tok(ult->cmd);
-		// if (ult->cmd)
-		// {
-		// 	ult->ret = search_for_builtins(ult);
-		// 	if (!ft_strcmp(ult->cmd, "hash") && ult->hash_table)
-		// 		print_hash(ult->hash_table);
-		// }
-		if (ult->cmd && *ult->cmd)
-		{
-			if (cmd[i])
-				start_prog(ult, cmd);
-		}
+			setting_all(ult);
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
-		free_tab(cmd);
-		cmd = NULL;
 	}
 	return (0);
 }
