@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/14 21:31:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/15 13:48:04 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int					seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 	cmd_tab2 = cmd_tab;
 	if (check_for_builtin(*cmd_tab))
 		return (builtin_launch(ult, job->proc));
-	if (hash_search(*cmd_tab, ult->hash_table))
+	if (ult->hash_table && hash_search(*cmd_tab, ult->hash_table))
 		return (exe_fork(ult->env, job->proc, ult));
 	if (ft_strchr(*cmd_tab, '/') && !path_access_checker(*cmd_tab))
 		return (exe_fork2(ult->env, job->proc, *cmd_tab, ult));
