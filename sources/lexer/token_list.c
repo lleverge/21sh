@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:54:34 by lleverge          #+#    #+#             */
-/*   Updated: 2017/10/18 19:30:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/17 12:28:01 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,18 @@ static void				lexer_pushb(t_lexer **list, t_lexer *new)
 	}
 }
 
-static t_lexer			*create_lexer_node(char *str)
+t_lexer			*create_lexer_node(char *str)
 {
 	t_lexer		*new;
 	int			i;
 
 	i = 0;
 	if (!(new = (t_lexer *)malloc(sizeof(t_lexer))))
-		return (NULL);
+	{
+		ft_putendl_fd("21sh: mem alloc error for t_lexer type, abort.", 
+			STDERR_FILENO);
+		exit(1);
+	}
 	new->token_id = 0;
 	new->content = ft_strdup(str);
 	new->prev = NULL;

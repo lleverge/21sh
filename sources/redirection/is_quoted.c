@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:42:27 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/12 18:37:17 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/17 10:58:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,10 @@ int		is_quoted(char *cmd, int index)
 	while (tmplist)
 	{
 		if (index >= tmplist->quotes[0] && index <= tmplist->quotes[1])
+		{
+			quote_destroy(quotelist);
 			return (1);
+		}
 		tmplist = tmplist->next;
 	}
 	quote_destroy(quotelist);

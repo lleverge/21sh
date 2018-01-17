@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/15 19:39:15 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/17 12:42:37 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@ typedef enum	e_token_id
 	OR = 9,
 	AGGREG = 11,
 	SEPARATOR = 12,
+	NEWLINE = 13,
+	TOK_WORD = 14,
 }				t_token_id;
 
 typedef struct		s_lexer
 {
-	int				token_id;
+	t_token_id		token_id;
 	char			*content;
 	struct s_lexer	*prev;
 	struct s_lexer	*next;
@@ -53,6 +55,18 @@ t_process			*check_pipe(char *str, int i, t_process *new);
 t_process			*check_and(char *str, int i, t_process *new);
 t_process			*check_less(char *str, int i, t_process *new);
 t_process			*check_great(char *str, int i, t_process *new);
+
+/*
+**token_recognizer.c
+*/
+int					is_token_char(char c);
+t_token_id			which_token(char c);
+
+
+/*
+**new_lexer.c
+*/
+t_lexer 			*init_lexer(char *cmd);
 
 /*
 **ft_strsplit_ws.c
@@ -78,6 +92,7 @@ int					is_dquote(char *str, int i);
 **token_list.c
 */
 t_lexer				*lexer_list(t_lexer *list, char *str);
+t_lexer				*create_lexer_node(char *str);
 
 /*
 **free_tools.c
