@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/17 12:42:37 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/17 18:11:03 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,15 @@ t_token_id			which_token(char c);
 **new_lexer.c
 */
 t_lexer 			*init_lexer(char *cmd);
+void				lex_push(t_lexer *new, t_lexer **lex_list);
+
+
+/*
+**quote_prompt.c
+*/
+char 				*prompt_until_quote(t_ult *ult, t_token_id tok_id);
+int					check_closed_quote(t_lexer *list);
+t_lexer 			*quote_tok(t_lexer *lexlist, t_ult *ult);
 
 /*
 **ft_strsplit_ws.c
