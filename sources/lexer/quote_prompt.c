@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:36:31 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/17 18:50:13 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/18 21:48:04 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,26 @@ char 			*prompt_until_quote(t_ult *ult, t_token_id tok_id)
 	return (cmd);
 }
 
-int		check_closed_quote(t_lexer *list)
+int		check_closed_quote(t_lexer **list)
 {
 		t_lexer 	*tmp;
 		t_token_id 	tok_value;
 
-		tok_value = list->token_id;
-		tmp = list;
+		tmp = *list;
+		tok_value = tmp->token_id;
 		tmp = tmp->next;
 		while (tmp)
 		{
 			if (tmp->token_id == tok_value)
+			{
+				*list = tmp;
 				return (1);
+			}
 			tmp = tmp->next;
 		}
 		return (0);
 }
+
 
 t_lexer *quote_tok(t_lexer *lexlist, t_ult *ult)
 {
@@ -72,21 +76,17 @@ t_lexer *quote_tok(t_lexer *lexlist, t_ult *ult)
 	{
 		if (tmp->token_id == QUOTE || tmp->token_id == DQUOTE)
 		{
-			if (check_closed_quote(tmp))
-			{
-				ft_putendl("merge will come after");
-				// merge_quoted_token(tmp);
-			}
-			else
+			if (!check_closed_quote(&tmp))
 			{
 				if (!(closed_quote = prompt_until_quote(ult, tmp->token_id)))
 					return (NULL);
 				lex_end = init_lexer(closed_quote);
+				ft_strdel(&closed_quote);
 				lex_push(lex_end, &lexlist);
 				return (lexlist);
 			}
 		}
-		tmp = tmp->next;
+			tmp = tmp->next;
 	}
 	return (lexlist);
 }

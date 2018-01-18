@@ -6,12 +6,35 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:54:34 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/17 12:28:01 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/18 16:37:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
+
+
+void 					lex_free_all(t_lexer *lexlist)
+{
+	t_lexer *tmp;
+
+	tmp = lexlist->next;
+	lex_free_one(lexlist);
+	while (tmp)
+	{
+		lexlist = tmp;
+		tmp = lexlist->next;
+		lex_free_one(lexlist);
+	}
+	lexlist = NULL;
+}
+
+void					lex_free_one(t_lexer *lexnode)
+{
+	ft_strdel(&lexnode->content);
+	free(lexnode);
+	lexnode = NULL;
+}
 
 static void				lexer_pushb(t_lexer **list, t_lexer *new)
 {
