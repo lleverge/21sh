@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/15 19:39:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/20 17:35:48 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int					start_prog(t_ult *ult, char **cmd)
 		job_li->proc = main_redirection_checker(job_li->proc, ult);
 		i++;
 	}
+	ft_putendl("bp5");
 	if (job_li->proc)
 		ult->ret = seek_and_exec(ult, job_li, cmd_tab);
 	free_tab(cmd_tab);

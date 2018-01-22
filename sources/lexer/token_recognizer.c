@@ -6,18 +6,18 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 10:40:32 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/17 14:04:33 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 18:27:02 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 
-int		is_token_char(char c)
+int			is_token_char(char c)
 {
 	if (!c)
 		return (0);
-	if (c == '|' || c == '<' || c == '>' || c == '&' || c == '|' || c == '\''||
-		c == '"' || c == ';' || c == '\n')
+	if (c == '|' || c == '<' || c == '>' || c == '&' || c == '|' || c == '\''
+		|| c == '"' || c == ';' || c == '\n')
 		return (1);
 	return (0);
 }

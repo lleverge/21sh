@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/14 16:39:39 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 17:09:17 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,8 @@ void				main_auto(char *buffer, t_prompt *prompt);
 **free_tools.c
 */
 void				free_prompt(t_prompt **prompt);
+
+char				*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/18 16:38:21 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 18:03:59 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,11 @@ void				lex_push(t_lexer *new, t_lexer **lex_list);
 char 				*prompt_until_quote(t_ult *ult, t_token_id tok_id);
 int					check_closed_quote(t_lexer **list);
 t_lexer 			*quote_tok(t_lexer *lexlist, t_ult *ult);
+
+/*
+**pipe_prompt.c
+*/
+t_lexer 			*prompt_pipe(t_lexer *lex, t_ult *ult);
 
 /*
 **merge_quotes.c

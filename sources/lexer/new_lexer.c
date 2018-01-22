@@ -6,18 +6,18 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 20:10:09 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/17 13:32:36 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 18:23:20 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 
-t_lexer *word_token(char *cmd)
+t_lexer		*word_token(char *cmd)
 {
-	int 	word_length;
+	int		word_length;
 	char	*tmp;
-	t_lexer *new;
+	t_lexer	*new;
 
 	word_length = 0;
 	tmp = cmd;
@@ -34,9 +34,9 @@ t_lexer *word_token(char *cmd)
 	return (new);
 }
 
-void	lex_push(t_lexer *new, t_lexer **lex_list)
+void		lex_push(t_lexer *new, t_lexer **lex_list)
 {
-	t_lexer *tmp;
+	t_lexer	*tmp;
 
 	if (!(*lex_list))
 	{
@@ -50,10 +50,10 @@ void	lex_push(t_lexer *new, t_lexer **lex_list)
 	new->prev = tmp;
 }
 
-t_lexer *single_token_init(char c)
+t_lexer		*single_token_init(char c)
 {
-	char buff[2];
-	t_lexer *new;
+	char	buff[2];
+	t_lexer	*new;
 
 	buff[0] = c;
 	buff[1] = '\0';
@@ -62,11 +62,11 @@ t_lexer *single_token_init(char c)
 	return (new);
 }
 
-t_lexer *init_lexer(char *cmd)
+t_lexer		*init_lexer(char *cmd)
 {
-	int index;
-	t_lexer *lex_list;
-	t_lexer *new;
+	int		index;
+	t_lexer	*lex_list;
+	t_lexer	*new;
 
 	index = 0;
 	lex_list = NULL;

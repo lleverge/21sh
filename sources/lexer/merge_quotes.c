@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:00:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/18 16:13:11 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 18:24:54 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 #include <shell.h>
 #include <cmd_edit.h>
 
-static char			*get_word_string(t_lexer *merge_start, int to_merge)
+static char		*get_word_string(t_lexer *merge_start, int to_merge)
 {
-	char			*dest;
-	t_lexer			*tmp;
+	char		*dest;
+	t_lexer		*tmp;
 
 	dest = NULL;
 	tmp = merge_start;
@@ -32,7 +32,7 @@ static char			*get_word_string(t_lexer *merge_start, int to_merge)
 	return (dest);
 }
 
-static void			do_merge(t_lexer *merge_start, int to_merge, char *word)
+static void		do_merge(t_lexer *merge_start, int to_merge, char *word)
 {
 	t_lexer		*new;
 	t_lexer		*tmp;
@@ -54,7 +54,7 @@ static void			do_merge(t_lexer *merge_start, int to_merge, char *word)
 	merge_start->next = new;
 }
 
-int 		count_merge_token(t_lexer *lex)
+int				count_merge_token(t_lexer *lex)
 {
 	t_lexer		*tmp;
 	int			to_merge;
@@ -80,11 +80,11 @@ int 		count_merge_token(t_lexer *lex)
 	return (to_merge);
 }
 
-t_lexer		*merge_token(t_lexer *lex)
+t_lexer			*merge_token(t_lexer *lex)
 {
-	int 	to_merge;
-	char 	*new_word;
-	t_lexer	*tmp;
+	int			to_merge;
+	char		*new_word;
+	t_lexer		*tmp;
 
 	new_word = NULL;
 	if (!(to_merge = count_merge_token(lex)))
