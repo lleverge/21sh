@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:36:31 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 18:26:20 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:06:03 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static char		*termcaps_quotes(t_ult *ult)
 	dest = read_heredoc(prompt, ult, flag);
 	if (dest)
 		dest = ft_strjoin_free_one(&dest, "\n");
+	*flag = 42;
 	free_prompt(&prompt);
 	return (dest);
 }
@@ -81,14 +82,22 @@ int				check_closed_quote(t_lexer **list)
 	return (0);
 }
 
+static	void	push_new_lex(char **to_add, t_lexer **lexlist)
+{
+	t_lexer		*lex_end;
+
+	lex_end = NULL;
+	lex_end = init_lexer(*to_add);
+	*to_add ? ft_strdel(to_add) : NULL;
+	lex_push(lex_end, lexlist);
+}
+
 t_lexer			*quote_tok(t_lexer *lexlist, t_ult *ult)
 {
 	t_lexer		*tmp;
 	char		*closed_quote;
-	t_lexer		*lex_end;
 
 	tmp = lexlist;
-	lex_end = NULL;
 	closed_quote = NULL;
 	while (tmp)
 	{
@@ -97,10 +106,11 @@ t_lexer			*quote_tok(t_lexer *lexlist, t_ult *ult)
 			if (!check_closed_quote(&tmp))
 			{
 				if (!(closed_quote = prompt_until_quote(ult, tmp->token_id)))
+				{
+					lex_free_all(lexlist);
 					return (NULL);
-				lex_end = init_lexer(closed_quote);
-				closed_quote ? ft_strdel(&closed_quote) : NULL;
-				lex_push(lex_end, &lexlist);
+				}
+				push_new_lex(&closed_quote, &lexlist);
 				return (quote_tok(lexlist, ult));
 			}
 		}

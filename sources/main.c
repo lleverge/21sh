@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 18:06:03 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 20:55:10 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +118,8 @@ int				init_all(char **environ)
 		ft_putchar('\n');
 		if (ult->cmd)
 		{
-			lex = init_lexer(ult->cmd);
-			lex = quote_tok(lex, ult);
-			lex_print(lex);
-			lex = merge_token(lex);
-			lex = prompt_pipe(lex, ult);
-			ft_putendl("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			ft_putendl("");
-			lex_print(lex);
-			lex_free_all(lex);
+			lex = fill_lexer(ult);
+			lex ? lex_free_all(lex) : NULL;
 		}
 		// if (ult->cmd && *ult->cmd)
 		// 	setting_all(ult);

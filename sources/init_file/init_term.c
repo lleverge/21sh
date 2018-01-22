@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 16:47:19 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/27 12:45:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 20:49:47 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		init_term2(t_term *termi)
 {
 	termi->termios.c_lflag &= ~(ICANON);
 	termi->termios.c_lflag &= ~(ECHO);
-	termi->termios.c_cc[VMIN] = 1;
+	termi->termios.c_cc[VMIN] = 0;
 	termi->termios.c_cc[VTIME] = 1;
 	if (tcsetattr(termi->fd, TCSANOW, &(termi->termios)) == -1)
 		ft_putendl_fd("error: tcsetattr", 2);

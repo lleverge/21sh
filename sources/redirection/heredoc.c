@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 15:52:23 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 17:07:48 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:04:05 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char			*termcaps_heredoc(t_ult *ult)
 	prompt_print(prompt, 1);
 	flag = singleton_signal();
 	dest = read_heredoc(prompt, ult, flag);
+	*flag = 42;
 	dest ? dest = add_nl(&dest) : 0;
 	free_prompt(&prompt);
 	return (dest);

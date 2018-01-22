@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/20 17:35:48 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/22 21:00:54 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,26 @@
 // 	return (nosp);
 // }
 
-static int			builtin_launch(t_ult *ult, t_process *proc)
+t_lexer			*fill_lexer(t_ult *ult)
 {
-	int fd[3];
-	int ret;
+	t_lexer		*lexlist;
+
+	lexlist = init_lexer(ult->cmd);
+	if (!(lexlist = quote_tok(lexlist, ult)))
+		return (NULL);
+	lexlist = merge_token(lexlist);
+	lexlist = prompt_pipe(lexlist, ult);
+	lexlist = quote_tok(lexlist, ult);
+	if (!(lexlist = quote_tok(lexlist, ult)))
+		return (NULL);
+	lexlist = merge_token(lexlist);
+	return (lexlist);
+}
+
+static int	builtin_launch(t_ult *ult, t_process *proc)
+{
+	int 	fd[3];
+	int 	ret;
 
 	fd[0] = dup(ult->fd[0]);
 	fd[1] = dup(ult->fd[1]);
@@ -85,7 +101,7 @@ static int			builtin_launch(t_ult *ult, t_process *proc)
 	return (ret);
 }
 
-int					seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
+int			seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 {
 	char	**cmd_tab2;
 
@@ -104,7 +120,7 @@ int					seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 	return (127);
 }
 
-int					start_prog(t_ult *ult, char **cmd)
+int			start_prog(t_ult *ult, char **cmd)
 {
 	int		i;
 	t_job	*job_li;
@@ -121,7 +137,6 @@ int					start_prog(t_ult *ult, char **cmd)
 		job_li->proc = main_redirection_checker(job_li->proc, ult);
 		i++;
 	}
-	ft_putendl("bp5");
 	if (job_li->proc)
 		ult->ret = seek_and_exec(ult, job_li, cmd_tab);
 	free_tab(cmd_tab);
