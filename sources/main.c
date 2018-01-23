@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/23 15:41:16 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/23 17:55:56 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,6 @@ int				init_all(char **environ)
 		if (ult->cmd)
 		{
 			lex = fill_lexer(ult);
-			lex_print(lex);
-			ft_putendl("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			group_token(&lex);
 			lex_print(lex);
 //			lex ? lex_free_all(lex) : NULL;
