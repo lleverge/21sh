@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/22 20:31:12 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/23 15:33:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ char				*ft_strnosp(char *str);
 int					start_prog(t_ult *ult, char **cmd);
 t_lexer				*fill_lexer(t_ult *ult);
 int					check_linker(t_job **job_li, char *cmd, int i);
+
+/*
+**lexer2.c
+*/
+void				group_token(t_lexer **lexer);
 
 /*
 **check_token.c
