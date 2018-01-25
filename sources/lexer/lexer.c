@@ -6,12 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/23 18:58:51 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/25 21:48:19 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
+#include <stdio.h>
 
 // int						check_aggreg(char *str, int i)
 // {
@@ -77,13 +78,16 @@ t_lexer			*fill_lexer(t_ult *ult)
 	if (!(lexlist = quote_tok(lexlist, ult)))
 		return (NULL);
 	lexlist = merge_token(lexlist);
-	lexlist = prompt_pipe(lexlist, ult);
-	lexlist = quote_tok(lexlist, ult);
+	if (!(lexlist = prompt_pipe(lexlist, ult)))
+		return (NULL);
 	if (!(lexlist = quote_tok(lexlist, ult)))
 		return (NULL);
 	lexlist = merge_token(lexlist);
 	if (parse_error(lexlist, ult->fd[2]) == -1)
+	{
+		lex_free_all(lexlist);
 		return (NULL);
+	}
 	return (lexlist);
 }
 
@@ -131,6 +135,7 @@ int			start_prog(t_ult *ult, char **cmd)
 
 	i = 0;
 	job_li = NULL;
+	cmd_tab = NULL;
 	cmd_tab = ft_strsplit_ws(cmd[0]);
 	while (cmd[i])
 	{
@@ -139,9 +144,9 @@ int			start_prog(t_ult *ult, char **cmd)
 		job_li->proc = main_redirection_checker(job_li->proc, ult);
 		i++;
 	}
-	if (job_li->proc)
+	if (job_li->proc && job_li->proc->cmd && !is_blankword(job_li->proc->cmd))
 		ult->ret = seek_and_exec(ult, job_li, cmd_tab);
-	free_tab(cmd_tab);
-	destroy_job_list(job_li);
+	cmd_tab ? free_tab(cmd_tab) : NULL;
+	job_li ? destroy_job_list(job_li) : NULL;
 	return (0);
 }

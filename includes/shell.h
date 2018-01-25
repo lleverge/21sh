@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/25 16:18:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/25 21:22:55 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,12 @@ typedef struct			s_env
 	struct s_env		*next;
 }						t_env;
 
+typedef struct			s_close
+{
+	int					fd;
+	struct s_close		*next;
+}						t_close;
+
 typedef struct			s_process
 {
 	int					token_id;
@@ -61,7 +67,7 @@ typedef struct			s_process
 	int					fd[3];
 	pid_t				pid;
 	int					done;
-	t_list				*fd_to_close;
+	t_close				*fd_to_close;
 	struct s_process	*next;
 }						t_process;
 
@@ -138,6 +144,7 @@ t_job					*create_job_node(char *cmd);
 /*
 **init_process.c
 */
+t_close					*close_init(int fd);
 t_process				*process_list(t_process *proc, char *cmd);
 void					proc_pushb(t_process **head, t_process *new);
 t_process				*create_proc_node(char *cmd);
@@ -328,5 +335,9 @@ void					destroy_job_list(t_job *job_list);
 */
 t_process 				*main_redirection_checker(t_process *proc, t_ult *ult);
 
+/*
+**is_blankword.c
+*/
+int						is_blankword(char *str);
 
 #endif
