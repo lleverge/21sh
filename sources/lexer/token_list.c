@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:54:34 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/22 18:29:27 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:53:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_lexer			*create_lexer_node(char *str)
 			STDERR_FILENO);
 		exit(1);
 	}
-	new->token_id = 0;
+	new->token_id = -1;
 	new->content = ft_strdup(str);
 	new->prev = NULL;
 	new->next = NULL;

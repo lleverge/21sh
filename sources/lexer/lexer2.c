@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:28:37 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/23 17:57:22 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:51:02 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void			group_token(t_lexer **lexer)
 			check_merge_dless(tmp);
 		else if (tmp->token_id == 3 && tmp->next && tmp->next->token_id == 3)
 			check_merge_dgreat(tmp);
-		else if (tmp->token_id == 3 && tmp->next && tmp->next->token_id == 12)
+		else if (tmp->token_id == 3 && tmp->next && tmp->next->token_id == 0)
 			check_merge_aggreg1(tmp);
-		else if (tmp->token_id == 12 && tmp->next && tmp->next->token_id == 3)
+		else if (tmp->token_id == 0 && tmp->next && tmp->next->token_id == 3)
 			check_merge_aggreg2(tmp);
 		tmp = tmp->next;
 	}

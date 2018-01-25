@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/23 15:33:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:41:05 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 
 typedef enum	e_token_id
 {
+	SAND = 0,
 	PIPE = 1,
 	LESS = 2,
 	GREAT = 3,
@@ -87,6 +88,11 @@ t_lexer 			*quote_tok(t_lexer *lexlist, t_ult *ult);
 **pipe_prompt.c
 */
 t_lexer 			*prompt_pipe(t_lexer *lex, t_ult *ult);
+
+/*
+**parse_error.c
+*/
+int					parse_error(t_lexer *lexer, int error_fd);
 
 /*
 **merge_quotes.c

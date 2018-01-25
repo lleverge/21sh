@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/22 21:00:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:58:51 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ t_lexer			*fill_lexer(t_ult *ult)
 	if (!(lexlist = quote_tok(lexlist, ult)))
 		return (NULL);
 	lexlist = merge_token(lexlist);
+	if (parse_error(lexlist, ult->fd[2]) == -1)
+		return (NULL);
 	return (lexlist);
 }
 

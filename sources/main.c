@@ -6,14 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/23 17:55:56 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:59:13 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 #include <cmd_edit.h>
-
 
 // static void setting_all(t_ult *ult)
 // {
@@ -40,6 +39,8 @@
 
 void type_lex_print(t_token_id tok_id)
 {
+	if (tok_id == 0)
+		ft_putendl("SAND");
 	if (tok_id == 1)
 		ft_putendl("PIPE");
 	if (tok_id == 2)
@@ -119,9 +120,9 @@ int				init_all(char **environ)
 		if (ult->cmd)
 		{
 			lex = fill_lexer(ult);
-			group_token(&lex);
 			lex_print(lex);
-//			lex ? lex_free_all(lex) : NULL;
+			group_token(&lex);
+			lex ? lex_free_all(lex) : NULL;
 		}
 		// if (ult->cmd && *ult->cmd)
 		// 	setting_all(ult);

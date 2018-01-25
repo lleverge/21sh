@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/22 17:09:05 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/25 16:18:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@
 # define CYAN "[0;36m"
 # define BLUE "[1;34m"
 # define RESET "[39m"
+
+# define LDNEXT tmp->next->next
+# define LNEXT tmp->next
+
 
 typedef struct stat		t_stat;
 typedef struct winsize	t_winsize;

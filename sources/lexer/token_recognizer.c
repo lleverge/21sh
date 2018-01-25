@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 10:40:32 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 18:27:02 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/23 18:51:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int			is_token_char(char c)
 
 t_token_id	which_token(char c)
 {
+	if (c == '&')
+		return (SAND);
 	if (c == '|')
 		return (PIPE);
 	if (c == '<')
@@ -34,7 +36,7 @@ t_token_id	which_token(char c)
 		return (QUOTE);
 	if (c == '"')
 		return (DQUOTE);
-	if (c == '&' || c == ';')
+	if (c == ';')
 		return (SEPARATOR);
 	if (c == '\n')
 		return (NEWLINE);
