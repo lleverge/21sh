@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/25 16:20:21 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/25 17:31:17 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int			parse_error(t_lexer *lex, int error_fd)
 			ft_putendl_fd("21sh: parse error near '\\n'", error_fd);
 			return (-1);
 		}
-		else if ((tmp->token_id == 3 && LNEXT && LNEXT->token_id == 3 && LDNEXT->token_id < 13) ||
+		else if ((tmp->token_id == 3 && LNEXT && LNEXT->token_id == 3 && LDNEXT && LDNEXT->token_id < 13) ||
 				 (tmp->token_id == 2 && LNEXT->token_id == 2 && LDNEXT && LDNEXT->token_id < 13) ||
 				 (tmp->token_id == 0 && LNEXT->token_id == 3 && LDNEXT && LDNEXT->token_id < 13) ||
 				 (tmp->token_id == 3 && LNEXT->token_id == 0 && LDNEXT && LDNEXT->token_id < 13) ||
