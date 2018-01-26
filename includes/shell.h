@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/25 21:22:55 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/26 12:21:31 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,11 @@ t_process				*stock_proc(t_process *proc, int i);
 **init_hist.c
 */
 t_hist					*init_hist(t_hist *hist);
+
+/*
+**safe_term_init.c
+*/
+void					safe_term_boot(void);
 
 /*
 **hist.c
