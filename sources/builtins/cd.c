@@ -6,19 +6,19 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:23:07 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/11 23:02:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/27 14:29:48 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <builtins.h>
 
-static int		go_home(t_env *env)
+static int		go_home(t_env **env)
 {
 	char		*home;
 	char		*old;
 
-	if (!(home = get_node_content(env, "HOME")))
+	if (!(home = get_node_content(*env, "HOME")))
 	{
 		ft_putendl_fd("cd: HOME isnt defined", 2);
 		return (1);
@@ -30,41 +30,41 @@ static int		go_home(t_env *env)
 		ft_strdel(&home);
 		return (1);
 	}
-	old = get_cdir(env);
+	old = get_cdir(*env);
 	chdir(home);
-	unset_env("OLDPWD", env);
+	unset_env("OLDPWD", *env);
 	set_env(env, "OLDPWD", old);
-	unset_env("PWD", env);
+	unset_env("PWD", *env);
 	set_env(env, "PWD", home);
 	ft_strdel(&old);
 	ft_strdel(&home);
 	return (0);
 }
 
-static int		change_dir(t_env *env, char *path)
+static int		change_dir(t_env **env, char *path)
 {
 	char		*old;
 	char		*tmp;
 
-	old = get_cdir(env);
+	old = get_cdir(*env);
 	if (env)
 	{
-		unset_env("OLDPWD", env);
+		unset_env("OLDPWD", *env);
 		set_env(env, "OLDPWD", old);
 	}
 	old ? ft_strdel(&old) : NULL;
 	chdir(path);
-	tmp = get_cdir(env);
-	if (env)
+	tmp = get_cdir(*env);
+	if (env && *env)
 	{
-		unset_env("PWD", env);
+		unset_env("PWD", *env);
 		set_env(env, "PWD", tmp);
 	}
 	ft_strdel(&tmp);
 	return (0);
 }
 
-static int		err_cd_handle(t_env *env, char **arg)
+static int		err_cd_handle(t_env **env, char **arg)
 {
 	struct stat stats;
 
@@ -89,36 +89,36 @@ static int		err_cd_handle(t_env *env, char **arg)
 	return (change_dir(env, arg[0]));
 }
 
-static int		prev_dir(t_env *env)
+static int		prev_dir(t_env **env)
 {
 	char		*old;
 	char		*tmp;
 
-	tmp = get_cdir(env);
-	if (!(old = get_node_content(env, "OLDPWD")))
+	tmp = get_cdir(*env);
+	if (!(old = get_node_content(*env, "OLDPWD")))
 	{
 		ft_putendl_fd("cd: OLDPWD not set", 2);
 		tmp ? ft_strdel(&tmp) : NULL;
 		return (1);
 	}
 	ft_putendl(old);
-	if (env)
+	if (env && *env)
 	{
-		unset_env("OLDPWD", env);
+		unset_env("OLDPWD", *env);
 		set_env(env, "OLDPWD", tmp);
 	}
 	tmp ? ft_strdel(&tmp) : NULL;
 	chdir(old);
-	if (env)
+	if (env && *env)
 	{
-		unset_env("PWD", env);
+		unset_env("PWD", *env);
 		set_env(env, "PWD", old);
 	}
 	ft_strdel(&old);
 	return (0);
 }
 
-int				ft_cd(t_env *env, char **arg)
+int				ft_cd(t_env **env, char **arg)
 {
 	char		*home;
 	char		*tmp;
@@ -134,7 +134,7 @@ int				ft_cd(t_env *env, char **arg)
 	}
 	if (!ft_strncmp(arg[1], "~/", 2))
 	{
-		if ((home = get_data(env, "HOME")))
+		if ((home = get_data(*env, "HOME")))
 		{
 			tmp = ft_strcut(arg[1], '~');
 			arg[1] = ft_strjoin_free(&home, &tmp);

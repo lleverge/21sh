@@ -6,11 +6,23 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:48:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/11 18:33:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/27 15:30:31 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+
+static int		invalid_identifier(char *cmd)
+{
+	if (ft_strchr(cmd, '=') == cmd)
+	{
+		ft_putstr_fd("setenv :", 2);
+		ft_putstr_fd(cmd, 2);
+		ft_putendl_fd(" : Invalid argument", 2);
+		return (1);
+	}
+	return (0);
+}
 
 static void		env_push(t_env **envlist, t_env *envnode)
 {
@@ -27,20 +39,20 @@ static void		env_push(t_env **envlist, t_env *envnode)
 	tmp->next = envnode;
 }
 
-t_env			*set_env(t_env *env, char *name, char *value)
+t_env			*set_env(t_env **env, char *name, char *value)
 {
 	t_env		*tmp;
 
-	tmp = env;
+	tmp = *env;
 	if (!name)
-		return (env);
+		return (*env);
 	while (tmp)
 	{
 		if (!ft_strcmp(name, tmp->name))
 		{
 			tmp->content ? ft_strdel(&tmp->content) : NULL;
 			tmp->content = ft_strdup(value);
-			return (env);
+			return (*env);
 		}
 		tmp = tmp->next;
 	}
@@ -52,25 +64,23 @@ t_env			*set_env(t_env *env, char *name, char *value)
 	tmp->name = ft_strdup(name);
 	tmp->content = ft_strdup(value);
 	tmp->next = NULL;
-	env_push(&env, tmp);
-	return (env);
+	env_push(env, tmp);
+	return (*env);
 }
 
-t_env			*split_to_set(t_ult *ult)
+static t_env	*add_all_env(t_ult *ult, char **cmd)
 {
-	char		**splited_cmd;
 	char		**tmp;
 	char		*tmp_string;
 
-	splited_cmd = NULL;
-	splited_cmd = ft_whitespace(ult->cmd);
-	tmp = splited_cmd;
+	tmp = cmd;
+	tmp_string = NULL;
 	while (*tmp)
 	{
-		if (ft_strchr(*tmp, '='))
+		if (ft_strchr(*tmp, '=') && !invalid_identifier(*tmp))
 		{
 			tmp_string = ft_strsub(*tmp, 0, ft_strchr(*tmp, '=') - *tmp);
-			ult->env = set_env(ult->env, tmp_string, ft_strchr(*tmp, '=') + 1);
+			ult->env = set_env(&ult->env, tmp_string, ft_strchr(*tmp, '=') + 1);
 			tmp_string ? ft_strdel(&tmp_string) : NULL;
 			if (!ft_strncmp("PATH", *tmp, 4))
 			{
@@ -80,6 +90,16 @@ t_env			*split_to_set(t_ult *ult)
 		}
 		tmp++;
 	}
+	return (ult->env);
+}
+
+t_env			*split_to_set(t_ult *ult)
+{
+	char		**splited_cmd;
+
+	splited_cmd = NULL;
+	splited_cmd = ft_whitespace(ult->cmd);
+	ult->env = add_all_env(ult, splited_cmd);
 	free_tab(splited_cmd);
 	return (ult->env);
 }
