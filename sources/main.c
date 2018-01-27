@@ -6,33 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/27 16:33:07 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/27 16:37:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 #include <cmd_edit.h>
-
-static void setting_all(t_ult *ult)
-{
-	char **cmd;
-	char **splited_cmd;
-	char **tmp;
-
-	cmd = NULL;
-	splited_cmd = NULL;
-	splited_cmd = ft_strsplit(ult->cmd, ';');
-	tmp = splited_cmd;
-	while (*tmp)
-	{
-		cmd = ft_strsplit_tok(*tmp);
-		start_prog(ult, cmd);
-		free_tab(cmd);
-		tmp++;
-	}
-	free_tab(splited_cmd);
-}
 
 void type_lex_print(t_token_id tok_id)
 {

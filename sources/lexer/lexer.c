@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/25 19:41:01 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/27 17:02:51 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,13 +148,18 @@ int			start_prog(t_lexer *lex)
 			job_pushb(&job, create_job_node(proc));
 			ft_strdel(&cmd);
 			cmd = ft_strdup("");
+			proc = NULL;
 		}
 		lex = lex->next;
 	}
 	while (job)
 	{
+		ft_putendl("NEW JOB-----------------------------");
+		ft_putendl("");
 		while (job->proc)
 		{
+			ft_putendl("NEW PROC~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+			ft_putendl("");
 			ft_putendl(job->proc->cmd);
 			job->proc = job->proc->next;
 		}
