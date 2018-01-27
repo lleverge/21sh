@@ -6,13 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/25 21:48:19 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/25 19:41:01 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
-#include <stdio.h>
 
 // int						check_aggreg(char *str, int i)
 // {
@@ -78,16 +77,13 @@ t_lexer			*fill_lexer(t_ult *ult)
 	if (!(lexlist = quote_tok(lexlist, ult)))
 		return (NULL);
 	lexlist = merge_token(lexlist);
-	if (!(lexlist = prompt_pipe(lexlist, ult)))
-		return (NULL);
+	lexlist = prompt_pipe(lexlist, ult);
+	lexlist = quote_tok(lexlist, ult);
 	if (!(lexlist = quote_tok(lexlist, ult)))
 		return (NULL);
 	lexlist = merge_token(lexlist);
 	if (parse_error(lexlist, ult->fd[2]) == -1)
-	{
-		lex_free_all(lexlist);
 		return (NULL);
-	}
 	return (lexlist);
 }
 
@@ -126,7 +122,48 @@ int			seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 	return (127);
 }
 
-int			start_prog(t_ult *ult, char **cmd)
+int			start_prog(t_lexer *lex)
+{
+	t_job		*job;
+	t_process	*proc;
+	char		*cmd;
+	char		*tmp;
+
+	job = NULL;
+	proc = NULL;
+	cmd = ft_strdup("");
+	while (lex)
+	{
+		tmp = ft_strdup(lex->content);
+		cmd = ft_strjoin_free(&cmd, &tmp);
+		if (lex->token_id == PIPE)
+		{
+			proc_pushb(&proc, create_proc_node(cmd, lex->token_id));
+			ft_strdel(&cmd);
+			cmd = ft_strdup("");
+		}
+		else if (lex->token_id == SEPARATOR || !lex->next)
+		{
+			proc_pushb(&proc, create_proc_node(cmd, SEPARATOR));
+			job_pushb(&job, create_job_node(proc));
+			ft_strdel(&cmd);
+			cmd = ft_strdup("");
+		}
+		lex = lex->next;
+	}
+	while (job)
+	{
+		while (job->proc)
+		{
+			ft_putendl(job->proc->cmd);
+			job->proc = job->proc->next;
+		}
+		job = job->next;
+	}
+	return (0);
+}
+
+/*int			start_prog(t_ult *ult, char **cmd)
 {
 	int		i;
 	t_job	*job_li;
@@ -135,7 +172,6 @@ int			start_prog(t_ult *ult, char **cmd)
 
 	i = 0;
 	job_li = NULL;
-	cmd_tab = NULL;
 	cmd_tab = ft_strsplit_ws(cmd[0]);
 	while (cmd[i])
 	{
@@ -144,9 +180,9 @@ int			start_prog(t_ult *ult, char **cmd)
 		job_li->proc = main_redirection_checker(job_li->proc, ult);
 		i++;
 	}
-	if (job_li->proc && job_li->proc->cmd && !is_blankword(job_li->proc->cmd))
+	if (job_li->proc)
 		ult->ret = seek_and_exec(ult, job_li, cmd_tab);
-	cmd_tab ? free_tab(cmd_tab) : NULL;
-	job_li ? destroy_job_list(job_li) : NULL;
+	free_tab(cmd_tab);
+	destroy_job_list(job_li);
 	return (0);
-}
+	}*/

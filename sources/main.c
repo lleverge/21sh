@@ -6,11 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/01/25 19:16:13 by lleverge         ###   ########.fr       */
-=======
-/*   Updated: 2018/01/25 21:39:10 by vfrolich         ###   ########.fr       */
->>>>>>> 07fc10e79c0cab92448e32eaa8b963e131b087ca
+/*   Updated: 2018/01/27 16:33:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,16 +118,10 @@ int				init_all(char **environ)
 		if (ult->cmd && !is_blankword(ult->cmd))
 		{
 			lex = fill_lexer(ult);
-<<<<<<< HEAD
-			group_token(&lex);
-			start_prog(lex);
-			lex ? lex_free_all(lex) : NULL;
-=======
 			lex ? group_token(&lex) : NULL;
->>>>>>> 07fc10e79c0cab92448e32eaa8b963e131b087ca
 		}
 		if (ult->cmd && *ult->cmd && lex)
-			setting_all(ult);
+			start_prog(lex);
 		lex ? lex_free_all(lex) : NULL;
 		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
