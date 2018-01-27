@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 19:39:38 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/26 10:22:21 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/25 21:23:19 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,21 @@ static int			which_fd_agreg(char *cmd)
 t_process			*close_fd(t_process *proc)
 {
 	int				fd;
-	t_list			*new;
+	t_close			*new;
+	t_close			*tmp;
 
+	tmp = NULL;
 	fd = which_fd_agreg(proc->cmd);
-	new = ft_lstnew(&fd, sizeof(fd));
-	lst_add(new, &proc->fd_to_close);
+	new = close_init(fd);
+	tmp = proc->fd_to_close;
+	if (!tmp)
+		proc->fd_to_close = new;
+	else
+	{
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+	}
 	return (proc);
 }
 

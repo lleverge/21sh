@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:37:50 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/26 14:21:26 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/27 15:29:43 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <builtins.h>
 #include <cmd_edit.h>
 
-int		check_for_builtin(char *cmd)
+int			check_for_builtin(char *cmd)
 {
 	if (!ft_strcmp(cmd, "env"))
 		return (1);
@@ -32,18 +32,18 @@ int		check_for_builtin(char *cmd)
 		return (0);
 }
 
-int		search_for_builtins_2(t_ult *ult, char **arg)
+static int	search_for_builtins_2(t_ult *ult, char **arg, t_process *proc)
 {
 	if (!ft_strcmp(arg[0], "env"))
-		print_list(ult->env);
+		ult->ret = env_builtin(proc, ult, arg);
 	else if (!ft_strcmp(arg[0], "cd"))
-		ult->ret = ft_cd(ult->env, arg);
+		ult->ret = ft_cd(&ult->env, arg);
 	else if (!ft_strcmp(arg[0], "unsetenv"))
 		ult->env = split_to_unset(ult);
 	return (ult->ret);
 }
 
-int		search_for_builtins(t_ult *ult, t_process *proc)
+int			search_for_builtins(t_ult *ult, t_process *proc)
 {
 	char	**arg;
 
@@ -66,7 +66,7 @@ int		search_for_builtins(t_ult *ult, t_process *proc)
 		ult->ret = ft_echo(&arg[1]);
 	else if (!ft_strcmp(arg[0], "setenv"))
 		ult->env = split_to_set(ult);
-	ult->ret = search_for_builtins_2(ult, arg);
+	ult->ret = search_for_builtins_2(ult, arg, proc);
 	free_tab(arg);
 	return (ult->ret);
 }

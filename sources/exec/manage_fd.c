@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 14:12:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/26 16:22:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/25 21:21:46 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	restore_fd(int fd[3])
 void	check_close(t_process *proc, int i)
 {
 	int		fd;
-	t_list	*tmp;
+	t_close	*tmp;
 	int		fd_closed;
 
 	tmp = proc->fd_to_close;
@@ -39,7 +39,7 @@ void	check_close(t_process *proc, int i)
 	fd_closed = -1;
 	while (tmp)
 	{
-		if (fd == *((int *)(tmp->content)))
+		if (fd == tmp->fd)
 		{
 			close(i);
 			fd_closed = i;

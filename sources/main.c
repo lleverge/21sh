@@ -6,7 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/01/25 19:16:13 by lleverge         ###   ########.fr       */
+=======
+/*   Updated: 2018/01/25 21:39:10 by vfrolich         ###   ########.fr       */
+>>>>>>> 07fc10e79c0cab92448e32eaa8b963e131b087ca
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +18,25 @@
 #include <lexer.h>
 #include <cmd_edit.h>
 
-// static void setting_all(t_ult *ult)
-// {
-// 	char **cmd;
-// 	char **splited_cmd;
-// 	char **tmp;
+static void setting_all(t_ult *ult)
+{
+	char **cmd;
+	char **splited_cmd;
+	char **tmp;
 
-// 	cmd = NULL;
-// 	splited_cmd = NULL;
-// 	splited_cmd = ft_strsplit(ult->cmd, ';');
-// 	tmp = splited_cmd;
-// 	ft_putendl("BP");
-// 	while (*tmp)
-// 	{
-// 		cmd = ft_strsplit_tok(*tmp);
-// 		ft_putendl("BP2");
-// 		start_prog(ult, cmd);
-// 		ft_putendl("BP3");
-// 		free_tab(cmd);
-// 		tmp++;
-// 	}
-// 	free_tab(splited_cmd);
-// }
+	cmd = NULL;
+	splited_cmd = NULL;
+	splited_cmd = ft_strsplit(ult->cmd, ';');
+	tmp = splited_cmd;
+	while (*tmp)
+	{
+		cmd = ft_strsplit_tok(*tmp);
+		start_prog(ult, cmd);
+		free_tab(cmd);
+		tmp++;
+	}
+	free_tab(splited_cmd);
+}
 
 void type_lex_print(t_token_id tok_id)
 {
@@ -112,20 +113,27 @@ int				init_all(char **environ)
 
 	ult = NULL;
 	ult = init_ult(ult, environ);
+	lex = NULL;
 	while (42)
 	{
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
-		if (ult->cmd)
+		if (ult->cmd && !is_blankword(ult->cmd))
 		{
 			lex = fill_lexer(ult);
+<<<<<<< HEAD
 			group_token(&lex);
 			start_prog(lex);
 			lex ? lex_free_all(lex) : NULL;
+=======
+			lex ? group_token(&lex) : NULL;
+>>>>>>> 07fc10e79c0cab92448e32eaa8b963e131b087ca
 		}
-		// if (ult->cmd && *ult->cmd)
-		// 	setting_all(ult);
+		if (ult->cmd && *ult->cmd && lex)
+			setting_all(ult);
+		lex ? lex_free_all(lex) : NULL;
+		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
 	}
 	return (0);

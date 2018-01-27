@@ -6,16 +6,29 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:27:03 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/25 19:11:11 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/27 16:16:38 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
+static void	destroy_fd_list(t_process *proc)
+{
+	t_close	*tmp;
+
+	tmp = NULL;
+	while (proc->fd_to_close)
+	{
+		tmp = proc->fd_to_close->next;
+		free(proc->fd_to_close);
+		proc->fd_to_close = tmp;
+	}
+}
+
 void	destroy_proc_one(t_process *proc)
 {
 	ft_strdel(&proc->cmd);
-//	destroy_fd_list();
+	destroy_fd_list(proc);
 	free(proc);
 	proc = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/17 12:06:16 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/11 20:37:06 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/26 14:24:34 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ char					**ft_whitespace(char const *s)
 {
 	char	**dest;
 
+	dest = NULL;
 	dest = ft_malloc_tab(s);
 	if (dest)
 	{

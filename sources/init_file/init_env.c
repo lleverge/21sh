@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:08:42 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/15 00:09:00 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/27 11:32:23 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,12 @@ t_env				*var_cpy(t_env *start, t_env *cpy)
 	t_env	*tmp;
 	t_env	*voyager;
 
-	tmp = (t_env *)malloc(sizeof(t_env));
+	tmp = NULL;
+	if (!(tmp = (t_env *)malloc(sizeof(t_env))))
+	{
+		ft_putendl_fd("21sh : allocation error, abort.", 2);
+		exit(3);
+	}
 	voyager = cpy;
 	tmp->name = ft_strdup(start->name);
 	tmp->content = ft_strdup(start->content);
@@ -35,7 +40,12 @@ t_env				*env_in_list(char *envar, t_env *start)
 	t_env	*tmp;
 	t_env	*voyager;
 
-	tmp = (t_env *)malloc(sizeof(t_env));
+	tmp = NULL;
+	if (!(tmp = (t_env *)malloc(sizeof(t_env))))
+	{
+		ft_putendl_fd("21sh : allocation error, abort.", 2);
+		exit(3);
+	}
 	tmp->next = NULL;
 	voyager = start;
 	tmp->name = getvarname(envar);

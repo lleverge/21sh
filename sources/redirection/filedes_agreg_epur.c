@@ -6,22 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:03:12 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/27 16:17:59 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/25 19:48:24 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
-
-// static int			get_real_start_pos(char *cmd)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	while (cmd[i + 1])
-// 	{
-// 		if ()
-// 	}
-// }
 
 int					get_start_pos_agreg(char *cmd)
 {

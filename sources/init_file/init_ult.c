@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/23 17:02:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/27 14:34:16 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,27 +40,27 @@ t_ult				*stock_ult(t_ult *ult, int i)
 	return (tmp);
 }
 
-static t_env				*incr_shlvl(t_env *envlist)
+static t_env				*incr_shlvl(t_env **envlist)
 {
 	char	*tmp;
 	int		shlvl;
 
 	tmp = NULL;
 	shlvl = 1;
-	if (!(tmp = get_node_content(envlist, "SHLVL")))
+	if (!(tmp = get_node_content(*envlist, "SHLVL")))
 	{
 		tmp = ft_itoa(shlvl);
-		envlist = set_env(envlist, "SHLVL", tmp);
+		*envlist = set_env(envlist, "SHLVL", tmp);
 		ft_strdel(&tmp);
-		return (envlist);
+		return (*envlist);
 	}
 	shlvl = ft_atoi(tmp);
 	shlvl++;
 	ft_strdel(&tmp);
 	tmp = ft_itoa(shlvl);
-	envlist = set_env(envlist, "SHLVL", tmp);
+	*envlist = set_env(envlist, "SHLVL", tmp);
 	ft_strdel(&tmp);
-	return (envlist);
+	return (*envlist);
 }
 
 t_ult				*init_ult(t_ult *ult, char **environ)
@@ -76,7 +76,7 @@ t_ult				*init_ult(t_ult *ult, char **environ)
 	ult->env = fill_env(environ);
 	ult->term = init_term();
 	ult->path = get_paths(ult->env);
-	ult->env = incr_shlvl(ult->env);
+	ult->env = incr_shlvl(&ult->env);
 	ult->hist = init_hist(hist);
 	ult->hash_table = table_init(ult->env);
 	ult->cmd = NULL; 
