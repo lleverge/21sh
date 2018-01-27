@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:46:25 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/13 21:53:27 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/25 18:48:03 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void				job_pushb(t_job **head, t_job *new)
 	}
 }
 
-t_job				*create_job_node(char *cmd)
+t_job				*create_job_node(t_process *proc)
 {
 	t_job		*job;
 
@@ -36,10 +36,9 @@ t_job				*create_job_node(char *cmd)
 		ft_putendl_fd("error: job struct malloc failed", 2);
 		exit(-1);
 	}
-	job->cmd = ft_strdup(cmd);
 	job->linker = 0;
 	job->pgid = 0;
-	job->proc = create_proc_node(cmd);
+	job->proc = proc;
 	job->next = NULL;
 	return (job);
 }

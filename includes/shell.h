@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/25 16:18:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/25 19:10:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct			s_process
 
 typedef struct			s_job
 {
-	char				*cmd;
 	int					linker;
 	pid_t				pgid;
 	t_process			*proc;
@@ -133,14 +132,14 @@ int						reset_term(t_term *termi);
 */
 t_job					*job_list(t_job *job, char *cmd);
 void					job_pushb(t_job **head, t_job *new);
-t_job					*create_job_node(char *cmd);
+t_job					*create_job_node(t_process *cmd);
 
 /*
 **init_process.c
 */
 t_process				*process_list(t_process *proc, char *cmd);
 void					proc_pushb(t_process **head, t_process *new);
-t_process				*create_proc_node(char *cmd);
+t_process				*create_proc_node(char *cmd, int token_id);
 t_process				*stock_proc(t_process *proc, int i);
 
 /*
@@ -327,6 +326,5 @@ void					destroy_job_list(t_job *job_list);
 **main_redirection.c
 */
 t_process 				*main_redirection_checker(t_process *proc, t_ult *ult);
-
 
 #endif

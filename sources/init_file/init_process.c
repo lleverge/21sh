@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:18:14 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/13 20:15:27 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/01/25 18:46:26 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void				proc_pushb(t_process **head, t_process *new)
 	}
 }
 
-t_process			*create_proc_node(char *cmd)
+t_process			*create_proc_node(char *cmd, int token_id)
 {
 	t_process	*proc;
 
@@ -46,7 +46,7 @@ t_process			*create_proc_node(char *cmd)
 		exit(-1);
 	}
 	proc->cmd = ft_strdup(cmd);
-	proc->token_id = -1;
+	proc->token_id = token_id;
 	proc->fd[0] = -1;
 	proc->fd[1] = -1;
 	proc->fd[2] = -1;

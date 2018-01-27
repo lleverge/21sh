@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:27:03 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/22 18:20:17 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/25 19:11:11 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void	destroy_proc_list(t_process *proc_list)
 
 void	destroy_job_one(t_job *job)
 {
-	ft_strdel(&job->cmd);
 	destroy_proc_list(job->proc);
 	free(job);
 	job = NULL;
