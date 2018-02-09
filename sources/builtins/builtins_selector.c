@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:37:50 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/27 15:29:43 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/01/27 19:48:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ int			check_for_builtin(char *cmd)
 		return (0);
 }
 
-static int	search_for_builtins_2(t_ult *ult, char **arg, t_process *proc)
+static int	search_for_builtins_2(t_ult *ult, char **arg)
 {
 	if (!ft_strcmp(arg[0], "env"))
-		ult->ret = env_builtin(proc, ult, arg);
+		ult->ret = env_builtin(ult, arg);
 	else if (!ft_strcmp(arg[0], "cd"))
 		ult->ret = ft_cd(&ult->env, arg);
 	else if (!ft_strcmp(arg[0], "unsetenv"))
@@ -66,7 +66,7 @@ int			search_for_builtins(t_ult *ult, t_process *proc)
 		ult->ret = ft_echo(&arg[1]);
 	else if (!ft_strcmp(arg[0], "setenv"))
 		ult->env = split_to_set(ult);
-	ult->ret = search_for_builtins_2(ult, arg, proc);
+	ult->ret = search_for_builtins_2(ult, arg);
 	free_tab(arg);
 	return (ult->ret);
 }
