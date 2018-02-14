@@ -6,11 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:27:03 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/27 16:16:38 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/02/14 17:27:07 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+#include <stdio.h>
+#include <fcntl.h>
 
 static void	destroy_fd_list(t_process *proc)
 {
@@ -27,6 +29,7 @@ static void	destroy_fd_list(t_process *proc)
 
 void	destroy_proc_one(t_process *proc)
 {
+
 	ft_strdel(&proc->cmd);
 	destroy_fd_list(proc);
 	free(proc);
@@ -43,11 +46,13 @@ void	destroy_proc_list(t_process *proc_list)
 		destroy_proc_one(proc_list);
 		proc_list = tmp;
 	}
+
 }
 
 void	destroy_job_one(t_job *job)
 {
 	destroy_proc_list(job->proc);
+	job->proc = NULL;
 	free(job);
 	job = NULL;
 }

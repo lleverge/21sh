@@ -6,13 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/09 12:58:53 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/14 17:29:28 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 #include <cmd_edit.h>
+#include <stdio.h>
 
 void type_lex_print(t_token_id tok_id)
 {
@@ -63,31 +64,54 @@ void lex_print(t_lexer *lexlist)
 	}
 }
 
-// void	lex_r_print(t_lexer *lexlist)
-// {
-// 	t_lexer *tmp;
+void	lex_r_print(t_lexer *lexlist)
+{
+	t_lexer *tmp;
 
-// 	tmp = lexlist;
-// 	while (tmp->next)
-// 		tmp = tmp->next;
-// 	while (tmp)
-// 	{
-// 		ft_putstr("token id is ->");
-// 		type_lex_print(tmp->token_id);
-// 		ft_putstr("token value is->");
-// 		ft_putstr(tmp->content);
-// 		ft_putendl("<-");
-// 		ft_putendl("-----------------------------------------------------");
-// 		tmp = tmp->prev;
-// 	}
-// }
+	tmp = lexlist;
+	while (tmp->next)
+		tmp = tmp->next;
+	while (tmp)
+	{
+		ft_putstr("token id is ->");
+		type_lex_print(tmp->token_id);
+		ft_putstr("token value is->");
+		ft_putstr(tmp->content);
+		ft_putendl("<-");
+		ft_putendl("-----------------------------------------------------");
+		tmp = tmp->prev;
+	}
+}
+
+void	job_print(t_job *jobs)
+{
+	t_job *tmp;
+	t_process *tmp2;
+
+	tmp = jobs;
+	while (tmp)
+	{
+		ft_putstr("new job ->");
+		tmp2 = tmp->proc; 
+		while (tmp2)
+		{
+			ft_putstr("proc cmd->");
+			ft_putendl(tmp2->cmd);
+			tmp2 = tmp2->next;
+		}
+		tmp = tmp->next;
+	}
+}
+
 
 int				init_all(char **environ)
 {
 	t_ult		*ult;
 	t_lexer		*lex;
+	t_job 		*jobs;
 
 	ult = NULL;
+	jobs = NULL;
 	ult = init_ult(ult, environ);
 	lex = NULL;
 	while (42)
@@ -101,7 +125,11 @@ int				init_all(char **environ)
 			lex ? group_token(&lex) : NULL;
 		}
 		if (ult->cmd && *ult->cmd && lex)
-			start_prog(lex, ult);
+		{
+			jobs = set_jobs(lex);
+			// job_print(jobs);
+			destroy_job_list(jobs);
+		}
 		lex ? lex_free_all(lex) : NULL;
 		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;

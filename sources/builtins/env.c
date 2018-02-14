@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:32:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/09 12:00:36 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:45:50 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ int			launch_new_cmd(t_ult *ult, char **arg, t_env *tmp_env)
 	tmp_ult->cmd = word_array_to_str(&arg[1]);
 	tmp_ult->env = tmp_env;
 	lexer = fill_lexer_env(tmp_ult, tmp_ult->cmd);
-	ult->ret = start_prog(lexer, tmp_ult);
+	// ult->ret = start_prog(lexer, tmp_ult);
+	ult->ret = 'A';
 	ft_strdel(&tmp_ult->cmd);
 	lex_free_all(lexer);
 	hash_destroy(tmp_ult->hash_table);
