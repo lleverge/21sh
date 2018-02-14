@@ -6,68 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/14 16:32:21 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:36:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
-
-// int						check_aggreg(char *str, int i)
-// {
-// 	int		j;
-// 	int		fdi1;
-// 	int		fdi2;
-// 	char	*fd2;
-// 	char	*fd1;
-
-// 	j = i - 1;
-// 	while (ft_isdigit(str[j]))
-// 		j--;
-// 	fd1 = ft_strsub(str, j + 1, i - j - 1);
-// 	fdi1 = ft_atoi(fd1);
-// 	j = i + 2;
-// 	while (ft_isdigit(str[j]))
-// 		j++;
-// 	fd2 = ft_strsub(str, i + 2, j - i);
-// 	fdi2 = ft_atoi(fd2);
-// 	return (0);
-// }
-
-// char					*ft_strnosp(char *str)
-// {
-// 	int		count;
-// 	int		strlen;
-// 	int		i;
-// 	int		j;
-// 	char	*nosp;
-
-// 	count = 0;
-// 	strlen = ft_strlen(str);
-// 	i = 0;
-// 	j = 0;
-// 	while (str[i])
-// 	{
-// 		if (ft_isspace(str[i]))
-// 			count++;
-// 		i++;
-// 	}
-// 	if (!(nosp = (char *)malloc(sizeof(char) * (strlen - count))))
-// 	{
-// 		ft_putendl_fd("21sh: ft_strnosp malloc failed", 2);
-// 		exit(-1);
-// 	}
-// 	while (*str)
-// 	{
-// 		if (!ft_isspace(*str))
-// 		{
-// 			nosp[j] = *str;
-// 			j++;
-// 		}
-// 		str++;
-// 	}
-// 	return (nosp);
-// }
 
 t_lexer			*fill_lexer(t_ult *ult)
 {
@@ -122,6 +66,7 @@ int			seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 	return (127);
 }
 
+<<<<<<< HEAD
 static void		pipe_token(t_lexer *lex, t_process **proc, char **cmd)
 {
 	proc_pushb(proc, create_proc_node(*cmd, lex->token_id));

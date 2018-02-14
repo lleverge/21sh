@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:48:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/27 15:30:31 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/09 11:30:46 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,22 @@ static void		env_push(t_env **envlist, t_env *envnode)
 	tmp->next = envnode;
 }
 
+static t_env 	*new_env_one(char *name, char *value)
+{
+	t_env		*tmp;
+
+	tmp = NULL;
+	if (!(tmp = (t_env *)malloc(sizeof(t_env))))
+	{
+		ft_putendl_fd("21sh: malloc error, abort.", 2);
+		exit(3);
+	}
+	tmp->name = ft_strdup(name);
+	tmp->content = ft_strdup(value);
+	tmp->next = NULL;
+	return (tmp);
+}
+
 t_env			*set_env(t_env **env, char *name, char *value)
 {
 	t_env		*tmp;
@@ -56,14 +72,7 @@ t_env			*set_env(t_env **env, char *name, char *value)
 		}
 		tmp = tmp->next;
 	}
-	if (!(tmp = (t_env *)malloc(sizeof(t_env))))
-	{
-		ft_putendl_fd("21sh: malloc error, abort.", 2);
-		exit(4);
-	}
-	tmp->name = ft_strdup(name);
-	tmp->content = ft_strdup(value);
-	tmp->next = NULL;
+	tmp = new_env_one(name, value);
 	env_push(env, tmp);
 	return (*env);
 }

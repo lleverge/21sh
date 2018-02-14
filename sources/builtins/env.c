@@ -6,11 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:32:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/27 15:30:12 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/09 12:00:36 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <builtins.h>
+#include <lexer.h>
 
 int			parse_var_setenv(char *arg)
 {
@@ -40,67 +41,68 @@ t_env		*add_env_one(char *arg, t_env **env)
 	return (*env);
 }
 
-t_env		*new_env(char **arg_tab, t_env **env)
+int 		new_env(char **arg_tab, t_env **env)
 {
 	char	**tmp;
 
 	if (!arg_tab || !(*arg_tab))
-		return (*env);
+		return (0);
 	tmp = arg_tab;
+	if (**tmp == '-')
+		tmp++;
 	while (*tmp && ft_strchr(*tmp, '='))
 	{
 		if (parse_var_setenv(*tmp) == 1)
 		{
 			free_env(env);
-			return (NULL);
+			return (1);
 		}
 		*env = add_env_one(*tmp, env);
 		tmp++;
 	}
-	return (*env);
+	return (0);
 }
 
-int			check_opt(char *opt)
+int			launch_new_cmd(t_ult *ult, char **arg, t_env *tmp_env)
 {
-	if (*opt != '-')
-		return (2);
-	if (opt[1] && opt[1] == 'i')
-		return (0);
-	else if (opt[1])
-	{
-		ft_putstr_fd("env: illegal option -- ", 2);
-		ft_putchar_fd(opt[1], 2);
-		ft_putchar_fd('\n', 2);
-		ft_putendl_fd("usage : env [-i] [name=value ...] [utility [argument .\
-..]]", 2);
-	}
-	return (1);
+	t_lexer	*lexer;
+	t_ult	*tmp_ult;
+
+	tmp_ult = setting_tmp_ult(ult, tmp_env);
+	tmp_ult->cmd = word_array_to_str(&arg[1]);
+	tmp_ult->env = tmp_env;
+	lexer = fill_lexer_env(tmp_ult, tmp_ult->cmd);
+	ult->ret = start_prog(lexer, tmp_ult);
+	ft_strdel(&tmp_ult->cmd);
+	lex_free_all(lexer);
+	hash_destroy(tmp_ult->hash_table);
+	free(tmp_ult);
+	return (ult->ret);
 }
 
-int			env_builtin(t_process *proc, t_ult *ult, char **arg)
+int			env_builtin(t_ult *ult, char **arg)
 {
-	t_env	*tmp;
 	t_env	*new;
+	int		ret;
 
-	tmp = ult->env;
-	if (!proc)
-		return (1);
+	ret = 0;
 	if (!arg[1])
 	{
-		new = envlist_cpy(ult->env);
-		print_list(new);
-		free_env(&new);
+		print_list(ult->env);
 		return (0);
 	}
 	if ((check_opt(arg[1]) == 1))
 		return (1);
-	if (!check_opt(arg[1]))
-		new = NULL;
+	new = (!check_opt(arg[1])) ? NULL : envlist_cpy(ult->env);
+	if (new_env(&arg[1], &new) == 1)
+		return (1);	
+	if (!arg[index_start_newtab(arg)])
+	{
+		print_list(new);
+		ret = 0;
+	}
 	else
-		new = envlist_cpy(ult->env);
-	if (!(new = new_env(&arg[2], &new)))
-		return (1);
-	print_list(new);
+		ret = launch_new_cmd(ult, arg, new);
 	free_env(&new);
-	return (0);
+	return (ret);
 }

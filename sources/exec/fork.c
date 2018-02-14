@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/14 17:55:05 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/07 20:36:48 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			exe_fork2(t_env *env, t_process *proc, char *cmd_path, t_ult * ult)
 	char	**env_cpy;
 	char	**cmd_tab;
 	int		status;
-
+	
 	cmd_tab = ft_strsplit_ws(proc->cmd);
 	env_cpy = list_in_tab(env);
 	status = 0;

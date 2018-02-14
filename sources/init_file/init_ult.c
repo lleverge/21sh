@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/27 14:34:16 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/07 18:14:10 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ t_ult				*init_ult(t_ult *ult, char **environ)
 	ult->env = incr_shlvl(&ult->env);
 	ult->hist = init_hist(hist);
 	ult->hash_table = table_init(ult->env);
+	ult->ret = 0;
 	ult->cmd = NULL; 
 	ult->fd[0] = 0;
 	ult->fd[1] = 1;

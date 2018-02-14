@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:58:42 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/12 18:14:34 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/09 12:29:00 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,4 @@ void		print_list(t_env *env)
 			env = env->next;
 		}
 	}
-	else
-		ft_putstr("empty env\n");
 }

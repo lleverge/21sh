@@ -6,9 +6,9 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/27 16:20:01 by lleverge         ###   ########.fr       */
-/*   Updated: 2018/01/26 12:47:36 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/09 12:37:41 by vfrolich         ###   ########.fr       */
 /*                                                                            */
+/* ************************************************************************** */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
@@ -237,12 +237,6 @@ int						is_heredoc(char *cmd);
 t_quote 				*quoted_list_init_one(char *sub_cmd, char *cmd);
 t_quote 				*quote_list_init(char *cmd);
 int						is_quoted(char *cmd, int index);
-
-
-/*
-**quote_list_initc.c
-*/
-
 
 /*
 **hash_table
