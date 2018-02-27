@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/09 12:37:41 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/14 20:22:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -339,5 +339,10 @@ t_process 				*main_redirection_checker(t_process *proc, t_ult *ult);
 **is_blankword.c
 */
 int						is_blankword(char *str);
+
+/*
+**apply_redirect.c
+*/
+t_job					*apply_redirect(t_job *job_li, t_ult *ult);
 
 #endif

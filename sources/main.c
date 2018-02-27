@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/14 17:29:28 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:34:41 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,13 @@ void	job_print(t_job *jobs)
 	tmp = jobs;
 	while (tmp)
 	{
-		ft_putstr("new job ->");
+		ft_putendl("<new job>");
 		tmp2 = tmp->proc; 
 		while (tmp2)
 		{
-			ft_putstr("proc cmd->");
-			ft_putendl(tmp2->cmd);
+			ft_putstr("proc cmd-> ");
+			if (tmp2 && tmp2->cmd && *tmp2->cmd)
+				ft_putendl(tmp2->cmd);
 			tmp2 = tmp2->next;
 		}
 		tmp = tmp->next;
@@ -127,7 +128,9 @@ int				init_all(char **environ)
 		if (ult->cmd && *ult->cmd && lex)
 		{
 			jobs = set_jobs(lex);
-			// job_print(jobs);
+			job_print(jobs);
+			jobs = apply_redirect(jobs, ult);
+			job_print(jobs);
 			destroy_job_list(jobs);
 		}
 		lex ? lex_free_all(lex) : NULL;
