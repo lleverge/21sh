@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:41:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/24 15:50:09 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:49:36 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,16 +78,12 @@ t_process			*redirect_input(t_process *proc)
 
 	sub_str = ft_strchr(proc->cmd, '<') + 1;
 	if (check_error_redir(sub_str, "<") == -1)
-	{
-		free_process_one(proc);
 		return (NULL);
-	}
 	file_name = get_word(sub_str);
 	if ((fd = open(file_name, O_RDONLY)) == -1)
 	{
 		get_open_err(file_name, R_OK);
 		ft_strdel(&file_name);
-		free_process_one(proc);
 		return (NULL);
 	}
 	proc->fd[0] = fd;

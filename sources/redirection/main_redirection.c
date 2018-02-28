@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/12 21:23:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/14 19:04:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,6 @@ t_process 	*main_redirection_checker(t_process *proc, t_ult *ult)
 	}
 	if (!proc)
 		return (NULL);
-	// ft_putstr("proc cmd is -> ");
-	// ft_putendl(proc->cmd);
-	// ft_putstr("proc fd 0 is: ");
-	// ft_putnbrendl(proc->fd[0]);
-	// ft_putstr("proc fd 1 is: ");
-	// ft_putnbrendl(proc->fd[1]);
-	// ft_putstr("proc fd 2 is: ");
-	// ft_putnbrendl(proc->fd[2]);
 	if (redir_detector_int(proc))
 		proc = main_redirection_checker(proc, ult);
 	proc = standard_fd(proc);

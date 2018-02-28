@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/14 16:37:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:39:55 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ typedef struct		s_lexer
 t_process			*new_lexer(char *str, t_process *proc_list);
 int					check_aggreg(char *str, int i);
 char				*ft_strnosp(char *str);
-int					set_jobs(t_lexer *lex);
+t_job				*set_jobs(t_lexer *lex);
 t_lexer				*fill_lexer(t_ult *ult);
 int					check_linker(t_job **job_li, char *cmd, int i);
 
