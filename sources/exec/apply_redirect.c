@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 19:01:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/28 18:28:53 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/28 20:45:37 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,18 @@ void			set_fd_pipe(t_process *proc_1, t_process *proc_2)
 
 t_job			*apply_redirect(t_job *job_li, t_ult *ult)
 {
-	t_job 		*tmp;
-	t_process 	*tmp2;
-	t_process	*proc_list;
+	t_process 		*tmp;
 
-	tmp = job_li;
+	tmp = job_li->proc;
 	while (tmp)
 	{
-		tmp2 = tmp->proc;
-		proc_list = tmp2;
-		while (tmp2)
+		if (!main_redirection_checker(tmp, ult))
 		{
-			if (!main_redirection_checker(tmp->proc, ult))
-			{
-				destroy_proc_list(proc_list);
-				tmp->proc = NULL;
-				proc_list = NULL;
-				break ;
-			}
-			tmp2 = tmp2->next;
+			destroy_proc_list(job_li->proc);
+			job_li->proc = NULL;
+			break ;
 		}
-		tmp = tmp->next;
+			tmp = tmp->next;
 	}
 	return (job_li);
 }
@@ -63,6 +54,7 @@ void		job_launch(t_job *job_li, t_ult *ult)
 	tmp_job = job_li;
 	while (tmp_job)
 	{
+		tmp_job = apply_redirect(tmp_job, ult);
 		tmp_proc = tmp_job->proc;
 		while (tmp_proc)
 		{
@@ -76,5 +68,3 @@ void		job_launch(t_job *job_li, t_ult *ult)
 		tmp_job = tmp_job->next;
 	}
 }
-
-// base64 /dev/urandom | head -c 1000 | grep 42 | wc -l | sed -e 's/1/Yes/g' -e 's/0/No/g'

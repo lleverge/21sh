@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/14 19:04:14 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/28 20:14:33 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int is_only_number(char *sub_cmd)
 static int	check_deeper(char *cmd, char *to_check)
 {
 	char	*sub_cmd;
-
 
 	if (!ft_strcmp(to_check, ">") || !ft_strcmp(to_check, "<"))
 		sub_cmd = ft_strchr(cmd, *to_check) + 1;

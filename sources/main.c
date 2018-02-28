@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/28 18:54:05 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/28 20:29:08 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,6 @@ int				init_all(char **environ)
 		if (ult->cmd && *ult->cmd && lex)
 		{
 			jobs = set_jobs(lex);
-			jobs = apply_redirect(jobs, ult);
 			job_launch(jobs,ult);
 			destroy_job_list(jobs);
 		}
