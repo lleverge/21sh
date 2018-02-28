@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/09 12:58:53 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/14 16:41:08 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int				init_all(char **environ)
 			lex ? group_token(&lex) : NULL;
 		}
 		if (ult->cmd && *ult->cmd && lex)
-			start_prog(lex, ult);
+			set_jobs(lex, ult);
 		lex ? lex_free_all(lex) : NULL;
 		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;

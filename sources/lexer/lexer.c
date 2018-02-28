@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/14 16:36:20 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/02/28 15:34:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int			seek_and_exec(t_ult *ult, t_job *job, char **cmd_tab)
 	return (127);
 }
 
-<<<<<<< HEAD
 static void		pipe_token(t_lexer *lex, t_process **proc, char **cmd)
 {
 	proc_pushb(proc, create_proc_node(*cmd, lex->token_id));
