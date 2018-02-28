@@ -6,11 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/02/14 16:41:08 by lleverge         ###   ########.fr       */
-=======
-/*   Updated: 2018/02/27 17:34:41 by vfrolich         ###   ########.fr       */
->>>>>>> 8a0828f48da645b9d861757a49f873f6b9b1b7ab
+/*   Updated: 2018/02/28 15:38:01 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +126,6 @@ int				init_all(char **environ)
 			lex ? group_token(&lex) : NULL;
 		}
 		if (ult->cmd && *ult->cmd && lex)
-<<<<<<< HEAD
-			set_jobs(lex, ult);
-=======
 		{
 			jobs = set_jobs(lex);
 			job_print(jobs);
@@ -140,7 +133,6 @@ int				init_all(char **environ)
 			job_print(jobs);
 			destroy_job_list(jobs);
 		}
->>>>>>> 8a0828f48da645b9d861757a49f873f6b9b1b7ab
 		lex ? lex_free_all(lex) : NULL;
 		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
