@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/14 20:22:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/28 18:59:30 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -344,5 +344,6 @@ int						is_blankword(char *str);
 **apply_redirect.c
 */
 t_job					*apply_redirect(t_job *job_li, t_ult *ult);
+void					job_launch(t_job *job_li, t_ult *ult);
 
 #endif

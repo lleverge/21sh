@@ -6,14 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/28 15:38:01 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/02/28 18:54:05 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <lexer.h>
 #include <cmd_edit.h>
-#include <stdio.h>
 
 void type_lex_print(t_token_id tok_id)
 {
@@ -128,9 +127,8 @@ int				init_all(char **environ)
 		if (ult->cmd && *ult->cmd && lex)
 		{
 			jobs = set_jobs(lex);
-			job_print(jobs);
 			jobs = apply_redirect(jobs, ult);
-			job_print(jobs);
+			job_launch(jobs,ult);
 			destroy_job_list(jobs);
 		}
 		lex ? lex_free_all(lex) : NULL;

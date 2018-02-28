@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/25 21:42:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/28 18:51:50 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int			parse_error(t_lexer *lex, int error_fd)
 	tmp = lex;
 	while (tmp)
 	{
-		if (tmp->token_id < 12 && !tmp->next)
+		if (tmp->token_id < 12 && tmp->token_id != QUOTE && tmp->token_id != DQUOTE && !tmp->next)
 		{
 			ft_putendl_fd("21sh: parse error near '\\n'", error_fd);
 			return (-1);
