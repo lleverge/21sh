@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/14 16:41:16 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/02/28 19:34:29 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void	main_signal_handler(void)
 {
 	signal(SIGINT, &signal_dispatch);
 	signal(SIGWINCH, &signal_dispatch);
+	signal(SIGTSTP, SIG_IGN);
 }
