@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/28 19:34:29 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/15 19:36:30 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	sigwinch_handler(t_prompt *prompt)
 {
 	
 	reset(prompt);
-	// reset_prompt2(prompt, ult);
-
 	prompt_print(prompt, 1);
 }
 

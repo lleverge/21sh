@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/28 18:58:59 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/15 14:23:08 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static int	builtin_launch(t_ult *ult, t_process *proc)
 	return (ret);
 }
 
-int			seek_and_exec(t_ult *ult, t_process *proc, char **cmd_tab)
+int			seek_and_exec(t_ult *ult, t_process *proc, char **cmd_tab, int fd[2])
 {
 	char	**cmd_tab2;
 
@@ -60,9 +60,9 @@ int			seek_and_exec(t_ult *ult, t_process *proc, char **cmd_tab)
 	if (check_for_builtin(*cmd_tab))
 		return (builtin_launch(ult, proc));
 	if (ult->hash_table && hash_search(*cmd_tab, ult->hash_table))
-		return (exe_fork(ult->env, proc, ult));
+		return (exe_fork(ult->env, proc, ult, fd));
 	if (ft_strchr(*cmd_tab, '/') && !path_access_checker(*cmd_tab))
-		return (exe_fork2(ult->env, proc, *cmd_tab, ult));
+		return (exe_fork2(ult->env, proc, ult, fd));
 	if (!ft_strchr(*cmd_tab, '/'))
 	{
 		ft_putstr_fd("21sh : command not found: ", 2);

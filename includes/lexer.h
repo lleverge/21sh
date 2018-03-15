@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/28 18:58:25 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/14 17:20:10 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int					check_aggreg(char *str, int i);
 char				*ft_strnosp(char *str);
 t_job				*set_jobs(t_lexer *lex);
 t_lexer				*fill_lexer(t_ult *ult);
-int					seek_and_exec(t_ult *ult, t_process *proc, char **cmd_tab);
+int					seek_and_exec(t_ult *ult, t_process *proc, char **cmd_tab, int fd[2]);
 int					check_linker(t_job **job_li, char *cmd, int i);
 
 /*

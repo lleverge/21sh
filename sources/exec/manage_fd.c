@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 14:12:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/25 21:21:46 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/15 19:05:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,22 @@ void	close_fd_exec(t_process *proc)
 	int	i;
 
 	i = 0;
+	// ft_putendl("for this process :");
+	// ft_putstr("stdin is ");
+	// ft_putnbrendl(proc->fd[0]);
+	// ft_putstr("stduut is ");
+	// ft_putnbrendl(proc->fd[1]);
+	// ft_putstr("stderr is ");
+	// ft_putnbrendl(proc->fd[2]);
 	while (i < 3)
 	{
 		if (proc->fd[i] > 2)
+		{
+			// ft_putstr("we close :");
+			// ft_putnbrendl(proc->fd[i]);
 			if (close(proc->fd[i]) == -1)
 				ft_putendl_fd("21sh: close error", 2);
+		}
 		i++;	
 	}
 }

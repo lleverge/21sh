@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/28 18:59:30 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/15 14:22:45 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -256,8 +256,8 @@ void					hash_destroy(t_hashelem **table);
 **fork.c
 */
 char					**path_in_tab(t_env *env, char **cmd);
-int						exe_fork2(t_env *env, t_process *proc, char *cmd_path, t_ult *ult);
-int						exe_fork(t_env *env, t_process *proc, t_ult *ult);
+int						exe_fork2(t_env *env, t_process *proc, t_ult *ult, int fd[2]);
+int						exe_fork(t_env *env, t_process *proc, t_ult *ult, int fd[2]);
 int						is_path(char *cmd);
 
 /*
@@ -345,5 +345,11 @@ int						is_blankword(char *str);
 */
 t_job					*apply_redirect(t_job *job_li, t_ult *ult);
 void					job_launch(t_job *job_li, t_ult *ult);
+
+/*
+**wait_procs.c
+*/
+void					wait_for_procs(t_process *procs);
+
 
 #endif
