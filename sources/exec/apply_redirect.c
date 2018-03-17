@@ -6,14 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 19:01:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/15 19:50:34 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/17 01:06:50 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <cmd_edit.h>
 #include <shell.h>
 #include <lexer.h>
-#include <errno.h>
-#include <stdio.h>
 
 void			set_fd_pipe(t_process *proc_1, t_process *proc_2)
 {
@@ -45,7 +44,12 @@ t_job			*apply_redirect(t_job *job_li, t_ult *ult)
 	}
 	return (job_li);
 }
-
+static void	simple_sigint(int signal)
+{
+	if (signal != SIGINT)
+		return ;
+	ft_putchar('\n');
+}
 void		job_launch(t_job *job_li, t_ult *ult)
 {
 	char		**cmd_tab;
@@ -55,7 +59,7 @@ void		job_launch(t_job *job_li, t_ult *ult)
 
 	cmd_tab = NULL;
 	tmp_job = job_li;
-	errno = 0;
+	signal(SIGINT, &simple_sigint);
 	while (tmp_job)
 	{
 		tmp_job = apply_redirect(tmp_job, ult);
