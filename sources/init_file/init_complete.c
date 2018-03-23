@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 14:13:42 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/23 17:26:19 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 19:20:17 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static void			get_cmd(char *path, char *cmd, t_compl **list)
 	{
 
 		new = NULL;
-		if (cmd)
+		if (ft_strlen(cmd))
 		{
 			if (!ft_strncmp(file_info->d_name, cmd, ft_strlen(cmd)))
 				new = init_compl_one(file_info->d_name);

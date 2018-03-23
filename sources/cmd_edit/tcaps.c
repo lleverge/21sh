@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/23 17:23:01 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 18:59:10 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			prompt_print(t_prompt *prompt, int show_cursor)
 
 void			prompt_shell(t_prompt *prompt, char *buffer, t_ult *ult)
 {
-	// main_auto(buffer, prompt);
+	main_auto(prompt, buffer, ult);
 	charac(prompt, buffer);
 	space(prompt, buffer);
 	down_line(prompt, buffer);
@@ -122,7 +122,6 @@ void			termcap(t_ult *ult)
 			: NULL;
 			break ;
 		}
-		// ft_putendl(word_detect(prompt));
 		ft_bzero(buffer, 4);
 	}
 	free_prompt(&prompt);

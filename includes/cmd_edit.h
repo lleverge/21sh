@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/23 17:26:43 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 21:11:56 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@
 # define DOWN_CMD_1 ((buffer[0] == 27 && buffer[1] == 27))
 # define DOWN_CMD_2 ((buffer[2] == 91 && buffer[3] == 66))
 # define DOWN_CMD ((DOWN_CMD_1 && DOWN_CMD_2))
+# define T_TAB (buffer[0] == 9)
 
 typedef struct		s_prompt
 {
@@ -93,6 +94,13 @@ void				exit_eof(t_term *termi, t_prompt *prompt);
 **word_detect.c
 */
 char				*word_detect(t_prompt *prompt);
+int					first_word(t_prompt	*prompt);
+int					empty_space(t_prompt *prompt);
+
+/*
+**print_compl.c
+*/
+size_t				word_per_line(t_compl *list);
 
 /*
 **prompt.c
@@ -159,7 +167,8 @@ void				up_line(t_prompt *prompt, char *buffer);
 /*
 **main_auto.c
 */
-void				main_auto(char *buffer, t_prompt *prompt);
+void				main_auto(t_prompt *prompt, char *buffer, t_ult *ult);
+
 
 /*
 **free_tools.c

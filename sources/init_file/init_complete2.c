@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/23 17:38:25 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 19:27:06 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_compl			*init_cmd_compl(t_ult *ult, char *cmd)
 	if (!(path_string = get_node_content(ult->env, "PATH")))
 		return (NULL);
 	dest = get_all_cmd(path_string, cmd);
-	add_prev(dest);
+	if (dest)
+		add_prev(dest);
 	return (dest);
 }
