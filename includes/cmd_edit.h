@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/23 15:34:21 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 17:26:43 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ typedef struct		s_compl
 	int 			cursored;
 	char			*name;
 	struct 	s_compl *next;
+	struct 	s_compl	*prev;
 }					t_compl;
 
 /*
@@ -75,6 +76,11 @@ t_prompt			*stock_prompt(t_prompt *prompt, int i);
 /*
 **init_complete.c
 */
+t_compl 				*get_all_cmd(char *paths, char *cmd);
+
+/*
+**init_complete2.c
+*/
 t_compl					*init_cmd_compl(t_ult *ult, char *cmd);
 
 /*
@@ -82,6 +88,11 @@ t_compl					*init_cmd_compl(t_ult *ult, char *cmd);
 */
 int					reset_term(t_term *termi);
 void				exit_eof(t_term *termi, t_prompt *prompt);
+
+/*
+**word_detect.c
+*/
+char				*word_detect(t_prompt *prompt);
 
 /*
 **prompt.c

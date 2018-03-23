@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 14:13:42 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/23 15:46:03 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 17:26:19 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ static t_compl	*init_compl_one(char *cmd)
 	}
 	dest->name = ft_strdup(cmd);
 	dest->next = NULL;
+	dest->prev = NULL;
 	return (dest);
 }
 
@@ -83,7 +84,7 @@ static void			get_cmd(char *path, char *cmd, t_compl **list)
 	closedir(pathdir);
 }
 
-static t_compl 		*get_all_cmd(char *paths, char *cmd)
+t_compl 		*get_all_cmd(char *paths, char *cmd)
 {
 	char 		**path_strings;
 	char		**tmp;
@@ -98,17 +99,5 @@ static t_compl 		*get_all_cmd(char *paths, char *cmd)
 		tmp++;
 	}
 	free(path_strings);
-	return (dest);
-}
-
-t_compl			*init_cmd_compl(t_ult *ult, char *cmd)
-{
-	t_compl		*dest;
-	char		*path_string;
-
-	path_string = NULL;
-	if (!(path_string = get_node_content(ult->env, "PATH")))
-		return (NULL);
-	dest = get_all_cmd(path_string, cmd);
 	return (dest);
 }

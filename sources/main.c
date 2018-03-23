@@ -108,11 +108,29 @@ void		print_compl(t_compl *list)
 {
 	t_compl *choice;
 
+	if (!list)
+		return ;
 	choice = list;
-	while (choice)
+	ft_putendl(choice->name);
+	while (choice->next != list)
 	{
-		ft_putendl(choice->name);
 		choice = choice->next;
+		ft_putendl(choice->name);
+	}
+}
+
+void		print_compl_r(t_compl *list)
+{
+	t_compl *choice;
+
+	if (!list)
+		return ;
+	choice = list;
+	ft_putendl(choice->name);
+	while (choice->prev != list)
+	{
+		choice = choice->prev;
+		ft_putendl(choice->name);
 	}
 }
 
@@ -145,7 +163,6 @@ int				init_all(char **environ)
 			destroy_job_list(jobs);
 		}
 		sample = init_cmd_compl(ult, "ls");
-		print_compl(sample);
 		lex ? lex_free_all(lex) : NULL;
 		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;

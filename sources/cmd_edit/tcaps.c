@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/14 17:31:43 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 17:23:01 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ void			termcap(t_ult *ult)
 			: NULL;
 			break ;
 		}
+		// ft_putendl(word_detect(prompt));
 		ft_bzero(buffer, 4);
 	}
 	free_prompt(&prompt);
