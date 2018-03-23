@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/22 17:09:17 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 15:34:21 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,23 @@ typedef struct		s_prompt
 	int				heredoc;
 }					t_prompt;
 
+typedef struct		s_compl
+{
+	int 			cursored;
+	char			*name;
+	struct 	s_compl *next;
+}					t_compl;
+
 /*
 **init_prompt.c
 */
 t_prompt			*init_prompt(void);
 t_prompt			*stock_prompt(t_prompt *prompt, int i);
+
+/*
+**init_complete.c
+*/
+t_compl					*init_cmd_compl(t_ult *ult, char *cmd);
 
 /*
 **init_term.c
@@ -144,6 +156,8 @@ void				main_auto(char *buffer, t_prompt *prompt);
 void				free_prompt(t_prompt **prompt);
 
 char				*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag);
+
+
 
 
 #endif

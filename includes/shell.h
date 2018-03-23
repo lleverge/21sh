@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/15 14:22:45 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/23 15:34:20 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -206,7 +206,7 @@ void					free_process_one(t_process *proc);
 **init_tools.c
 */
 char					*get_node_content(t_env *env, char *str);
-
+	
 /*
 **redirections
 */
