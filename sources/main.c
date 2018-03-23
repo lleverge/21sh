@@ -7,7 +7,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/09 15:45:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/17 00:59:41 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ int				init_all(char **environ)
 	lex = NULL;
 	while (42)
 	{
+		main_signal_handler();
 		get_prompt(ult->env);
 		termcap(ult);
 		ft_putchar('\n');
