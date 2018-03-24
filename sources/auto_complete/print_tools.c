@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 16:21:17 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/24 16:22:59 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/24 18:03:39 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,51 @@ size_t	word_per_line(t_compl *list)
 	largest = get_largest_word(list);
 	term_co = get_term_size("col");
 	return (term_co/(largest + 1));
+}
+
+size_t	count_entries(t_compl *list)
+{
+	size_t count;
+	t_compl *tmp;
+
+	count = 1;
+	tmp = list;
+	tmp = tmp->next;
+	while (tmp != list)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
+size_t 	count_lines(t_compl *list)
+{
+	size_t 	wpl;
+	size_t	nb_entries;
+	size_t lines_needed;
+
+	wpl = word_per_line(list);
+	nb_entries = count_entries(list);
+	if (nb_entries < wpl)
+		return (1);
+	lines_needed = nb_entries/wpl;
+	if (nb_entries%wpl)
+		lines_needed++;
+	return (lines_needed);
+}
+
+void	clr_screen(t_compl *list)
+{
+	size_t nb_entries;
+	size_t lines_needed; 
+
+	nb_entries = count_entries(list);
+	lines_needed = count_lines(list);
+	while (lines_needed > 0)
+	{
+		tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+		lines_needed--;
+	}
+	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
 }

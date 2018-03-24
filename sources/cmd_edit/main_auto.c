@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/24 17:08:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/24 18:14:42 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ void	read_compl(t_compl *list)
 	int		ret;
 
 	ft_bzero(buffer, 4);
+	print_options(list);
 	while((ret = read(0, buffer, 4)) != -1)
 	{
+		clr_screen(list);
 		if (T_LEFT)
 			select_prev(list);
 		if (T_RIGHT)
@@ -74,6 +76,16 @@ void	term_setup(t_ult *ult, int value)
 	close(ult->term->fd);
 }
 
+static void	void_prompt(void)
+{
+	t_prompt *prompt;
+
+	prompt = NULL;
+	prompt = stock_prompt(prompt, 1);
+	prompt_print(prompt, 0);
+	ft_putchar('\n');
+}
+
 void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 {
 	char *word;
@@ -86,8 +98,10 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 		list = init_cmd_compl(ult, word);
 	else
 		list = basic_compl();
+	if (!list)
+		return ;
+	void_prompt();
 	list->cursored = 1;
-	print_options(list);
 	term_setup(ult, 1);
 	read_compl(list);
 	term_setup(ult, 0);
