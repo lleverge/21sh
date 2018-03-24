@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/23 21:11:56 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/24 16:38:18 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,20 @@ int					empty_space(t_prompt *prompt);
 **print_compl.c
 */
 size_t				word_per_line(t_compl *list);
+void				print_options(t_compl *list);
+
+/*
+**print_tools.c
+*/
+size_t				get_term_size(char *field);
+size_t				get_largest_word(t_compl *list);
+size_t				word_per_line(t_compl *list);
+
+/*
+**select_actions.c
+*/
+void	select_next(t_compl *list);
+void	select_prev(t_compl *list);
 
 /*
 **prompt.c

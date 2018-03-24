@@ -6,27 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/23 21:29:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/24 17:08:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 #include <shell.h>
 
-// static void		print_completion(t_compl *list)
-// {
-// 	t_compl *choice;
-
-// 	if (!list)
-// 		return ;
-// 	choice = list;
-// 	ft_putendl(choice->name);
-// 	while (choice->next != list)
-// 	{
-// 		choice = choice->next;
-// 		ft_putendl(choice->name);
-// 	}
-// }
 
 static t_compl	*init_coml_one(char *cmd)
 {
@@ -54,6 +40,40 @@ t_compl	*basic_compl(void)
 	return (new);
 }
 
+void	read_compl(t_compl *list)
+{
+	char 	buffer[4];
+	int		ret;
+
+	ft_bzero(buffer, 4);
+	while((ret = read(0, buffer, 4)) != -1)
+	{
+		if (T_LEFT)
+			select_prev(list);
+		if (T_RIGHT)
+			select_next(list);
+		print_options(list);
+		ft_bzero(buffer, 4);
+	}
+}
+
+void	term_setup(t_ult *ult, int value)
+{
+	ult->term->fd = open(ttyname(0), O_RDWR);
+	if (tcgetattr(ult->term->fd, &(ult->term->termios)) == -1)
+	{
+		ft_putendl("error: tcgetattr");
+		return ;
+	}
+	ult->term->termios.c_cc[VMIN] = value;
+	if (tcsetattr(ult->term->fd, TCSANOW, &(ult->term->termios)) == -1)
+	{
+		ft_putendl_fd("error: tcsetattr", 2);
+		return ;
+	}
+	close(ult->term->fd);
+}
+
 void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 {
 	char *word;
@@ -66,6 +86,9 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 		list = init_cmd_compl(ult, word);
 	else
 		list = basic_compl();
-	// word_per_line(list);
-	// print_completion(list);
+	list->cursored = 1;
+	print_options(list);
+	term_setup(ult, 1);
+	read_compl(list);
+	term_setup(ult, 0);
 }

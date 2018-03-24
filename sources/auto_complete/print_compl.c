@@ -6,59 +6,67 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 20:51:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/23 21:28:59 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/24 16:23:11 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-size_t				get_term_size(char *field)
+static void	print_one(t_compl *list, size_t largest)
 {
-	struct winsize	win;
+	int to_print;
 
-	ft_bzero(&win, sizeof(win));
-	if (ioctl(STDIN_FILENO, TIOCGSIZE, &win) == -1)
+	if (list->cursored == 1)
 	{
-		write(STDERR_FILENO, "ft_select: unable to get terminal size\n",
-			sizeof("ft_select: unable to get terminal size\n"));
-		return (0);
+		tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
+		ft_putstr(list->name);
+		tputs(tgetstr("me", NULL), 1, ft_putchar_int);
 	}
-	if (!ft_strcmp(field, "row"))
-		return (win.ws_row);
-	return (win.ws_col);
+	else
+		ft_putstr(list->name);	
+	to_print = largest - ft_strlen(list->name);
+	while (to_print >= 0)
+	{
+		ft_putchar(32);
+		to_print--;
+	}
 }
 
-size_t	get_largest_word(t_compl *list)
+static void	void_prompt(void)
 {
-	size_t 	res;
-	t_compl *tmp;
+	t_prompt *prompt;
 
-	res = ft_strlen(list->name);
-	tmp = list->next;
+	prompt = NULL;
+	prompt = stock_prompt(prompt, 1);
+	prompt_print(prompt, 0);
+	ft_putchar('\n');
+}
+
+void	print_options(t_compl *list)
+{
+	size_t	word_line;
+	size_t	largest;
+	size_t		i;
+	t_compl	*tmp;
+
+	void_prompt();
+	word_line = word_per_line(list);
+	tmp = list;
+	largest = get_largest_word(list);
+	print_one(tmp, largest);
+	tmp = tmp->next;
+	i = 1;
 	while (tmp != list)
 	{
-		if (ft_strlen(tmp->name) > res)
+		while (i < word_line && tmp != list)
 		{
-			res = ft_strlen(tmp->name);
-			ft_putendl(tmp->name);
+			print_one(tmp, largest);
+			i++;
+			tmp = tmp->next;
 		}
-		tmp = tmp->next;
+		ft_putchar('\n');
+		i = 0;
 	}
-	return (res);
-}
-
-size_t	word_per_line(t_compl *list)
-{
-	size_t 	largest;
-	size_t	term_co;
-
-	largest = get_largest_word(list);
-	ft_putstr("largest:");
-	ft_putnbrendl(largest);
-	term_co = get_term_size("row");
-	ft_putstr("rows:");
-	ft_putnbrendl(term_co);
-	return (term_co/(largest + 1));
 }
 
