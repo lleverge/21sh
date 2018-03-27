@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/27 12:37:43 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 13:43:02 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,11 @@ int					ask_prompt(t_compl *list);
 */
 size_t				word_per_line(t_compl *list);
 void				print_options(t_compl *list);
+
+/*
+**print_compl.c
+*/
+void				free_all_choices(t_compl *elem);
 
 /*
 **print_tools.c

@@ -6,39 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 13:14:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 13:54:50 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 #include <shell.h>
-
-
-static t_compl	*init_coml_one(char *cmd)
-{
-	t_compl		*dest;
-
-	dest = NULL;
-	if (!(dest = (t_compl *)malloc(sizeof(t_compl))))
-	{
-		ft_putendl_fd("21sh : malloc error, abort.", 2);
-		exit(3);
-	}
-	dest->name = ft_strdup(cmd);
-	dest->next = NULL;
-	dest->prev = NULL;
-	return (dest);
-}
-
-t_compl	*basic_compl(void)
-{
-	t_compl *new;
-
-	new = init_coml_one("DUMMY");
-	new->prev = new;
-	new->next = new;
-	return (new);
-}
 
 void	read_compl(t_compl *list)
 {
@@ -97,7 +70,10 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 	if (first_word(prompt) || empty_space(prompt))
 		list = init_cmd_compl(ult, word);
 	else
-		list = basic_compl();
+	{
+		// list = basic_compl();
+		return ;
+	}
 	if (!list)
 		return ;
 	void_prompt();
@@ -110,9 +86,11 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 		}
 		get_prompt(ult->env);
 		prompt_print(prompt, 1);
+		free_all_choices(list);
 		return ;
 	}
 	term_setup(ult, 1);
 	read_compl(list);
 	term_setup(ult, 0);
+	free_all_choices(list);
 }

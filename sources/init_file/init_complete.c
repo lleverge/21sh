@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 14:13:42 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 12:56:40 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 13:56:33 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,16 @@ static void			get_cmd(char *path, char *cmd, t_compl **list)
 	closedir(pathdir);
 }
 
+t_compl	*basic_compl(void)
+{
+	t_compl *new;
+
+	new = init_compl_one("DUMMY");
+	new->prev = new;
+	new->next = new;
+	return (new);
+}
+
 t_compl 		*get_all_cmd(char *paths, char *cmd)
 {
 	char 		**path_strings;
@@ -98,8 +108,8 @@ t_compl 		*get_all_cmd(char *paths, char *cmd)
 		get_cmd(*tmp, cmd, &dest);
 		tmp++;
 	}
-	free(path_strings);
 	if (dest)
 		dest->cursored = 1;
+	free_tab(path_strings);
 	return (dest);
 }

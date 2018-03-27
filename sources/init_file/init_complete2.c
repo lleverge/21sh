@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/23 19:27:06 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 13:48:04 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ t_compl			*init_cmd_compl(t_ult *ult, char *cmd)
 	dest = get_all_cmd(path_string, cmd);
 	if (dest)
 		add_prev(dest);
+	ft_strdel(&path_string);
 	return (dest);
 }
