@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/27 13:43:02 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 14:42:28 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ int					empty_space(t_prompt *prompt);
 **small_prompt.c
 */
 int					ask_prompt(t_compl *list);
+
+/*
+**exec_more.c
+*/
+void 				exec_more(t_compl *list, t_ult *ult);
 
 
 /*

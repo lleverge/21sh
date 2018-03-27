@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 13:54:50 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 14:47:01 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,16 +81,17 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 	{
 		term_setup(ult, 0);
 		if (ask_prompt(list))
-		{
-			ft_putendl("full printing goes here");	
-		}
+			exec_more(list, ult);
 		get_prompt(ult->env);
 		prompt_print(prompt, 1);
 		free_all_choices(list);
+		free(ult->term);
+		ult->term = init_term();	
 		return ;
 	}
 	term_setup(ult, 1);
 	read_compl(list);
-	term_setup(ult, 0);
+	free(ult->term);
+	ult->term = init_term();
 	free_all_choices(list);
 }
