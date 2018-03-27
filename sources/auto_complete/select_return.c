@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   select_return.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:40:52 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/26 21:28:40 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/27 12:17:29 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void			select_in_prompt(char *select, char *cmd, int index)
 {
 	char	*tmp;
 	char	*result;
-	int		i;
+	size_t		i;
 	
 	i = 0;
 	tmp = ft_strdup(cmd + index + 1);
