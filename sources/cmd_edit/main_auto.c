@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 14:47:01 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 16:53:24 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 #include <shell.h>
 
-void	read_compl(t_compl *list)
+void	read_compl(t_compl *list, t_prompt *prompt)
 {
 	char 	buffer[4];
 	int		ret;
@@ -27,6 +27,11 @@ void	read_compl(t_compl *list)
 			select_prev(list);
 		if (T_RIGHT)
 			select_next(list);
+		if (T_TAB)
+		{
+			do_selection(list, prompt);
+			return ;
+		}
 		print_options(list);
 		ft_bzero(buffer, 4);
 	}
@@ -86,12 +91,16 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 		prompt_print(prompt, 1);
 		free_all_choices(list);
 		free(ult->term);
-		ult->term = init_term();	
+		ult->term = init_term();
 		return ;
 	}
 	term_setup(ult, 1);
-	read_compl(list);
+	read_compl(list, prompt);
+	ft_putendl("BPPPPPPPP");
+	get_prompt(ult->env);
+	prompt_print(prompt, 1);
 	free(ult->term);
 	ult->term = init_term();
 	free_all_choices(list);
+	ft_putendl("after main_auto");
 }

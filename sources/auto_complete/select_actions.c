@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 16:31:33 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/24 16:38:01 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 16:00:49 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,12 @@ void	select_prev(t_compl *list)
 	}
 	selected->cursored = 0;
 	selected->prev->cursored = 1;
+}
+
+void	do_selection(t_compl *list, t_prompt *prompt)
+{
+	t_compl *selected;
+
+	selected = search_selected(list);
+	select_in_prompt(selected->name, prompt);
 }

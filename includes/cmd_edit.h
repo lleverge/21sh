@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/27 14:42:28 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/27 16:03:29 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,11 @@ int					first_word(t_prompt	*prompt);
 int					empty_space(t_prompt *prompt);
 
 /*
+**select_return.c
+*/
+void				select_in_prompt(char *select, t_prompt *prompt);
+
+/*
 **small_prompt.c
 */
 int					ask_prompt(t_compl *list);
@@ -134,6 +139,8 @@ size_t				count_entries(t_compl *list);
 */
 void				select_next(t_compl *list);
 void				select_prev(t_compl *list);
+void				do_selection(t_compl *list, t_prompt *prompt);
+
 
 /*
 **prompt.c
