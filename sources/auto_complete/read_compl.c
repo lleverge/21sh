@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   small_prompt.c                                     :+:      :+:    :+:   */
+/*   read_compl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/27 12:06:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 18:36:01 by vfrolich         ###   ########.fr       */
+/*   Created: 2018/03/28 19:50:57 by vfrolich          #+#    #+#             */
+/*   Updated: 2018/03/28 19:54:15 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,47 +35,32 @@ static void	small_handler(int signal)
 	*flag = 0;
 }
 
-int prompt_for_display(t_compl *list)
+void	read_compl(t_compl *list, t_prompt *prompt)
 {
-	char	buffer[4];
+	char 	buffer[4];
+	int		ret;
 	int		flag;
 
+	ft_bzero(buffer, 4);
+	print_options(list);
 	flag = 1;
 	singlet_signal(&flag, 0);
 	signal(SIGINT, &small_handler);
-	ft_putstr("Display all ");
-	ft_putnbr(count_entries(list));
-	ft_putstr(" possibilities? (y or n)");
-	tputs(tgetstr("vs", NULL), 1 , ft_putchar_int);
-	ft_bzero(&buffer, 4);
-	while (read(0, buffer, 4) != -1 && flag)
+	while((ret = read(0, buffer, 4)) != -1 && flag)
 	{
-		if (*buffer == 'y' || *buffer == 'Y')
+		clr_screen(list);
+		if (T_LEFT)
+			select_prev(list);
+		if (T_RIGHT)
+			select_next(list);
+		if (T_TAB)
 		{
-			tputs(tgetstr("vi", NULL), 1 , ft_putchar_int);
-			return (0);
+			do_selection(list, prompt);
+			main_signal_handler();
+			return ;
 		}
-		if (*buffer == 'n' || *buffer == 'N')
-			flag = 0;
-		ft_bzero(&buffer, 4);
+		print_options(list);
+		ft_bzero(buffer, 4);
 	}
-	tputs(tgetstr("vi", NULL), 1 , ft_putchar_int);
-	return (1);
-}
-
-int	ask_prompt(t_compl *list)
-{
-	size_t	lines_needed;
-
-	lines_needed = count_lines(list);
-	if (lines_needed >= get_term_size("row")
-		&& !prompt_for_display(list))
-	{
-		ft_putchar('\n');
-		main_signal_handler();
-		return (1);
-	}
-	ft_putchar('\n');
 	main_signal_handler();
-	return (0);
 }

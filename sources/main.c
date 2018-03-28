@@ -139,7 +139,6 @@ int				init_all(char **environ)
 	t_ult		*ult;
 	t_lexer		*lex;
 	t_job 		*jobs;
-	t_compl		*sample;
 
 	ult = NULL;
 	jobs = NULL;
@@ -162,7 +161,6 @@ int				init_all(char **environ)
 			job_launch(jobs,ult);
 			destroy_job_list(jobs);
 		}
-		sample = init_cmd_compl(ult, "ls");
 		lex ? lex_free_all(lex) : NULL;
 		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;

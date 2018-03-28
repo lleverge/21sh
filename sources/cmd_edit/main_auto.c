@@ -6,36 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 16:53:24 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/28 19:59:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 #include <shell.h>
-
-void	read_compl(t_compl *list, t_prompt *prompt)
-{
-	char 	buffer[4];
-	int		ret;
-
-	ft_bzero(buffer, 4);
-	print_options(list);
-	while((ret = read(0, buffer, 4)) != -1)
-	{
-		clr_screen(list);
-		if (T_LEFT)
-			select_prev(list);
-		if (T_RIGHT)
-			select_next(list);
-		if (T_TAB)
-		{
-			do_selection(list, prompt);
-			return ;
-		}
-		print_options(list);
-		ft_bzero(buffer, 4);
-	}
-}
 
 void	term_setup(t_ult *ult, int value)
 {
@@ -72,15 +48,20 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 	if (!T_TAB)
 		return ;
 	word = word_detect(prompt);
+	list = NULL;
 	if (first_word(prompt) || empty_space(prompt))
 		list = init_cmd_compl(ult, word);
 	else
 	{
-		// list = basic_compl();
+		ft_strdel(&word);
 		return ;
 	}
 	if (!list)
+	{
+		ft_strdel(&word);
 		return ;
+	}
+	ft_strdel(&word);
 	void_prompt();
 	if (count_lines(list) >= get_term_size("row"))
 	{
@@ -94,13 +75,10 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 		ult->term = init_term();
 		return ;
 	}
-	term_setup(ult, 1);
 	read_compl(list, prompt);
-	ft_putendl("BPPPPPPPP");
 	get_prompt(ult->env);
 	prompt_print(prompt, 1);
+	free_all_choices(list);
 	free(ult->term);
 	ult->term = init_term();
-	free_all_choices(list);
-	ft_putendl("after main_auto");
 }

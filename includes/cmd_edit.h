@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/27 16:03:29 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/28 19:51:13 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,14 +207,18 @@ void				up_line(t_prompt *prompt, char *buffer);
 /*
 **main_auto.c
 */
+
 void				main_auto(t_prompt *prompt, char *buffer, t_ult *ult);
 
+/*
+**main_auto.c
+*/
+void				read_compl(t_compl *list, t_prompt *prompt);
 
 /*
 **free_tools.c
 */
 void				free_prompt(t_prompt **prompt);
-
 char				*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag);
 
 
