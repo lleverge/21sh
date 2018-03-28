@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 20:51:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/24 18:05:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/28 20:11:29 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	print_options(t_compl *list)
 	size_t		i;
 	t_compl	*tmp;
 
-	// void_prompt();
 	word_line = word_per_line(list);
 	tmp = list;
 	largest = get_largest_word(list);

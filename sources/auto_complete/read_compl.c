@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 19:50:57 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/28 19:54:15 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/28 22:16:00 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,13 +51,12 @@ void	read_compl(t_compl *list, t_prompt *prompt)
 		clr_screen(list);
 		if (T_LEFT)
 			select_prev(list);
-		if (T_RIGHT)
+		if (T_RIGHT || T_TAB)
 			select_next(list);
-		if (T_TAB)
+		if (buffer[0] == 10 && buffer[1] == 0)
 		{
 			do_selection(list, prompt);
-			main_signal_handler();
-			return ;
+			break ;
 		}
 		print_options(list);
 		ft_bzero(buffer, 4);

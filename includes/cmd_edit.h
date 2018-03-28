@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/28 19:51:13 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/28 20:48:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,21 @@ t_prompt			*stock_prompt(t_prompt *prompt, int i);
 /*
 **init_complete.c
 */
+void					compl_push(t_compl *newelem, t_compl **elemlist);
+t_compl					*init_compl_one(char *cmd);
 t_compl 				*get_all_cmd(char *paths, char *cmd);
 
 /*
 **init_complete2.c
 */
 t_compl					*init_cmd_compl(t_ult *ult, char *cmd);
+void					add_prev(t_compl *list);
+
+/*
+**init_complete3.c
+*/
+t_compl					*classic_compl(t_prompt *prompt);
+
 
 /*
 **init_term.c

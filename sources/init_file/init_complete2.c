@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 13:48:04 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/28 20:44:05 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 #include <shell.h>
 
-static void		add_prev(t_compl *list)
+void		add_prev(t_compl *list)
 {
 	t_compl 	*tmp;
 	t_compl		*tmp2;

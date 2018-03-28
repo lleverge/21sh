@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 14:13:42 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 13:56:33 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/28 20:50:06 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void			compl_push(t_compl *newelem, t_compl **elemlist)
 	tmp->next = newelem;
 }
 
-static t_compl	*init_compl_one(char *cmd)
+t_compl			*init_compl_one(char *cmd)
 {
 	t_compl		*dest;
 
@@ -70,7 +70,6 @@ static void			get_cmd(char *path, char *cmd, t_compl **list)
 	readdir(pathdir);
 	while ((file_info = readdir(pathdir)))
 	{
-
 		new = NULL;
 		if (ft_strlen(cmd))
 		{
@@ -82,16 +81,6 @@ static void			get_cmd(char *path, char *cmd, t_compl **list)
 		new ? compl_push(new, list) : NULL;
 	}
 	closedir(pathdir);
-}
-
-t_compl	*basic_compl(void)
-{
-	t_compl *new;
-
-	new = init_compl_one("DUMMY");
-	new->prev = new;
-	new->next = new;
-	return (new);
 }
 
 t_compl 		*get_all_cmd(char *paths, char *cmd)
