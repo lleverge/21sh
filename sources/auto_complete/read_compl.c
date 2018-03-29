@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 19:50:57 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/29 11:30:33 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 21:37:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static void	small_handler(int signal)
 	ult = NULL;
 	ult = stock_ult(ult, 1);
 	term_setup(ult, 0);
-	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 }
 
 void	read_compl(t_compl *list, t_prompt *prompt)

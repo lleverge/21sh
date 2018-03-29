@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 20:09:48 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/28 21:57:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 20:43:35 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-static DIR			*safe_open(char *path_string)
+DIR			*safe_open_dir(char *path_string)
 {
 	DIR				*pathdir;
 
@@ -34,11 +34,8 @@ static t_compl *on_empty(void)
 	DIR				*curr_dir;
 	struct dirent 	*file_info;
 
-	if (!(curr_dir = safe_open(".")))
-	{
-		ft_putendl("safe open failed");
+	if (!(curr_dir = safe_open_dir(".")))
 		return (NULL);
-	}
 	list = NULL;
 	while ((file_info = readdir(curr_dir)))
 	{
@@ -58,11 +55,8 @@ static t_compl *on_word(char *word)
 	DIR				*curr_dir;
 	struct dirent 	*file_info;
 
-	if (!(curr_dir = safe_open(".")))
-	{
-		ft_putendl("safe open failed");
+	if (!(curr_dir = safe_open_dir(".")))
 		return (NULL);
-	}
 	list = NULL;
 	while ((file_info = readdir(curr_dir)))
 	{
@@ -94,6 +88,8 @@ t_compl	*classic_compl(t_prompt *prompt)
 	new ? add_prev(new) : NULL;
 	if (new)
 		new->cursored = 1;
+	if ((new && compl_dir_needed(new)) || (!new && ft_strlen(word) && word[ft_strlen(word) - 1] == '/'))
+		dir_handle(&new, word);
 	ft_strdel(&word);
 	return (new);
 }

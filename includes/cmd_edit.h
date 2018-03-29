@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/29 11:29:51 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 19:12:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,12 +84,16 @@ t_compl 				*get_all_cmd(char *paths, char *cmd);
 /*
 **init_complete2.c
 */
+int						compl_dir_needed(t_compl *list);
 t_compl					*init_cmd_compl(t_ult *ult, char *cmd);
 void					add_prev(t_compl *list);
+void					dir_handle(t_compl **list, char *word);
+
 
 /*
 **init_complete3.c
 */
+DIR						*safe_open_dir(char *path_string);
 t_compl					*classic_compl(t_prompt *prompt);
 
 

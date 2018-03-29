@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/29 13:41:31 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 21:38:15 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,73 @@ t_compl			*init_cmd_compl(t_ult *ult, char *cmd)
 	return (dest);
 }
 
-// t_compl			*init_on_dir(t_compl *list)
+static t_compl		*init_on_dir(char *path_dir)
+{
+	DIR				*open_dir;
+	t_compl			*list;
+	t_compl			*new;
+	struct dirent	*file_info;
+	char			*buff;
 
-// int		compl_dir_needed(t_compl *list)
-// {	
-// 	if (count_entries(list) > 1)
-// 		return (0);
+	if (!(open_dir = safe_open_dir(path_dir)))
+		return (NULL);
+	list = NULL;
+	buff = NULL;
+	while ((file_info = readdir(open_dir)))
+	{
+		new = NULL;
+		if (file_info->d_name[0] != '.')
+		{
+			buff = ft_strjoin(path_dir, file_info->d_name);
+			new = init_compl_one(buff);
+			ft_strdel(&buff);
+		}
+		new ? compl_push(new, &list) : NULL;
+	}
+	closedir(open_dir);
+	if (list)
+		list->cursored = 1;
+	return (list);
+}
 
-// }
+int		compl_dir_needed(t_compl *list)
+{	
+	struct	stat *file_info;
+
+	file_info = NULL;
+	if (count_entries(list) > 1 || access(list->name, F_OK | X_OK) == -1)
+		return (0);
+	if (!(file_info = (struct stat *)malloc(sizeof(struct stat))))
+	{
+		ft_putendl_fd("21sh: malloc error", 2);
+		exit(3);
+	}
+ 	if (lstat(list->name, file_info) == -1)
+ 	{
+ 		free(file_info);
+ 		return (0);
+ 	}
+ 	free(file_info);
+	return (S_ISDIR(file_info->st_mode) ? 1 : 0);
+}
+
+void	dir_handle(t_compl **list, char *word)
+{
+	char	*buffer;
+	t_compl	*tmp;
+
+	if (!word || !ft_strlen(word))
+		return ;
+	tmp = *list;
+	if ((!list || !*list) && (word[ft_strlen(word) - 1] == '/'))
+	{
+		*list = init_on_dir(word);
+		*list ? add_prev(*list) : NULL;
+	}
+	else if (!ft_strcmp(tmp->name, word))
+	{
+		buffer = ft_strdup(tmp->name);
+		ft_strdel(&tmp->name);
+		tmp->name = ft_strjoin_free_one(&buffer, "/");
+	}
+}
