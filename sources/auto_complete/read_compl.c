@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 19:50:57 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/28 22:16:00 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 11:30:33 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,18 @@ static int	*singlet_signal(int *flag, int mode)
 
 static void	small_handler(int signal)
 {
-	int *flag;
+	int 	*flag;
+	t_ult	*ult;
 
 	if (signal != SIGINT)
 		return ;
 	flag = NULL;
 	flag = singlet_signal(flag, 1);
 	*flag = 0;
+	ult = NULL;
+	ult = stock_ult(ult, 1);
+	term_setup(ult, 0);
+	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 }
 
 void	read_compl(t_compl *list, t_prompt *prompt)

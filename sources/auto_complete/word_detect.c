@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:31:43 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/23 20:46:00 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 13:39:05 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,22 @@ int		first_word(t_prompt	*prompt)
 {
 	char	*word;
 	char	*pos;
+	int		index;
 
+	index = prompt->i;
 	word = word_detect(prompt);
 	if (!ft_strlen(word))
 	{
 		ft_strdel(&word);
 		return (0);
 	}
-	pos = ft_strstr(prompt->cmd, word);
+	while (index > 0 && prompt->cmd[index])
+	{
+		if (ft_isspace(prompt->cmd[index - 1]))
+			break;
+		index--;
+	}
+	pos = &prompt->cmd[index];
 	ft_strdel(&word);
 	if (pos == prompt->cmd || space_check(prompt))
 		return (1);

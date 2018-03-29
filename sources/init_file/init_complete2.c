@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/28 20:44:05 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 13:41:31 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,12 @@ t_compl			*init_cmd_compl(t_ult *ult, char *cmd)
 	ft_strdel(&path_string);
 	return (dest);
 }
+
+// t_compl			*init_on_dir(t_compl *list)
+
+// int		compl_dir_needed(t_compl *list)
+// {	
+// 	if (count_entries(list) > 1)
+// 		return (0);
+
+// }

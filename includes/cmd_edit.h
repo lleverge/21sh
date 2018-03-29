@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/28 20:48:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 11:29:51 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,7 @@ void				up_line(t_prompt *prompt, char *buffer);
 **main_auto.c
 */
 
+void				term_setup(t_ult *ult, int value);
 void				main_auto(t_prompt *prompt, char *buffer, t_ult *ult);
 
 /*

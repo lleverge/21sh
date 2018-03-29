@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/28 22:12:29 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 13:43:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,14 @@ void	term_setup(t_ult *ult, int value)
 static void	void_prompt(void)
 {
 	t_prompt *prompt;
+	t_ult	*ult;
 
 	prompt = NULL;
 	prompt = stock_prompt(prompt, 1);
 	prompt_print(prompt, 0);
+	ult = NULL;
+	ult = stock_ult(ult, 1);
+	term_setup(ult, 1);
 	ft_putchar('\n');
 }
 
@@ -44,6 +48,7 @@ static void	cleanup(t_prompt *prompt, t_ult *ult, t_compl *list)
 {
 	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
+	tputs(tgetstr("cr", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_int);
 	get_prompt(ult->env);
 	prompt_print(prompt, 1);

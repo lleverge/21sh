@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/23 16:19:57 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/29 11:32:47 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -307,10 +307,6 @@ void					main_signal_handler(void);
 */
 void					sig_handler_heredoc(int sig);
 int						*singleton_signal();
-
-/*
-**pipe.c
-*/
 
 /*
 **safe_position_tools.c
