@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:23:07 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 10:30:29 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/30 11:20:00 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,9 +137,7 @@ int				ft_cd(t_env **env, char **arg)
 		if ((home = get_data(*env, "HOME")))
 		{
 			tmp = ft_strsub(arg[1], 1, ft_strlen(arg[1]) - 1);
-			ft_putendl(tmp);
 			arg[1] = ft_strjoin(home, tmp);
-			ft_putendl(arg[1]);
 			ft_strdel(&tmp);
 			return (err_cd_handle(env, &arg[1]));
 		}
