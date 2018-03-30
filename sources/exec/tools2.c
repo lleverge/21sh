@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 14:29:56 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/15 19:48:57 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:01:54 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int			list_size(t_env *env)
 static int	is_dir(char *path)
 {
 	struct stat *buffer;
-	
+
 	buffer = NULL;
 	if (!(buffer = (struct stat *)malloc(sizeof(struct stat))))
 	{
@@ -51,11 +51,10 @@ static int	is_dir(char *path)
 	}
 	free(buffer);
 	return (0);
-}	
+}
 
 static int	is_validsubpath(char *sub_path, char *full_cmd_path)
 {
-
 	if (access(sub_path, F_OK) == -1)
 	{
 		ft_putstr_fd("21sh : no such file or directory: ", 2);
@@ -71,7 +70,7 @@ static int	is_validsubpath(char *sub_path, char *full_cmd_path)
 	return (0);
 }
 
-int		path_access_checker(char *cmd_path)
+int			path_access_checker(char *cmd_path)
 {
 	char **splited_cmd;
 	char **tmp_arr;

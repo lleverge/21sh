@@ -6,16 +6,16 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/29 21:38:15 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:52:48 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 #include <shell.h>
 
-void		add_prev(t_compl *list)
+void			add_prev(t_compl *list)
 {
-	t_compl 	*tmp;
+	t_compl		*tmp;
 	t_compl		*tmp2;
 
 	tmp = list;
@@ -27,7 +27,7 @@ void		add_prev(t_compl *list)
 		tmp2 = tmp;
 		tmp = tmp->next;
 	}
-	tmp2->next= list;
+	tmp2->next = list;
 	list->prev = tmp2;
 }
 
@@ -46,7 +46,7 @@ t_compl			*init_cmd_compl(t_ult *ult, char *cmd)
 	return (dest);
 }
 
-static t_compl		*init_on_dir(char *path_dir)
+static t_compl	*init_on_dir(char *path_dir)
 {
 	DIR				*open_dir;
 	t_compl			*list;
@@ -75,9 +75,9 @@ static t_compl		*init_on_dir(char *path_dir)
 	return (list);
 }
 
-int		compl_dir_needed(t_compl *list)
-{	
-	struct	stat *file_info;
+int				compl_dir_needed(t_compl *list)
+{
+	struct stat	*file_info;
 
 	file_info = NULL;
 	if (count_entries(list) > 1 || access(list->name, F_OK | X_OK) == -1)
@@ -87,16 +87,16 @@ int		compl_dir_needed(t_compl *list)
 		ft_putendl_fd("21sh: malloc error", 2);
 		exit(3);
 	}
- 	if (lstat(list->name, file_info) == -1)
- 	{
- 		free(file_info);
- 		return (0);
- 	}
- 	free(file_info);
+	if (lstat(list->name, file_info) == -1)
+	{
+		free(file_info);
+		return (0);
+	}
+	free(file_info);
 	return (S_ISDIR(file_info->st_mode) ? 1 : 0);
 }
 
-void	dir_handle(t_compl **list, char *word)
+void			dir_handle(t_compl **list, char *word)
 {
 	char	*buffer;
 	t_compl	*tmp;

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 15:52:23 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 21:04:05 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 14:02:09 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <lexer.h>
 #include <cmd_edit.h>
 
-char		*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag)
+char			*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag)
 {
 	static char	buffer[4];
 

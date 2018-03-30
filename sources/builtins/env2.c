@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 15:48:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/09 12:01:30 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:55:28 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 
 char			*word_array_to_str(char **args_arr)
 {
-	char 	**tmp;
+	char	**tmp;
 	char	*dest;
 
 	dest = NULL;
 	tmp = args_arr;
 	if (**tmp == '-')
 		tmp++;
-	while (*tmp && ft_strchr(*tmp , '='))
+	while (*tmp && ft_strchr(*tmp, '='))
 		tmp++;
 	if (*tmp)
 	{

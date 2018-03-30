@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 11:36:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/09 11:47:35 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 16:01:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ t_env		*envlist_cpy(t_env *src)
 	return (new);
 }
 
-int		index_start_newtab(char **cmd)
+int			index_start_newtab(char **cmd)
 {
 	int	i;
 
 	i = 1;
-	if(cmd[i] && *cmd[i] == '-')
+	if (cmd[i] && *cmd[i] == '-')
 		i++;
 	while (cmd[i] && ft_strchr(cmd[i], '='))
 		i++;
@@ -58,7 +58,7 @@ int			check_opt(char *opt)
 	return (1);
 }
 
-static int count_strings(char **src, int index_start_newtab)
+static int	count_strings(char **src, int index_start_newtab)
 {
 	char	**tmp;
 	int		index;
@@ -72,9 +72,10 @@ static int count_strings(char **src, int index_start_newtab)
 	}
 	return (index);
 }
-char	**tab_dup(char **src, int index_start_newtab)
+
+char		**tab_dup(char **src, int index_start_newtab)
 {
-	char 	**dest;
+	char	**dest;
 	char	**tmp;
 	int		index;
 

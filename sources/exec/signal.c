@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/17 00:58:37 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 14:58:00 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <lexer.h>
 #include <cmd_edit.h>
 
-static void full_lines(t_prompt *prompt)
+static void	full_lines(t_prompt *prompt)
 {
 	int		count;
 
@@ -35,14 +35,13 @@ static void full_lines(t_prompt *prompt)
 	}
 }
 
-void	sigwinch_handler(t_prompt *prompt)
+void		sigwinch_handler(t_prompt *prompt)
 {
-	
 	reset(prompt);
 	prompt_print(prompt, 1);
 }
 
-void	intsig_handler(t_prompt *prompt, t_ult *ult)
+void		intsig_handler(t_prompt *prompt, t_ult *ult)
 {
 	struct winsize	win;
 
@@ -62,7 +61,7 @@ void	intsig_handler(t_prompt *prompt, t_ult *ult)
 	prompt_print(prompt, 1);
 }
 
-void	signal_dispatch(int signal)
+void		signal_dispatch(int signal)
 {
 	t_ult			*ult;
 	t_prompt		*prompt;
@@ -77,7 +76,7 @@ void	signal_dispatch(int signal)
 		sigwinch_handler(prompt);
 }
 
-void	main_signal_handler(void)
+void		main_signal_handler(void)
 {
 	signal(SIGINT, &signal_dispatch);
 	signal(SIGWINCH, &signal_dispatch);

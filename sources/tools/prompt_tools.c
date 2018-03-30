@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:23:22 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/14 17:33:45 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 13:55:10 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			is_cmd_empty(char *cmd)
 {
-	char 	*tmp;
+	char	*tmp;
 
 	tmp = cmd;
 	while (*tmp)

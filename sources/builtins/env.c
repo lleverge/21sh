@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:32:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/14 16:45:50 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:56:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_env		*add_env_one(char *arg, t_env **env)
 	return (*env);
 }
 
-int 		new_env(char **arg_tab, t_env **env)
+int			new_env(char **arg_tab, t_env **env)
 {
 	char	**tmp;
 
@@ -96,7 +96,7 @@ int			env_builtin(t_ult *ult, char **arg)
 		return (1);
 	new = (!check_opt(arg[1])) ? NULL : envlist_cpy(ult->env);
 	if (new_env(&arg[1], &new) == 1)
-		return (1);	
+		return (1);
 	if (!arg[index_start_newtab(arg)])
 	{
 		print_list(new);

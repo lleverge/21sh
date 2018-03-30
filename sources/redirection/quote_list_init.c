@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 18:26:42 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/12 18:13:03 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 14:01:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		quote_push(t_quote *elem, t_quote **elemlist)
 	tmp->next = elem;
 }
 
-t_quote 	*quote_list_init(char *cmd)
+t_quote		*quote_list_init(char *cmd)
 {
 	t_quote *new;
 	t_quote *head;
@@ -35,7 +35,7 @@ t_quote 	*quote_list_init(char *cmd)
 
 	if (!ft_strchr(cmd, '\'') && !ft_strchr(cmd, '"'))
 		return (NULL);
-	head = quoted_list_init_one(cmd , cmd);
+	head = quoted_list_init_one(cmd, cmd);
 	sub_cmd = &cmd[head->quotes[1]] + 1;
 	new = NULL;
 	while (ft_strchr(sub_cmd, '\'') || ft_strchr(sub_cmd, '"'))

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 19:01:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/17 01:06:50 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 14:54:01 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			set_fd_pipe(t_process *proc_1, t_process *proc_2)
 
 t_job			*apply_redirect(t_job *job_li, t_ult *ult)
 {
-	t_process 		*tmp;
+	t_process	*tmp;
 
 	tmp = job_li->proc;
 	while (tmp)
@@ -40,17 +40,19 @@ t_job			*apply_redirect(t_job *job_li, t_ult *ult)
 			job_li->proc = NULL;
 			break ;
 		}
-			tmp = tmp->next;
+		tmp = tmp->next;
 	}
 	return (job_li);
 }
-static void	simple_sigint(int signal)
+
+static void		simple_sigint(int signal)
 {
 	if (signal != SIGINT)
 		return ;
 	ft_putchar('\n');
 }
-void		job_launch(t_job *job_li, t_ult *ult)
+
+void			job_launch(t_job *job_li, t_ult *ult)
 {
 	char		**cmd_tab;
 	t_job		*tmp_job;

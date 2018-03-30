@@ -6,14 +6,14 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:28:37 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/23 18:51:02 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/30 14:40:54 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <lexer.h>
 #include <shell.h>
 
-static void     check_merge_aggreg2(t_lexer *lexer)
+static void		check_merge_aggreg2(t_lexer *lexer)
 {
 	t_lexer		*tmp;
 
@@ -26,9 +26,9 @@ static void     check_merge_aggreg2(t_lexer *lexer)
 	tmp->prev = lexer;
 }
 
-static void     check_merge_aggreg1(t_lexer *lexer)
+static void		check_merge_aggreg1(t_lexer *lexer)
 {
-	t_lexer     *tmp;
+	t_lexer		*tmp;
 
 	ft_strdel(&lexer->content);
 	lexer->content = ft_strdup(">&");
@@ -41,7 +41,7 @@ static void     check_merge_aggreg1(t_lexer *lexer)
 
 static void		check_merge_dgreat(t_lexer *lexer)
 {
-	t_lexer     *tmp;
+	t_lexer		*tmp;
 
 	ft_strdel(&lexer->content);
 	lexer->content = ft_strdup(">>");
@@ -54,7 +54,7 @@ static void		check_merge_dgreat(t_lexer *lexer)
 
 static void		check_merge_dless(t_lexer *lexer)
 {
-	t_lexer     *tmp;
+	t_lexer		*tmp;
 
 	ft_strdel(&lexer->content);
 	lexer->content = ft_strdup("<<");

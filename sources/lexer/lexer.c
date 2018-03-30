@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/15 14:23:08 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 14:49:01 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,55 +31,14 @@ t_lexer			*fill_lexer(t_ult *ult)
 	return (lexlist);
 }
 
-static int	builtin_launch(t_ult *ult, t_process *proc)
-{
-	int 	fd[3];
-	int 	ret;
-
-	fd[0] = dup(ult->fd[0]);
-	fd[1] = dup(ult->fd[1]);
-	fd[2] = dup(ult->fd[2]);
-	if (set_fd_exec(proc) == -1)
-		return (1);
-	ret = search_for_builtins(ult, proc);
-	close_fd_exec(proc);
-	restore_fd(fd);
-	return (ret);
-}
-
-int			seek_and_exec(t_ult *ult, t_process *proc, char **cmd_tab, int fd[2])
-{
-	char	**cmd_tab2;
-
-	cmd_tab2 = cmd_tab;
-	if(!cmd_tab)
-	{
-		ft_putendl_fd("21sh : command not found", 2);
-		return (127);
-	}
-	if (check_for_builtin(*cmd_tab))
-		return (builtin_launch(ult, proc));
-	if (ult->hash_table && hash_search(*cmd_tab, ult->hash_table))
-		return (exe_fork(ult->env, proc, ult, fd));
-	if (ft_strchr(*cmd_tab, '/') && !path_access_checker(*cmd_tab))
-		return (exe_fork2(ult->env, proc, ult, fd));
-	if (!ft_strchr(*cmd_tab, '/'))
-	{
-		ft_putstr_fd("21sh : command not found: ", 2);
-		ft_putendl_fd(*cmd_tab, 2);
-	}
-	return (127);
-}
-
 static void		pipe_token(t_lexer *lex, t_process **proc, char **cmd)
 {
 	proc_pushb(proc, create_proc_node(*cmd, lex->token_id));
 	ft_strdel(cmd);
 	*cmd = ft_strdup("");
-
 }
 
-static int		fine_token(int	token_id)
+static int		fine_token(int token_id)
 {
 	if (token_id == SAND || token_id == SEPARATOR || token_id == PIPE ||
 		token_id == QUOTE || token_id == DQUOTE)
@@ -93,10 +52,10 @@ static void		separator_token(char **cmd, t_job **job, t_process **proc)
 	job_pushb(job, create_job_node(*proc));
 	ft_strdel(cmd);
 	*cmd = ft_strdup("");
-	*proc = NULL;	
+	*proc = NULL;
 }
 
-t_job		*set_jobs(t_lexer *lex)
+t_job			*set_jobs(t_lexer *lex)
 {
 	t_job		*job;
 	t_process	*proc;

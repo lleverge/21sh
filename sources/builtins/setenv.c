@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:48:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/09 11:30:46 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 16:02:02 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static int		invalid_identifier(char *cmd)
+static int			invalid_identifier(char *cmd)
 {
 	if (ft_strchr(cmd, '=') == cmd)
 	{
@@ -24,7 +24,7 @@ static int		invalid_identifier(char *cmd)
 	return (0);
 }
 
-static void		env_push(t_env **envlist, t_env *envnode)
+static void			env_push(t_env **envlist, t_env *envnode)
 {
 	t_env		*tmp;
 
@@ -39,7 +39,7 @@ static void		env_push(t_env **envlist, t_env *envnode)
 	tmp->next = envnode;
 }
 
-static t_env 	*new_env_one(char *name, char *value)
+static t_env		*new_env_one(char *name, char *value)
 {
 	t_env		*tmp;
 
@@ -55,7 +55,7 @@ static t_env 	*new_env_one(char *name, char *value)
 	return (tmp);
 }
 
-t_env			*set_env(t_env **env, char *name, char *value)
+t_env				*set_env(t_env **env, char *name, char *value)
 {
 	t_env		*tmp;
 
@@ -77,7 +77,7 @@ t_env			*set_env(t_env **env, char *name, char *value)
 	return (*env);
 }
 
-static t_env	*add_all_env(t_ult *ult, char **cmd)
+static t_env		*add_all_env(t_ult *ult, char **cmd)
 {
 	char		**tmp;
 	char		*tmp_string;
@@ -102,7 +102,7 @@ static t_env	*add_all_env(t_ult *ult, char **cmd)
 	return (ult->env);
 }
 
-t_env			*split_to_set(t_ult *ult)
+t_env				*split_to_set(t_ult *ult)
 {
 	char		**splited_cmd;
 

@@ -6,16 +6,16 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:42:27 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/17 10:58:14 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 13:59:26 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 
-static int 		first_quote(char *sub_cmd, char *cmd)
+static int		first_quote(char *sub_cmd, char *cmd)
 {
-	int 		quote;
-	int 		dquote;
+	int		quote;
+	int		dquote;
 
 	quote = 0;
 	dquote = 0;
@@ -30,8 +30,8 @@ static int 		first_quote(char *sub_cmd, char *cmd)
 
 static	int		endquote(char *cmd, int firstquote)
 {
-	char 		*sub_cmd;
-	char 		delim;
+	char		*sub_cmd;
+	char		delim;
 
 	sub_cmd = &cmd[firstquote];
 	delim = *sub_cmd;
@@ -39,9 +39,9 @@ static	int		endquote(char *cmd, int firstquote)
 	return (ft_strchr(sub_cmd, delim) - cmd);
 }
 
-t_quote 		*quoted_list_init_one(char *sub_cmd, char *cmd)
+t_quote			*quoted_list_init_one(char *sub_cmd, char *cmd)
 {
-	t_quote 	*new;
+	t_quote		*new;
 
 	if (!(new = (t_quote *)malloc(sizeof(t_quote))))
 		return (NULL);
@@ -64,7 +64,7 @@ static void		quote_destroy(t_quote *quote_list)
 	quote_list = NULL;
 }
 
-int		is_quoted(char *cmd, int index)
+int				is_quoted(char *cmd, int index)
 {
 	t_quote *quotelist;
 	t_quote	*tmplist;

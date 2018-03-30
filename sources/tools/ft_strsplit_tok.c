@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/06 14:15:09 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/26 14:13:00 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 13:55:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int				ft_istoken(char c)
 {
 	if (c == '|')
 		return (3);
-	// else if (c == '&')
-	// 	return (4);
 	else
 		return (0);
 }

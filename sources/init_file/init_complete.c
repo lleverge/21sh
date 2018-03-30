@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 14:13:42 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/28 20:50:06 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:04:11 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_compl			*init_compl_one(char *cmd)
 	return (dest);
 }
 
-static DIR			*safe_open(char *path_string)
+static DIR		*safe_open(char *path_string)
 {
 	DIR				*pathdir;
 
@@ -58,11 +58,11 @@ static DIR			*safe_open(char *path_string)
 	return (pathdir);
 }
 
-static void			get_cmd(char *path, char *cmd, t_compl **list)
+static void		get_cmd(char *path, char *cmd, t_compl **list)
 {
-	t_compl 		*new;
+	t_compl			*new;
 	DIR				*pathdir;
-	struct dirent 	*file_info;
+	struct dirent	*file_info;
 
 	if (!(pathdir = safe_open(path)))
 		return ;
@@ -83,9 +83,9 @@ static void			get_cmd(char *path, char *cmd, t_compl **list)
 	closedir(pathdir);
 }
 
-t_compl 		*get_all_cmd(char *paths, char *cmd)
+t_compl			*get_all_cmd(char *paths, char *cmd)
 {
-	char 		**path_strings;
+	char		**path_strings;
 	char		**tmp;
 	t_compl		*dest;
 

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2018/02/07 18:14:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 15:53:28 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_ult				*stock_ult(t_ult *ult, int i)
 	return (tmp);
 }
 
-static t_env				*incr_shlvl(t_env **envlist)
+static t_env		*incr_shlvl(t_env **envlist)
 {
 	char	*tmp;
 	int		shlvl;
@@ -80,7 +80,7 @@ t_ult				*init_ult(t_ult *ult, char **environ)
 	ult->hist = init_hist(hist);
 	ult->hash_table = table_init(ult->env);
 	ult->ret = 0;
-	ult->cmd = NULL; 
+	ult->cmd = NULL;
 	ult->fd[0] = 0;
 	ult->fd[1] = 1;
 	ult->fd[2] = 2;
