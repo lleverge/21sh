@@ -6,11 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 14:06:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/30 16:10:59 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
+#include <lexer.h>
 
 static int			is_only_number(char *sub_cmd)
 {

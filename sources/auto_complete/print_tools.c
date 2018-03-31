@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 16:21:17 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/28 22:12:16 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/31 13:36:36 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ size_t				get_term_size(char *field)
 	return (win.ws_col);
 }
 
-size_t	get_largest_word(t_compl *list)
+size_t				get_largest_word(t_compl *list)
 {
-	size_t 	res;
-	t_compl *tmp;
+	size_t			res;
+	t_compl			*tmp;
 
 	res = ft_strlen(list->name);
 	tmp = list->next;
@@ -45,52 +45,36 @@ size_t	get_largest_word(t_compl *list)
 	return (res);
 }
 
-size_t	word_per_line(t_compl *list)
+size_t				word_per_line(t_compl *list)
 {
-	size_t 	largest;
-	size_t	term_co;
+	size_t			largest;
+	size_t			term_co;
 
 	largest = get_largest_word(list);
 	term_co = get_term_size("col");
-	return (term_co/(largest + 1));
+	return (term_co / (largest + 1));
 }
 
-size_t	count_entries(t_compl *list)
+size_t				count_lines(t_compl *list)
 {
-	size_t count;
-	t_compl *tmp;
-
-	count = 1;
-	tmp = list;
-	tmp = tmp->next;
-	while (tmp != list)
-	{
-		count++;
-		tmp = tmp->next;
-	}
-	return (count);
-}
-
-size_t 	count_lines(t_compl *list)
-{
-	size_t 	wpl;
-	size_t	nb_entries;
-	size_t lines_needed;
+	size_t			wpl;
+	size_t			nb_entries;
+	size_t			lines_needed;
 
 	wpl = word_per_line(list);
 	nb_entries = count_entries(list);
 	if (nb_entries < wpl)
 		return (1);
-	lines_needed = nb_entries/wpl;
-	if (nb_entries%wpl)
+	lines_needed = nb_entries / wpl;
+	if (nb_entries % wpl)
 		lines_needed++;
 	return (lines_needed);
 }
 
-void	clr_screen(t_compl *list)
+void				clr_screen(t_compl *list)
 {
-	size_t nb_entries;
-	size_t lines_needed; 
+	size_t			nb_entries;
+	size_t			lines_needed;
 
 	nb_entries = count_entries(list);
 	lines_needed = count_lines(list);

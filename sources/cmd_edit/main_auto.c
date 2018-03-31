@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/29 16:03:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 19:06:30 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 		return ;
 	word = word_detect(prompt);
 	list = NULL;
-	if (first_word(prompt) || empty_space(prompt))
+	if (empty_space(prompt) || first_word(prompt))
 		list = init_cmd_compl(ult, word);
 	else
 		list = classic_compl(prompt);

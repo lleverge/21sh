@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/27 13:38:18 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 13:42:39 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/31 13:23:12 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 #include <shell.h>
 
-void 	free_choice_one(t_compl *elem)
+void	free_choice_one(t_compl *elem)
 {
 	ft_strdel(&elem->name);
 	free(elem);

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:40:52 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/28 22:00:26 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/31 13:45:42 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 
 static int		detect_index(t_prompt *prompt)
 {
-	int		index;
+	int			index;
 
 	index = prompt->i;
-	if (ft_isspace(prompt->cmd[index]))
+	if (ft_isspace(prompt->cmd[index]) && index > 0 &&
+		ft_isspace(prompt->cmd[index - 1]))
 		return (index);
 	while (index > 0)
 	{
@@ -31,10 +32,9 @@ static int		detect_index(t_prompt *prompt)
 
 static int		detect_index_end(t_prompt *prompt)
 {
-	int		index;
+	int			index;
 
 	index = prompt->i;
-
 	if (ft_isspace(prompt->cmd[index]))
 		return (index);
 	while (index < 1999)
@@ -48,7 +48,7 @@ static int		detect_index_end(t_prompt *prompt)
 
 static void		gather(char *before, char *select, char *after, t_prompt *p)
 {
-	int index;
+	int			index;
 
 	index = 0;
 	if (before)
@@ -64,13 +64,11 @@ static void		gather(char *before, char *select, char *after, t_prompt *p)
 
 void			select_in_prompt(char *select, t_prompt *prompt)
 {
-	char	*before;
-	char	*after;
-	char	*word;
-	
-	if ((detect_index_end(prompt) + 1 ) >= 1999)
+	char		*before;
+	char		*after;
+
+	if ((detect_index_end(prompt) + 1) >= 1999)
 		return ;
-	word = word_detect(prompt);
 	after = NULL;
 	after = ft_strdup(&(prompt->cmd[detect_index_end(prompt)]));
 	if (!detect_index(prompt))
@@ -80,5 +78,4 @@ void			select_in_prompt(char *select, t_prompt *prompt)
 	gather(before, select, after, prompt);
 	before ? ft_strdel(&before) : NULL;
 	after ? ft_strdel(&after) : NULL;
-	word ? ft_strdel(&word): NULL;
 }

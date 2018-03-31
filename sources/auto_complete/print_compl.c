@@ -6,16 +6,32 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 20:51:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/28 20:11:29 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/31 13:34:14 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
+size_t		count_entries(t_compl *list)
+{
+	size_t	count;
+	t_compl	*tmp;
+
+	count = 1;
+	tmp = list;
+	tmp = tmp->next;
+	while (tmp != list)
+	{
+		count++;
+		tmp = tmp->next;
+	}
+	return (count);
+}
+
 static void	print_one(t_compl *list, size_t largest)
 {
-	int to_print;
+	int		to_print;
 
 	if (list->cursored == 1)
 	{
@@ -24,7 +40,7 @@ static void	print_one(t_compl *list, size_t largest)
 		tputs(tgetstr("me", NULL), 1, ft_putchar_int);
 	}
 	else
-		ft_putstr(list->name);	
+		ft_putstr(list->name);
 	to_print = largest - ft_strlen(list->name);
 	while (to_print >= 0)
 	{
@@ -33,11 +49,11 @@ static void	print_one(t_compl *list, size_t largest)
 	}
 }
 
-void	print_options(t_compl *list)
+void		print_options(t_compl *list)
 {
 	size_t	word_line;
 	size_t	largest;
-	size_t		i;
+	size_t	i;
 	t_compl	*tmp;
 
 	word_line = word_per_line(list);
@@ -58,4 +74,3 @@ void	print_options(t_compl *list)
 		i = 0;
 	}
 }
-

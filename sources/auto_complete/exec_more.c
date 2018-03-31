@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:30:03 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/27 14:41:43 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/31 13:26:10 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static void	write_it(char *field, size_t padd_size, int fd)
 	}
 }
 
-static void write_in_pipe(t_compl *list, int fd)
+static void	write_in_pipe(t_compl *list, int fd)
 {
 	size_t	largest;
 	size_t	word_line;
@@ -53,7 +53,7 @@ static void write_in_pipe(t_compl *list, int fd)
 	close(fd);
 }
 
-void 		exec_more(t_compl *list, t_ult *ult)
+void		exec_more(t_compl *list, t_ult *ult)
 {
 	int		fd[2];
 	pid_t	pid;

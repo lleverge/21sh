@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 20:09:48 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 15:05:43 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/30 14:54:29 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-DIR				*safe_open_dir(char *path_string)
+DIR			*safe_open_dir(char *path_string)
 {
 	DIR				*pathdir;
 
@@ -27,12 +27,12 @@ DIR				*safe_open_dir(char *path_string)
 	return (pathdir);
 }
 
-static t_compl	*on_empty(void)
+static t_compl *on_empty(void)
 {
 	t_compl			*list;
 	t_compl			*new;
 	DIR				*curr_dir;
-	struct dirent	*file_info;
+	struct dirent 	*file_info;
 
 	if (!(curr_dir = safe_open_dir(".")))
 		return (NULL);
@@ -48,12 +48,12 @@ static t_compl	*on_empty(void)
 	return (list);
 }
 
-static t_compl	*on_word(char *word)
+static t_compl *on_word(char *word)
 {
 	t_compl			*list;
 	t_compl			*new;
 	DIR				*curr_dir;
-	struct dirent	*file_info;
+	struct dirent 	*file_info;
 
 	if (!(curr_dir = safe_open_dir(".")))
 		return (NULL);
@@ -69,7 +69,7 @@ static t_compl	*on_word(char *word)
 	return (list);
 }
 
-t_compl			*classic_compl(t_prompt *prompt)
+t_compl	*classic_compl(t_prompt *prompt)
 {
 	t_compl *new;
 	char	*word;
@@ -88,9 +88,8 @@ t_compl			*classic_compl(t_prompt *prompt)
 	new ? add_prev(new) : NULL;
 	if (new)
 		new->cursored = 1;
-	if ((new && compl_dir_needed(new)) || (!new && ft_strlen(word)
-										&& word[ft_strlen(word) - 1] == '/'))
+	if ((new && compl_dir_needed(new)) || (!new && !access(word, F_OK | X_OK)))
 		dir_handle(&new, word);
-	ft_strdel(&word);
+	word ? ft_strdel(&word) : NULL;
 	return (new);
 }

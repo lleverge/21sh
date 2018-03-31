@@ -6,19 +6,21 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:31:43 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/29 15:12:26 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/31 13:49:16 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <shell.h>
 #include <cmd_edit.h>
 
-char	*word_detect(t_prompt *prompt)
+char			*word_detect(t_prompt *prompt)
 {
-	int		index;
-	int		start;
+	int			index;
+	int			start;
 
 	index = prompt->i;
+	if (ft_isspace(prompt->cmd[index]) && index > 0)
+		index--;
 	if (ft_isspace(prompt->cmd[index]))
 		return (ft_strdup(""));
 	while (index > 0)
@@ -29,42 +31,46 @@ char	*word_detect(t_prompt *prompt)
 	}
 	start = index;
 	index = prompt->i;
-	while (index <= 1999 && (prompt->cmd[index] > 32 && prompt->cmd[index] < 127))
+	while (index <= 1999 && (prompt->cmd[index] > 32 &&
+	prompt->cmd[index] < 127))
 		index++;
 	return (ft_strsub(prompt->cmd, start, index - start));
 }
 
-static int		space_check(t_prompt *prompt)
+static int		space_check(int i, char prompt[2000])
 {
-	int		index;
+	int			index;
 
-	index = prompt->i;
-	while (index > 0 && (prompt->cmd[index] > 32 && prompt->cmd[index] < 127))
-		index--;
-	while (index >= 0)
+	index = i;
+	while (index > 0)
 	{
-		if (prompt->cmd[index] > 32 && prompt->cmd[index] < 127)
+		if (!ft_isspace(prompt[index]))
 			return (0);
 		index--;
 	}
+	if (!ft_isspace(prompt[index]))
+		return (0);
 	return (1);
 }
 
 int				empty_space(t_prompt *prompt)
 {
-	int 	index;
+	int			index;
 
-	index = prompt->i;
-	while (index > 0 && ft_isspace(prompt->cmd[index]))
-		index--;
-	return (!index ? 1 : 0);
+	index = 0;
+	while (index < prompt->i)
+	{
+		if (!ft_isspace(prompt->cmd[index]))
+			return (0);
+		index++;
+	}
+	return (1);
 }
 
-int		first_word(t_prompt	*prompt)
+int				first_word(t_prompt *prompt)
 {
-	char	*word;
-	char	*pos;
-	int		index;
+	char		*word;
+	int			index;
 
 	index = prompt->i;
 	word = word_detect(prompt);
@@ -73,15 +79,13 @@ int		first_word(t_prompt	*prompt)
 		ft_strdel(&word);
 		return (0);
 	}
-	while (index > 0 && prompt->cmd[index])
-	{
-		if (ft_isspace(prompt->cmd[index - 1]))
-			break;
+	if ((ft_isspace(prompt->cmd[index]) || prompt->cmd[index] == 0) &&
+	index > 0)
 		index--;
-	}
-	pos = &prompt->cmd[index];
+	while (index > 0 && !ft_isspace(prompt->cmd[index]))
+		index--;
 	ft_strdel(&word);
-	if (pos == prompt->cmd || space_check(prompt))
+	if (index == 0 || space_check(index, prompt->cmd))
 		return (1);
 	return (0);
 }

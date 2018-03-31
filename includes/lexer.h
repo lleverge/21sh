@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/14 17:20:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/03/30 16:10:35 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,11 @@ t_process			*check_pipe(char *str, int i, t_process *new);
 t_process			*check_and(char *str, int i, t_process *new);
 t_process			*check_less(char *str, int i, t_process *new);
 t_process			*check_great(char *str, int i, t_process *new);
+
+/*
+**ft_isbadtoken.c
+*/
+int					ft_isbadtoken(char c);
 
 /*
 **token_recognizer.c
