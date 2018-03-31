@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:54 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 15:23:15 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/31 15:51:17 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ static int		pwd_home(t_env *env, char *buff)
 	{
 		if (ft_strcmp(env->name, "HOME") == 0)
 		{
-			if (ft_strcmp(ft_strchr(env->content, '/'), buff) == 0)
+			if (ft_strchr(env->content, '/') &&
+			ft_strcmp(ft_strchr(env->content, '/'), buff) == 0)
 				return (1);
 			else if (ft_strncmp(ft_strchr(env->content, '/'), buff,
 								ft_strlen(ft_strchr(env->content, '/'))) == 0)
