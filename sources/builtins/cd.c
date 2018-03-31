@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:23:07 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 11:20:00 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/31 15:02:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static int		err_cd_handle(t_env **env, char **arg)
 {
 	struct stat stats;
 
+	ft_putendl(arg[0]);
 	if (stat(arg[0], &stats) == -1)
 	{
 		ft_putstr_fd("cd: no such file or directory: ", 2);
@@ -77,6 +78,12 @@ static int		err_cd_handle(t_env **env, char **arg)
 	else if (!(S_ISDIR(stats.st_mode)))
 	{
 		ft_putstr_fd("cd: not a directory: ", 2);
+		ft_putendl_fd(arg[0], 2);
+		return (1);
+	}
+	else if (access(arg[0], F_OK) == -1)
+	{
+		ft_putstr_fd("cd: no such directory: ", 2);
 		ft_putendl_fd(arg[0], 2);
 		return (1);
 	}
@@ -129,7 +136,7 @@ int				ft_cd(t_env **env, char **arg)
 		return (prev_dir(env));
 	else if (arg[0] && arg[1] && arg[2])
 	{
-		ft_putendl_fd("cd: multiple directory entry", 2);
+		ft_putendl_fd("cd: error, multiple directory entry", 2);
 		return (1);
 	}
 	if (!ft_strncmp(arg[1], "~/", 2))

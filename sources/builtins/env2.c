@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 15:48:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 15:55:28 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/31 14:34:49 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,44 @@ t_ult			*setting_tmp_ult(t_ult *ult, t_env *env)
 	dest->fd[2] = ult->fd[2];
 	dest->term = ult->term;
 	return (dest);
+}
+
+static void		clean_sigint(int signal)
+{
+	if (signal != SIGINT)
+		return ;
+	ft_putchar('\n');
+}
+
+void			job_launch_env(t_job *job_li, t_ult *ult)
+{
+	char		**cmd_tab;
+	t_job		*tmp_job;
+	t_process	*tmp_proc;
+	int			fd[2];
+
+	cmd_tab = NULL;
+	tmp_job = job_li;
+	signal(SIGINT, &clean_sigint);
+	while (tmp_job)
+	{
+		tmp_job = apply_redirect(tmp_job, ult);
+		tmp_proc = tmp_job->proc;
+		while (tmp_proc)
+		{
+			cmd_tab = ft_whitespace(tmp_proc->cmd);
+			if (tmp_proc->next)
+			{
+				pipe(fd);
+				tmp_proc->fd[1] = fd[1];
+			}
+			ult->ret = seek_and_exec(ult, tmp_proc, cmd_tab, fd);
+			if (tmp_proc->next)
+				tmp_proc->next->fd[0] = fd[0];
+			cmd_tab ? free_tab(cmd_tab) : NULL;
+			tmp_proc = tmp_proc->next;
+		}
+		wait_for_procs(tmp_job->proc);
+		tmp_job = tmp_job->next;
+	}
 }

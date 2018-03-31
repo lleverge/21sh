@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:32:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 15:56:37 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/31 14:36:55 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,19 @@ int			launch_new_cmd(t_ult *ult, char **arg, t_env *tmp_env)
 {
 	t_lexer	*lexer;
 	t_ult	*tmp_ult;
+	t_job	*jobs;
 
 	tmp_ult = setting_tmp_ult(ult, tmp_env);
 	tmp_ult->cmd = word_array_to_str(&arg[1]);
 	tmp_ult->env = tmp_env;
 	lexer = fill_lexer_env(tmp_ult, tmp_ult->cmd);
-	// ult->ret = start_prog(lexer, tmp_ult);
-	ult->ret = 'A';
+	jobs = NULL;
+	jobs = set_jobs(lexer);
+	job_launch_env(jobs, tmp_ult);
+	ult->ret = tmp_ult->ret;
 	ft_strdel(&tmp_ult->cmd);
 	lex_free_all(lexer);
+	destroy_job_list(jobs);
 	hash_destroy(tmp_ult->hash_table);
 	free(tmp_ult);
 	return (ult->ret);

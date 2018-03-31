@@ -6,13 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 19:01:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 14:54:01 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/03/31 14:36:08 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cmd_edit.h>
 #include <shell.h>
 #include <lexer.h>
+#include <stdio.h>
 
 void			set_fd_pipe(t_process *proc_1, t_process *proc_2)
 {
@@ -77,7 +78,7 @@ void			job_launch(t_job *job_li, t_ult *ult)
 			ult->ret = seek_and_exec(ult, tmp_proc, cmd_tab, fd);
 			if (tmp_proc->next)
 				tmp_proc->next->fd[0] = fd[0];
-			free_tab(cmd_tab);
+			cmd_tab ? free_tab(cmd_tab) : NULL;
 			tmp_proc = tmp_proc->next;
 		}
 		wait_for_procs(tmp_job->proc);
