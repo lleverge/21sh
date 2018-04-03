@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:23:07 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/31 15:02:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/03 21:57:38 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,8 @@ static int		go_home(t_env **env)
 		ft_putendl_fd("cd: HOME isnt defined", 2);
 		return (1);
 	}
-	if (access(home, X_OK) == -1)
+	if (check_for_access(home))
 	{
-		ft_putstr_fd("cd: permission denied: ", 2);
-		ft_putendl_fd(home, 2);
 		ft_strdel(&home);
 		return (1);
 	}
@@ -66,34 +64,9 @@ static int		change_dir(t_env **env, char *path)
 
 static int		err_cd_handle(t_env **env, char **arg)
 {
-	struct stat stats;
-
-	ft_putendl(arg[0]);
-	if (stat(arg[0], &stats) == -1)
-	{
-		ft_putstr_fd("cd: no such file or directory: ", 2);
-		ft_putendl_fd(arg[0], 2);
-		return (1);
-	}
-	else if (!(S_ISDIR(stats.st_mode)))
-	{
-		ft_putstr_fd("cd: not a directory: ", 2);
-		ft_putendl_fd(arg[0], 2);
-		return (1);
-	}
-	else if (access(arg[0], F_OK) == -1)
-	{
-		ft_putstr_fd("cd: no such directory: ", 2);
-		ft_putendl_fd(arg[0], 2);
-		return (1);
-	}
-	else if (access(arg[0], X_OK) == -1)
-	{
-		ft_putstr_fd("cd: permission denied: ", 2);
-		ft_putendl_fd(arg[0], 2);
-		return (1);
-	}
-	return (change_dir(env, arg[0]));
+	if (!check_for_access(arg[0]))
+		return (change_dir(env, arg[0]));
+	return (1);
 }
 
 static int		prev_dir(t_env **env)

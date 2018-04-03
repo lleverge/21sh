@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/31 14:34:08 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/03 21:53:18 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ t_env					*set_env(t_env **env, char *name, char *value);
 **cd.c
 */
 int						ft_cd(t_env **env, char **arg);
+
+/*
+**cd_2.c
+*/
+int						check_for_access(char *path);
 
 /*
 **echo.c
