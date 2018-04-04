@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 14:57:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/04 19:56:28 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,12 +108,12 @@ void	dir_handle(t_compl **list, char *word)
 	{
 		if (word[ft_strlen(word) - 1] != '/')
 		{
-			buffer = ft_strdup(word);
-			word ? ft_strdel(&word) : NULL;
-			word = ft_strjoin_free_one(&buffer, "/");
+			buffer = ft_strjoin(word, "/");
+			*list = init_on_dir(buffer);
+			ft_strdel(&buffer);	
 		}
-		*list = init_on_dir(word);
-		*list ? add_prev(*list) : NULL;
+		else
+			*list = init_on_dir(word);
 	}
 	else if (!ft_strcmp(tmp->name, word))
 	{
@@ -121,4 +121,5 @@ void	dir_handle(t_compl **list, char *word)
 		ft_strdel(&tmp->name);
 		tmp->name = ft_strjoin_free_one(&buffer, "/");
 	}
+	*list ? add_prev(*list) : NULL;
 }

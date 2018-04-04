@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:23:07 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/03 21:57:38 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/04 13:53:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static int		go_home(t_env **env)
 	char		*home;
 	char		*old;
 
+	home = NULL;
 	if (!(home = get_node_content(*env, "HOME")))
 	{
 		ft_putendl_fd("cd: HOME isnt defined", 2);

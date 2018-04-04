@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 19:06:30 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/04 19:39:30 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 		ft_strdel(&word);
 		return ;
 	}
-	ft_strdel(&word);
+	word ? ft_strdel(&word) : NULL;
 	void_prompt();
 	if (count_lines(list) >= get_term_size("row"))
 		simple_print(ult, list, prompt);
