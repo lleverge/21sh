@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 16:21:17 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/31 13:36:36 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/09 13:41:40 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ size_t				word_per_line(t_compl *list)
 
 	largest = get_largest_word(list);
 	term_co = get_term_size("col");
-	return (term_co / (largest + 1));
+	if ((term_co / (largest + 1) > 0))
+		return (term_co / (largest + 1));
+	return (1);
 }
 
 size_t				count_lines(t_compl *list)
@@ -63,8 +65,6 @@ size_t				count_lines(t_compl *list)
 
 	wpl = word_per_line(list);
 	nb_entries = count_entries(list);
-	if (nb_entries < wpl)
-		return (1);
 	lines_needed = nb_entries / wpl;
 	if (nb_entries % wpl)
 		lines_needed++;

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/04 19:56:28 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/09 13:43:42 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ void		add_prev(t_compl *list)
 	tmp = list;
 	tmp2 = tmp;
 	tmp = tmp->next;
+	if (tmp2 == tmp)
+	{
+		list->prev = list;
+		return ;
+	}
 	while (tmp)
 	{
 		tmp->prev = tmp2;
