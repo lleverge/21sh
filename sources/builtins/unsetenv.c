@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:18:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/11 22:57:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/09 18:27:50 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,59 @@ static void	free_env_one(t_env *env)
 	free(env);
 }
 
-int			unset_env(char *name, t_env *envlist)
+static int	count_env(t_env *envi)
 {
-	t_env	*tmp;
-	t_env	*start;
+	int result;
 
-	start = envlist;
-	if (!name || !start)
-		return (1);
-	while (envlist->next)
+	result = 0;
+	while (envi)
 	{
-		if (!(ft_strcmp(envlist->next->name, name)))
-		{
-			tmp = envlist->next;
-			envlist->next = envlist->next->next;
-			free_env_one(tmp);
-			envlist = start;
-			return (0);
-		}
-		envlist = envlist->next;
+		result++;
+		envi = envi->next;
 	}
-	envlist = start;
+	return (result);
+}
+
+static int	unset_one(t_env *envlist, char *name)
+{
+	t_env *tmp;
+
+	if (!(ft_strcmp(envlist->next->name, name)))
+	{
+		tmp = envlist->next;
+		envlist->next = envlist->next->next;
+		free_env_one(tmp);
+		return (0);
+	}
 	return (1);
 }
+
+static int	unset_env(char *name, t_env **envlist)
+{
+	t_env 	*tmp;
+
+	tmp = *envlist;
+	while (tmp->next)
+	{
+		if (!unset_one(tmp, name))
+			return (0);
+		tmp = tmp->next;
+	}
+	if (!ft_strcmp(tmp->name, name))
+	{
+		if (count_env(*envlist) == 1)
+		{
+			free_env_one(*envlist);
+			*envlist = NULL;
+			return (0);
+		}
+		free_env_one(tmp);
+		tmp = NULL;
+		return (0);
+	}
+	return (1);
+}
+
 
 static void	unset_error(char *cmd)
 {
@@ -64,7 +94,7 @@ t_env		*split_to_unset(t_ult *ult)
 			unset_error(*tmp);
 		else
 		{
-			ult->ret = unset_env(*tmp, ult->env);
+			ult->ret = unset_env(*tmp, &ult->env);
 			if (!ft_strncmp("PATH", *tmp, 4))
 			{
 				ult->hash_table ? hash_destroy(ult->hash_table) : NULL;

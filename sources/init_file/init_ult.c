@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 15:53:28 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/09 15:32:08 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ t_ult				*init_ult(t_ult *ult, char **environ)
 	ult->env = fill_env(environ);
 	ult->term = init_term();
 	ult->path = get_paths(ult->env);
-	ult->env = incr_shlvl(&ult->env);
+	if (ult->env)
+		ult->env = incr_shlvl(&ult->env);
 	ult->hist = init_hist(hist);
 	ult->hash_table = table_init(ult->env);
 	ult->ret = 0;

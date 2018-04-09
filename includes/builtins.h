@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/03 21:53:18 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/09 18:09:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ char					**tab_dup(char **src, int index_start_newtab);
 **unsetenv.c
 */
 t_env					*split_to_unset(t_ult *ult);
-int						unset_env(char *name, t_env *envlist);
 
 /*
 **setenv.c
