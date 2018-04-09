@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:23:07 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/04 13:53:09 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/09 14:39:58 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int		change_dir(t_env **env, char *path)
 		unset_env("PWD", *env);
 		set_env(env, "PWD", tmp);
 	}
-	ft_strdel(&tmp);
+	tmp ? ft_strdel(&tmp) : NULL;
 	return (0);
 }
 
