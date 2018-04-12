@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:20:35 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/14 16:39:58 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:53:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
+#include "../../includes/cmd_edit.h"
 
 t_prompt		*stock_prompt(t_prompt *prompt, int i)
 {

@@ -6,46 +6,126 @@
 #    By: lleverge <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2017/10/24 14:30:50 by vfrolich         ###   ########.fr        #
+#    Updated: 2018/04/12 16:16:44 by lleverge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= 21sh
+SRC		= sources/auto_complete/exec_more.c\
+	sources/auto_complete/free_tools.c\
+	sources/auto_complete/print_compl.c\
+	sources/auto_complete/print_tools.c\
+	sources/auto_complete/read_compl.c\
+	sources/auto_complete/select_actions.c\
+	sources/auto_complete/select_return.c\
+	sources/auto_complete/small_prompt.c\
+	sources/auto_complete/word_detect.c\
+	sources/builtins/builtins_selector.c\
+	sources/builtins/cd.c\
+	sources/builtins/cd_2.c\
+	sources/builtins/echo.c\
+	sources/builtins/env.c\
+	sources/builtins/env2.c\
+	sources/builtins/env_builtin_tools.c\
+	sources/builtins/exit.c\
+	sources/builtins/setenv.c\
+	sources/builtins/unsetenv.c\
+	sources/cmd_edit/cut.c\
+	sources/cmd_edit/edit_tools.c\
+	sources/cmd_edit/heredoc_prompt.c\
+	sources/cmd_edit/hist.c\
+	sources/cmd_edit/homend.c\
+	sources/cmd_edit/insert.c\
+	sources/cmd_edit/main_auto.c\
+	sources/cmd_edit/move.c\
+	sources/cmd_edit/prompt.c\
+	sources/cmd_edit/tcaps.c\
+	sources/cmd_edit/updown.c\
+	sources/exec/apply_redirect.c\
+	sources/exec/error.c\
+	sources/exec/fork.c\
+	sources/exec/fork2.c\
+	sources/exec/hash_table.c\
+	sources/exec/hash_table2.c\
+	sources/exec/hash_tools.c\
+	sources/exec/job_launch.c\
+	sources/exec/manage_fd.c\
+	sources/exec/signal.c\
+	sources/exec/tools2.c\
+	sources/exec/tools3.c\
+	sources/exec/wait_procs.c\
+	sources/init_file/init_complete.c\
+	sources/init_file/init_complete2.c\
+	sources/init_file/init_complete3.c\
+	sources/init_file/init_env.c\
+	sources/init_file/init_hist.c\
+	sources/init_file/init_job.c\
+	sources/init_file/init_process.c\
+	sources/init_file/init_prompt.c\
+	sources/init_file/init_term.c\
+	sources/init_file/init_tools.c\
+	sources/init_file/init_ult.c\
+	sources/init_file/safe_term_init.c\
+	sources/lexer/free_procjob.c\
+	sources/lexer/lexer.c\
+	sources/lexer/lexer2.c\
+	sources/lexer/merge_quotes.c\
+	sources/lexer/new_lexer.c\
+	sources/lexer/pipe_prompt.c\
+	sources/lexer/quote_prompt.c\
+	sources/lexer/seek_exec.c\
+	sources/lexer/token_list.c\
+	sources/lexer/token_recognizer.c\
+	sources/main.c\
+	sources/parse_error/parse_error.c\
+	sources/redirection/filedes_agreg.c\
+	sources/redirection/filedes_agreg_epur.c\
+	sources/redirection/ft_isbadtoken.c\
+	sources/redirection/heredoc.c\
+	sources/redirection/heredoc2.c\
+	sources/redirection/heredoc_signal.c\
+	sources/redirection/is_quoted.c\
+	sources/redirection/main_redirection.c\
+	sources/redirection/quote_list_init.c\
+	sources/redirection/redir_append.c\
+	sources/redirection/redir_detect.c\
+	sources/redirection/redir_input.c\
+	sources/redirection/redir_tools.c\
+	sources/redirection/redirect_fd.c\
+	sources/tools/cmd_tools.c\
+	sources/tools/display_tools.c\
+	sources/tools/env_tools.c\
+	sources/tools/free_tools.c\
+	sources/tools/ft_strsplit_tok.c\
+	sources/tools/ft_strsplit_ws.c\
+	sources/tools/is_blankword.c\
+	sources/tools/prompt_tools.c\
+	sources/tools/safe_position_tools.c
 
-C_DIR	= sources
-C_DIRS	= $(shell find $(C_DIR) -type d -follow -print)
-C_FILES	= $(shell find $(C_DIRS) -type f -follow -print | grep -w "[.c]$$")
-
-O_DIR	= .tmp/obj
-O_DIRS	= $(C_DIRS:$(C_DIR)%=$(O_DIR)%)
-O_FILES	= $(C_FILES:$(C_DIR)%.c=$(O_DIR)%.o)
-
+OBJ 	= $(SRC:.c=.o)
 FLAGS	= -Wall -Werror -Wextra
-INCS	= -Iincludes -Ilibft
 LIB		= -L./libft -lft -ltermcap
 
 all: $(NAME)
 
-$(NAME): $(O_FILES)
+$(NAME): $(OBJ)
 	@echo "Creating $(NAME)"
-	@make -C ./libft -j8
-	@gcc $(FLAGS) $^ $(LIB) -o $@
+	@make -C ./libft
+	@gcc $(FLAGS) $(OBJ) $(LIB) -o $(NAME)
 
-$(O_DIR)%.o: $(C_DIR)%.c
+%.o: %.c
 	@echo "Creating object : $@"
-	@mkdir -p $(O_DIRS) $(O_DIR)
-	@gcc $(FLAGS) $(INCS) -o $@ -c $<
+	@gcc $(FLAGS) -o $@ -c $<
 
 clean:
 	@echo "Deleting objects"
-	@rm -rf $(O_FILES)
-	@make clean -C libft
+	@rm -f $(OBJ)
+	@make -C libft/ clean
 
 fclean: clean
 	@echo "Deleting $(NAME)"
 	@make fclean -C libft
-	@rm $(NAME) || true
-	@rm -rf .tmp/
+	@rm -f $(NAME)
 
 re: fclean all
 

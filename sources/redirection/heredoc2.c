@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:21:48 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/17 17:08:29 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:57:53 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
+#include "../../includes/cmd_edit.h"
 
 void		heredoc_write(int fd, char *delim, t_ult *ult)
 {

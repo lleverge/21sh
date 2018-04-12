@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 19:39:38 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:02:08 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:55:35 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 static int			which_fd_agreg(char *cmd)
 {

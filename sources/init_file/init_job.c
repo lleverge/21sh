@@ -6,11 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/18 19:46:25 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/27 17:04:29 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:52:47 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 void				job_pushb(t_job **head, t_job *new)
 {

@@ -6,12 +6,12 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 12:28:37 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 14:40:54 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:06:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
-#include <shell.h>
+#include "../../includes/lexer.h"
+#include "../../includes/shell.h"
 
 static void		check_merge_aggreg2(t_lexer *lexer)
 {

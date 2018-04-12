@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/14 11:30:11 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/18 17:00:46 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:59:16 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
+#include "../../includes/lexer.h"
 
 int				*singleton_signal(void)
 {

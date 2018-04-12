@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:38:54 by lleverge          #+#    #+#             */
-/*   Updated: 2017/11/30 15:45:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:44:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 static void		display_hist(t_prompt *prompt)
 {

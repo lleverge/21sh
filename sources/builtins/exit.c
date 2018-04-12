@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:11:24 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/12/11 16:21:36 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:02:25 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 /*
 **ret stands for the last return state to return in case of exit without arg

@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/09 13:43:42 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:52:21 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
-#include <shell.h>
+#include "../../includes/cmd_edit.h"
+#include "../../includes/shell.h"
 
 void		add_prev(t_compl *list)
 {

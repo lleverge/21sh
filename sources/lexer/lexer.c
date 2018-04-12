@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 14:49:01 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:07:56 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 t_lexer			*fill_lexer(t_ult *ult)
 {

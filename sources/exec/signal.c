@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 18:12:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 14:58:00 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:04:10 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
-#include <lexer.h>
-#include <cmd_edit.h>
+#include "../../includes/cmd_edit.h"
+#include "../../includes/lexer.h"
+#include "../../includes/cmd_edit.h"
 
 static void	full_lines(t_prompt *prompt)
 {

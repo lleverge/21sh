@@ -6,12 +6,12 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 14:25:18 by lleverge          #+#    #+#             */
-/*   Updated: 2017/04/06 16:03:53 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:04:36 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 void			ft_env_error(char *file)
 {

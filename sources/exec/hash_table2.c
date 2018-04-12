@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 12:42:28 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/30 15:42:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:05:43 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 char			*hash_search(char *cmd, t_hashelem **table)
 {

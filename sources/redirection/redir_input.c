@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:41:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/27 17:49:36 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:59:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 int					get_start_pos_input(char *cmd)
 {

@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 20:10:09 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 18:23:20 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:06:51 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 t_lexer		*word_token(char *cmd)
 {

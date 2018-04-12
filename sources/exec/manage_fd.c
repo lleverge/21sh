@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 14:12:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:45:55 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:05:53 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 void	restore_fd(int fd[3])
 {

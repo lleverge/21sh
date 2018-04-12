@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 15:54:50 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/10/23 17:25:48 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:10:01 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <libft.h>
+#include "../../libft/libft.h"
 
 char		*ft_extracter(char *s, char *to_del)
 {

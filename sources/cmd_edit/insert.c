@@ -6,12 +6,12 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:35:51 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/14 14:56:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:45:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 void			print_backsp(t_prompt *prompt, int show_cursor)
 {

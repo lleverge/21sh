@@ -6,11 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:53:19 by lleverge          #+#    #+#             */
-/*   Updated: 2017/02/03 15:55:02 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:53:22 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 char		*get_node_content(t_env *env, char *str)
 {

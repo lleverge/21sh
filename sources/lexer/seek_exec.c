@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:47:13 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 15:44:07 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:07:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 static int		builtin_launch(t_ult *ult, t_process *proc)
 {

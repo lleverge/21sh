@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 12:01:29 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/24 13:31:44 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:06:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 char	*ft_getbin_path(char *cmd)
 {

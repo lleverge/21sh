@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:08:42 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/27 11:32:23 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:52:33 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 t_env				*var_cpy(t_env *start, t_env *cpy)
 {

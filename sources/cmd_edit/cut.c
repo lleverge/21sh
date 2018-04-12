@@ -6,11 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:10:54 by lleverge          #+#    #+#             */
-/*   Updated: 2017/12/14 19:17:25 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:44:18 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
+#include "../../includes/cmd_edit.h"
 
 static char		*cpy_at(char *src1, char *src2, int i)
 {

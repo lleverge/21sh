@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 11:36:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 16:01:07 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:01:19 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 t_env		*envlist_cpy(t_env *src)
 {

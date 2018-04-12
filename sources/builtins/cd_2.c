@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 17:57:56 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/03 22:08:51 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:00:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 #include <sys/stat.h>
 
 static int		test_isdir(char *path)

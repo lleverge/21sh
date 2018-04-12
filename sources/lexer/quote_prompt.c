@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:36:31 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 21:06:03 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:17:09 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/cmd_edit.h"
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 static char		*termcaps_quotes(t_ult *ult)
 {
@@ -90,6 +90,8 @@ static	void	push_new_lex(char **to_add, t_lexer **lexlist)
 	lex_end = init_lexer(*to_add);
 	*to_add ? ft_strdel(to_add) : NULL;
 	lex_push(lex_end, lexlist);
+	ft_putstr("TO ADD~~~~~~~~~~~~~");
+	ft_putendl((*lexlist)->content);
 }
 
 t_lexer			*quote_tok(t_lexer *lexlist, t_ult *ult)
@@ -111,6 +113,7 @@ t_lexer			*quote_tok(t_lexer *lexlist, t_ult *ult)
 					return (NULL);
 				}
 				push_new_lex(&closed_quote, &lexlist);
+				ft_putendl(lexlist->content);
 				return (quote_tok(lexlist, ult));
 			}
 		}

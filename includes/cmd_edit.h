@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/31 13:34:09 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:15:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CMD_EDIT_H
 # define CMD_EDIT_H
-# include <shell.h>
+# include "shell.h"
 # include <term.h>
 # include <curses.h>
 # include <signal.h>

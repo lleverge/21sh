@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 17:09:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/02/27 17:42:38 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:56:55 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 static int			get_epur_size_append(char *cmd)
 {

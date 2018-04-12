@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/10 14:40:55 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/17 13:00:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:44:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
+#include "../../includes/cmd_edit.h"
 
 void			reset_prompt_heredoc(t_prompt *prompt, int show_cursor)
 {

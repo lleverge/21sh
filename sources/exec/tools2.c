@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/25 14:29:56 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 15:01:54 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:05:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 int			list_size(t_env *env)
 {

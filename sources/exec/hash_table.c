@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:39:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 15:00:29 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:04:55 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 /*
 ** djb2 hash algorithm

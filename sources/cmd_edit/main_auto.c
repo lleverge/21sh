@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/09 13:20:11 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:44:47 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
-#include <shell.h>
+#include "../../includes/cmd_edit.h"
+#include "../../includes/shell.h"
 
 void	term_setup(t_ult *ult, int value)
 {

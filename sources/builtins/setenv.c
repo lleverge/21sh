@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:48:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 16:02:02 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:01:32 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 static int			invalid_identifier(char *cmd)
 {

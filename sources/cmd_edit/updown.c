@@ -6,11 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 11:17:56 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/04 16:01:54 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:45:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
+#include "../../includes/cmd_edit.h"
 
 void		down_line(t_prompt *prompt, char *buffer)
 {

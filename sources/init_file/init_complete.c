@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 14:13:42 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 15:04:11 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:54:32 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
-#include <shell.h>
+#include "../../includes/cmd_edit.h"
+#include "../../includes/shell.h"
 
 void			compl_push(t_compl *newelem, t_compl **elemlist)
 {

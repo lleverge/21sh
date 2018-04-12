@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 14:00:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 18:24:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:08:17 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <lexer.h>
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/lexer.h"
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 static char		*get_word_string(t_lexer *merge_start, int to_merge)
 {

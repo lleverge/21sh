@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/13 20:27:03 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 14:39:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:06:22 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 static void		destroy_fd_list(t_process *proc)
 {

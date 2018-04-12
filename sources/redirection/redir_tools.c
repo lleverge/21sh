@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 16:11:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/27 17:25:41 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:57:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 char				*get_word(char *sub_cmd)
 {

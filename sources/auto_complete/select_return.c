@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:40:52 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/31 13:45:42 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:48:16 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 static int		detect_index(t_prompt *prompt)
 {

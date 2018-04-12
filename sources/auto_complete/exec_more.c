@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:30:03 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/31 13:26:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:47:41 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 static void	write_it(char *field, size_t padd_size, int fd)
 {

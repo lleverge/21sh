@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 15:23:22 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 13:55:10 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:11:58 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 int			is_cmd_empty(char *cmd)
 {

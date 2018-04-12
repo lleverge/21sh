@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 17:14:11 by lleverge          #+#    #+#             */
-/*   Updated: 2018/01/14 17:40:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:11:31 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
-#include <lexer.h>
+#include "../../includes/cmd_edit.h"
+#include "../../includes/lexer.h"
 
 void		free_lexer(t_lexer **lexer)
 {

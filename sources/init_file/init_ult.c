@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:00:44 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/09 15:32:08 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:52:00 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <builtins.h>
+#include "../../includes/shell.h"
+#include "../../includes/builtins.h"
 
 static char			**get_paths(t_env *env)
 {

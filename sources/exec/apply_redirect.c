@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/14 19:01:05 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/11 19:30:00 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:03:03 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <cmd_edit.h>
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/cmd_edit.h"
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 t_job			*apply_redirect(t_job *job_li, t_ult *ult)
 {

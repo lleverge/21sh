@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/09 18:09:52 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:15:21 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
-# include <shell.h>
-# include <lexer.h>
+# include "shell.h"
+# include "lexer.h"
 
 /*
 **env_builtin.c

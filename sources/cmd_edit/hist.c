@@ -6,11 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 17:06:59 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/08 14:07:03 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:45:38 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 void		hist_full(t_hist **hist)
 {

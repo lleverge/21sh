@@ -6,11 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:06:07 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 14:07:26 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:58:55 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 int		ft_isbadtoken(char c)
 {

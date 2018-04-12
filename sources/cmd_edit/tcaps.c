@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:22:27 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/27 16:25:20 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:46:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 void			reset_prompt(t_prompt *prompt)
 {

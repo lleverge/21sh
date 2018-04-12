@@ -1,5 +1,4 @@
 /* ************************************************************************** */
-/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
@@ -7,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/17 00:59:41 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:17:41 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
-#include <cmd_edit.h>
+#include "../includes/shell.h"
+#include "../includes/lexer.h"
+#include "../includes/cmd_edit.h"
 
 int				init_all(char **environ)
 {

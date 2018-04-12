@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 14:41:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/22 21:00:37 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:07:11 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 static int	empty_word(char *word)
 {

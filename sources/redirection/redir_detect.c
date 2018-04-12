@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/27 16:21:26 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/12 21:21:42 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:58:19 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 int		is_simple_redir(char *cmd)
 {

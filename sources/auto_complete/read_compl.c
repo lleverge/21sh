@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 19:50:57 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/31 13:41:15 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:48:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 static int		*singlet_signal(int *flag, int mode)
 {

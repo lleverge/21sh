@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:23:07 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/09 15:29:15 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:01:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <builtins.h>
+#include "../../includes/shell.h"
+#include "../../includes/builtins.h"
 
 static int		go_home(t_env **env)
 {

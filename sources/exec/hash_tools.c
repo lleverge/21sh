@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/22 19:16:55 by vfrolich          #+#    #+#             */
-/*   Updated: 2017/11/30 15:35:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:03:52 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 t_hashelem			*init_hash_one(char *binary, char *full_binary)
 {

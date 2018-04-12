@@ -6,11 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/06 14:00:06 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/24 14:28:28 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:11:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../../includes/lexer.h"
 
 static int		ft_count(char const *s)
 {

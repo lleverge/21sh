@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:18:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/09 18:27:50 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:02:34 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 static void	free_env_one(t_env *env)
 {

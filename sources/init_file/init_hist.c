@@ -6,11 +6,11 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 17:01:17 by lleverge          #+#    #+#             */
-/*   Updated: 2017/03/07 11:33:56 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:16:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 t_hist			*init_hist(t_hist *hist)
 {

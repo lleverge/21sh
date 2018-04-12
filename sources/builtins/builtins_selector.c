@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:37:50 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/27 19:48:14 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:00:30 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <builtins.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/builtins.h"
+#include "../../includes/cmd_edit.h"
 
 int			check_for_builtin(char *cmd)
 {

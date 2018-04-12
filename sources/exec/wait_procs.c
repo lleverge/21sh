@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 16:14:39 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 14:59:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:04:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
 
 int				count_process(t_process *proc)
 {

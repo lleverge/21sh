@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 15:52:23 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 14:02:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:56:06 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <lexer.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/lexer.h"
+#include "../../includes/cmd_edit.h"
 
 char			*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag)
 {

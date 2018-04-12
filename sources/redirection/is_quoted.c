@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/11 15:42:27 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 13:59:26 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:56:21 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 static int		first_quote(char *sub_cmd, char *cmd)
 {

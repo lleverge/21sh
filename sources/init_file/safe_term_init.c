@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 11:32:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/26 12:51:30 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:54:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 void	safe_term_boot(void)
 {

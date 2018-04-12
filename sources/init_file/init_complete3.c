@@ -6,12 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/28 20:09:48 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/09 13:24:11 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:50:37 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
-#include <cmd_edit.h>
+#include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 DIR			*safe_open_dir(char *path_string)
 {

@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:03:12 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 13:57:08 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:57:29 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 int					get_start_pos_agreg(char *cmd)
 {

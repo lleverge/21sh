@@ -6,11 +6,11 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/25 17:55:27 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/01/25 17:59:43 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 16:10:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <shell.h>
+#include "../../includes/shell.h"
 
 int			is_blankword(char *str)
 {
