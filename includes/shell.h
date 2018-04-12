@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/29 11:32:47 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:46:12 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 /* ************************************************************************** */
@@ -271,9 +271,8 @@ char					*search_path2(char *tmp2, char *tmp, char **path_tab,
 /*
 **manage_fd.c
 */
-int						set_fd_exec(t_process *proc);
+void					set_fd_exec(t_process *proc);
 void					close_fd_exec(t_process *proc);
-int						*save_fd_exec(t_ult *ult);
 void					restore_fd(int fd[3]);
 
 /*

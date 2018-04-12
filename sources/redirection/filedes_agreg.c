@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 19:39:38 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/04 20:01:42 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:02:08 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ t_process			*agreg_output(t_process *proc)
 		fd = which_fd_agreg(proc->cmd);
 		if (fd == -1)
 			return (cmd_epur_agreg(proc));
+		if (get_target_fd(proc->cmd) < 0 || get_target_fd(proc->cmd) > 2)
+			ft_putendl_fd("21sh : Bad file descriptor.", 2);
 		proc->fd[fd] = get_target_fd(proc->cmd);
 	}
 	return (cmd_epur_agreg(proc));

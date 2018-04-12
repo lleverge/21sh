@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   seek_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:47:13 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 14:49:23 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:44:07 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ static int		builtin_launch(t_ult *ult, t_process *proc)
 	fd[0] = dup(ult->fd[0]);
 	fd[1] = dup(ult->fd[1]);
 	fd[2] = dup(ult->fd[2]);
-	if (set_fd_exec(proc) == -1)
-		return (1);
+	set_fd_exec(proc);
 	ret = search_for_builtins(ult, proc);
 	close_fd_exec(proc);
 	restore_fd(fd);

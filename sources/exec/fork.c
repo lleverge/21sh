@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/09 14:51:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:43:10 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int			exe_fork2(t_env *env, t_process *proc, t_ult *ult, int fd[2])
 		signal(SIGINT, SIG_DFL);
 		reset_term(ult->term);
 		detect_fd(proc, fd);
-		if (set_fd_exec(proc) == -1 || execve(*cmd_tab, cmd_tab, env_cpy) < 0)
+		set_fd_exec(proc);
+		if (execve(*cmd_tab, cmd_tab, env_cpy) < 0)
 		{
 			ft_putendl_fd("21sh: invalid command", 2);
 			exit(-1);
@@ -70,8 +71,7 @@ int			exe_fork(t_env *env, t_process *proc, t_ult *ult, int fd[2])
 		signal(SIGINT, SIG_DFL);
 		reset_term(ult->term);
 		detect_fd(proc, fd);
-		if (set_fd_exec(proc) == -1)
-			exit(-1);
+		set_fd_exec(proc);
 		execve(hash_search(*cmd_tab, ult->hash_table), cmd_tab, env_cpy);
 	}
 	else

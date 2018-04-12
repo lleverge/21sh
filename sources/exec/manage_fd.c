@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 14:12:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/03/30 14:52:44 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/12 15:45:55 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,43 +28,28 @@ void	restore_fd(int fd[3])
 		ft_putendl_fd("21sh: error while closing saved err output", 2);
 }
 
-void	check_close(t_process *proc, int i)
+static void	close_fd(t_close *fd_list)
 {
-	int		fd;
-	t_close	*tmp;
-	int		fd_closed;
+	t_close *tmp;
 
-	tmp = proc->fd_to_close;
-	fd = proc->fd[i];
-	fd_closed = -1;
+	tmp = fd_list;
 	while (tmp)
 	{
-		if (fd == tmp->fd)
-		{
-			close(i);
-			fd_closed = i;
-		}
+		close(tmp->fd);
 		tmp = tmp->next;
 	}
-	if (i == 0 && i != fd_closed)
-		dup2(proc->fd[0], STDIN_FILENO);
-	if (i == 1 && i != fd_closed)
-		dup2(proc->fd[1], STDOUT_FILENO);
-	if (i == 2 && i != fd_closed)
-		dup2(proc->fd[2], STDERR_FILENO);
 }
 
-int		set_fd_exec(t_process *proc)
+void		set_fd_exec(t_process *proc)
 {
-	int	fd;
+	close_fd(proc->fd_to_close);
+	if (dup2(proc->fd[0], STDIN_FILENO) == -1)
+		close(STDIN_FILENO);
+	if (dup2(proc->fd[1], STDOUT_FILENO) == -1)
+		close(STDOUT_FILENO);
+	if (dup2(proc->fd[2], STDERR_FILENO) == -1)
+		close(STDERR_FILENO);
 
-	fd = 0;
-	while (fd < 3)
-	{
-		check_close(proc, fd);
-		fd++;
-	}
-	return (0);
 }
 
 void	close_fd_exec(t_process *proc)
@@ -75,10 +60,7 @@ void	close_fd_exec(t_process *proc)
 	while (i < 3)
 	{
 		if (proc->fd[i] > 2)
-		{
-			if (close(proc->fd[i]) == -1)
-				ft_putendl_fd("21sh: close error", 2);
-		}
+			close(proc->fd[i]);
 		i++;
 	}
 }
