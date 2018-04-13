@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:35:51 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 15:45:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:05:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void			delete(t_prompt *prompt, char *buffer)
 
 void			backspace(t_prompt *prompt, char *buffer)
 {
-	if (BACK_SPACE && prompt->i > 0)
+	if (BACK_SPACE && ft_strlen(prompt->cmd) > 0)
 	{
 			prompt->i--;
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
@@ -73,7 +73,7 @@ void			backspace(t_prompt *prompt, char *buffer)
 
 void			space(t_prompt *prompt, char *buffer)
 {
-	if (WHITE_SP && prompt->i < 1999)
+	if (WHITE_SP && ft_strlen(prompt->cmd) < 1999)
 	{
 		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
 				ft_strlen(prompt->cmd + prompt->i) + 1);
@@ -85,7 +85,7 @@ void			space(t_prompt *prompt, char *buffer)
 
 void			charac(t_prompt *prompt, char *buffer)
 {
-	if (CHAR && prompt->i < 1999)
+	if (CHAR && ft_strlen(prompt->cmd) < 1999)
 	{
 		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
 				ft_strlen(prompt->cmd + prompt->i) + 1);
