@@ -6,7 +6,7 @@
 #    By: lleverge <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/12 16:16:44 by lleverge         ###   ########.fr        #
+#    Updated: 2018/04/16 18:14:17 by lleverge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,17 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/builtins/exit.c\
 	sources/builtins/setenv.c\
 	sources/builtins/unsetenv.c\
+	sources/builtins/setunsetenv.c\
+	sources/builtins/setting_tmp_ult.c\
 	sources/cmd_edit/cut.c\
 	sources/cmd_edit/edit_tools.c\
 	sources/cmd_edit/heredoc_prompt.c\
 	sources/cmd_edit/hist.c\
 	sources/cmd_edit/homend.c\
 	sources/cmd_edit/insert.c\
+	sources/cmd_edit/insert2.c\
 	sources/cmd_edit/main_auto.c\
+	sources/cmd_edit/term_setup.c\
 	sources/cmd_edit/move.c\
 	sources/cmd_edit/prompt.c\
 	sources/cmd_edit/tcaps.c\

@@ -6,31 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 18:32:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 16:10:35 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:51:28 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cmd_edit.h"
 #include "../../includes/shell.h"
 
-void		term_setup(t_ult *ult, int value)
-{
-	ult->term->fd = open(ttyname(0), O_RDWR);
-	if (tcgetattr(ult->term->fd, &(ult->term->termios)) == -1)
-	{
-		ft_putendl("error: tcgetattr");
-		return ;
-	}
-	ult->term->termios.c_cc[VMIN] = value;
-	if (tcsetattr(ult->term->fd, TCSANOW, &(ult->term->termios)) == -1)
-	{
-		ft_putendl_fd("error: tcsetattr", 2);
-		return ;
-	}
-	close(ult->term->fd);
-}
-
-static void	void_prompt(void)
+static void		void_prompt(void)
 {
 	t_prompt	*prompt;
 	t_ult		*ult;
@@ -44,7 +27,7 @@ static void	void_prompt(void)
 	ft_putchar('\n');
 }
 
-static void	cleanup(t_prompt *prompt, t_ult *ult, t_compl *list)
+static void		cleanup(t_prompt *prompt, t_ult *ult, t_compl *list)
 {
 	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
 	tputs(tgetstr("up", NULL), 1, ft_putchar_int);
@@ -57,7 +40,7 @@ static void	cleanup(t_prompt *prompt, t_ult *ult, t_compl *list)
 	ult->term = init_term();
 }
 
-static void	simple_print(t_ult *ult, t_compl *list, t_prompt *prompt)
+static void		simple_print(t_ult *ult, t_compl *list, t_prompt *prompt)
 {
 	term_setup(ult, 0);
 	if (ask_prompt(list))
@@ -65,7 +48,19 @@ static void	simple_print(t_ult *ult, t_compl *list, t_prompt *prompt)
 	cleanup(prompt, ult, list);
 }
 
-void		main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
+static void		main_auto2(t_prompt *prompt, t_compl *list, t_ult *ult)
+{
+	if (count_lines(list) >= get_term_size("row"))
+		simple_print(ult, list, prompt);
+	else
+	{
+		count_entries(list) > 1 ? read_compl(list, prompt) :
+			do_selection(list, prompt);
+		cleanup(prompt, ult, list);
+	}
+}
+
+void			main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 {
 	char		*word;
 	t_compl		*list;
@@ -85,12 +80,5 @@ void		main_auto(t_prompt *prompt, char *buffer, t_ult *ult)
 	}
 	word ? ft_strdel(&word) : NULL;
 	void_prompt();
-	if (count_lines(list) >= get_term_size("row"))
-		simple_print(ult, list, prompt);
-	else
-	{
-		count_entries(list) > 1 ? read_compl(list, prompt) :
-			do_selection(list, prompt);
-		cleanup(prompt, ult, list);
-	}
+	main_auto2(prompt, list, ult);
 }

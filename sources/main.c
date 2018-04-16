@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:17:41 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:16:17 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				init_all(char **environ)
 {
 	t_ult		*ult;
 	t_lexer		*lex;
-	t_job 		*jobs;
+	t_job		*jobs;
 
 	ult = NULL;
 	jobs = NULL;
@@ -38,13 +38,12 @@ int				init_all(char **environ)
 		if (ult->cmd && *ult->cmd && lex)
 		{
 			jobs = set_jobs(lex);
-			job_launch(jobs,ult);
+			job_launch(jobs, ult);
 			destroy_job_list(jobs);
 		}
 		lex ? lex_free_all(lex) : NULL;
 		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
-
 	}
 	return (0);
 }

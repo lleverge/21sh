@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 15:48:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 15:45:59 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:01:53 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,34 +58,27 @@ t_lexer			*fill_lexer_env(t_ult *ult, char *cmd)
 	return (lexlist);
 }
 
-t_ult			*setting_tmp_ult(t_ult *ult, t_env *env)
-{
-	t_ult		*dest;
-
-	dest = NULL;
-	if (!(dest = (t_ult *)malloc(sizeof(t_ult))))
-	{
-		ft_putendl_fd("error: ult struct malloc failed", 2);
-		exit_term(ult->term);
-		exit(3);
-	}
-	dest->env = env;
-	if (!env)
-		dest->hash_table = NULL;
-	else
-		dest->hash_table = table_init(env);
-	dest->fd[0] = ult->fd[0];
-	dest->fd[1] = ult->fd[1];
-	dest->fd[2] = ult->fd[2];
-	dest->term = ult->term;
-	return (dest);
-}
-
 static void		clean_sigint(int signal)
 {
 	if (signal != SIGINT)
 		return ;
 	ft_putchar('\n');
+}
+
+static void		job_launch_bis(char **cmd_tab, t_job *tmp_job,
+							t_ult *ult, int *fd)
+{
+	cmd_tab = ft_whitespace(tmp_job->proc->cmd);
+	if (tmp_job->proc->next)
+	{
+		pipe(fd);
+		tmp_job->proc->fd[1] = fd[1];
+	}
+	ult->ret = seek_and_exec(ult, tmp_job->proc, cmd_tab, fd);
+	if (tmp_job->proc->next)
+		tmp_job->proc->next->fd[0] = fd[0];
+	cmd_tab ? free_tab(cmd_tab) : NULL;
+	tmp_job->proc = tmp_job->proc->next;
 }
 
 void			job_launch_env(t_job *job_li, t_ult *ult)
@@ -103,19 +96,7 @@ void			job_launch_env(t_job *job_li, t_ult *ult)
 		tmp_job = apply_redirect(tmp_job, ult);
 		tmp_proc = tmp_job->proc;
 		while (tmp_proc)
-		{
-			cmd_tab = ft_whitespace(tmp_proc->cmd);
-			if (tmp_proc->next)
-			{
-				pipe(fd);
-				tmp_proc->fd[1] = fd[1];
-			}
-			ult->ret = seek_and_exec(ult, tmp_proc, cmd_tab, fd);
-			if (tmp_proc->next)
-				tmp_proc->next->fd[0] = fd[0];
-			cmd_tab ? free_tab(cmd_tab) : NULL;
-			tmp_proc = tmp_proc->next;
-		}
+			job_launch_bis(cmd_tab, tmp_job, ult, fd);
 		wait_for_procs(tmp_job->proc);
 		tmp_job = tmp_job->next;
 	}

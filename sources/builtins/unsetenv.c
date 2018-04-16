@@ -6,11 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:18:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 16:12:43 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:12:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+#include "../../includes/builtins.h"
 
 static void	free_env_one(t_env *env)
 {
@@ -70,13 +71,6 @@ static int	unset_env(char *name, t_env **envlist)
 		return (0);
 	}
 	return (1);
-}
-
-static void	unset_error(char *cmd)
-{
-	ft_putstr_fd("21sh: unset: '", 2);
-	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd("': not a valid identifier", 2);
 }
 
 t_env		*split_to_unset(t_ult *ult)

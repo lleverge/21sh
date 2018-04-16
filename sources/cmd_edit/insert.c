@@ -6,12 +6,26 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:35:51 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/16 16:09:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 17:21:43 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/cmd_edit.h"
+
+static int		print_backsp3(t_prompt *prompt)
+{
+	prompt->y++;
+	return (0);
+}
+
+static int		print_backsp2(t_prompt *prompt, int i)
+{
+	tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
+	ft_putchar(prompt->cmd[i]);
+	tputs(tgetstr("me", NULL), 1, ft_putchar_int);
+	return (1);
+}
 
 void			print_backsp(t_prompt *prompt, int show_cursor)
 {
@@ -28,21 +42,13 @@ void			print_backsp(t_prompt *prompt, int show_cursor)
 	{
 		if ((j == prompt->win_size - 4 && prompt->y == 0) ||
 			(j == prompt->win_size && prompt->y != 0))
-		{
-			prompt->y++;
-			j = 0;
-		}
+			j = print_backsp3(prompt);
 		if (i == prompt->i && show_cursor == 1)
-		{
-			cursor_flag = 1;
-			tputs(tgetstr("mr", NULL), 1, ft_putchar_int);
-			ft_putchar(prompt->cmd[i]);
-			tputs(tgetstr("me", NULL), 1, ft_putchar_int);
-		}
+			print_backsp2(prompt, i);
 		else
 			ft_putchar(prompt->cmd[i]);
-		i++;
 		j++;
+		i++;
 	}
 	if (cursor_flag == 0)
 		print_cursor(prompt, show_cursor, i);
@@ -68,29 +74,5 @@ void			backspace(t_prompt *prompt, char *buffer)
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
 				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
 		print_backsp(prompt, 1);
-	}
-}
-
-void			space(t_prompt *prompt, char *buffer)
-{
-	if (WHITE_SP && ft_strlen(prompt->cmd) < 1999)
-	{
-		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
-				ft_strlen(prompt->cmd + prompt->i) + 1);
-		prompt->cmd[prompt->i] = ' ';
-		prompt->i++;
-		prompt_print(prompt, 1);
-	}
-}
-
-void			charac(t_prompt *prompt, char *buffer)
-{
-	if (CHAR && ft_strlen(prompt->cmd) < 1999)
-	{
-		ft_memmove(prompt->cmd + prompt->i + 1, prompt->cmd + prompt->i,
-				ft_strlen(prompt->cmd + prompt->i) + 1);
-		prompt->cmd[prompt->i] = *buffer;
-		prompt->i++;
-		prompt_print(prompt, 1);
 	}
 }

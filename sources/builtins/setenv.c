@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 15:48:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 15:47:15 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:15:26 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_env				*set_env(t_env **env, char *name, char *value)
 	return (*env);
 }
 
-static t_env		*add_all_env(t_ult *ult, char **cmd)
+t_env				*add_all_env(t_ult *ult, char **cmd)
 {
 	char		**tmp;
 	char		*tmp_string;
@@ -104,16 +104,5 @@ static t_env		*add_all_env(t_ult *ult, char **cmd)
 		}
 		tmp++;
 	}
-	return (ult->env);
-}
-
-t_env				*split_to_set(t_ult *ult)
-{
-	char		**splited_cmd;
-
-	splited_cmd = NULL;
-	splited_cmd = ft_whitespace(ult->cmd);
-	ult->env = add_all_env(ult, splited_cmd);
-	free_tab(splited_cmd);
 	return (ult->env);
 }

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:39:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 15:10:59 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:18:39 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,13 @@ void				hash_insert(t_hashelem *elem, t_hashelem **table)
 			&table[index]);
 }
 
+static void			exit_tab(t_ult *ult)
+{
+	ft_putendl_fd("21sh: malloc error on hash table init, abort.", 2);
+	exit_term(ult->term);
+	exit(3);
+}
+
 t_hashelem			**table_init(t_env *envlist)
 {
 	t_hashelem	**table;
@@ -63,11 +70,7 @@ t_hashelem			**table_init(t_env *envlist)
 	ult = NULL;
 	ult = stock_ult(ult, 1);
 	if (!(table = (t_hashelem **)malloc(sizeof(t_hashelem *) * 1021)))
-	{
-		ft_putendl_fd("21sh : malloc erroc on hash table init, abort.", 2);
-		exit_term(ult->term);
-		exit(3);
-	}
+		exit_tab(ult);
 	ft_bzero(table, sizeof(t_hashelem *) * 1021);
 	path_list = NULL;
 	if (!(path_list = hash_init(envlist)))
