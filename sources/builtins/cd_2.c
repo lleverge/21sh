@@ -6,13 +6,19 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 17:57:56 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 15:48:07 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:05:56 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/cmd_edit.h"
 #include <sys/stat.h>
+
+static void		print_dir_err(char *path)
+{
+	ft_putstr_fd("cd: Not a directory: ", 2);
+	ft_putendl_fd(path, 2);
+}
 
 static int		test_isdir(char *path)
 {
@@ -35,8 +41,7 @@ static int		test_isdir(char *path)
 	}
 	if ((!S_ISDIR(stats->st_mode)) && (!S_ISLNK(stats->st_mode)))
 	{
-		ft_putstr_fd("cd: Not a directory: ", 2);
-		ft_putendl_fd(path, 2);
+		print_dir_err(path);
 		free(stats);
 		return (0);
 	}

@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/08 14:10:54 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 15:44:18 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:07:31 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ static char		*cpy_at(char *src1, char *src2, int i)
 		return (res);
 	}
 	else
-	{
 		return (NULL);
-	}
 }
 
 void			copy(t_prompt *prompt, char *buffer, int i)
@@ -75,8 +73,8 @@ void			cut(t_prompt *prompt, char *buffer, int i)
 
 void			paste(t_prompt *prompt, char *buffer)
 {
-	char	*tmp;
-	int		itmp;
+	char		*tmp;
+	int			itmp;
 	size_t		j;
 	size_t		k;
 

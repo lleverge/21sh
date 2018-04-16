@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:35:51 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/13 16:05:27 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:09:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void			backspace(t_prompt *prompt, char *buffer)
 {
 	if (BACK_SPACE && ft_strlen(prompt->cmd) > 0)
 	{
-			prompt->i--;
+		prompt->i--;
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
 				ft_strlen(prompt->cmd + prompt->i + 1) + 1);
 		print_backsp(prompt, 1);

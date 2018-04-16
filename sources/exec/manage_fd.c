@@ -6,13 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/23 14:12:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:05:53 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:03:22 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 
-void	restore_fd(int fd[3])
+void		restore_fd(int fd[3])
 {
 	if (dup2(fd[0], 0) == -1)
 		ft_putendl_fd("21sh: error while restoring standard input", 2);
@@ -49,10 +49,9 @@ void		set_fd_exec(t_process *proc)
 		close(STDOUT_FILENO);
 	if (dup2(proc->fd[2], STDERR_FILENO) == -1)
 		close(STDERR_FILENO);
-
 }
 
-void	close_fd_exec(t_process *proc)
+void		close_fd_exec(t_process *proc)
 {
 	int	i;
 

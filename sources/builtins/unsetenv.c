@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:18:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:02:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:12:43 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	unset_one(t_env *envlist, char *name)
 
 static int	unset_env(char *name, t_env **envlist)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 
 	tmp = *envlist;
 	while (tmp->next)
@@ -71,7 +71,6 @@ static int	unset_env(char *name, t_env **envlist)
 	}
 	return (1);
 }
-
 
 static void	unset_error(char *cmd)
 {
