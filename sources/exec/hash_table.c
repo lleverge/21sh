@@ -6,11 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 19:39:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:04:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:10:59 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 /*
 ** djb2 hash algorithm
@@ -54,14 +55,18 @@ void				hash_insert(t_hashelem *elem, t_hashelem **table)
 
 t_hashelem			**table_init(t_env *envlist)
 {
-	t_hashelem **table;
-	t_hashelem *tmp;
-	t_hashelem *path_list;
+	t_hashelem	**table;
+	t_hashelem	*tmp;
+	t_hashelem	*path_list;
+	t_ult		*ult;
 
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (!(table = (t_hashelem **)malloc(sizeof(t_hashelem *) * 1021)))
 	{
 		ft_putendl_fd("21sh : malloc erroc on hash table init, abort.", 2);
-		exit(1);
+		exit_term(ult->term);
+		exit(3);
 	}
 	ft_bzero(table, sizeof(t_hashelem *) * 1021);
 	path_list = NULL;

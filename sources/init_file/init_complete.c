@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 14:13:42 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:54:32 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 14:55:05 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,15 @@ void			compl_push(t_compl *newelem, t_compl **elemlist)
 t_compl			*init_compl_one(char *cmd)
 {
 	t_compl		*dest;
+	t_ult		*ult;
 
 	dest = NULL;
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (!(dest = (t_compl *)malloc(sizeof(t_compl))))
 	{
 		ft_putendl_fd("21sh : malloc error, abort.", 2);
+		exit_term(ult->term);
 		exit(3);
 	}
 	dest->name = ft_strdup(cmd);

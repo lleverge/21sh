@@ -6,11 +6,12 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 17:06:59 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 15:45:38 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:48:33 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 void		hist_full(t_hist **hist)
 {
@@ -46,12 +47,16 @@ void		add_hist(t_hist **start, char *cmd)
 {
 	t_hist	*new;
 	t_hist	*tmp;
+	t_ult	*ult;
 
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	tmp = *start;
 	if (!(new = (t_hist *)malloc(sizeof(t_hist))))
 	{
 		ft_putendl_fd("error: new hist malloc failed", 2);
-		exit(-1);
+		exit_term(ult->term);
+		exit(3);
 	}
 	new->cmd = ft_strdup(cmd);
 	new->next = (*start)->next;

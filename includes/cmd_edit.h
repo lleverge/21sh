@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 16:15:07 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 14:57:02 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,7 @@ t_compl					*classic_compl(t_prompt *prompt);
 */
 int					reset_term(t_term *termi);
 void				exit_eof(t_term *termi, t_prompt *prompt);
+void				exit_term(t_term *termi);
 
 /*
 **word_detect.c

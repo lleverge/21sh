@@ -6,21 +6,26 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 13:08:42 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 15:52:33 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 14:58:38 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 t_env				*var_cpy(t_env *start, t_env *cpy)
 {
 	t_env	*tmp;
 	t_env	*voyager;
+	t_ult	*ult;
 
 	tmp = NULL;
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (!(tmp = (t_env *)malloc(sizeof(t_env))))
 	{
 		ft_putendl_fd("21sh : allocation error, abort.", 2);
+		exit_term(ult->term);
 		exit(3);
 	}
 	voyager = cpy;
@@ -39,11 +44,15 @@ t_env				*env_in_list(char *envar, t_env *start)
 {
 	t_env	*tmp;
 	t_env	*voyager;
+	t_ult	*ult;
 
 	tmp = NULL;
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (!(tmp = (t_env *)malloc(sizeof(t_env))))
 	{
 		ft_putendl_fd("21sh : allocation error, abort.", 2);
+		exit_term(ult->term);
 		exit(3);
 	}
 	tmp->next = NULL;

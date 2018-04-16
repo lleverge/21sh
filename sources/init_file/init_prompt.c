@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/09 15:20:35 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 15:53:04 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:01:10 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,16 @@ t_prompt		*init_prompt(void)
 {
 	t_prompt		*prompt;
 	struct winsize	win;
+	t_ult			*ult;
 
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (!(prompt = (t_prompt *)malloc(sizeof(t_prompt))))
-		return (NULL);
+	{
+		ft_putendl_fd("21sh: prompt malloc failed", 2);
+		exit_term(ult->term);
+		exit(3);
+	}
 	ft_bzero(prompt->cmd, 2000);
 	prompt->i = 0;
 	prompt->y = 0;

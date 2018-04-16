@@ -6,21 +6,26 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/27 11:36:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:01:19 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:45:43 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 
 t_env		*envlist_cpy(t_env *src)
 {
 	t_env	*new;
+	t_ult	*ult;
 
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (!src)
 		return (NULL);
 	if (!(new = (t_env *)malloc(sizeof(t_env))))
 	{
 		ft_putendl_fd("21sh : allocation error, abort.", 2);
+		exit_term(ult->term);
 		exit(3);
 	}
 	new->name = ft_strdup(src->name);
@@ -78,12 +83,16 @@ char		**tab_dup(char **src, int index_start_newtab)
 	char	**dest;
 	char	**tmp;
 	int		index;
+	t_ult	*ult;
 
 	dest = NULL;
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	index = count_strings(src, index_start_newtab);
 	if (!(dest = (char **)malloc(sizeof(char *) * (index + 1))))
 	{
 		ft_putendl_fd("21sh allocation error, abort.", 2);
+		exit_term(ult->term);
 		exit(3);
 	}
 	dest[index] = NULL;

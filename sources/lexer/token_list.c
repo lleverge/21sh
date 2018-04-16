@@ -6,12 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 11:54:34 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 16:17:27 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:14:28 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
+#include "../../includes/cmd_edit.h"
 
 void			lex_free_all(t_lexer *lexlist)
 {
@@ -55,12 +56,16 @@ t_lexer			*create_lexer_node(char *str)
 {
 	t_lexer		*new;
 	int			i;
+	t_ult		*ult;
 
 	i = 0;
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (!(new = (t_lexer *)malloc(sizeof(t_lexer))))
 	{
 		ft_putendl_fd("21sh: mem alloc error for t_lexer type, abort.",
-			STDERR_FILENO);
+					STDERR_FILENO);
+		exit_term(ult->term);
 		exit(1);
 	}
 	new->token_id = -1;

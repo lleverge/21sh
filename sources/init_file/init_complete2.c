@@ -6,16 +6,16 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:52:21 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:06:48 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cmd_edit.h"
 #include "../../includes/shell.h"
 
-void		add_prev(t_compl *list)
+void			add_prev(t_compl *list)
 {
-	t_compl 	*tmp;
+	t_compl		*tmp;
 	t_compl		*tmp2;
 
 	tmp = list;
@@ -32,7 +32,7 @@ void		add_prev(t_compl *list)
 		tmp2 = tmp;
 		tmp = tmp->next;
 	}
-	tmp2->next= list;
+	tmp2->next = list;
 	list->prev = tmp2;
 }
 
@@ -51,7 +51,7 @@ t_compl			*init_cmd_compl(t_ult *ult, char *cmd)
 	return (dest);
 }
 
-static t_compl		*init_on_dir(char *path_dir)
+static t_compl	*init_on_dir(char *path_dir)
 {
 	DIR				*open_dir;
 	t_compl			*list;
@@ -80,28 +80,32 @@ static t_compl		*init_on_dir(char *path_dir)
 	return (list);
 }
 
-int		compl_dir_needed(t_compl *list)
-{	
-	struct	stat *file_info;
+int				compl_dir_needed(t_compl *list)
+{
+	struct stat		*file_info;
+	t_ult			*ult;
 
 	file_info = NULL;
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (count_entries(list) > 1 || access(list->name, F_OK | X_OK) == -1)
 		return (0);
 	if (!(file_info = (struct stat *)malloc(sizeof(struct stat))))
 	{
 		ft_putendl_fd("21sh: malloc error", 2);
+		exit_term(ult->term);
 		exit(3);
 	}
- 	if (lstat(list->name, file_info) == -1)
- 	{
- 		free(file_info);
- 		return (0);
- 	}
- 	free(file_info);
+	if (lstat(list->name, file_info) == -1)
+	{
+		free(file_info);
+		return (0);
+	}
+	free(file_info);
 	return (S_ISDIR(file_info->st_mode) ? 1 : 0);
 }
 
-void	dir_handle(t_compl **list, char *word)
+void			dir_handle(t_compl **list, char *word)
 {
 	char	*buffer;
 	t_compl	*tmp;
@@ -109,13 +113,14 @@ void	dir_handle(t_compl **list, char *word)
 	if (!word || !ft_strlen(word))
 		return ;
 	tmp = *list;
-	if ((!list || !*list) && (ft_strchr(word , '/') && !access(word, F_OK | X_OK)))
+	if ((!list || !*list) && (ft_strchr(word, '/')
+							&& !access(word, F_OK | X_OK)))
 	{
 		if (word[ft_strlen(word) - 1] != '/')
 		{
 			buffer = ft_strjoin(word, "/");
 			*list = init_on_dir(buffer);
-			ft_strdel(&buffer);	
+			ft_strdel(&buffer);
 		}
 		else
 			*list = init_on_dir(word);

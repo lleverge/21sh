@@ -6,21 +6,26 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/31 17:57:56 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:00:45 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:48:07 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
+#include "../../includes/cmd_edit.h"
 #include <sys/stat.h>
 
 static int		test_isdir(char *path)
 {
 	struct stat	*stats;
+	t_ult		*ult;
 
+	ult = NULL;
+	ult = stock_ult(ult, 1);
 	if (!(stats = malloc(sizeof(struct stat))))
 	{
 		ft_putstr_fd("21sh : malloc error", 2);
-		exit (3);
+		exit_term(ult->term);
+		exit(3);
 	}
 	if (stat(path, stats) == -1)
 	{

@@ -6,12 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/05 15:48:19 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:02:14 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:45:59 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
+#include "../../includes/cmd_edit.h"
 
 char			*word_array_to_str(char **args_arr)
 {
@@ -65,7 +66,8 @@ t_ult			*setting_tmp_ult(t_ult *ult, t_env *env)
 	if (!(dest = (t_ult *)malloc(sizeof(t_ult))))
 	{
 		ft_putendl_fd("error: ult struct malloc failed", 2);
-		exit(-1);
+		exit_term(ult->term);
+		exit(3);
 	}
 	dest->env = env;
 	if (!env)
