@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/16 19:50:03 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/16 21:25:16 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ typedef struct		s_lexer
 	struct s_lexer	*prev;
 	struct s_lexer	*next;
 }					t_lexer;
+
+/*
+**lexer_to_str.c
+*/
+char				*lexer_to_str(t_lexer *lex);
+t_lexer				*lexdup(t_lexer *lexlist);
 
 /*
 **lexer.c

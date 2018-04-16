@@ -6,7 +6,7 @@
 #    By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/16 19:50:34 by vfrolich         ###   ########.fr        #
+#    Updated: 2018/04/16 21:17:27 by vfrolich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -72,6 +72,7 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/init_file/safe_term_init.c\
 	sources/lexer/free_procjob.c\
 	sources/lexer/lexer.c\
+	sources/lexer/lexer_to_str.c\
 	sources/lexer/lexer2.c\
 	sources/lexer/merge_quotes.c\
 	sources/lexer/new_lexer.c\
