@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/25 14:26:39 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/16 14:57:02 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:58:49 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,10 @@ typedef struct		s_prompt
 
 typedef struct		s_compl
 {
-	int 			cursored;
+	int				cursored;
 	char			*name;
-	struct 	s_compl *next;
-	struct 	s_compl	*prev;
+	struct s_compl	*next;
+	struct s_compl	*prev;
 }					t_compl;
 
 /*
@@ -77,25 +77,23 @@ t_prompt			*stock_prompt(t_prompt *prompt, int i);
 /*
 **init_complete.c
 */
-void					compl_push(t_compl *newelem, t_compl **elemlist);
-t_compl					*init_compl_one(char *cmd);
-t_compl 				*get_all_cmd(char *paths, char *cmd);
+void				compl_push(t_compl *newelem, t_compl **elemlist);
+t_compl				*init_compl_one(char *cmd);
+t_compl				*get_all_cmd(char *paths, char *cmd);
 
 /*
 **init_complete2.c
 */
-int						compl_dir_needed(t_compl *list);
-t_compl					*init_cmd_compl(t_ult *ult, char *cmd);
-void					add_prev(t_compl *list);
-void					dir_handle(t_compl **list, char *word);
-
+int					compl_dir_needed(t_compl *list);
+t_compl				*init_cmd_compl(t_ult *ult, char *cmd);
+void				add_prev(t_compl *list);
+void				dir_handle(t_compl **list, char *word);
 
 /*
 **init_complete3.c
 */
-DIR						*safe_open_dir(char *path_string);
-t_compl					*classic_compl(t_prompt *prompt);
-
+DIR					*safe_open_dir(char *path_string);
+t_compl				*classic_compl(t_prompt *prompt);
 
 /*
 **init_term.c
@@ -124,8 +122,7 @@ int					ask_prompt(t_compl *list);
 /*
 **exec_more.c
 */
-void 				exec_more(t_compl *list, t_ult *ult);
-
+void				exec_more(t_compl *list, t_ult *ult);
 
 /*
 **print_compl.c
@@ -146,7 +143,7 @@ size_t				get_term_size(char *field);
 size_t				get_largest_word(t_compl *list);
 size_t				word_per_line(t_compl *list);
 void				clr_screen(t_compl *list);
-size_t 				count_lines(t_compl *list);
+size_t				count_lines(t_compl *list);
 
 /*
 **select_actions.c
@@ -154,7 +151,6 @@ size_t 				count_lines(t_compl *list);
 void				select_next(t_compl *list);
 void				select_prev(t_compl *list);
 void				do_selection(t_compl *list, t_prompt *prompt);
-
 
 /*
 **prompt.c
@@ -235,8 +231,4 @@ void				read_compl(t_compl *list, t_prompt *prompt);
 */
 void				free_prompt(t_prompt **prompt);
 char				*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag);
-
-
-
-
 #endif

@@ -6,9 +6,8 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 15:46:12 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/16 16:01:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
 /* ************************************************************************** */
 
 #ifndef SHELL_H
@@ -35,7 +34,6 @@
 
 # define LDNEXT tmp->next->next
 # define LNEXT tmp->next
-
 
 typedef struct stat		t_stat;
 typedef struct winsize	t_winsize;
@@ -133,7 +131,6 @@ void					init_term2(t_term *termi);
 t_term					*init_term(void);
 int						reset_term(t_term *termi);
 
-
 /*
 **init_job.c
 */
@@ -184,7 +181,6 @@ int						is_cmd_empty(char *cmd);
 char					*get_data(t_env *env, char *ref_name);
 char					*copy_cmd(char *cmd);
 
-
 /*
 **display_tools.c
 */
@@ -207,11 +203,10 @@ void					free_process_one(t_process *proc);
 **init_tools.c
 */
 char					*get_node_content(t_env *env, char *str);
-	
+
 /*
 **redirections
 */
-
 t_process				*simple_redirect(t_process *proc);
 t_process				*append_redirect(t_process *proc);
 t_process				*redirect_input(t_process *proc);
@@ -235,8 +230,8 @@ int						is_redir_append(char *cmd);
 int						is_fildes_agreg(char *cmd);
 int						is_input_redir(char *cmd);
 int						is_heredoc(char *cmd);
-t_quote 				*quoted_list_init_one(char *sub_cmd, char *cmd);
-t_quote 				*quote_list_init(char *cmd);
+t_quote					*quoted_list_init_one(char *sub_cmd, char *cmd);
+t_quote					*quote_list_init(char *cmd);
 int						is_quoted(char *cmd, int index);
 
 /*
@@ -257,8 +252,10 @@ void					hash_destroy(t_hashelem **table);
 **fork.c
 */
 char					**path_in_tab(t_env *env, char **cmd);
-int						exe_fork2(t_env *env, t_process *proc, t_ult *ult, int fd[2]);
-int						exe_fork(t_env *env, t_process *proc, t_ult *ult, int fd[2]);
+int						exe_fork2(t_env *env, t_process *proc,
+								t_ult *ult, int fd[2]);
+int						exe_fork(t_env *env, t_process *proc,
+								t_ult *ult, int fd[2]);
 int						is_path(char *cmd);
 
 /*
@@ -329,7 +326,7 @@ void					destroy_job_list(t_job *job_list);
 /*
 **main_redirection.c
 */
-t_process 				*main_redirection_checker(t_process *proc, t_ult *ult);
+t_process				*main_redirection_checker(t_process *proc, t_ult *ult);
 
 /*
 **is_blankword.c
@@ -346,6 +343,4 @@ void					job_launch(t_job *job_li, t_ult *ult);
 **wait_procs.c
 */
 void					wait_for_procs(t_process *procs);
-
-
 #endif

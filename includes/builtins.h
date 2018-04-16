@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:15:21 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:53:44 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@
 t_ult					*setting_tmp_ult(t_ult *ult, t_env *env);
 t_lexer					*fill_lexer_env(t_ult *ult, char *cmd);
 char					*word_array_to_str(char **args_arr);
-int 					env_builtin(t_ult *ult, char **arg);
-void					job_launch_env(t_job *job_li, t_ult *ult);
-
+int						env_builtin(t_ult *ult, char **arg);
+Void					job_launch_env(t_job *job_li, t_ult *ult);
 
 /*
 **env_builtin_tools.c
@@ -42,7 +41,8 @@ t_env					*split_to_unset(t_ult *ult);
 **setenv.c
 */
 t_env					*split_to_set(t_ult *ult);
-t_env					*set_env(t_env **env, char *name, char *value);
+t_env					*set_env(t_env **env, char *name,
+								char *value);
 
 /*
 **cd.c

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/03/30 16:10:35 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:55:52 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int					check_aggreg(char *str, int i);
 char				*ft_strnosp(char *str);
 t_job				*set_jobs(t_lexer *lex);
 t_lexer				*fill_lexer(t_ult *ult);
-int					seek_and_exec(t_ult *ult, t_process *proc, char **cmd_tab, int fd[2]);
+int					seek_and_exec(t_ult *ult, t_process *proc,
+								char **cmd_tab, int fd[2]);
 int					check_linker(t_job **job_li, char *cmd, int i);
 
 /*
@@ -75,25 +76,23 @@ int					ft_isbadtoken(char c);
 int					is_token_char(char c);
 t_token_id			which_token(char c);
 
-
 /*
 **new_lexer.c
 */
-t_lexer 			*init_lexer(char *cmd);
+t_lexer				*init_lexer(char *cmd);
 void				lex_push(t_lexer *new, t_lexer **lex_list);
-
 
 /*
 **quote_prompt.c
 */
-char 				*prompt_until_quote(t_ult *ult, t_token_id tok_id);
+char				*prompt_until_quote(t_ult *ult, t_token_id tok_id);
 int					check_closed_quote(t_lexer **list);
-t_lexer 			*quote_tok(t_lexer *lexlist, t_ult *ult);
+t_lexer				*quote_tok(t_lexer *lexlist, t_ult *ult);
 
 /*
 **pipe_prompt.c
 */
-t_lexer 			*prompt_pipe(t_lexer *lex, t_ult *ult);
+t_lexer				*prompt_pipe(t_lexer *lex, t_ult *ult);
 
 /*
 **parse_error.c
@@ -103,7 +102,7 @@ int					parse_error(t_lexer *lexer, int error_fd);
 /*
 **merge_quotes.c
 */
-int 				count_merge_token(t_lexer *lex);
+int					count_merge_token(t_lexer *lex);
 t_lexer				*merge_token(t_lexer *lex);
 
 /*
@@ -132,7 +131,7 @@ int					is_dquote(char *str, int i);
 t_lexer				*lexer_list(t_lexer *list, char *str);
 t_lexer				*create_lexer_node(char *str);
 void				lex_free_one(t_lexer *lexnode);
-void 				lex_free_all(t_lexer *lexlist);
+void				lex_free_all(t_lexer *lexlist);
 
 /*
 **free_tools.c
