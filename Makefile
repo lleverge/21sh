@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lleverge <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/16 18:14:17 by lleverge         ###   ########.fr        #
+#    Updated: 2018/04/16 19:50:34 by vfrolich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,8 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/lexer/new_lexer.c\
 	sources/lexer/pipe_prompt.c\
 	sources/lexer/quote_prompt.c\
+	sources/lexer/quote_handler.c\
+	sources/lexer/quote_handler_2.c\
 	sources/lexer/seek_exec.c\
 	sources/lexer/token_list.c\
 	sources/lexer/token_recognizer.c\

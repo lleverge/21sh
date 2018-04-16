@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 16:36:31 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:17:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 18:38:34 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,8 @@ int				check_closed_quote(t_lexer **list)
 
 static	void	push_new_lex(char **to_add, t_lexer **lexlist)
 {
-	t_lexer		*lex_end;
-
-	lex_end = NULL;
-	lex_end = init_lexer(*to_add);
+	get_final_string(lexlist, to_add);
 	*to_add ? ft_strdel(to_add) : NULL;
-	lex_push(lex_end, lexlist);
-	ft_putstr("TO ADD~~~~~~~~~~~~~");
-	ft_putendl((*lexlist)->content);
 }
 
 t_lexer			*quote_tok(t_lexer *lexlist, t_ult *ult)
@@ -113,7 +107,6 @@ t_lexer			*quote_tok(t_lexer *lexlist, t_ult *ult)
 					return (NULL);
 				}
 				push_new_lex(&closed_quote, &lexlist);
-				ft_putendl(lexlist->content);
 				return (quote_tok(lexlist, ult));
 			}
 		}
