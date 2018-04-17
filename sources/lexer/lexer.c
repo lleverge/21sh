@@ -6,12 +6,29 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 16:07:56 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/16 22:04:10 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
+
+t_lexer			*fill_lexer_2(t_lexer **oldlex, t_ult *ult)
+{
+	t_lexer		*dup;
+
+	dup = NULL;
+	dup = lexdup(*oldlex);
+	dup = merge_token(dup);
+	if (parse_error(dup, ult->fd[2]) == -1)
+	{
+		free_lexer(&dup);
+		free_lexer(oldlex);
+		return (NULL);
+	}
+	free_lexer(&dup);
+	return (*oldlex);
+}
 
 t_lexer			*fill_lexer(t_ult *ult)
 {
@@ -25,9 +42,9 @@ t_lexer			*fill_lexer(t_ult *ult)
 	lexlist = quote_tok(lexlist, ult);
 	if (!(lexlist = quote_tok(lexlist, ult)))
 		return (NULL);
-	lexlist = merge_token(lexlist);
-	if (parse_error(lexlist, ult->fd[2]) == -1)
-		return (NULL);
+	lexlist = fill_lexer_2(&lexlist, ult);
+	ult->cmd ? ft_strdel(&ult->cmd) : NULL;
+	ult->cmd = lexer_to_str(lexlist);
 	return (lexlist);
 }
 
@@ -40,8 +57,7 @@ static void		pipe_token(t_lexer *lex, t_process **proc, char **cmd)
 
 static int		fine_token(int token_id)
 {
-	if (token_id == SAND || token_id == SEPARATOR || token_id == PIPE ||
-		token_id == QUOTE || token_id == DQUOTE)
+	if (token_id == SAND || token_id == SEPARATOR || token_id == PIPE)
 		return (1);
 	return (0);
 }

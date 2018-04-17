@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/30 14:47:13 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 16:07:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/17 22:06:50 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ static int		builtin_launch(t_ult *ult, t_process *proc)
 int				seek_and_exec(t_ult *ult, t_process *proc,
 							char **cmd_tab, int fd[2])
 {
-	char	**cmd_tab2;
-
-	cmd_tab2 = cmd_tab;
 	if (!cmd_tab)
 	{
 		ft_putendl_fd("21sh : command not found", 2);

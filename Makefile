@@ -6,7 +6,7 @@
 #    By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/16 21:17:27 by vfrolich         ###   ########.fr        #
+#    Updated: 2018/04/17 18:38:56 by vfrolich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,9 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/lexer/lexer.c\
 	sources/lexer/lexer_to_str.c\
 	sources/lexer/lexer2.c\
+	sources/lexer/format_arg.c\
 	sources/lexer/merge_quotes.c\
+	sources/lexer/init_lexproc.c\
 	sources/lexer/new_lexer.c\
 	sources/lexer/pipe_prompt.c\
 	sources/lexer/quote_prompt.c\

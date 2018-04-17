@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:37:50 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:00:30 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/17 22:13:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			search_for_builtins(t_ult *ult, t_process *proc)
 	char	**arg;
 
 	arg = NULL;
-	arg = ft_whitespace(proc->cmd);
+	arg = cmd_format(proc->cmd);
 	if (!arg)
 		return (2);
 	if (!ft_strlen(arg[0]))
