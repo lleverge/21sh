@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:35:51 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/16 17:21:43 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/17 17:29:56 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			delete(t_prompt *prompt, char *buffer)
 
 void			backspace(t_prompt *prompt, char *buffer)
 {
-	if (BACK_SPACE && ft_strlen(prompt->cmd) > 0)
+	if (BACK_SPACE && ft_strlen(prompt->cmd) > 0 && prompt->i != 0)
 	{
 		prompt->i--;
 		ft_memmove(prompt->cmd + prompt->i, prompt->cmd + prompt->i + 1,
