@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/16 21:39:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:31:21 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int				parse_error(t_lexer *lex, int error_fd)
 				(tmp->token_id == 3 && LNEXT->token_id == 0 && LDNEXT &&
 				LDNEXT->token_id < 13) ||
 				((tmp->token_id == 3 || tmp->token_id == 2 ||
-				  tmp->token_id == 0) && LNEXT->token_id == SEPARATOR) ||
-				 ((tmp->token_id == 0) && (LNEXT->token_id == 0)))
+				tmp->token_id == 0) && LNEXT->token_id == SEPARATOR) ||
+				((tmp->token_id == 0) && (LNEXT->token_id == 0)))
 		{
 			print_parse_error2(tmp, error_fd);
 			return (-1);

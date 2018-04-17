@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 21:10:39 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 21:26:41 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/17 16:32:53 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 #include "../../includes/lexer.h"
 #include "../../includes/cmd_edit.h"
 
-
-t_lexer	*lexdup(t_lexer *lexlist)
+t_lexer		*lexdup(t_lexer *lexlist)
 {
 	t_lexer	*new;
 
@@ -28,7 +27,7 @@ t_lexer	*lexdup(t_lexer *lexlist)
 	return (new);
 }
 
-char	*lexer_to_str(t_lexer *lex)
+char		*lexer_to_str(t_lexer *lex)
 {
 	t_lexer *tmp;
 	char	*dest;
@@ -37,7 +36,8 @@ char	*lexer_to_str(t_lexer *lex)
 	dest = NULL;
 	while (tmp)
 	{
-		dest =  !dest ? ft_strdup(tmp->content) : ft_strjoin_free_one(&dest, tmp->content);
+		dest = !dest ? ft_strdup(tmp->content) :
+			ft_strjoin_free_one(&dest, tmp->content);
 		tmp = tmp->next;
 	}
 	return (dest);
