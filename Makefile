@@ -6,7 +6,7 @@
 #    By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/18 12:11:53 by vfrolich         ###   ########.fr        #
+#    Updated: 2018/04/18 19:21:00 by lleverge         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -88,6 +88,7 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/lexer/token_recognizer.c\
 	sources/main.c\
 	sources/parse_error/parse_error.c\
+	sources/parse_error/parse_errortools.c\
 	sources/redirection/filedes_agreg.c\
 	sources/redirection/filedes_agreg_epur.c\
 	sources/redirection/ft_isbadtoken.c\

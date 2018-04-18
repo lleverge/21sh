@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/18 18:41:43 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:30:43 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,24 @@ static void		print_parse_error2(t_lexer *tmp, int error_fd)
 	ft_putendl_fd("'", error_fd);
 }
 
+static int		parse_space_error(t_lexer *lex)
+{
+	t_lexer		*tmp;
+
+	tmp = lex;
+	while (tmp)
+	{
+		if (tmp->token_id != 14 && LNEXT && is_full_spaces(LNEXT->content)
+		&& LDNEXT && LDNEXT->token_id != 14)
+		{
+			print_parse_error2(tmp->next, 2);
+			return (1);
+		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 int				parse_error(t_lexer *lex, int error_fd)
 {
 	t_lexer	*tmp;
@@ -43,17 +61,9 @@ int				parse_error(t_lexer *lex, int error_fd)
 	{
 		if (print_parse_error(tmp, error_fd) == -1)
 			return (-1);
-		else if ((tmp->token_id == 3 && LNEXT && LNEXT->token_id == 3 &&
-				LDNEXT && LDNEXT->token_id < 13) || (tmp->token_id == 2
-				&& LNEXT->token_id == 2 && LDNEXT && LDNEXT->token_id < 13) ||
-				(tmp->token_id == 0 && LNEXT->token_id == 3 && LDNEXT &&
-				LDNEXT->token_id < 13) || (tmp->token_id == 3 && LNEXT->token_id
-				== 0 && LDNEXT && LDNEXT->token_id < 13) || ((tmp->token_id == 3
-				|| tmp->token_id == 2 || tmp->token_id == 0) && LNEXT->token_id
-				== SEPARATOR) || ((tmp->token_id == 0) && (LNEXT->token_id
-				== 0)) || ((!LPREV || LPREV->token_id != 14) && tmp->token_id
-				== 12 && !tmp->next) || (tmp->token_id == 1 && LNEXT &&
-				LNEXT->token_id != 14))
+		else if (parse_space_error(tmp) == 1)
+			return (-1);
+		else if (!is_parse_error(tmp))
 		{
 			print_parse_error2(tmp, error_fd);
 			return (-1);
