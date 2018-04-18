@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/18 19:27:21 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:34:33 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ t_lexer				*lexdup(t_lexer *lexlist);
 **format_arg.c
 */
 int					is_quoted_lex(t_lexer *node, t_lexer *lexlist);
-int 				count_allwords(t_lexer *lex, t_lexer *lexlist);
+int					count_allwords(t_lexer *lex, t_lexer *lexlist);
 int					split_words(char *src, char **dest, int i);
 
 /*
@@ -61,7 +61,7 @@ char				**cmd_format(char *cmd);
 /*
 **init_lexproc.c
 */
-t_lexer			*lex_from_proc(t_process *proc);
+t_lexer				*lex_from_proc(t_process *proc);
 
 /*
 **lexer.c
