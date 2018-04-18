@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/17 16:31:21 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:03:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ static int		print_parse_error(t_lexer *tmp, int error_fd)
 static void		print_parse_error2(t_lexer *tmp, int error_fd)
 {
 	ft_putstr_fd("21sh: parse error near '", error_fd);
-	ft_putstr_fd(tmp->next->content, error_fd);
+	if (tmp->next)
+		ft_putstr_fd(tmp->next->content, error_fd);
+	else
+		ft_putstr_fd(tmp->content, error_fd);
 	ft_putendl_fd("'", error_fd);
 }
 
@@ -41,16 +44,16 @@ int				parse_error(t_lexer *lex, int error_fd)
 		if (print_parse_error(tmp, error_fd) == -1)
 			return (-1);
 		else if ((tmp->token_id == 3 && LNEXT && LNEXT->token_id == 3 &&
-				LDNEXT && LDNEXT->token_id < 13) ||
-				(tmp->token_id == 2 && LNEXT->token_id == 2 && LDNEXT &&
-				LDNEXT->token_id < 13) ||
+				LDNEXT && LDNEXT->token_id < 13) || (tmp->token_id == 2
+				&& LNEXT->token_id == 2 && LDNEXT && LDNEXT->token_id < 13) ||
 				(tmp->token_id == 0 && LNEXT->token_id == 3 && LDNEXT &&
-				LDNEXT->token_id < 13) ||
-				(tmp->token_id == 3 && LNEXT->token_id == 0 && LDNEXT &&
-				LDNEXT->token_id < 13) ||
-				((tmp->token_id == 3 || tmp->token_id == 2 ||
-				tmp->token_id == 0) && LNEXT->token_id == SEPARATOR) ||
-				((tmp->token_id == 0) && (LNEXT->token_id == 0)))
+				LDNEXT->token_id < 13) || (tmp->token_id == 3 && LNEXT->token_id
+				== 0 && LDNEXT && LDNEXT->token_id < 13) || ((tmp->token_id == 3
+				|| tmp->token_id == 2 || tmp->token_id == 0) && LNEXT->token_id
+				== SEPARATOR) || ((tmp->token_id == 0) && (LNEXT->token_id
+				== 0)) || ((!LPREV || LPREV->token_id != 14) && tmp->token_id
+				== 12 && !tmp->next) || (tmp->token_id == 1 && LNEXT &&
+				LNEXT->token_id == 1))
 		{
 			print_parse_error2(tmp, error_fd);
 			return (-1);

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/17 22:04:26 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/18 18:04:04 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 
 # define LDNEXT tmp->next->next
 # define LNEXT tmp->next
+# define LPREV tmp->prev
 
 typedef struct stat		t_stat;
 typedef struct winsize	t_winsize;
