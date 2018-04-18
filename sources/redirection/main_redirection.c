@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 21:55:41 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:42:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ t_process			*main_redirection_checker(t_process *proc, t_ult *ult)
 	i = 0;
 	while (proc->cmd[i])
 	{
-		if ((proc->cmd[i] == '>' || proc->cmd[i] == '<' || proc->cmd[i] == '&') && !is_quoted(proc->cmd, i))
+		if ((proc->cmd[i] == '>' || proc->cmd[i] == '<' || proc->cmd[i] == '&')
+		&& !is_quoted(proc->cmd, i))
 		{
 			proc = redir_detector(proc, ult);
 			break ;

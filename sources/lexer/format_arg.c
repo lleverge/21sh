@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:49:35 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/17 21:44:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:41:13 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ static int		parse_through(t_lexer **list, t_lexer *elem)
 	return (1);
 }
 
-int		is_quoted_lex(t_lexer *node, t_lexer *lexlist)
+int				is_quoted_lex(t_lexer *node, t_lexer *lexlist)
 {
-	t_lexer 	*tmp;
+	t_lexer		*tmp;
 
 	tmp = lexlist;
 	while (tmp && tmp != node)
@@ -52,7 +52,7 @@ int		is_quoted_lex(t_lexer *node, t_lexer *lexlist)
 	return (0);
 }
 
-static int				ft_count_words(char const *s)
+static int		ft_count_words(char const *s)
 {
 	int i;
 	int nb_w;
@@ -73,18 +73,18 @@ static int				ft_count_words(char const *s)
 	return (nb_w);
 }
 
-int 					count_allwords(t_lexer *lex, t_lexer *lexlist)
+int				count_allwords(t_lexer *lex, t_lexer *lexlist)
 {
 	if (is_quoted_lex(lex, lexlist))
 		return (1);
 	return (ft_count_words(lex->content));
-} 
+}
 
-int						split_words(char *src, char **dest, int i)
+int				split_words(char *src, char **dest, int i)
 {
 	char	**tmp;
 	char	**start;
-	int 	ret;
+	int		ret;
 
 	start = NULL;
 	start = ft_strsplit_ws(src);

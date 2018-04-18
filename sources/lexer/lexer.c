@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/16 22:04:10 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:45:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,6 @@ static void		pipe_token(t_lexer *lex, t_process **proc, char **cmd)
 	proc_pushb(proc, create_proc_node(*cmd, lex->token_id));
 	ft_strdel(cmd);
 	*cmd = ft_strdup("");
-}
-
-static int		fine_token(int token_id)
-{
-	if (token_id == SAND || token_id == SEPARATOR || token_id == PIPE)
-		return (1);
-	return (0);
 }
 
 static void		separator_token(char **cmd, t_job **job, t_process **proc)

@@ -6,11 +6,18 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/17 10:40:32 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:07:38 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:45:13 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/lexer.h"
+
+int			fine_token(int token_id)
+{
+	if (token_id == SAND || token_id == SEPARATOR || token_id == PIPE)
+		return (1);
+	return (0);
+}
 
 int			is_token_char(char c)
 {

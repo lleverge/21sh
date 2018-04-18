@@ -6,17 +6,17 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 11:53:28 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/18 19:09:14 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:37:51 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
 
-static int				count_words(t_lexer *lex)
+static int		count_words(t_lexer *lex)
 {
-	t_lexer *tmp;
-	int 	ret;
+	t_lexer	*tmp;
+	int		ret;
 
 	ret = 0;
 	tmp = lex;
@@ -56,7 +56,7 @@ static void		fill_dest(char **dest, t_lexer *lexer)
 	dest[i] = NULL;
 }
 
-char		**cmd_format(char *base)
+char			**cmd_format(char *base)
 {
 	t_lexer		*lexer;
 	char		**dest;

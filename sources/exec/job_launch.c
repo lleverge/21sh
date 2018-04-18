@@ -6,14 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:28:46 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/18 12:12:55 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:36:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cmd_edit.h"
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
-
 
 static void		simple_sigint(int signal)
 {

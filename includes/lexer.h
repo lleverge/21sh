@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/18 19:34:33 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/18 19:46:03 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,7 @@ t_lexer				*lexer_list(t_lexer *list, char *str);
 t_lexer				*create_lexer_node(char *str);
 void				lex_free_one(t_lexer *lexnode);
 void				lex_free_all(t_lexer *lexlist);
+int					fine_token(int token_id);
 
 /*
 **free_tools.c
