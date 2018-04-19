@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/18 19:30:43 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/19 17:51:55 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ static int		parse_space_error(t_lexer *lex)
 	tmp = lex;
 	while (tmp)
 	{
-		if (tmp->token_id != 14 && LNEXT && is_full_spaces(LNEXT->content)
-		&& LDNEXT && LDNEXT->token_id != 14)
+		if (tmp->token_id != 14 && tmp->token_id != 6 && tmp->token_id != 7
+			&& LNEXT && is_full_spaces(LNEXT->content)
+			&& LDNEXT && LDNEXT->token_id != 6 && LDNEXT->token_id != 7
+			&& LDNEXT->token_id != 14)
 		{
 			print_parse_error2(tmp->next, 2);
 			return (1);
