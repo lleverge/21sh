@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/22 16:57:11 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 17:11:45 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,9 @@ static int		parse_separator(t_lexer *lex)
 	t_lexer *tmp;
 
 	tmp = lex;
+	if ((tmp->token_id == SEPARATOR && !LNEXT) || (tmp->token_id && LNEXT
+		&& !LDNEXT && is_full_spaces(LNEXT->content)))
+		return (1);
 	if (tmp->token_id == SEPARATOR && LNEXT && (LNEXT->token_id == SEPARATOR ||
 	LNEXT->token_id == LESS || LNEXT->token_id == GREAT || LNEXT->token_id
 	== SAND || LNEXT->token_id == PIPE))
