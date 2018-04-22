@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 17:37:50 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/17 22:13:22 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/22 18:29:09 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int			search_for_builtins(t_ult *ult, t_process *proc)
 	else if (!ft_strcmp(arg[0], "setenv"))
 		ult->env = split_to_set(ult);
 	ult->ret = search_for_builtins_2(ult, arg);
-	free_tab(arg);
+	arg ? free_tab(arg) : NULL;
 	return (ult->ret);
 }

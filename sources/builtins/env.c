@@ -6,12 +6,13 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:32:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:01:05 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 19:25:20 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 #include "../../includes/lexer.h"
+#include <stdio.h>
 
 int			parse_var_setenv(char *arg)
 {
@@ -81,6 +82,8 @@ int			launch_new_cmd(t_ult *ult, char **arg, t_env *tmp_env)
 	lex_free_all(lexer);
 	destroy_job_list(jobs);
 	hash_destroy(tmp_ult->hash_table);
+	free(tmp_ult->term);
+	free_env(&tmp_ult->env);
 	free(tmp_ult);
 	return (ult->ret);
 }
@@ -108,6 +111,5 @@ int			env_builtin(t_ult *ult, char **arg)
 	}
 	else
 		ret = launch_new_cmd(ult, arg, new);
-	free_env(&new);
 	return (ret);
 }

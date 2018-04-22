@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 19:19:20 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 19:35:15 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 #include "../includes/lexer.h"
 #include "../includes/cmd_edit.h"
 
-static void		prog_core(t_lexer *lex, t_job *jobs, t_ult *ult)
+static void		prog_core(t_job *jobs, t_ult *ult)
 {
+	t_lexer *lex;
+
+	lex = NULL; 
 	main_signal_handler();
 	get_prompt(ult->env);
 	termcap(ult);
@@ -31,6 +34,7 @@ static void		prog_core(t_lexer *lex, t_job *jobs, t_ult *ult)
 		job_launch(jobs, ult);
 		destroy_job_list(jobs);
 	}
+	lex ? lex_free_all(lex) : NULL;
 }
 
 int				init_all(char **environ)
@@ -45,9 +49,7 @@ int				init_all(char **environ)
 	lex = NULL;
 	while (42)
 	{
-		prog_core(lex, jobs, ult);
-		lex ? lex_free_all(lex) : NULL;
-		lex = NULL;
+		prog_core(jobs, ult);
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
 	}
 	return (0);
