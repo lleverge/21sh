@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/22 17:39:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 17:42:42 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,6 @@ int				parse_error(t_lexer *lex, int error_fd)
 	tmp = lex;
 	while (tmp)
 	{
-		ft_putstr("TMP->CONTENT~~~~~~~~~~~~~ ");
-		ft_putendl(tmp->content);
-		ft_putstr("TMP->TOK_ID~~~~~~~~~~~~~~~~ ");
-		ft_putnbr(tmp->token_id);
-		ft_putendl("");
 		if (parse_separator(tmp) || parse_great(tmp) || parse_less(tmp)
 			|| parse_and(tmp) || parse_pipe(tmp))
 		{
