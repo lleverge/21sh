@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:28:46 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/18 19:36:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 16:16:17 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,20 @@ static void		simple_sigint(int signal)
 	if (signal != SIGINT)
 		return ;
 	ft_putchar('\n');
+}
+
+static int		to_close(t_close *close_fd, int fd)
+{
+	t_close		*tmp;
+
+	tmp = close_fd;
+	while (tmp)
+	{
+		if (tmp->fd == fd)
+			return (1);
+		tmp = tmp->next;	
+	}
+	return (0);
 }
 
 void			proc_launch(t_process *proc, t_ult *ult, int fd[2])
@@ -35,7 +49,7 @@ void			proc_launch(t_process *proc, t_ult *ult, int fd[2])
 		if (tmp_proc->next)
 		{
 			pipe(fd);
-			if (tmp_proc->fd[1] == 1)
+			if (tmp_proc->fd[1] == 1 && !to_close(tmp_proc->fd_to_close, 1))
 				tmp_proc->fd[1] = fd[1];
 			else
 				close(fd[1]);
