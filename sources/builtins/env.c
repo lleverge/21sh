@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:32:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 19:25:20 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/22 19:48:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ int			env_builtin(t_ult *ult, char **arg)
 	{
 		print_list(new);
 		ret = 0;
+		free_env(&new);
 	}
 	else
 		ret = launch_new_cmd(ult, arg, new);
