@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/18 19:46:03 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 16:44:05 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,10 +134,17 @@ t_lexer				*prompt_pipe(t_lexer *lex, t_ult *ult);
 int					parse_error(t_lexer *lexer, int error_fd);
 
 /*
+**parse_error2.c
+*/
+int					parse_pipe(t_lexer *lex);
+int					parse_and(t_lexer *lex);
+
+/*
 **parse_errortools.c
 */
 int					is_full_spaces(char *str);
-int					is_parse_error(t_lexer *lex);
+int					parse_and_error(t_lexer *lex);
+int					parse_pipe_error(t_lexer *lex);
 
 /*
 **merge_quotes.c

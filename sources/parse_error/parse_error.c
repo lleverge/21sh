@@ -6,22 +6,65 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/19 17:51:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 16:52:46 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
 
-static int		print_parse_error(t_lexer *tmp, int error_fd)
+static int		parse_less(t_lexer *lex)
 {
-	if (tmp->token_id < 12 && tmp->token_id != QUOTE &&
-		tmp->token_id != DQUOTE && !tmp->next)
-	{
-		ft_putendl_fd("21sh: parse error near '\\n'", error_fd);
-		return (-1);
-	}
-	return (0);
+	t_lexer *tmp;
+
+	tmp = lex;
+	if (tmp->token_id == LESS && LNEXT && (LNEXT->token_id == SEPARATOR ||
+	LNEXT->token_id == GREAT || LNEXT->token_id == PIPE ||
+	LNEXT->token_id == SAND))
+		return (1);
+	else if (tmp->token_id == LESS && LNEXT && LNEXT->token_id == LESS
+			&& !LDNEXT)
+		return (1);
+	else if ((tmp->token_id == LESS && LNEXT && LNEXT->token_id == LESS
+			&& LDNEXT->token_id != 14))
+		return (1);
+	else if (tmp->token_id == LESS && LNEXT && LDNEXT &&
+			is_full_spaces(LNEXT->content) && (LDNEXT->token_id ==
+			SEPARATOR || LDNEXT->token_id == LESS ||
+			LDNEXT->token_id == GREAT || LDNEXT->token_id
+			== SAND || LDNEXT->token_id == PIPE))
+		return (1);
+	else
+		return (0);
+}
+
+static int		parse_great(t_lexer *lex)
+{
+	t_lexer	*tmp;
+
+	tmp = lex;
+	if (tmp->token_id == GREAT && LNEXT && (LNEXT->token_id == SEPARATOR ||
+	LNEXT->token_id == LESS || LNEXT->token_id == PIPE))
+		return (1);
+	else if (tmp->token_id == GREAT && LNEXT && LNEXT->token_id == GREAT
+			&& !LDNEXT)
+		return (1);
+	else if (tmp->token_id == GREAT && LNEXT && LNEXT->token_id ==
+			SAND && !LDNEXT)
+		return (1);
+	else if ((tmp->token_id == GREAT && LNEXT && LNEXT->token_id == GREAT
+			&& LDNEXT->token_id != 14) || ((tmp->token_id == GREAT && LNEXT
+			&& LDNEXT && LNEXT->token_id == SAND &&
+			ft_strncmp("-", LDNEXT->content, 1))))
+		return (1);
+	else if (tmp->token_id == GREAT && LNEXT && LDNEXT &&
+			is_full_spaces(LNEXT->content) && (LDNEXT->token_id ==
+			SEPARATOR || LDNEXT->token_id == LESS ||
+			LDNEXT->token_id == GREAT || LDNEXT->token_id
+			== SAND || LDNEXT->token_id == PIPE))
+		return (1);
+	else
+		return (0);
 }
 
 static void		print_parse_error2(t_lexer *tmp, int error_fd)
@@ -34,24 +77,22 @@ static void		print_parse_error2(t_lexer *tmp, int error_fd)
 	ft_putendl_fd("'", error_fd);
 }
 
-static int		parse_space_error(t_lexer *lex)
+static int		parse_separator(t_lexer *lex)
 {
-	t_lexer		*tmp;
+	t_lexer *tmp;
 
 	tmp = lex;
-	while (tmp)
-	{
-		if (tmp->token_id != 14 && tmp->token_id != 6 && tmp->token_id != 7
-			&& LNEXT && is_full_spaces(LNEXT->content)
-			&& LDNEXT && LDNEXT->token_id != 6 && LDNEXT->token_id != 7
-			&& LDNEXT->token_id != 14)
-		{
-			print_parse_error2(tmp->next, 2);
-			return (1);
-		}
-		tmp = tmp->next;
-	}
-	return (0);
+	if (tmp->token_id == SEPARATOR && LNEXT && (LNEXT->token_id == SEPARATOR ||
+	LNEXT->token_id == LESS || LNEXT->token_id == GREAT || LNEXT->token_id
+	== SAND || LNEXT->token_id == PIPE))
+		return (1);
+	else if (tmp->token_id == SEPARATOR && LNEXT && LDNEXT &&
+			is_full_spaces(LNEXT->content) && (LDNEXT->token_id == SEPARATOR
+			|| LDNEXT->token_id == LESS || LDNEXT->token_id == GREAT ||
+			LDNEXT->token_id == SAND || LDNEXT->token_id == PIPE))
+		return (2);
+	else
+		return (0);
 }
 
 int				parse_error(t_lexer *lex, int error_fd)
@@ -61,11 +102,8 @@ int				parse_error(t_lexer *lex, int error_fd)
 	tmp = lex;
 	while (tmp)
 	{
-		if (print_parse_error(tmp, error_fd) == -1)
-			return (-1);
-		else if (parse_space_error(tmp) == 1)
-			return (-1);
-		else if (!is_parse_error(tmp))
+		if (parse_separator(tmp) || parse_great(tmp) || parse_less(tmp)
+			|| parse_and(tmp) || parse_pipe(tmp))
 		{
 			print_parse_error2(tmp, error_fd);
 			return (-1);
