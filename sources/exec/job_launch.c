@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:28:46 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 16:16:17 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/22 17:00:05 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		to_close(t_close *close_fd, int fd)
 	{
 		if (tmp->fd == fd)
 			return (1);
-		tmp = tmp->next;	
+		tmp = tmp->next;
 	}
 	return (0);
 }
