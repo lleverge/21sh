@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 19:39:38 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 16:22:56 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/22 19:57:08 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int			which_fd_agreg(char *cmd)
 	int				j;
 	int				fd;
 
-	sub_cmd = cmd;
+	sub_cmd = NULL;
 	sub_cmd = ft_strsub(sub_cmd, 0, (ft_strchr(sub_cmd, '>') - sub_cmd));
 	i = ft_strlen(sub_cmd) - 1;
 	j = i;
