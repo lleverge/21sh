@@ -6,13 +6,32 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/18 16:08:02 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 19:19:20 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 #include "../includes/lexer.h"
 #include "../includes/cmd_edit.h"
+
+static void		prog_core(t_lexer *lex, t_job *jobs, t_ult *ult)
+{
+	main_signal_handler();
+	get_prompt(ult->env);
+	termcap(ult);
+	ft_putchar('\n');
+	if (ult->cmd && !is_blankword(ult->cmd))
+	{
+		lex = fill_lexer(ult);
+		lex ? group_token(&lex) : NULL;
+	}
+	if (ult->cmd && *ult->cmd && lex)
+	{
+		jobs = set_jobs(lex);
+		job_launch(jobs, ult);
+		destroy_job_list(jobs);
+	}
+}
 
 int				init_all(char **environ)
 {
@@ -26,21 +45,7 @@ int				init_all(char **environ)
 	lex = NULL;
 	while (42)
 	{
-		main_signal_handler();
-		get_prompt(ult->env);
-		termcap(ult);
-		ft_putchar('\n');
-		if (ult->cmd && !is_blankword(ult->cmd))
-		{
-			lex = fill_lexer(ult);
-			lex ? group_token(&lex) : NULL;
-		}
-		if (ult->cmd && *ult->cmd && lex)
-		{
-			jobs = set_jobs(lex);
-			job_launch(jobs, ult);
-			destroy_job_list(jobs);
-		}
+		prog_core(lex, jobs, ult);
 		lex ? lex_free_all(lex) : NULL;
 		lex = NULL;
 		ult->cmd ? ft_strdel(&ult->cmd) : NULL;
