@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 11:53:28 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 14:33:26 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:51:56 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,6 @@ char			**cmd_format(char *base)
 	char		**dest;
 
 	lexer = init_lexer(base);
-	// lex_print(lexer);
-	// lexer = merge_token(lexer);
-	// lexer = merge_token(lexer);
-	// ft_putstr("after merge");
 	if (!count_words(lexer))
 	{
 		free_lexer(&lexer);
@@ -122,7 +118,6 @@ char			**cmd_format(char *base)
 		free_lexer(&lexer);
 		return (NULL);
 	}
-	// ft_putendl("OUAIS OUAIS OUAIS");
 	fill_dest(dest, lexer);
 	free_lexer(&lexer);
 	return (dest);

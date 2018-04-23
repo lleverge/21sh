@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 19:39:38 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 19:57:08 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:48:40 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,13 @@ int					get_target_fd(char *cmd)
 	int				fd;
 
 	sub_cmd = ft_strchr(cmd, '&') + 1;
+	word_to_atoi = NULL;
 	word_to_atoi = get_word(sub_cmd);
+	if (word_to_atoi && *word_to_atoi && !ft_isdigit(*word_to_atoi))
+	{
+		ft_strdel(&word_to_atoi);
+		return (-1);
+	}
 	fd = ft_atoi(word_to_atoi);
 	word_to_atoi ? ft_strdel(&word_to_atoi) : NULL;
 	return (fd);

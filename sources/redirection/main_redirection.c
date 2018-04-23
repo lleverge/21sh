@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/18 19:42:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/22 20:58:02 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int			check_deeper(char *cmd, char *to_check)
 
 static t_process	*redir_detector(t_process *proc, t_ult *ult)
 {
+	if (is_simple_redir(proc->cmd) && check_deeper(proc->cmd, ">") != -1)
+		return (simple_redirect(proc));
 	if (is_redir_append(proc->cmd) && check_deeper(proc->cmd, ">>") != -1)
 		return (append_redirect(proc));
 	if (is_heredoc(proc->cmd) && check_deeper(proc->cmd, "<<") != -1)
@@ -53,8 +55,6 @@ static t_process	*redir_detector(t_process *proc, t_ult *ult)
 		return (agreg_output(proc));
 	if (is_input_redir(proc->cmd) && check_deeper(proc->cmd, "<") != -1)
 		return (redirect_input(proc));
-	if (is_simple_redir(proc->cmd) && check_deeper(proc->cmd, ">") != -1)
-		return (simple_redirect(proc));
 	return (proc);
 }
 

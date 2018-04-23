@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 16:57:59 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:27:47 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,11 @@ int					get_epur_size(char *cmd)
 	{
 		while (tmp[to_epur] && (tmp[to_epur] < 33 || tmp[to_epur] > 126))
 			to_epur++;
-		while (tmp[to_epur] && (tmp[to_epur] >= 33 && tmp[to_epur] <= 126))
-			to_epur++;
+		if (tmp[to_epur] == '\'' || tmp[to_epur] == '\"')
+			quote_extracter(tmp, &to_epur);
+		else
+			while (tmp[to_epur] && (tmp[to_epur] >= 33 && tmp[to_epur] <= 126))
+				to_epur++;
 	}
 	return (to_epur);
 }

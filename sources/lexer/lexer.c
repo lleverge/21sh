@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/22 15:07:14 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/22 21:27:42 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_job			*set_jobs(t_lexer *lex)
 	cmd = ft_strdup("");
 	while (lex)
 	{
-		if (!fine_token(lex->token_id))
+		if (!fine_token(lex->token_id) && (lex->token_id != DQUOTE || lex->token_id != QUOTE))
 		{
 			tmp = ft_strdup(lex->content);
 			cmd = ft_strjoin_free(&cmd, &tmp);

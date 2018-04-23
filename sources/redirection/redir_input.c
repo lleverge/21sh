@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:41:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 14:10:53 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:55:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,7 @@ t_process			*redirect_input(t_process *proc)
 
 	sub_str = ft_strchr(proc->cmd, '<') + 1;
 	if (check_error_redir(sub_str, "<") == -1)
-	{
-		ft_putstr("oui\n\n\n\n\n\n");
 		return (NULL);
-	}
 	file_name = get_word(sub_str);
 	if ((fd = open(file_name, O_RDONLY)) == -1)
 	{
@@ -97,8 +94,6 @@ t_process			*redirect_input(t_process *proc)
 	proc->fd[0] = fd;
 	proc = standard_fd(proc);
 	proc = cmd_epur_input(proc);
-	ft_putstr("proc cmd after epur :");
-	ft_putendl(proc->cmd);
 	ft_strdel(&file_name);
 	return (proc);
 }

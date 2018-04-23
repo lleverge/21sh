@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/13 12:21:48 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:57:53 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:42:38 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,18 @@ static int	get_epur_size_heredoc(char *cmd)
 	tmp = &cmd[start];
 	while (tmp[to_epur] && tmp[to_epur] == '<')
 		to_epur++;
-	while (tmp[to_epur] && (tmp[to_epur] < 33 || tmp[to_epur] > 126))
-		to_epur++;
-	while (tmp[to_epur] && (tmp[to_epur] >= 33 && tmp[to_epur] <= 126))
-		to_epur++;
+	if (tmp[to_epur] && (tmp[to_epur] == '\'' || tmp[to_epur] == '\"'))
+		quote_extracter(tmp, &to_epur);
+	else
+	{
+		while (tmp[to_epur] && (tmp[to_epur] < 33 || tmp[to_epur] > 126))
+			to_epur++;
+		if (tmp[to_epur] && (tmp[to_epur] == '\'' || tmp[to_epur] == '\"'))
+			quote_extracter(tmp, &to_epur);
+		else
+			while (tmp[to_epur] && (tmp[to_epur] >= 33 && tmp[to_epur] <= 126))
+				to_epur++;
+	}
 	return (to_epur);
 }
 
