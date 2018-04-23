@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/23 17:45:41 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 19:26:28 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ static int		parse_great(t_lexer *lex)
 		return (0);
 }
 
-static void		print_parse_error2(t_lexer *tmp, int error_fd)
+static void		print_parse_error2(t_lexer *tmp)
 {
-	ft_putstr_fd("21sh: parse error near '", error_fd);
+	ft_putstr_fd("21sh: parse error near '", 2);
 	if (tmp->next)
-		ft_putstr_fd(tmp->content, error_fd);
+		ft_putstr_fd(tmp->content, 2);
 	else
-		ft_putstr_fd(tmp->content, error_fd);
-	ft_putendl_fd("'", error_fd);
+		ft_putstr_fd(tmp->content, 2);
+		ft_putendl_fd("'", 2);
 }
 
 static int		parse_separator(t_lexer *lex)
@@ -101,7 +101,7 @@ static int		parse_separator(t_lexer *lex)
 		return (0);
 }
 
-int				parse_error(t_lexer *lex, int error_fd)
+int				parse_error(t_lexer *lex)
 {
 	t_lexer	*tmp;
 
@@ -111,7 +111,7 @@ int				parse_error(t_lexer *lex, int error_fd)
 		if (parse_separator(tmp) || parse_great(tmp) || parse_less(tmp)
 			|| parse_and(tmp) || parse_pipe(tmp) || parse_first(tmp))
 		{
-			print_parse_error2(tmp, error_fd);
+			print_parse_error2(tmp);
 			return (-1);
 		}
 		tmp = tmp->next;

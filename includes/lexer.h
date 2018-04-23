@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/23 15:30:08 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 19:19:50 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ t_lexer				*prompt_pipe(t_lexer *lex, t_ult *ult);
 /*
 **parse_error.c
 */
-int					parse_error(t_lexer *lexer, int error_fd);
+int					parse_error(t_lexer *lexer);
 
 /*
 **parse_error2.c
