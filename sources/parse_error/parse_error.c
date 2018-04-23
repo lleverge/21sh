@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/23 15:33:09 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 16:14:11 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static int		parse_less(t_lexer *lex)
 	t_lexer *tmp;
 
 	tmp = lex;
+	if (tmp->token_id == LESS && !tmp->prev && LNEXT)
+		return (0);
 	if (tmp->token_id == LESS && LNEXT && (LNEXT->token_id == SEPARATOR ||
 	LNEXT->token_id == GREAT || LNEXT->token_id == PIPE ||
 	LNEXT->token_id == SAND))
@@ -43,19 +45,19 @@ static int		parse_great(t_lexer *lex)
 	t_lexer	*tmp;
 
 	tmp = lex;
-	if (tmp->token_id == GREAT && LNEXT && (LNEXT->token_id == SEPARATOR ||
-	LNEXT->token_id == LESS || LNEXT->token_id == PIPE))
+	if (tmp->token_id == GREAT && !tmp->prev && LNEXT)
+		return (0);
+	if ((tmp->token_id == GREAT && LNEXT && (LNEXT->token_id == SEPARATOR ||
+	LNEXT->token_id == LESS || LNEXT->token_id == PIPE)) || ((tmp->token_id
+	== GREAT && LNEXT && LNEXT->token_id == GREAT && !LDNEXT)
+	|| (tmp->token_id == GREAT && !LNEXT)))
 		return (1);
-	else if ((tmp->token_id == GREAT && LNEXT && LNEXT->token_id == GREAT
-			&& !LDNEXT) || (tmp->token_id == GREAT && !LNEXT))
-		return (1);
-	else if (tmp->token_id == GREAT && LNEXT && LNEXT->token_id ==
-			SAND && !LDNEXT)
-		return (1);
-	else if ((tmp->token_id == GREAT && LNEXT && LNEXT->token_id == GREAT
-			&& LDNEXT->token_id != 14) && ((tmp->token_id == GREAT && LNEXT
-			&& LDNEXT && LNEXT->token_id == SAND &&
-			(ft_strncmp("-", LDNEXT->content, 1) || LDNEXT->token_id != 14))))
+	else if ((tmp->token_id == GREAT && LNEXT && LNEXT->token_id ==
+			SAND && !LDNEXT) || ((tmp->token_id == GREAT && LNEXT
+			&& LNEXT->token_id == GREAT && LDNEXT->token_id != 14)
+			&& ((tmp->token_id == GREAT && LNEXT && LDNEXT &&
+			LNEXT->token_id == SAND && (ft_strncmp("-", LDNEXT->content, 1)
+			|| LDNEXT->token_id != 14)))))
 		return (1);
 	else if (tmp->token_id == GREAT && LNEXT && LDNEXT &&
 			is_full_spaces(LNEXT->content) && (LDNEXT->token_id ==
