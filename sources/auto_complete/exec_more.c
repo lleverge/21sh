@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:30:03 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:47:41 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 21:45:06 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void		exec_more(t_compl *list, t_ult *ult)
 		return ;
 	write_in_pipe(list, fd[1]);
 	env_dup = list_in_tab(ult->env);
-	arg = (char **)malloc(sizeof(char) * 2);
+	arg = (char **)malloc(sizeof(char *) * 2);
 	arg[0] = ft_strdup("/usr/bin/more");
 	arg[1] = NULL;
 	pid = fork();
