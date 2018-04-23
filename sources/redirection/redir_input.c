@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/24 14:41:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:59:46 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 14:10:53 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,15 @@ int					get_epur_size_input(char *cmd)
 		to_epur++;
 	if (tmp[to_epur + 1])
 		to_epur++;
-	while (tmp[to_epur] && (tmp[to_epur] < 33 || tmp[to_epur] > 126))
-		to_epur++;
-	while (tmp[to_epur] && (tmp[to_epur] >= 33 && tmp[to_epur] <= 126))
-		to_epur++;
+	if (tmp[to_epur] == '\'' || tmp[to_epur] == '\"')
+		quote_extracter(tmp, &to_epur);
+	else
+	{
+		while (tmp[to_epur] && (tmp[to_epur] < 33 || tmp[to_epur] > 126))
+			to_epur++;
+		while (tmp[to_epur] && (tmp[to_epur] >= 33 && tmp[to_epur] <= 126))
+			to_epur++;
+	}
 	return (to_epur);
 }
 
@@ -78,7 +83,10 @@ t_process			*redirect_input(t_process *proc)
 
 	sub_str = ft_strchr(proc->cmd, '<') + 1;
 	if (check_error_redir(sub_str, "<") == -1)
+	{
+		ft_putstr("oui\n\n\n\n\n\n");
 		return (NULL);
+	}
 	file_name = get_word(sub_str);
 	if ((fd = open(file_name, O_RDONLY)) == -1)
 	{
@@ -89,6 +97,8 @@ t_process			*redirect_input(t_process *proc)
 	proc->fd[0] = fd;
 	proc = standard_fd(proc);
 	proc = cmd_epur_input(proc);
+	ft_putstr("proc cmd after epur :");
+	ft_putendl(proc->cmd);
 	ft_strdel(&file_name);
 	return (proc);
 }
