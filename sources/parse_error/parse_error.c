@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/23 16:14:11 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:45:41 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ static int		parse_less(t_lexer *lex)
 			&& !LDNEXT) || (tmp->token_id == LESS && !LNEXT))
 		return (1);
 	else if ((tmp->token_id == LESS && LNEXT && LNEXT->token_id == LESS
-			&& LDNEXT->token_id != 14))
+			&& (LDNEXT->token_id != 14 && LDNEXT->token_id
+			!= QUOTE && LDNEXT->token_id != DQUOTE)))
 		return (1);
 	else if (tmp->token_id == LESS && LNEXT && LDNEXT &&
 			is_full_spaces(LNEXT->content) && (LDNEXT->token_id ==
