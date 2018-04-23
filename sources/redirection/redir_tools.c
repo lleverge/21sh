@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 16:11:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:57:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 17:02:03 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,15 @@ char				*get_word(char *sub_cmd)
 	while (tmp[w_start] && (tmp[w_start] < 33 || tmp[w_start] > 126))
 		w_start++;
 	tmp = &tmp[w_start];
-	while (tmp[w_length] && (tmp[w_length] >= 33 && tmp[w_length] <= 126))
-		w_length++;
+	if (tmp && (*tmp == '\'' || *tmp == '\"'))
+		w_length = get_wordlen(tmp);
+	else
+	{
+		while (tmp[w_length] && (tmp[w_length] >= 33 && tmp[w_length] <= 126))
+			w_length++;
+	}
+	if (*tmp && (*tmp == '\'' || *tmp == '\"'))
+		w_start++;
 	return (ft_strsub(sub_cmd, w_start, w_length));
 }
 
