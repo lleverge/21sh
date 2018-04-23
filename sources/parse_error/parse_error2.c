@@ -6,12 +6,24 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:28:40 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/22 17:37:37 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 15:35:42 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
+
+int		parse_first(t_lexer *lex)
+{
+	t_lexer	*tmp;
+
+	tmp = lex;
+	if (tmp->token_id < 13 && tmp->token_id != SEPARATOR && tmp->token_id
+		!= QUOTE && tmp->token_id != DQUOTE && !LNEXT)
+		return (1);
+	else
+		return (0);
+}
 
 int		parse_pipe(t_lexer *lex)
 {

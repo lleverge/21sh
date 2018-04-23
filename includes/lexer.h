@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/22 16:44:05 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 15:30:08 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int					parse_error(t_lexer *lexer, int error_fd);
 */
 int					parse_pipe(t_lexer *lex);
 int					parse_and(t_lexer *lex);
+int					parse_first(t_lexer *lex);
 
 /*
 **parse_errortools.c
