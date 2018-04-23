@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/21 11:55:04 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 20:58:02 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/23 18:33:07 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ static t_process	*redir_detector(t_process *proc, t_ult *ult)
 
 static int			redir_detector_int(t_process *proc)
 {
+	if (!proc->cmd)
+		return (0);
 	if (is_redir_append(proc->cmd) && check_deeper(proc->cmd, ">>") != -1)
 		return (1);
 	if (is_heredoc(proc->cmd) && check_deeper(proc->cmd, "<<") != -1)
@@ -78,6 +80,8 @@ t_process			*main_redirection_checker(t_process *proc, t_ult *ult)
 	int		i;
 
 	i = 0;
+	if (!proc->cmd)
+		return (NULL);
 	while (proc->cmd[i])
 	{
 		if ((proc->cmd[i] == '>' || proc->cmd[i] == '<' || proc->cmd[i] == '&')

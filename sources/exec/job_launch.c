@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:28:46 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 21:17:56 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/23 19:07:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,9 @@ void			proc_launch(t_process *proc, t_ult *ult, int fd[2])
 
 	cmd_tab = NULL;
 	tmp_proc = proc;
-	// ft_putstr("proc->cmd :");
-	// ft_putendl(tmp_proc->cmd);
 	while (tmp_proc)
 	{
-		if (!(cmd_tab = cmd_format(tmp_proc->cmd)))
-			return ;
+		cmd_tab = cmd_format(tmp_proc->cmd);
 		if (tmp_proc->next)
 		{
 			pipe(fd);
@@ -56,8 +53,6 @@ void			proc_launch(t_process *proc, t_ult *ult, int fd[2])
 			else
 				close(fd[1]);
 		}
-		// ft_putstr("proc->cmd :");
-		// ft_putendl(tmp_proc->cmd);
 		ult->ret = seek_and_exec(ult, tmp_proc, cmd_tab, fd);
 		if (tmp_proc->next)
 			tmp_proc->next->fd[0] = fd[0];
