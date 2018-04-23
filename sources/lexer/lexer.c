@@ -6,21 +6,21 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/22 21:27:42 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/23 21:16:02 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
 
-t_lexer			*fill_lexer_2(t_lexer **oldlex, t_ult *ult)
+t_lexer			*fill_lexer_2(t_lexer **oldlex)
 {
 	t_lexer		*dup;
 
 	dup = NULL;
 	dup = lexdup(*oldlex);
 	dup = merge_token(dup);
-	if (parse_error(dup, ult->fd[2]) == -1)
+	if (parse_error(dup) == -1)
 	{
 		free_lexer(&dup);
 		free_lexer(oldlex);
@@ -42,7 +42,7 @@ t_lexer			*fill_lexer(t_ult *ult)
 	lexlist = quote_tok(lexlist, ult);
 	if (!(lexlist = quote_tok(lexlist, ult)))
 		return (NULL);
-	lexlist = fill_lexer_2(&lexlist, ult);
+	lexlist = fill_lexer_2(&lexlist);
 	ult->cmd ? ft_strdel(&ult->cmd) : NULL;
 	ult->cmd = lexer_to_str(lexlist);
 	return (lexlist);
