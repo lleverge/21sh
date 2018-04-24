@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:30:03 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 21:45:06 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:10:43 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@
 static void	write_it(char *field, size_t padd_size, int fd)
 {
 	int	to_print;
-
+	
 	to_print = padd_size - ft_strlen(field);
 	ft_putstr_fd(field, fd);
 	while (to_print >= 0)
 	{
-		ft_putchar_fd(32, fd);
+		ft_putchar_fd(' ', fd);
 		to_print--;
 	}
 }
@@ -41,7 +41,7 @@ static void	write_in_pipe(t_compl *list, int fd)
 	i = 1;
 	while (tmp != list)
 	{
-		while (i < word_line && tmp != list)
+		while (i <= word_line && tmp != list)
 		{
 			write_it(tmp->name, largest, fd);
 			i++;
@@ -53,6 +53,22 @@ static void	write_in_pipe(t_compl *list, int fd)
 	close(fd);
 }
 
+static void io_block(int flag, int fd)
+{
+	int opt;
+
+	opt = flag;
+	ft_putnbrendl(opt);
+	ioctl(fd, FIONBIO, &opt);
+}
+
+static void cleanup(int fd[2], char **env_dup, char **arg)
+{
+	close(fd[0]);
+	free_tab(env_dup);
+	free_tab(arg);
+}
+
 void		exec_more(t_compl *list, t_ult *ult)
 {
 	int		fd[2];
@@ -62,7 +78,9 @@ void		exec_more(t_compl *list, t_ult *ult)
 
 	if (pipe(fd) == -1)
 		return ;
+	io_block(1, fd[1]);
 	write_in_pipe(list, fd[1]);
+	io_block(0, fd[1]);
 	env_dup = list_in_tab(ult->env);
 	arg = (char **)malloc(sizeof(char *) * 2);
 	arg[0] = ft_strdup("/usr/bin/more");
@@ -77,7 +95,5 @@ void		exec_more(t_compl *list, t_ult *ult)
 	}
 	else
 		wait(NULL);
-	close(fd[0]);
-	free_tab(env_dup);
-	free_tab(arg);
+	cleanup(fd, env_dup, arg);
 }
