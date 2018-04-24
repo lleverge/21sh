@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 11:53:28 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 19:08:44 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/24 14:40:12 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,19 @@
 static int		count_words(t_lexer *lex)
 {
 	t_lexer	*tmp;
+	t_lexer	*safe;
 	int		ret;
 
 	ret = 0;
 	tmp = lex;
 	while (tmp)
 	{
-		if (tmp->token_id == TOK_WORD)
+		safe = tmp;
+		if (tmp->token_id == TOK_WORD || is_quoted_lex(tmp, lex))
+		{
+			tmp = safe;
 			ret += count_allwords(tmp, lex);
+		}
 		tmp = tmp->next;
 	}
 	return (ret);
@@ -40,8 +45,10 @@ static void		fill_dest(char **dest, t_lexer *lexer)
 	tmp = lexer;
 	while (tmp)
 	{
-		if (tmp->token_id == TOK_WORD)
+		safe = tmp;
+		if (tmp->token_id == TOK_WORD || is_quoted_lex(tmp, lexer))
 		{
+			tmp = safe;
 			safe = tmp;
 			if (is_quoted_lex(tmp, lexer))
 			{
@@ -57,6 +64,33 @@ static void		fill_dest(char **dest, t_lexer *lexer)
 	dest[i] = NULL;
 }
 
+// static void		print_lex(t_lexer *lex)
+// {
+// 	t_lexer *tmp;
+
+// 	tmp = lex;
+// 	while (tmp)
+// {}
+// 	while (tmp->next)
+// 		tmp = tmp->next;
+// 	if (tmp->token_id == DQUOTE)
+// 		ft_putstr("BRAVO");
+// }
+
+// static void		formar_print(char **args)
+// {
+// 	char		**tmp;
+
+// 	tmp = args;
+// 	while (*tmp)
+// 	{
+// 		ft_putstr("arg is ->");
+// 		ft_putstr(*tmp);
+// 		ft_putstr(":\n");
+// 		tmp++;
+// 	}
+// }
+
 char			**cmd_format(char *base)
 {
 	t_lexer		*lexer;
@@ -64,7 +98,14 @@ char			**cmd_format(char *base)
 
 	if (!base)
 		return (NULL);
+	// ft_putstr("base is :");
+	// ft_putstr(base);
+	// ft_putstr(":\n");
 	lexer = init_lexer(base);
+	lexer = merge_token(lexer);
+	// ft_putstr("last content is:");
+	// print_last(lexer);
+	// ft_putstr(":\n");
 	if (!count_words(lexer))
 	{
 		free_lexer(&lexer);
@@ -77,6 +118,7 @@ char			**cmd_format(char *base)
 		return (NULL);
 	}
 	fill_dest(dest, lexer);
+	// formar_print(dest);
 	free_lexer(&lexer);
 	return (dest);
 }

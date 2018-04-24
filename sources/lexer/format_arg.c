@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:49:35 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/18 19:41:13 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/24 14:19:05 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ static int		parse_through(t_lexer **list, t_lexer *elem)
 		}
 		tmp = tmp->next;
 	}
+	if (tmp == elem)
+		return (0);
 	return (1);
 }
 
