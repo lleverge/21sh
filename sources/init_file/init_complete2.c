@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/23 16:25:34 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 15:06:48 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/25 16:16:34 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int				compl_dir_needed(t_compl *list)
 {
 	struct stat		*file_info;
 	t_ult			*ult;
+	int				ret;
 
 	file_info = NULL;
 	ult = NULL;
@@ -101,8 +102,9 @@ int				compl_dir_needed(t_compl *list)
 		free(file_info);
 		return (0);
 	}
+	ret = S_ISDIR(file_info->st_mode) ? 1 : 0;
 	free(file_info);
-	return (S_ISDIR(file_info->st_mode) ? 1 : 0);
+	return (ret);
 }
 
 void			dir_handle(t_compl **list, char *word)
