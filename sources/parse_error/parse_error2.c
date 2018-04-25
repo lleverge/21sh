@@ -19,8 +19,10 @@ int		parse_first(t_lexer *lex)
 
 	tmp = lex;
 	if ((tmp->token_id < 13 && tmp->token_id != SEPARATOR && tmp->token_id
-		!= QUOTE && tmp->token_id != DQUOTE && !LNEXT) || (tmp->token_id ==
-		SEPARATOR && !tmp->prev && !tmp->next))
+	    != QUOTE && tmp->token_id != DQUOTE && !LNEXT) || (tmp->token_id ==
+	    SEPARATOR && !tmp->prev && !tmp->next) || (tmp->token_id == PIPE && !tmp->prev)
+	    || (tmp->token_id == PIPE && tmp->prev && is_full_spaces(tmp->prev->content)
+		&& !tmp->prev->prev))
 		return (1);
 	else
 		return (0);
