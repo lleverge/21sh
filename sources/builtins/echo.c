@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:02:23 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:02:00 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/23 21:19:12 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int		ft_echo(char **str)
 	{
 		ft_putstr(*str);
 		str++;
-		if (*str)
-			ft_putchar(32);
 	}
 	ft_putchar('\n');
 	return (0);
