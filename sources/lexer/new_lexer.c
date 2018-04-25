@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/16 20:10:09 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:06:51 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/25 16:46:07 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,5 +86,7 @@ t_lexer		*init_lexer(char *cmd)
 			index += ft_strlen(new->content);
 		}
 	}
+	new = single_token_init('\n');
+	lex_push(new, &lex_list);
 	return (lex_list);
 }
