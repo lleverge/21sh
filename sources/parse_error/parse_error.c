@@ -85,9 +85,6 @@ static int		parse_separator(t_lexer *lex)
 	t_lexer *tmp;
 
 	tmp = lex;
-	if ((tmp->token_id == SEPARATOR && LNEXT && !LDNEXT
-		&& is_full_spaces(LNEXT->content)))
-		return (1);
 	if (tmp->token_id == SEPARATOR && LNEXT && (LNEXT->token_id == SEPARATOR ||
 	LNEXT->token_id == LESS || LNEXT->token_id == GREAT || LNEXT->token_id
 	== SAND || LNEXT->token_id == PIPE))
@@ -96,7 +93,7 @@ static int		parse_separator(t_lexer *lex)
 			is_full_spaces(LNEXT->content) && (LDNEXT->token_id == SEPARATOR
 			|| LDNEXT->token_id == LESS || LDNEXT->token_id == GREAT ||
 			LDNEXT->token_id == SAND || LDNEXT->token_id == PIPE))
-		return (2);
+		return (1);
 	else
 		return (0);
 }
