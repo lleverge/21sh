@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 19:28:46 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 19:07:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/25 19:10:38 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,10 @@ void			proc_launch(t_process *proc, t_ult *ult, int fd[2])
 				tmp_proc->fd[1] = fd[1];
 			else
 				close(fd[1]);
+			fork_setup(proc, ult, fd);
 		}
-		ult->ret = seek_and_exec(ult, tmp_proc, cmd_tab, fd);
+		else
+			ult->ret = seek_and_exec(ult, tmp_proc, cmd_tab, fd);
 		if (tmp_proc->next)
 			tmp_proc->next->fd[0] = fd[0];
 		cmd_tab ? free_tab(cmd_tab) : NULL;

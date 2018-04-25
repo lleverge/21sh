@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/03/24 11:32:12 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/22 16:06:54 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:01:19 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
 
-static void	clean(t_process *proc, char **env_cpy, char **cmd_tab)
+void		exe_clean(t_process *proc, char **env_cpy, char **cmd_tab)
 {
 	close_fd_exec(proc);
 	free_tab(env_cpy);
@@ -52,7 +52,7 @@ int			exe_fork2(t_env *env, t_process *proc, t_ult *ult, int fd[2])
 	}
 	else
 		proc->pid = pid;
-	clean(proc, env_cpy, cmd_tab);
+	exe_clean(proc, env_cpy, cmd_tab);
 	return (status);
 }
 
@@ -76,6 +76,6 @@ int			exe_fork(t_env *env, t_process *proc, t_ult *ult, int fd[2])
 	}
 	else
 		proc->pid = pid;
-	clean(proc, env_cpy, cmd_tab);
+	exe_clean(proc, env_cpy, cmd_tab);
 	return (status);
 }

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/23 18:38:53 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/25 20:00:53 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -259,7 +259,8 @@ int						exe_fork2(t_env *env, t_process *proc,
 								t_ult *ult, int fd[2]);
 int						exe_fork(t_env *env, t_process *proc,
 								t_ult *ult, int fd[2]);
-int						is_path(char *cmd);
+void					exe_clean(t_process *proc, char **env_cpy,
+								char **cmd_tab);
 
 /*
 **fork2.c
@@ -267,6 +268,7 @@ int						is_path(char *cmd);
 void					fork_error(char **cmd, char **path_tab);
 char					*search_path2(char *tmp2, char *tmp, char **path_tab,
 							int i);
+void					fork_setup(t_process *proc, t_ult *ult, int fd[2]);
 
 /*
 **manage_fd.c
