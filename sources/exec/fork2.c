@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 15:59:00 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/26 15:47:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:50:18 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
 
-static void	detect_fd(t_process *proc, int fd[2])
+static void		detect_fd(t_process *proc, int fd[2])
 {
 	if (fd[0] != proc->fd[0] && fd[0] != proc->fd[1] && fd[0] != proc->fd[2])
 		close(fd[0]);
@@ -40,7 +40,8 @@ static int		no_launch(char **cmd_tab, t_ult *ult)
 	return (1);
 }
 
-static void		simple_fork(t_ult *ult, char **cmd_tab, t_process *proc, char **env_cpy)
+static void		simple_fork(t_ult *ult, char **cmd_tab, t_process *proc,
+							char **env_cpy)
 {
 	if (check_for_builtin(*cmd_tab))
 		exit(search_for_builtins(ult, proc));
@@ -50,7 +51,7 @@ static void		simple_fork(t_ult *ult, char **cmd_tab, t_process *proc, char **env
 		execve(*cmd_tab, cmd_tab, env_cpy);
 }
 
-void		fork_setup(t_process *proc, t_ult *ult, int fd[2])
+void			fork_setup(t_process *proc, t_ult *ult, int fd[2])
 {
 	pid_t	pid;
 	char	**cmd_tab;

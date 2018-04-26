@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/26 17:30:03 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/24 17:10:43 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:32:02 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static void	write_it(char *field, size_t padd_size, int fd)
 {
 	int	to_print;
-	
+
 	to_print = padd_size - ft_strlen(field);
 	ft_putstr_fd(field, fd);
 	while (to_print >= 0)
@@ -53,7 +53,7 @@ static void	write_in_pipe(t_compl *list, int fd)
 	close(fd);
 }
 
-static void io_block(int flag, int fd)
+static void	io_block(int flag, int fd)
 {
 	int opt;
 
@@ -62,7 +62,7 @@ static void io_block(int flag, int fd)
 	ioctl(fd, FIONBIO, &opt);
 }
 
-static void cleanup(int fd[2], char **env_dup, char **arg)
+static void	cleanup(int fd[2], char **env_dup, char **arg)
 {
 	close(fd[0]);
 	free_tab(env_dup);

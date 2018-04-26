@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:28:40 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/26 15:04:23 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:29:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int		parse_and(t_lexer *lex)
 	t_lexer *tmp;
 
 	tmp = lex;
-	if (tmp->token_id == SAND && (!LNEXT || !LPREV || (is_full_spaces(LPREV->content)
-	&& !LPREV->prev)))
+	if (tmp->token_id == SAND && (!LNEXT || !LPREV ||
+	(is_full_spaces(LPREV->content) && !LPREV->prev)))
 		return (1);
 	else if (tmp->token_id == SAND && LNEXT && tmp->prev && tmp->prev->token_id
 			== GREAT && LNEXT->token_id == 14)

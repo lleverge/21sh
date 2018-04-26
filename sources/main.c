@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 19:35:15 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:32:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void		prog_core(t_job *jobs, t_ult *ult)
 {
 	t_lexer *lex;
 
-	lex = NULL; 
+	lex = NULL;
 	main_signal_handler();
 	get_prompt(ult->env);
 	termcap(ult);

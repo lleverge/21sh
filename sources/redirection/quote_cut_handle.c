@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/23 14:23:15 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 17:04:18 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:27:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void			quote_extracter(char *cmd, int *i)
 	quote_char = cmd[index];
 	index++;
 	while (cmd[index] && cmd[index] != quote_char)
-			index++;
+		index++;
 	if (cmd[index])
 		index++;
 	*i = index;

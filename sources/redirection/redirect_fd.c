@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/26 16:23:55 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:26:51 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int					get_start_pos(char *cmd)
 		while (start >= 1 && ft_isdigit(cmd[start - 1]))
 			start--;
 	}
-
 	if (start >= 1 && ft_isalpha(cmd[start - 1]))
 		start = ft_strchr(cmd, '>') - cmd;
 	return (start);

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 17:59:41 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/22 19:21:28 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:30:22 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	init_tmp_term(t_ult *ult, t_ult *dest)
 	{
 		ft_putendl_fd("error: term struct malloc failed", 2);
 		exit_term(ult->term);
-		exit(3);	
+		exit(3);
 	}
 	termi->fd = ult->term->fd;
 	termi->termios.c_lflag = ult->term->termios.c_lflag;
