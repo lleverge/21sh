@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 16:11:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 17:02:03 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:27:49 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,11 @@ int					which_fd(char *cmd)
 
 	sub_cmd = cmd;
 	sub_cmd = ft_strsub(sub_cmd, 0, (ft_strchr(sub_cmd, '>') - sub_cmd));
+	if (!ft_strlen(sub_cmd))
+	{
+		sub_cmd ? ft_strdel(&sub_cmd) : NULL;
+		return (1);
+	}
 	i = ft_strlen(sub_cmd) - 1;
 	if (ft_isdigit(sub_cmd[i]))
 	{
