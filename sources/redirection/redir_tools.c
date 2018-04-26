@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 16:11:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/26 15:27:49 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 22:01:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ int					check_error_redir(char *sub_cmd, char *error_char)
 
 t_process			*standard_fd(t_process *proc)
 {
+	if (!proc)
+		return (NULL);
 	if (proc->fd[0] == -1)
 		proc->fd[0] = 0;
 	if (proc->fd[1] == -1)
@@ -90,7 +92,7 @@ int					which_fd(char *cmd)
 	}
 	fd = ft_atoi(&sub_cmd[i]);
 	ft_strdel(&sub_cmd);
-	return (fd == 2 ? 2 : 1);
+	return (fd);
 }
 
 void				get_open_err(char *file_name, int access_mode)

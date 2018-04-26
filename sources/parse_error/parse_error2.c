@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_error2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:28:40 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/26 21:54:22 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/26 21:55:31 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int		parse_and(t_lexer *lex)
 	(is_full_spaces(LPREV->content) && !LPREV->prev)))
 		return (1);
 	else if (tmp->token_id == SAND && LNEXT && is_full_spaces(LNEXT->content) &&
-			 LDNEXT && DNEXT->token_id == 13)
+			 LDNEXT && LDNEXT->token_id == 13)
 		return (1);
 	else if (tmp->token_id == SAND && LNEXT && tmp->prev && tmp->prev->token_id
 			== GREAT && LNEXT->token_id == 14)

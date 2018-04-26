@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 17:09:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 15:56:55 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/26 22:13:27 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_process	*cmd_epur_append(t_process *proc)
 	char			*new_cmd;
 
 	start_pos = ft_strchr(proc->cmd, '>') - proc->cmd;
-	if (start_pos > 1)
+	if (start_pos >= 1)
 		if (ft_isdigit(proc->cmd[start_pos - 1]))
 			start_pos = get_start_pos(proc->cmd);
 	w_length = get_epur_size_append(proc->cmd) + 1;
@@ -72,8 +72,10 @@ t_process			*append_redirect(t_process *proc)
 		ft_strdel(&file_name);
 		return (NULL);
 	}
-	proc->fd[which_fd(proc->cmd)] = fd;
-	proc = standard_fd(proc);
+	if (which_fd(proc->cmd) == 1 || which_fd(proc->cmd) == 2)
+		proc->fd[which_fd(proc->cmd)] = fd;
+	else
+		proc = standard_fd(proc);
 	proc = cmd_epur_append(proc);
 	ft_strdel(&file_name);
 	return (proc);

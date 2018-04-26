@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 18:03:12 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 20:58:41 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 21:49:30 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ t_process			*cmd_epur_agreg(t_process *proc)
 	char			*new_cmd;
 
 	start_pos = ft_strchr(proc->cmd, '>') - proc->cmd;
-	if (start_pos > 1)
+	if (start_pos >= 1)
 		if (ft_isdigit(proc->cmd[start_pos - 1]))
 			start_pos = get_start_pos_agreg(proc->cmd);
 	w_length = get_epur_size_agreg(proc->cmd);

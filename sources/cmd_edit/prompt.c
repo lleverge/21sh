@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 10:45:54 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/12 15:44:58 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/26 21:57:22 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ void			get_prompt(t_env *env)
 			prompt_path(i, buff);
 		}
 		else
-			ft_putendl_fd("\033[31mDirectory does not exist\033[39m", 2);
+			ft_putendl_fd("\033[31mPosition undefined\033[39m", 2);
 	}
 }
