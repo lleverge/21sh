@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/26 15:00:47 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/26 16:53:27 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,15 @@ static int		parse_less(t_lexer *lex)
 	t_lexer *tmp;
 
 	tmp = lex;
-	if (tmp->token_id == LESS && !tmp->prev && LNEXT)
+	if (tmp->token_id == LESS && !tmp->prev && LNEXT && LNEXT->token_id > 13)
 		return (0);
 	if (tmp->token_id == LESS && LNEXT && (LNEXT->token_id == SEPARATOR ||
 	LNEXT->token_id == GREAT || LNEXT->token_id == PIPE ||
 	LNEXT->token_id == SAND))
 		return (1);
 	else if ((tmp->token_id == LESS && LNEXT && LNEXT->token_id == LESS
-			&& !LDNEXT) || (tmp->token_id == LESS && !LNEXT))
+			&& !LDNEXT) || (tmp->token_id == LESS && !LNEXT) ||
+			(tmp->token_id == LESS && LNEXT->token_id == SEPARATOR))
 		return (1);
 	else if ((tmp->token_id == LESS && LNEXT && LNEXT->token_id == LESS
 			&& (LDNEXT->token_id != 14 && LDNEXT->token_id
