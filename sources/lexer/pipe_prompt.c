@@ -6,12 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 14:41:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:07:11 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/27 00:43:50 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
+
+
 
 static int	empty_word(char *word)
 {
@@ -27,6 +29,20 @@ static int	empty_word(char *word)
 	return (1);
 }
 
+static int	empty_words(t_lexer	*lexlist)
+{
+	t_lexer	*tmp;
+
+	tmp = lexlist;
+	while (tmp)
+	{
+		if (empty_word(tmp->content))
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 static int	prompt_needed(t_lexer *lexlist)
 {
 	t_lexer	*tmp;
@@ -36,9 +52,7 @@ static int	prompt_needed(t_lexer *lexlist)
 	{
 		if (tmp->token_id == PIPE)
 		{
-			if (!tmp->next)
-				return (1);
-			if (empty_word(tmp->next->content) && !tmp->next->next)
+			if (!tmp->next || empty_words(tmp->next))
 				return (1);
 		}
 		tmp = tmp->next;
