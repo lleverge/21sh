@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 15:52:23 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/23 17:51:15 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 19:38:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,18 @@ char			*read_heredoc(t_prompt *prompt, t_ult *ult, int *sig_flag)
 static char		*add_nl(char **line)
 {
 	char		*tmp;
+	size_t		w_len;
 
-	if (!(tmp = (char *)malloc(sizeof(ft_strlen(*line) + 2))))
+
+	w_len = ft_strlen(*line);
+	if (!(tmp = (char *)malloc(sizeof(char) * (w_len + 2))))
 	{
 		ft_putendl_fd("21sh : malloc error", 2);
 		exit(1);
 	}
 	ft_strcpy(tmp, *line);
-	tmp[ft_strlen(*line)] = '\n';
-	tmp[ft_strlen(*line) + 1] = '\0';
+	tmp[w_len] = '\n';
+	tmp[w_len + 1] = '\0';
 	ft_strdel(line);
 	return (tmp);
 }
