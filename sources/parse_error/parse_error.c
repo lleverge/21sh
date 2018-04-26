@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/23 19:26:28 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:00:47 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,11 +73,8 @@ static int		parse_great(t_lexer *lex)
 static void		print_parse_error2(t_lexer *tmp)
 {
 	ft_putstr_fd("21sh: parse error near '", 2);
-	if (tmp->next)
-		ft_putstr_fd(tmp->content, 2);
-	else
-		ft_putstr_fd(tmp->content, 2);
-		ft_putendl_fd("'", 2);
+	ft_putstr_fd(tmp->content, 2);
+	ft_putendl_fd("'", 2);
 }
 
 static int		parse_separator(t_lexer *lex)
