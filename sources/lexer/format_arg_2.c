@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 11:53:28 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/25 16:26:02 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 20:33:12 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,43 @@
 #include "../../includes/lexer.h"
 #include "../../includes/cmd_edit.h"
 
+static char 	*get_full_quote(t_lexer *lex, t_lexer *start)
+{
+	char		*dest;
+
+	dest = NULL;
+	dest = ft_strdup(lex->content);
+	lex = lex->next;
+	while (lex && is_quoted_lex(lex, start))
+	{
+		dest = ft_strjoin_free_one(&dest, lex->content);
+		lex = lex->next;
+	}
+	return (dest);
+}
+
 static int		count_words(t_lexer *lex)
 {
 	t_lexer	*tmp;
-	t_lexer	*safe;
+
 	int		ret;
 
 	ret = 0;
 	tmp = lex;
 	while (tmp)
 	{
-		safe = tmp;
 		if (tmp->token_id == TOK_WORD || is_quoted_lex(tmp, lex))
 		{
-			tmp = safe;
-			ret += count_allwords(tmp, lex);
+			if (is_quoted_lex(tmp, lex))
+			{
+				ret++;
+				while (is_quoted_lex(tmp, lex))
+					tmp = tmp->next;
+			}
+			else
+				ret += count_allwords(tmp, lex);
 		}
-		tmp = tmp->next;
+		tmp ? tmp = tmp->next : NULL;
 	}
 	return (ret);
 }
@@ -48,13 +68,16 @@ static void		fill_dest(char **dest, t_lexer *lexer)
 		{
 			if (is_quoted_lex(tmp, lexer))
 			{
-				dest[i] = ft_strdup(tmp->content);
+				dest[i] = get_full_quote(tmp, lexer);
 				i++;
+				while (tmp && is_quoted_lex(tmp, lexer))
+					tmp = tmp->next;
 			}
 			else
 				i += split_words(tmp->content, dest, i);
 		}
-		tmp = tmp->next;
+		if (tmp)
+			tmp = tmp->next;
 	}
 	dest[i] = NULL;
 }

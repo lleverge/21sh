@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 17:49:35 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/25 14:44:57 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 20:31:59 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int				is_quoted_lex(t_lexer *node, t_lexer *lexlist)
 	t_token_id	tok_id;
 
 	tmp = lexlist;
+	if (!lexlist || !node)
+		return (0);
 	while (tmp && tmp != node)
 	{
 		if (tmp->token_id == QUOTE || tmp->token_id == DQUOTE)
