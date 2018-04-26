@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/04/15 15:59:00 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/25 20:01:02 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/26 15:47:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int		no_launch(char **cmd_tab, t_ult *ult)
 static void		simple_fork(t_ult *ult, char **cmd_tab, t_process *proc, char **env_cpy)
 {
 	if (check_for_builtin(*cmd_tab))
-		proc->done = search_for_builtins(ult, proc);
+		exit(search_for_builtins(ult, proc));
 	else if (ult->hash_table && hash_search(*cmd_tab, ult->hash_table))
 		execve(hash_search(*cmd_tab, ult->hash_table), cmd_tab, env_cpy);
 	else if (ft_strchr(*cmd_tab, '/') && !path_access_checker(*cmd_tab))
