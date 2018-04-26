@@ -6,7 +6,7 @@
 /*   By: lleverge <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:28:40 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/26 16:29:27 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/26 19:17:57 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int		parse_pipe(t_lexer *lex)
 	t_lexer *tmp;
 
 	tmp = lex;
+	if (tmp->token_id == PIPE && LPREV && LPREV->token_id == GREAT)
+		return (1);
 	if (tmp->token_id == PIPE && LNEXT && (LNEXT->token_id == SEPARATOR ||
 	LNEXT->token_id == PIPE || LNEXT->token_id == SAND))
 		return (1);

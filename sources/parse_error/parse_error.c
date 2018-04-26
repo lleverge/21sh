@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/26 16:53:27 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/26 19:17:05 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static int		parse_less(t_lexer *lex)
 	t_lexer *tmp;
 
 	tmp = lex;
-	if (tmp->token_id == LESS && !tmp->prev && LNEXT && LNEXT->token_id > 13)
+	if (tmp->token_id == LESS && !tmp->prev && LNEXT && LNEXT->token_id >= 13)
 		return (0);
 	if (tmp->token_id == LESS && LNEXT && (LNEXT->token_id == SEPARATOR ||
 	LNEXT->token_id == GREAT || LNEXT->token_id == PIPE ||
@@ -47,7 +47,7 @@ static int		parse_great(t_lexer *lex)
 	t_lexer	*tmp;
 
 	tmp = lex;
-	if (tmp->token_id == GREAT && !tmp->prev && LNEXT)
+	if (tmp->token_id == GREAT && !tmp->prev && LNEXT && LNEXT->token_id >= 13)
 		return (0);
 	if ((tmp->token_id == GREAT && LNEXT && (LNEXT->token_id == SEPARATOR ||
 	LNEXT->token_id == LESS || LNEXT->token_id == PIPE)) || ((tmp->token_id
