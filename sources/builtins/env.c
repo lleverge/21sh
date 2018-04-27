@@ -6,13 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/26 12:32:52 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 19:48:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:05:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/builtins.h"
 #include "../../includes/lexer.h"
-#include <stdio.h>
 
 int			parse_var_setenv(char *arg)
 {
