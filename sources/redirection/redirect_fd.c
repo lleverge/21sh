@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/27 18:07:51 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 18:21:47 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ t_process			*simple_redirect(t_process *proc)
 		ft_strdel(&file_name);
 		return (NULL);
 	}
-	if (which_fd_s(proc->cmd) == 1 || which_fd_s(proc->cmd) == 2 || 
+	if (which_fd_s(proc->cmd) == 1 || which_fd_s(proc->cmd) == 2 ||
 		which_fd_s(proc->cmd) == 0)
 		proc->fd[which_fd_s(proc->cmd)] = fd;
 	else
