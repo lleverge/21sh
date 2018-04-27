@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 16:11:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/27 17:17:27 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 18:13:30 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,60 +74,26 @@ t_process			*standard_fd(t_process *proc)
 int					which_fd(char *cmd)
 {
 	char			*sub_cmd;
-	char			*to_atoi;
-	// int				i;
+	int				i;
 	int				fd;
 
-	if (get_start_pos(cmd) < 0 || get_start_pos(cmd) >= (int)ft_strlen(cmd))
-		return (0);
-	sub_cmd = &cmd[get_start_pos(cmd)];
-	ft_putstr("get start pos:");
-	ft_putnbrendl(get_start_pos(cmd));
-	if (*sub_cmd == '>')
-
-	if (*sub_cmd == '0' && sub_cmd[1] == '>')
-		return (0);
-	ft_putstr("sub_cmd state:");
-	ft_putendl(sub_cmd);
-	to_atoi = fd_to_atoi(sub_cmd);
-	ft_putstr(to_atoi);
-	// if (!ft_strlen(sub_cmd))
-	// {
-	// 	sub_cmd ? ft_strdel(&sub_cmd) : NULL;
-	// 	return (1);
-	// }
-	// i = ft_strlen(sub_cmd) - 1;
-	// if (i > 1 && ft_isdigit(sub_cmd[i - 1]))
-	// {
-	// 	while (i > 0 && ft_isdigit(sub_cmd[i]))
-	// 		i--;
-	// }
-	fd = ft_atoi(to_atoi);
-	// ft_strdel(&sub_cmd);
+	sub_cmd = cmd;
+	sub_cmd = ft_strsub(sub_cmd, 0, (ft_strchr(sub_cmd, '>') - sub_cmd));
+	if (!ft_strlen(sub_cmd))
+	{
+		sub_cmd ? ft_strdel(&sub_cmd) : NULL;
+		return (1);
+	}
+	i = ft_strlen(sub_cmd) - 1;
+	if (ft_isdigit(sub_cmd[i]))
+	{
+		while (i > 0 && ft_isdigit(sub_cmd[i]))
+			i--;
+	}
+	fd = ft_atoi(&sub_cmd[i]);
+	ft_strdel(&sub_cmd);
 	return (fd);
 }
-
-// int					which_fd(char *cmd)
-// {
-// 	char			*sub_cmd;
-// 	int				i;
-// 	int				fd;
-
-// 	sub_cmd = cmd;
-// 	sub_cmd = ft_strchr(sub_cmd, '>') - 1;
-// 	ft_putstr("sub_cmd state:");
-// 	ft_putendl(sub_cmd);
-// 	i = ft_strlen(sub_cmd) - 1;
-// 	if (ft_isdigit(sub_cmd[i]))
-// 	{
-// 		while (i > 0 && ft_isdigit(sub_cmd[i]))
-// 			i--;
-// 	}
-// 	fd = ft_atoi(&sub_cmd[i]);
-// 	ft_putstr("fd state:");
-// 	ft_strdel(&sub_cmd);
-// 	return (fd);
-// }
 
 void				get_open_err(char *file_name, int access_mode)
 {
