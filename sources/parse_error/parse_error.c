@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/26 19:17:05 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:48:12 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int		parse_great(t_lexer *lex)
 	else if ((tmp->token_id == GREAT && LNEXT && LNEXT->token_id ==
 			SAND && !LDNEXT) || ((tmp->token_id == GREAT && LNEXT
 			&& LNEXT->token_id == GREAT && LDNEXT->token_id != 14)
-			&& ((tmp->token_id == GREAT && LNEXT && LDNEXT &&
+			|| ((tmp->token_id == GREAT && LNEXT && LDNEXT &&
 			LNEXT->token_id == SAND && (ft_strncmp("-", LDNEXT->content, 1)
 			|| LDNEXT->token_id != 14)))))
 		return (1);
@@ -89,8 +89,7 @@ static int		parse_separator(t_lexer *lex)
 		return (1);
 	else if (tmp->token_id == SEPARATOR && LNEXT && LDNEXT &&
 			is_full_spaces(LNEXT->content) && (LDNEXT->token_id == SEPARATOR
-			|| LDNEXT->token_id == LESS || LDNEXT->token_id == GREAT ||
-			LDNEXT->token_id == SAND || LDNEXT->token_id == PIPE))
+			|| LDNEXT->token_id == SAND || LDNEXT->token_id == PIPE))
 		return (1);
 	else
 		return (0);
