@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/22 15:52:23 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/26 19:38:32 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:40:18 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static char		*add_nl(char **line)
 {
 	char		*tmp;
 	size_t		w_len;
-
 
 	w_len = ft_strlen(*line);
 	if (!(tmp = (char *)malloc(sizeof(char) * (w_len + 2))))

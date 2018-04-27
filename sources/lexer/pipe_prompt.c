@@ -6,14 +6,14 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 14:41:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/27 13:03:01 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:52:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
 
-static int	empty_word(char *word)
+static int			empty_word(char *word)
 {
 	char	*tmp;
 
@@ -27,7 +27,7 @@ static int	empty_word(char *word)
 	return (1);
 }
 
-static int	empty_words(t_lexer	*lexlist)
+static int			empty_words(t_lexer *lexlist)
 {
 	t_lexer	*tmp;
 
@@ -41,7 +41,7 @@ static int	empty_words(t_lexer	*lexlist)
 	return (1);
 }
 
-static int	prompt_needed(t_lexer *lexlist)
+static int			prompt_needed(t_lexer *lexlist)
 {
 	t_lexer	*tmp;
 
@@ -77,15 +77,15 @@ static t_lexer		*read_until_closed_pipe(t_ult *ult, t_lexer *lexlist)
 		lex_push(lex_end, &lexlist);
 		if (!(ret = prompt_needed(lexlist)))
 			break ;
-		dest ? ft_strdel(&dest) : NULL ;
+		dest ? ft_strdel(&dest) : NULL;
 	}
-	dest ? ft_strdel(&dest) : NULL ;
+	dest ? ft_strdel(&dest) : NULL;
 	return (lexlist);
 }
 
-t_lexer		*prompt_pipe(t_lexer *lex, t_ult *ult)
+t_lexer				*prompt_pipe(t_lexer *lex, t_ult *ult)
 {
 	if (!prompt_needed(lex))
 		return (lex);
-	return(read_until_closed_pipe(ult, lex));
+	return (read_until_closed_pipe(ult, lex));
 }

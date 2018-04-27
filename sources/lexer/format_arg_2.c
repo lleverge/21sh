@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/18 11:53:28 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/26 20:33:12 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 14:38:15 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../../includes/lexer.h"
 #include "../../includes/cmd_edit.h"
 
-static char 	*get_full_quote(t_lexer *lex, t_lexer *start)
+static char		*get_full_quote(t_lexer *lex, t_lexer *start)
 {
 	char		*dest;
 
@@ -32,7 +32,6 @@ static char 	*get_full_quote(t_lexer *lex, t_lexer *start)
 static int		count_words(t_lexer *lex)
 {
 	t_lexer	*tmp;
-
 	int		ret;
 
 	ret = 0;
