@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:33:02 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/22 19:24:26 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:26:38 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char					**tab_dup(char **src, int index_start_newtab);
 **setenv.c
 */
 t_env					*add_all_env(t_ult *ult, char **cmd);
-t_env					*split_to_set(t_ult *ult);
+t_env					*split_to_set(t_ult *ult, char **arg);
 t_env					*set_env(t_env **env, char *name,
 								char *value);
 
@@ -44,7 +44,7 @@ t_env					*set_env(t_env **env, char *name,
 **setunsetenv.c
 */
 void					unset_error(char *cmd);
-t_env					*split_to_unset(t_ult *ult);
+t_env					*split_to_unset(t_ult *ult, char **arg);
 
 /*
 **cd.c

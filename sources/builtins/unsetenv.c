@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:18:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/16 18:12:20 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/27 15:13:03 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ static int	unset_env(char *name, t_env **envlist)
 	t_env	*tmp;
 
 	tmp = *envlist;
+	if (!envlist || !(*envlist))
+		return (0);
 	while (tmp->next)
 	{
 		if (!unset_one(tmp, name))
@@ -73,13 +75,13 @@ static int	unset_env(char *name, t_env **envlist)
 	return (1);
 }
 
-t_env		*split_to_unset(t_ult *ult)
+t_env		*split_to_unset(t_ult *ult, char **arg)
 {
 	char	**splited_cmd;
 	char	**tmp;
 
 	splited_cmd = NULL;
-	splited_cmd = ft_whitespace(ult->cmd);
+	splited_cmd = arg;
 	tmp = splited_cmd;
 	while (*tmp)
 	{
@@ -96,6 +98,5 @@ t_env		*split_to_unset(t_ult *ult)
 		}
 		tmp++;
 	}
-	free_tab(splited_cmd);
 	return (ult->env);
 }
