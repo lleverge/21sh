@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/23 18:17:33 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/27 15:48:12 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:52:23 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int		parse_great(t_lexer *lex)
 			&& LNEXT->token_id == GREAT && LDNEXT->token_id != 14)
 			|| ((tmp->token_id == GREAT && LNEXT && LDNEXT &&
 			LNEXT->token_id == SAND && (ft_strncmp("-", LDNEXT->content, 1)
-			|| LDNEXT->token_id != 14)))))
+			&& LDNEXT->token_id != 14)))))
 		return (1);
 	else if (tmp->token_id == GREAT && LNEXT && LDNEXT &&
 			is_full_spaces(LNEXT->content) && (LDNEXT->token_id ==
