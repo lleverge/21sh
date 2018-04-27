@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/20 14:13:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/26 22:05:53 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 18:07:51 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,26 @@ t_process			*cmd_epur(t_process *proc)
 	return (proc);
 }
 
+static int			which_fd_s(char *cmd)
+{
+	char			*sub_cmd;
+	char			*to_atoi;
+	int				fd;
+
+	if (get_start_pos(cmd) < 0 || get_start_pos(cmd) >= (int)ft_strlen(cmd))
+		return (0);
+	sub_cmd = &cmd[get_start_pos(cmd)];
+	if (*sub_cmd == '>')
+		return (1);
+	if (*sub_cmd == '0' && sub_cmd[1] == '>')
+		return (0);
+	to_atoi = NULL;
+	to_atoi = fd_to_atoi(sub_cmd);
+	fd = ft_atoi(to_atoi);
+	to_atoi ? ft_strdel(&to_atoi) : NULL;
+	return (fd);
+}
+
 t_process			*simple_redirect(t_process *proc)
 {
 	char			*sub_str;
@@ -95,8 +115,9 @@ t_process			*simple_redirect(t_process *proc)
 		ft_strdel(&file_name);
 		return (NULL);
 	}
-	if (which_fd(proc->cmd) == 1 || which_fd(proc->cmd) == 2)
-		proc->fd[which_fd(proc->cmd)] = fd;
+	if (which_fd_s(proc->cmd) == 1 || which_fd_s(proc->cmd) == 2 || 
+		which_fd_s(proc->cmd) == 0)
+		proc->fd[which_fd_s(proc->cmd)] = fd;
 	else
 		proc = standard_fd(proc);
 	ft_strdel(&file_name);

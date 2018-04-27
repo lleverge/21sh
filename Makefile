@@ -6,7 +6,7 @@
 #    By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/23 14:32:19 by vfrolich         ###   ########.fr        #
+#    Updated: 2018/04/27 17:12:14 by vfrolich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -103,6 +103,7 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/redirection/redir_detect.c\
 	sources/redirection/redir_input.c\
 	sources/redirection/redir_tools.c\
+	sources/redirection/redir_tools_2.c\
 	sources/redirection/redirect_fd.c\
 	sources/redirection/quote_cut_handle.c\
 	sources/tools/cmd_tools.c\

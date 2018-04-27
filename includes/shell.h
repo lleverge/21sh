@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/25 20:00:53 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 17:11:19 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,6 +236,11 @@ t_quote					*quote_list_init(char *cmd);
 int						is_quoted(char *cmd, int index);
 void					quote_extracter(char *cmd, int *i);
 int						get_wordlen(char *sub_cmd);
+
+/*
+**redir_tools_c.c
+*/
+char					*fd_to_atoi(char *sub_cmd);
 
 /*
 **hash_table
