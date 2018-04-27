@@ -6,14 +6,12 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/19 14:41:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/27 00:43:50 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/27 13:03:01 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
-
-
 
 static int	empty_word(char *word)
 {
@@ -36,11 +34,11 @@ static int	empty_words(t_lexer	*lexlist)
 	tmp = lexlist;
 	while (tmp)
 	{
-		if (empty_word(tmp->content))
-			return (1);
+		if (!empty_word(tmp->content))
+			return (0);
 		tmp = tmp->next;
 	}
-	return (0);
+	return (1);
 }
 
 static int	prompt_needed(t_lexer *lexlist)
@@ -60,31 +58,34 @@ static int	prompt_needed(t_lexer *lexlist)
 	return (0);
 }
 
-t_lexer		*prompt_pipe(t_lexer *lex, t_ult *ult)
+static t_lexer		*read_until_closed_pipe(t_ult *ult, t_lexer *lexlist)
 {
 	t_lexer	*lex_end;
 	char	*dest;
+	int		ret;
 
-	if (!prompt_needed(lex))
-		return (lex);
 	lex_end = NULL;
 	dest = NULL;
-	if (!(dest = termcaps_heredoc(ult)))
+	while (42)
 	{
-		lex_free_all(lex);
-		return (NULL);
-	}
-	while (empty_word(dest))
-	{
-		ft_strdel(&dest);
 		if (!(dest = termcaps_heredoc(ult)))
 		{
-			lex_free_all(lex);
+			lex_free_all(lexlist);
 			return (NULL);
 		}
+		lex_end = init_lexer(dest);
+		lex_push(lex_end, &lexlist);
+		if (!(ret = prompt_needed(lexlist)))
+			break ;
+		dest ? ft_strdel(&dest) : NULL ;
 	}
-	lex_end = init_lexer(dest);
-	lex_push(lex_end, &lex);
-	dest ? ft_strdel(&dest) : NULL;
-	return (lex);
+	dest ? ft_strdel(&dest) : NULL ;
+	return (lexlist);
+}
+
+t_lexer		*prompt_pipe(t_lexer *lex, t_ult *ult)
+{
+	if (!prompt_needed(lex))
+		return (lex);
+	return(read_until_closed_pipe(ult, lex));
 }
