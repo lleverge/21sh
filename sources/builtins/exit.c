@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:11:24 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:02:25 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/29 14:11:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 int		clean_exit(char **arg, int ret)
 {
-	int tmp;
+	int 	tmp;
+	t_ult	*ult;
 
 	if (arg[1] && arg[2])
 	{
@@ -33,7 +34,10 @@ int		clean_exit(char **arg, int ret)
 			return (tmp);
 		}
 		ft_putendl_fd("exit: numeric argument required", 2);
-		exit(0);
+		ult = NULL;
+		ult = stock_ult(ult, 1);
+		reset_term(ult->term);
+		exit(255);
 	}
 	return (ret);
 }

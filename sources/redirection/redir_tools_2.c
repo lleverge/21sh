@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/27 17:06:22 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/29 13:00:24 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/29 14:04:33 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int		is_validchar(char *cmd, int index)
 		return (0);
 	if (is_quoted(cmd, index))
 		return (1);
-	if (cmd[index] == '>' || cmd[index] == '<' || !ft_isprint(cmd[index]))
+	if (cmd[index] == '>' || cmd[index] == '<' || ft_isspace(cmd[index]))
 		return (0);
 	return (1);
 }
