@@ -6,7 +6,7 @@
 #    By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/29 16:51:33 by vfrolich         ###   ########.fr        #
+#    Updated: 2018/04/29 20:42:03 by vfrolich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,6 +87,8 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/lexer/token_list.c\
 	sources/lexer/token_recognizer.c\
 	sources/lexer/is_dquoted.c\
+	sources/lexer/expand_var.c\
+	sources/lexer/cut_shellvar.c\
 	sources/main.c\
 	sources/parse_error/parse_error.c\
 	sources/parse_error/parse_error2.c\
@@ -115,6 +117,7 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/tools/ft_strsplit_ws.c\
 	sources/tools/is_blankword.c\
 	sources/tools/prompt_tools.c\
+	sources/tools/expand_tools.c\
 	sources/tools/safe_position_tools.c
 
 OBJ 	= $(SRC:.c=.o)

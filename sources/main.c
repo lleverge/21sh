@@ -6,13 +6,26 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 15:50:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/26 16:32:24 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/29 20:38:35 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/shell.h"
 #include "../includes/lexer.h"
 #include "../includes/cmd_edit.h"
+
+static void	test_it(t_lexer *lex, t_ult *ult)
+{
+	t_lexer *tmp;
+
+	tmp = lex;
+	while (tmp)
+	{
+		if (tmp->token_id == TOK_WORD && !is_squoted(tmp, lex))
+			tmp = expand_var(tmp, ult);
+		tmp = tmp->next;
+	}
+}
 
 static void		prog_core(t_job *jobs, t_ult *ult)
 {
@@ -27,6 +40,7 @@ static void		prog_core(t_job *jobs, t_ult *ult)
 	{
 		lex = fill_lexer(ult);
 		lex ? group_token(&lex) : NULL;
+		test_it(lex, ult);
 	}
 	if (ult->cmd && *ult->cmd && lex)
 	{

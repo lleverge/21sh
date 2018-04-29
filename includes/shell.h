@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/04 16:09:23 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/29 12:59:02 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/29 18:50:29 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,5 +360,10 @@ void					proc_launch(t_process *proc, t_ult *ult, int fd[2]);
 */
 void					wait_for_procs(t_process *procs);
 int						count_process(t_process *proc);
+
+/*
+**expand_tools.c
+*/
+char					*cpy_node_content(t_env *env, char *str);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/29 16:51:11 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/29 19:13:55 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,5 +212,16 @@ int					fork_pipe(t_ult *ult, char **cmd1);
 */
 int					is_dquoted(t_lexer *node, t_lexer *lexlist);
 int					is_squoted(t_lexer *node, t_lexer *lexlist);
+
+/*
+**expand_var.c
+*/
+t_lexer				*expand_var(t_lexer *lex, t_ult *ult);
+
+/*
+**cut_shellvar.c
+*/
+char				*get_del_string(char *content);
+
 
 #endif
