@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/23 19:19:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/29 16:51:11 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,8 +208,9 @@ char				*search_path(char **path_tab, char **cmd);
 int					fork_pipe(t_ult *ult, char **cmd1);
 
 /*
-**io_redir.c
+**is_dquoted.c
 */
-void				open_redir(t_ult *ult, t_lexer *lex);
-int					fd_len(char *str, int i);
+int					is_dquoted(t_lexer *node, t_lexer *lexlist);
+int					is_squoted(t_lexer *node, t_lexer *lexlist);
+
 #endif

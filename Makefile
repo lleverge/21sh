@@ -6,7 +6,7 @@
 #    By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/27 17:12:14 by vfrolich         ###   ########.fr        #
+#    Updated: 2018/04/29 16:51:33 by vfrolich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -86,6 +86,7 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/lexer/seek_exec.c\
 	sources/lexer/token_list.c\
 	sources/lexer/token_recognizer.c\
+	sources/lexer/is_dquoted.c\
 	sources/main.c\
 	sources/parse_error/parse_error.c\
 	sources/parse_error/parse_error2.c\
