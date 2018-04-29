@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/23 16:11:01 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/27 18:13:30 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/28 18:23:51 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char				*get_word(char *sub_cmd)
 		w_length = get_wordlen(tmp);
 	else
 	{
-		while (tmp[w_length] && (tmp[w_length] >= 33 && tmp[w_length] <= 126))
+		while (is_validchar(tmp, w_length))
 			w_length++;
 	}
 	if (*tmp && (*tmp == '\'' || *tmp == '\"'))
