@@ -18,7 +18,7 @@
 
 int		clean_exit(char **arg, int ret)
 {
-	int 	tmp;
+	int		tmp;
 	t_ult	*ult;
 
 	if (arg[1] && arg[2])
