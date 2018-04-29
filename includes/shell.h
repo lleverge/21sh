@@ -359,4 +359,6 @@ void					proc_launch(t_process *proc, t_ult *ult, int fd[2]);
 **wait_procs.c
 */
 void					wait_for_procs(t_process *procs);
+int						count_process(t_process *proc);
+
 #endif

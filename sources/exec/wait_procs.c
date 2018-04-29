@@ -13,10 +13,10 @@
 #include "../../includes/shell.h"
 #include "../../includes/lexer.h"
 
-int				count_process(t_process *proc)
+int					count_process(t_process *proc)
 {
-	int			count;
-	t_process	*tmp;
+	int				count;
+	t_process		*tmp;
 
 	count = 0;
 	tmp = proc;
@@ -28,9 +28,9 @@ int				count_process(t_process *proc)
 	return (count);
 }
 
-t_process		*proc_from_pid(int pid, t_process *proclist)
+static t_process	*proc_from_pid(int pid, t_process *proclist)
 {
-	t_process	*tmp;
+	t_process		*tmp;
 
 	tmp = proclist;
 	while (tmp)
@@ -42,21 +42,21 @@ t_process		*proc_from_pid(int pid, t_process *proclist)
 	return (NULL);
 }
 
-static void		udpate_status(t_process *proc, pid_t pid, int status)
+static void			udpate_status(t_process *proc, pid_t pid, int status)
 {
-	t_process	*tmp;
+	t_process		*tmp;
 
 	if (!(tmp = proc_from_pid(pid, proc)))
 		return ;
 	tmp->done = status;
 }
 
-void			wait_for_procs(t_process *procs)
+void				wait_for_procs(t_process *procs)
 {
-	int			count;
-	pid_t		pid;
-	int			tmp_status;
-	t_process	*proc;
+	int				count;
+	pid_t			pid;
+	int				tmp_status;
+	t_process		*proc;
 
 	pid = 0;
 	proc = procs;

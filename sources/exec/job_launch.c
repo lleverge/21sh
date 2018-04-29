@@ -52,8 +52,9 @@ void			proc_launch(t_process *proc, t_ult *ult, int fd[2])
 				tmp_proc->fd[1] = fd[1];
 			else
 				close(fd[1]);
-			fork_setup(tmp_proc, ult, fd);
 		}
+		if (count_process(proc) > 1)
+			fork_setup(tmp_proc, ult, fd);
 		else
 			ult->ret = seek_and_exec(ult, tmp_proc, cmd_tab, fd);
 		if (tmp_proc->next)
