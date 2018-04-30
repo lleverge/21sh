@@ -6,7 +6,7 @@
 #    By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/21 17:32:58 by lleverge          #+#    #+#              #
-#    Updated: 2018/04/29 20:42:03 by vfrolich         ###   ########.fr        #
+#    Updated: 2018/04/30 11:40:48 by vfrolich         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -89,6 +89,7 @@ SRC		= sources/auto_complete/exec_more.c\
 	sources/lexer/is_dquoted.c\
 	sources/lexer/expand_var.c\
 	sources/lexer/cut_shellvar.c\
+	sources/lexer/apply_expand.c\
 	sources/main.c\
 	sources/parse_error/parse_error.c\
 	sources/parse_error/parse_error2.c\

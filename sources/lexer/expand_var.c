@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 17:36:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/29 20:41:46 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/30 11:35:01 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static char		*get_var_name(char *content)
 {
-	int	i;
-	int	w_start;
+	int			i;
+	int			w_start;
 
 	i = 0;
 	w_start = 0;
@@ -31,14 +31,12 @@ static char		*get_var_name(char *content)
 	return (ft_strsub(content, w_start, i - w_start));
 }
 
-static t_lexer		*expand_word(t_lexer *lex, t_ult *ult, char *word)
+static t_lexer	*expand_word(t_lexer *lex, t_ult *ult, char *word)
 {
-	char	*envvar;
-	int		index_start;
-	char	*before;
-	char	*after;
+	int			index_start;
+	char		*before;
+	char		*after;
 
-	envvar = cpy_node_content(ult->env, word);
 	index_start = ft_strchr(lex->content, '$') - lex->content;
 	before = ft_strsub(lex->content, 0, index_start);
 	after = ft_strsub(lex->content, index_start + ft_strlen(word) + 1,
@@ -50,10 +48,10 @@ static t_lexer		*expand_word(t_lexer *lex, t_ult *ult, char *word)
 	return (lex);
 }	
 
-static t_lexer		*expand_it(t_lexer *lex, t_ult *ult)
+static t_lexer	*expand_it(t_lexer *lex, t_ult *ult)
 {
-	char 	*word;
-	char	*new;
+	char 		*word;
+	char		*new;
 
 	if (!ult)
 		return (NULL);
@@ -66,16 +64,18 @@ static t_lexer		*expand_it(t_lexer *lex, t_ult *ult)
 		word = get_del_string(lex->content);
 		new = ft_extracter(lex->content, word);
 		ft_strdel(&lex->content);
+		word ? ft_strdel(&word) : NULL;
 		lex->content = new;
 		return (lex);
 	}
 	expand_word(lex, ult, word);
+	word ? ft_strdel(&word) : NULL;
 	return (lex);
 }
 
-static t_lexer *expand_all(t_lexer *node, t_ult *ult)
+static t_lexer	*expand_all(t_lexer *node, t_ult *ult)
 {
-	char	*tmp;
+	char		*tmp;
 
 	tmp = NULL;
 	while (ft_strchr(node->content, '$'))
@@ -89,15 +89,15 @@ static t_lexer *expand_all(t_lexer *node, t_ult *ult)
 	return (node);
 }
 
-t_lexer		*expand_var(t_lexer *lex, t_ult *ult)
+t_lexer			*expand_var(t_lexer *lex, t_ult *ult)
 {
-	t_lexer *node;
+	t_lexer		*node;
 
 	node = lex;
 	while (node)
 	{
 		if (node->token_id == TOK_WORD && node->content && ft_strchr(node->content,
-			'$'))
+			'$') && !is_squoted(node, lex))
 			node = expand_all(node, ult);
 		node = node->next;
 	}

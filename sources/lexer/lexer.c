@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/03 15:45:15 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/26 16:28:34 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/30 11:41:32 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ t_lexer			*fill_lexer(t_ult *ult)
 	if (!(lexlist = quote_tok(lexlist, ult)))
 		return (NULL);
 	lexlist = fill_lexer_2(&lexlist);
+	lexlist ? apply_expand(lexlist, ult) : NULL;
 	ult->cmd ? ft_strdel(&ult->cmd) : NULL;
 	ult->cmd = lexer_to_str(lexlist);
 	return (lexlist);

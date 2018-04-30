@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/18 09:54:16 by lleverge          #+#    #+#             */
-/*   Updated: 2018/04/29 19:13:55 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/30 11:40:26 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,5 +223,9 @@ t_lexer				*expand_var(t_lexer *lex, t_ult *ult);
 */
 char				*get_del_string(char *content);
 
+/*
+**apply_expand.c
+*/
+void				apply_expand(t_lexer *lex, t_ult *ult);
 
 #endif
