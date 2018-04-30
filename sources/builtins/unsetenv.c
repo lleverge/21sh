@@ -6,71 +6,32 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/07 17:18:54 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/27 15:13:03 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/30 18:01:00 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/shell.h"
 #include "../../includes/builtins.h"
 
-static void	free_env_one(t_env *env)
-{
-	ft_strdel(&env->name);
-	ft_strdel(&env->content);
-	free(env);
-}
-
-static int	count_env(t_env *envi)
-{
-	int result;
-
-	result = 0;
-	while (envi)
-	{
-		result++;
-		envi = envi->next;
-	}
-	return (result);
-}
-
-static int	unset_one(t_env *envlist, char *name)
-{
-	t_env *tmp;
-
-	if (!(ft_strcmp(envlist->next->name, name)))
-	{
-		tmp = envlist->next;
-		envlist->next = envlist->next->next;
-		free_env_one(tmp);
-		return (0);
-	}
-	return (1);
-}
-
-static int	unset_env(char *name, t_env **envlist)
+static int	ft_unsetenv(t_env **begin_list, char *varname)
 {
 	t_env	*tmp;
 
-	tmp = *envlist;
-	if (!envlist || !(*envlist))
-		return (0);
-	while (tmp->next)
+	tmp = *begin_list;
+	if (*begin_list)
 	{
-		if (!unset_one(tmp, name))
-			return (0);
-		tmp = tmp->next;
-	}
-	if (!ft_strcmp(tmp->name, name))
-	{
-		if (count_env(*envlist) == 1)
+		if (!(ft_strcmp((*(begin_list))->name, varname)))
 		{
-			free_env_one(*envlist);
-			*envlist = NULL;
+			tmp = *begin_list;
+			*begin_list = (*(begin_list))->next;
+			ft_strdel(&(tmp->name));
+			ft_strdel(&(tmp->content));
+			free(tmp);
+			tmp = NULL;
 			return (0);
 		}
-		free_env_one(tmp);
-		tmp = NULL;
-		return (0);
+		else
+			ft_unsetenv(&(*begin_list)->next, varname);
 	}
 	return (1);
 }
@@ -83,13 +44,14 @@ t_env		*split_to_unset(t_ult *ult, char **arg)
 	splited_cmd = NULL;
 	splited_cmd = arg;
 	tmp = splited_cmd;
+	tmp++;
 	while (*tmp)
 	{
 		if (ft_strchr(*tmp, '='))
 			unset_error(*tmp);
 		else
 		{
-			ult->ret = unset_env(*tmp, &ult->env);
+			ult->ret = ft_unsetenv(&ult->env, *tmp);
 			if (!ft_strncmp("PATH", *tmp, 4))
 			{
 				ult->hash_table ? hash_destroy(ult->hash_table) : NULL;
