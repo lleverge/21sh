@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/21 17:09:10 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/26 22:13:27 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/30 16:19:52 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,41 @@ static t_process	*cmd_epur_append(t_process *proc)
 	return (proc);
 }
 
+static int			get_start_pos_app(char *cmd)
+{
+	int		start;
+
+	start = 0;
+	while (cmd[start] != '>')
+		start++;
+	if (start >= 1 && ft_isdigit(cmd[start - 1]))
+	{
+		while (start >= 1 && ft_isdigit(cmd[start - 1]))
+			start--;
+	}
+	if (start >= 1 && ft_isalpha(cmd[start - 1]))
+		start = ft_strchr(cmd, '>') - cmd;
+	return (start);
+}
+
+static int			which_fd_ap(char *cmd)
+{
+	char			*sub_cmd;
+	char			*to_atoi;
+	int				fd;
+
+	sub_cmd = &cmd[get_start_pos_app(cmd)];
+	if (*sub_cmd == '>')
+		return (1);
+	if (*sub_cmd == '0' && sub_cmd[1] == '>')
+		return (0);
+	to_atoi = NULL;
+	to_atoi = fd_to_atoi(sub_cmd);
+	fd = ft_atoi(to_atoi);
+	to_atoi ? ft_strdel(&to_atoi) : NULL;
+	return (fd);
+}
+
 t_process			*append_redirect(t_process *proc)
 {
 	char			*sub_str;
@@ -72,8 +107,8 @@ t_process			*append_redirect(t_process *proc)
 		ft_strdel(&file_name);
 		return (NULL);
 	}
-	if (which_fd(proc->cmd) == 1 || which_fd(proc->cmd) == 2)
-		proc->fd[which_fd(proc->cmd)] = fd;
+	if (which_fd_ap(proc->cmd) == 1 || which_fd_ap(proc->cmd) == 2)
+		proc->fd[which_fd_ap(proc->cmd)] = fd;
 	else
 		proc = standard_fd(proc);
 	proc = cmd_epur_append(proc);
