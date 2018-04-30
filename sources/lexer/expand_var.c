@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/29 17:36:00 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/30 11:35:01 by vfrolich         ###   ########.fr       */
+/*   Updated: 2018/04/30 11:56:24 by lleverge         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static t_lexer	*expand_word(t_lexer *lex, t_ult *ult, char *word)
 	ft_strdel(&lex->content);
 	lex->content = before;
 	return (lex);
-}	
+}
 
 static t_lexer	*expand_it(t_lexer *lex, t_ult *ult)
 {
-	char 		*word;
+	char		*word;
 	char		*new;
 
 	if (!ult)
@@ -96,8 +96,8 @@ t_lexer			*expand_var(t_lexer *lex, t_ult *ult)
 	node = lex;
 	while (node)
 	{
-		if (node->token_id == TOK_WORD && node->content && ft_strchr(node->content,
-			'$') && !is_squoted(node, lex))
+		if (node->token_id == TOK_WORD && node->content &&
+			ft_strchr(node->content, '$') && !is_squoted(node, lex))
 			node = expand_all(node, ult);
 		node = node->next;
 	}
