@@ -6,7 +6,7 @@
 /*   By: vfrolich <vfrolich@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 16:23:07 by vfrolich          #+#    #+#             */
-/*   Updated: 2018/04/12 16:01:50 by lleverge         ###   ########.fr       */
+/*   Updated: 2018/04/30 18:58:07 by vfrolich         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,19 @@ static int		prev_dir(t_env **env)
 	char		*old;
 	char		*tmp;
 
+	tmp = NULL;
+	old = NULL;
 	tmp = get_cdir(*env);
 	if (!(old = get_node_content(*env, "OLDPWD")))
 	{
 		ft_putendl_fd("cd: OLDPWD not set", 2);
 		tmp ? ft_strdel(&tmp) : NULL;
+		return (1);
+	}
+	if (check_for_access(old))
+	{
+		tmp ? ft_strdel(&tmp) : NULL;
+		old ? ft_strdel(&old) : NULL;
 		return (1);
 	}
 	ft_putendl(old);
